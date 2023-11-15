@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pdo_sqlite": "*",
+        "ext-sodium": "*",
         "api-platform/core": "^3.2.3",
         "doctrine/doctrine-bundle": "^2.10.2",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
