@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0684e99fcbcb4cb7dc46c0307d9eeeac",
+    "content-hash": "d7053bb7bc4ae28fa6f9d386da49166e",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13450,7 +13450,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "RC",
+    "minimum-stability": "beta",
     "stability-flags": {
         "survos/api-grid-bundle": 20,
         "symfony/stimulus-bundle": 20
