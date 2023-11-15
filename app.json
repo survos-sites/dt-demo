@@ -1,11 +1,11 @@
 {
-    "name": "datatables-demo",
+    "name": "dt3-demo",
     "description": "A repo, maybe get this from github",
     "keywords": [
         "php",
         "symfony"
     ],
-    "repository": "https:\/\/github.com\/survos-sites\/datatables-demo",
+    "repository": "https:\/\/github.com\/survos-sites\/dt3-demo",
     "scripts": {
         "dokku": {
             "predeploy": "bin\/console importmap:install && bin\/console asset-map:compile",
