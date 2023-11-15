@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Official{% endblock %}
+
+{% block body %}
+    <h1>Create new Official</h1>
+
+    {{ include('congress/_form.html.twig') }}
+
+    <a href="{{ path('congress_crud_index') }}">back to list</a>
+{% endblock %}

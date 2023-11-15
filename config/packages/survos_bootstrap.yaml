@@ -1,0 +1,24 @@
+survos_bootstrap:
+  routes:
+    login: app_login
+    logout: app_logout
+    home: app_homepage
+    register: app_register
+  app:
+    abbr: <b>dt</b>Demo
+    code: dt-demo
+    social:
+      facebook: https://facebook.com
+      twitter: https://twitter.com
+      github: https://github.com/survos-sites/dt-demo
+  options:
+    # consider https://startbootstrap.com/previews/simple-sidebar as another theme
+#    theme: bs5
+    theme: bootswatch
+    allow_login: false
+    offcanvas: end
+
+  menu_options:
+    project: null
+    frontPage: false
+    showAppMenu: true

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Official{% endblock %}
+
+{% block body %}
+    <h1>Edit Official</h1>
+
+    {{ include('congress/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('congress_crud_index') }}">back to list</a>
+
+    {{ include('congress/_delete_form.html.twig') }}
+{% endblock %}

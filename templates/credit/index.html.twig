@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImportMap{% endblock %}
+
+{% block body %}
+    {% set columns = [
+        'packageLink',
+        'version'
+    ] %}
+
+    <twig:grid :data="data" :columns="columns" pageLength="25">
+        <twig:block name="packageLink">
+            <a href="{{ row.packageLink }}" target="_blank">
+                <img style="width: 16px; height: 16px" src="https://www.jsdelivr.com/favicon.ico" alt="jsdelivr" />
+                {{ row.key }}
+            </a>
+        </twig:block>
+
+    </twig:grid>
+
+{% endblock %}

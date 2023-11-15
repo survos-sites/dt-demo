@@ -1,0 +1,50 @@
+{
+    "controllers": {
+        "@survos/api-grid-bundle": {
+            "api_grid": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": {
+                    "datatables.net-bs5/css/dataTables.bootstrap5.min.css": true,
+                    "datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css": true,
+                    "datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css": true,
+                    "datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css": true,
+                    "datatables.net-select-bs5/css/select.bootstrap5.min.css": true
+                }
+            }
+        },
+        "@survos/datatables-bundle": {
+            "table": {
+                "enabled": true,
+                "fetch": "lazy"
+            }
+        },
+        "@survos/grid-bundle": {
+            "grid": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": {
+                    "datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css": true,
+                    "datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css": true,
+                    "datatables.net-bs5/css/dataTables.bootstrap5.min.css": true
+                }
+            }
+        },
+        "@survos/html-prettify-bundle": {
+            "prettify": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        },
+        "@survos/simple-datatables-bundle": {
+            "table": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": {
+                    "@survos/simple-datatables/style.css": true
+                }
+            }
+        }
+    },
+    "entrypoints": []
+}

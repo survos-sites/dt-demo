@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+Explanation of grids...
+
+    <span class="fas fa-calendar"></span>
+    <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table') }}>
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>number</th>
+        </thead>
+        <tbody>
+        {% for j in 1..12 %}
+            <tr>
+                <td>{{ j |date('2023-' ~ j ~ '-01') |date('F') }}</td>
+                <td>{{ j }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+

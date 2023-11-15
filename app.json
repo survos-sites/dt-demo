@@ -1,0 +1,18 @@
+{
+    "name": "datatables-demo",
+    "description": "A repo, maybe get this from github",
+    "keywords": [
+        "php",
+        "symfony"
+    ],
+    "expo": {
+
+    },
+    "repository": "https:\/\/github.com\/survos-sites\/dt-demo",
+    "scripts": {
+        "dokku": {
+            "predeploy": "bin\/console importmap:install && bin\/console asset-map:compile",
+            "postdeploy": "bin/release.sh"
+        }
+    }
+}

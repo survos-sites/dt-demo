@@ -1,0 +1,8 @@
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: /api
+    options:
+        expose: true
+        stenope:
+            ignore: true

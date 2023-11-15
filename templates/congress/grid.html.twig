@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Official index{% endblock %}
+
+<twig:block name="body">
+    <h1>Elected Officials (Grid Component)</h1>
+    <p>
+        This page uses the <code>grid</code> component to generate a table from a doctrine query ->findAll()
+    </p>
+
+    <code>{{ app.locale }}</code>
+    {% set _sc = 'locale_display' %}
+    {{ app.request.locale }}
+
+    <div class="dtsp-verticalContainer row">
+        <div class="search-panes col-3">
+        </div>
+        <div class="col-9">
+            {{ block('gridTable') }}
+        </div>
+    </div>
+</twig:block>
+
+<twig:block name="gridTable">
+
+    {% component grid with {
+        data: data,
+        columns: ['id',
+            {name: 'gender', sortable: true, inSearchPane: true},
+            {name: 'currentParty', sortable: true, inSearchPane: true},
+            {name: 'firstName', sortable: true},
+            {name: 'lastName', sortable: true},
+            'officialName']|merge(is_granted('ROLE_ADMIN')?['actions']:['birthday'])
+    } %}
+
+        {% block officialName %}
+        <a href="{{ path('app_congress_show', {'id': row.id}) }}">
+            {{ row.officialName }}
+        </a>
+        {% endblock %}
+
+        {% block birthday %}
+            {{ row.birthday|date('Y-m-d') }}
+        {% endblock %}
+
+        {% block actions %}
+            <a href="{{ path('app_congress_edit', {'id': row.id}) }}">edit</a>
+        {% endblock %}
+
+    {% endcomponent %}
+
+</twig:block>

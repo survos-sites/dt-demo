@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Term index{% endblock %}
+
+{% block body %}
+    <h1>Term index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>StateAbbreviation</th>
+                <th>Party</th>
+                <th>District</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for term in terms %}
+            <tr>
+                <td>{{ term.id }}</td>
+                <td>{{ term.type }}</td>
+                <td>{{ term.stateAbbreviation }}</td>
+                <td>{{ term.party }}</td>
+                <td>{{ term.district }}</td>
+                <td>{{ term.startDate ? term.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ term.endDate ? term.endDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_term_crud_show', {'id': term.id}) }}">show</a>
+                    <a href="{{ path('app_term_crud_edit', {'id': term.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_term_crud_new') }}">Create new</a>
+{% endblock %}

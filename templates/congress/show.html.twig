@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Official{% endblock %}
+
+{% block body %}
+    <h1>Official</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ official.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ official.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ official.lastName }}</td>
+            </tr>
+            <tr>
+                <th>OfficialName</th>
+                <td>{{ official.officialName }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ official.birthday ? official.birthday|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ official.gender }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

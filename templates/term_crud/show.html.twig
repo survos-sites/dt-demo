@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Term{% endblock %}
+
+{% block body %}
+    <h1>Term</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ term.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ term.type }}</td>
+            </tr>
+            <tr>
+                <th>StateAbbreviation</th>
+                <td>{{ term.stateAbbreviation }}</td>
+            </tr>
+            <tr>
+                <th>Party</th>
+                <td>{{ term.party }}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{ term.district }}</td>
+            </tr>
+            <tr>
+                <th>StartDate</th>
+                <td>{{ term.startDate ? term.startDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndDate</th>
+                <td>{{ term.endDate ? term.endDate|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_term_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_term_crud_edit', {'id': term.id}) }}">edit</a>
+
+    {{ include('term_crud/_delete_form.html.twig') }}
+{% endblock %}
