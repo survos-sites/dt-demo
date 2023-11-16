@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fc578acace3d6b94a5be931ba3519b5",
+    "content-hash": "194ce1e88bc2a2d7de587115b7144e5d",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4739,17 +4739,11 @@
         },
         {
             "name": "survos/deployment-bundle",
-            "version": "1.5.83",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/survos/SurvosDeploymentBundle.git",
-                "reference": "f4fa1e07fae0051359096869ecfc1d2ba99dc484"
-            },
+            "version": "dev-tac",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosDeploymentBundle/zipball/f4fa1e07fae0051359096869ecfc1d2ba99dc484",
-                "reference": "f4fa1e07fae0051359096869ecfc1d2ba99dc484",
-                "shasum": ""
+                "type": "path",
+                "url": "../../survos/survos/packages/deployment-bundle",
+                "reference": "c817466dd28af15882ad32ce4a22c4d8ac265071"
             },
             "require": {
                 "php": "^8.1",
@@ -4775,7 +4769,6 @@
                     "Survos\\DeploymentBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4783,11 +4776,9 @@
                 "symfony-ux",
                 "symfony6"
             ],
-            "support": {
-                "issues": "https://github.com/survos/SurvosDeploymentBundle/issues",
-                "source": "https://github.com/survos/SurvosDeploymentBundle/tree/1.5.83"
-            },
-            "time": "2023-11-13T23:39:59+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "survos/grid-bundle",
@@ -13453,6 +13444,7 @@
     "minimum-stability": "beta",
     "stability-flags": {
         "survos/api-grid-bundle": 20,
+        "survos/deployment-bundle": 20,
         "symfony/stimulus-bundle": 20
     },
     "prefer-stable": true,

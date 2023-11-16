@@ -48,7 +48,7 @@ return [
         'type' => 'css',
     ],
     'axios' => [
-        'version' => '1.6.1',
+        'version' => '1.6.2',
     ],
     'datatables.net-searchpanes-bs5' => [
         'version' => '2.2.0',
@@ -188,5 +188,8 @@ return [
         'version' => '1.11.1',
         'type' => 'css',
     ],
-
+    'bootswatch/dist/cerulean/bootstrap.min.css' => [
+        'version' => '5.3.2',
+        'type' => 'css',
+    ],
 ];
