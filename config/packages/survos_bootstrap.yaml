@@ -8,9 +8,10 @@ survos_bootstrap:
     abbr: <b>dt</b>Demo
     code: dt-demo
     social:
-      facebook: https://facebook.com
-      twitter: https://twitter.com
+#      facebook: https://facebook.com
+#      twitter: https://twitter.com
       github: https://github.com/survos-sites/dt-demo
+#    github: survos-sites/dt-demo
   options:
     # consider https://startbootstrap.com/previews/simple-sidebar as another theme
 #    theme: bs5

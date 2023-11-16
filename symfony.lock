@@ -156,9 +156,6 @@
     "survos/core-bundle": {
         "version": "1.5.64"
     },
-    "survos/datatables-bundle": {
-        "version": "1.5.64"
-    },
     "survos/deployment-bundle": {
         "version": "1.5.79"
     },

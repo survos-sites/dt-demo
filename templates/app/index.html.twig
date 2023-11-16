@@ -1,25 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+        <!-- the cards with each type of grid -->
+        <div class="row mt-5">
 
-Explanation of grids...
+            <div class="row mb-5">
+                <div class="col-md-6 col-lg-4 mb-3">
+                    {% component card with {} %}
+                        {% block title 'Simple Datatables' %}
+                        {% block text %}
+                            <p>
+                                A wrapper around simple datatables.
+                                Pros: no dependencies, just one js file and one css file.
+                                Simple.
+                            </p>
+                            <p>
+                                For example, the credits links use simple-datatables
+                            </p>
+                        {% endblock %}
+                        {% block links %}
+                            <div class="demo-inline-spacing">
+                                <a href="https://github.com/fiduswriter/simple-datatables/" target="_blank"
+                                   class="btn btn-outline-primary">Simple Datatables Library</a>
+                                <a href="https://github.com/survos/SurvosSimpleDatatablesBundle" target="_blank"
+                                   class="btn btn-outline-success">Simple Datatables Bundle</a>
+                            </div>
+                        {% endblock %}
+                    {% endcomponent %}
+                </div>
+            </div>
+        </div>
 
-    <span class="fas fa-calendar"></span>
-    <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table') }}>
-        <thead>
-        <tr>
-            <th>name</th>
-            <th>number</th>
-        </thead>
-        <tbody>
-        {% for j in 1..12 %}
-            <tr>
-                <td>{{ j |date('2023-' ~ j ~ '-01') |date('F') }}</td>
-                <td>{{ j }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="row">
+
+            <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table') }}>
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>number</th>
+                </thead>
+                <tbody>
+                {% for j in 1..12 %}
+                    <tr>
+                        <td>{{ j |date('2023-' ~ j ~ '-01') |date('F') }}</td>
+                        <td>{{ j }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
 {% endblock %}
 

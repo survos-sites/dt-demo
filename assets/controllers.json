@@ -13,12 +13,6 @@
                 }
             }
         },
-        "@survos/datatables-bundle": {
-            "table": {
-                "enabled": true,
-                "fetch": "lazy"
-            }
-        },
         "@survos/grid-bundle": {
             "grid": {
                 "enabled": true,

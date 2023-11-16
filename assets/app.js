@@ -11,7 +11,9 @@ import './bootstrap.js';
 
 // bootstrap 5
 import 'bootstrap'; // bootstrap javascript
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootswatch/dist/sandstone/bootstrap.min.css'
+import 'bootswatch/dist/materia/bootstrap.min.css'
 
 // font-awesome free
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css'
@@ -21,6 +23,7 @@ import {library} from "@fortawesome/fontawesome-svg-core"
 import { fas } from '@fortawesome/free-solid-svg-icons'
 library.add(fas)
 
+import 'bootstrap-icons/font/bootstrap-icons.min.css'
 
 console.log('This log comes from assets/app.js, stimulus and bootstrap')
 //

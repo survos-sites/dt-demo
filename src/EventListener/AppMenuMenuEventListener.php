@@ -34,9 +34,10 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
     {
         $menu = $event->getMenu();
         $options = $event->getOptions();
-        foreach (['app_homepage','app_credit'] as $route) {
-            $this->add($menu, $route, label: u($route)->after('app_'));
-        }
+        $this->add($menu, 'app_credit', label: "Javascript Packages");
+//        foreach (['app_credit'] as $route) {
+//            $this->add($menu, $route, label: u($route)->after('app_'));
+//        }
     }
 
     public function lastNavbarMenu(KnpMenuEvent $event): void
@@ -58,8 +59,11 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         }
         $this->add($menu, label: ' ', dividerAppend: true);
 
-        $nested = $this->addSubmenu($menu, 'github', icon: 'bi bi-github');
-        $this->add($nested, uri: '/issues', label: 'issues');
+        if (0) {
+            $nested = $this->addSubmenu($menu, 'github', icon: 'bi bi-github');
+            $this->add($nested, label: 'repo', uri: $this->contextService->getConfig()['app']['social']['github']);
+            $this->add($nested, label: 'issues', uri: $this->contextService->getConfig()['app']['social']['github'] . '/issues');
+        }
     }
 
         public function startNavbarMenu(KnpMenuEvent $event): void
@@ -74,12 +78,11 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         }
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem
 
-        $nestedMenu = $this->addSubmenu($menu, 'Credits');
-
-        foreach (['bundles', 'javascript'] as $type) {
-            // $this->addMenuItem($nestedMenu, ['route' => 'survos_base_credits', 'rp' => ['type' => $type], 'label' => ucfirst($type)]);
-            $this->addMenuItem($nestedMenu, ['uri' => "#$type", 'label' => ucfirst($type)]);
-        }
+//        $nestedMenu = $this->addSubmenu($menu, 'Credits');
+//        foreach (['bundles', 'javascript'] as $type) {
+//            // $this->addMenuItem($nestedMenu, ['route' => 'survos_base_credits', 'rp' => ['type' => $type], 'label' => ucfirst($type)]);
+//            $this->addMenuItem($nestedMenu, ['uri' => "#$type", 'label' => ucfirst($type)]);
+//        }
 
         foreach ([CongressController::class,
 //                     TermCrudController::class
