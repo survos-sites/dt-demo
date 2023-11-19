@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51a0dd59c3cb1b1340511d1649708308",
+    "content-hash": "9ff57b47f09b1af84428ab46a61e6123",
     "packages": [
         {
             "name": "api-platform/core",
@@ -1391,16 +1391,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.17.0",
+            "version": "2.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "e8afa9f80ce66ac728f63325d102adda01cbd6ff"
+                "reference": "1a4fe6e0bb67762370937a7e6cee3da40a9122d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/e8afa9f80ce66ac728f63325d102adda01cbd6ff",
-                "reference": "e8afa9f80ce66ac728f63325d102adda01cbd6ff",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/1a4fe6e0bb67762370937a7e6cee3da40a9122d1",
+                "reference": "1a4fe6e0bb67762370937a7e6cee3da40a9122d1",
                 "shasum": ""
             },
             "require": {
@@ -1486,9 +1486,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.17.0"
+                "source": "https://github.com/doctrine/orm/tree/2.17.1"
             },
-            "time": "2023-11-15T23:04:41+00:00"
+            "time": "2023-11-17T06:25:40+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -1706,6 +1706,66 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "endroid/installer",
+            "version": "1.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/endroid/installer.git",
+                "reference": "308051404c8370b9641cd61d86a464f2c6938265"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/endroid/installer/zipball/308051404c8370b9641cd61d86a464f2c6938265",
+                "reference": "308051404c8370b9641cd61d86a464f2c6938265",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "composer/composer": "^2.0",
+                "endroid/quality": "dev-main"
+            },
+            "suggest": {
+                "roave/security-advisories": "Avoids installation of package versions with vulnerabilities"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "class": "Endroid\\Installer\\Installer"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Endroid\\Installer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeroen van den Enden",
+                    "email": "info@endroid.nl"
+                }
+            ],
+            "description": "Composer plugin for installing configuration files",
+            "support": {
+                "issues": "https://github.com/endroid/installer/issues",
+                "source": "https://github.com/endroid/installer/tree/1.4.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/endroid",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-07T12:11:36+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -4335,17 +4395,11 @@
         },
         {
             "name": "survos/api-grid-bundle",
-            "version": "1.5.86",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/survos/SurvosApiGridBundle.git",
-                "reference": "2b3a7362340532ad2f11827722c7d4c1ac5ebc2d"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosApiGridBundle/zipball/2b3a7362340532ad2f11827722c7d4c1ac5ebc2d",
-                "reference": "2b3a7362340532ad2f11827722c7d4c1ac5ebc2d",
-                "shasum": ""
+                "type": "path",
+                "url": "../../survos/survos/packages/api-grid-bundle",
+                "reference": "b56bb9a607b088af4b0cec01388fc543d9bf801e"
             },
             "require": {
                 "api-platform/core": "^3.2",
@@ -4354,7 +4408,7 @@
                 "doctrine/persistence": "^2.0 || ^3.0",
                 "friendsofsymfony/jsrouting-bundle": "^3.2",
                 "php": "^8.1",
-                "survos/inspection-bundle": "^1.5.86",
+                "survos/inspection-bundle": "^1.5",
                 "symfony/config": "^6.3 || ^7.0",
                 "symfony/dependency-injection": "^6.3 || ^7.0",
                 "symfony/dom-crawler": "^6.3",
@@ -4391,7 +4445,11 @@
                     "Survos\\ApiGrid\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "phpstan": [
+                    "vendor/bin/phpstan analyse"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -4406,11 +4464,9 @@
                 "symfony-ux",
                 "symfony6"
             ],
-            "support": {
-                "issues": "https://github.com/survos/SurvosApiGridBundle/issues",
-                "source": "https://github.com/survos/SurvosApiGridBundle/tree/1.5.86"
-            },
-            "time": "2023-11-16T17:18:38+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "survos/auth-bundle",
@@ -4499,22 +4555,17 @@
         },
         {
             "name": "survos/bootstrap-bundle",
-            "version": "1.5.86",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/survos/BootstrapBundle.git",
-                "reference": "ce4db81ad44e56f50d882360faac51a38a1f1cf2"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/survos/BootstrapBundle/zipball/ce4db81ad44e56f50d882360faac51a38a1f1cf2",
-                "reference": "ce4db81ad44e56f50d882360faac51a38a1f1cf2",
-                "shasum": ""
+                "type": "path",
+                "url": "../../survos/survos/packages/bootstrap-bundle",
+                "reference": "3f287ed5349d99215cb6591ffeab5d9aa947b58f"
             },
             "require": {
+                "endroid/installer": "^1.4",
                 "knplabs/knp-menu-bundle": "^3.2",
                 "php": "^8.1",
-                "survos/core-bundle": "^1.5.86",
+                "survos/core-bundle": "^1.5",
                 "symfony/config": "^6.3 | ^7.0",
                 "symfony/dependency-injection": "^6.3 | ^7.0",
                 "symfony/http-kernel": "^6.3 | ^7.0",
@@ -4563,7 +4614,14 @@
                     "Survos\\BootstrapBundle\\Tests\\": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "vendor/bin/phpstan analyse"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -4577,15 +4635,13 @@
             "keywords": [
                 "symfony-ux"
             ],
-            "support": {
-                "issues": "https://github.com/survos/BootstrapBundle/issues",
-                "source": "https://github.com/survos/BootstrapBundle/tree/1.5.86"
-            },
-            "time": "2023-11-16T17:18:36+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "survos/core-bundle",
-            "version": "1.5.86",
+            "version": "1.5.88",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/SurvosCoreBundle.git",
@@ -4661,7 +4717,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/SurvosCoreBundle/issues",
-                "source": "https://github.com/survos/SurvosCoreBundle/tree/1.5.86"
+                "source": "https://github.com/survos/SurvosCoreBundle/tree/1.5.88"
             },
             "time": "2023-11-01T18:34:12+00:00"
         },
@@ -13384,6 +13440,8 @@
     "aliases": [],
     "minimum-stability": "beta",
     "stability-flags": {
+        "survos/api-grid-bundle": 20,
+        "survos/bootstrap-bundle": 20,
         "symfony/stimulus-bundle": 20
     },
     "prefer-stable": true,

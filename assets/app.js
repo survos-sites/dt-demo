@@ -23,7 +23,8 @@ import {library} from "@fortawesome/fontawesome-svg-core"
 import { fas } from '@fortawesome/free-solid-svg-icons'
 library.add(fas)
 
-import 'bootstrap-icons/font/bootstrap-icons.min.css'
+// :-( doesn't work
+// import 'bootstrap-icons/font/bootstrap-icons.min.css'
 
 console.log('This log comes from assets/app.js, stimulus and bootstrap')
 //
