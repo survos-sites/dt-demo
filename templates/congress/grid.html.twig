@@ -34,9 +34,9 @@
     } %}
 
         {% block officialName %}
-        <a href="{{ path('app_congress_show', {'id': row.id}) }}">
-            {{ row.officialName }}
-        </a>
+            <a href="{{ path('app_congress_show', {'id': row.id}) }}">
+                {{ row.officialName }}
+            </a>
         {% endblock %}
 
         {% block birthday %}

@@ -8,27 +8,27 @@
         This page uses the <code>api_grid</code> component, and the datatable's AJAX call using API Platform.
     </p>
 
+
+
     {#    <twig:hola /> #}
     {% set class = 'App\\Entity\\Official' %}
 
     {% set columns =
-     [
-         'id',
-         {name: 'actions', condition: is_granted('ROLE_ADMIN')},
-    {name: 'firstName', sortable: true},
-    {name: 'gender', sortable: true},
-    {name: 'lastName', sortable: true},
-    {name: 'officialName', sortable: true},
-    {name: 'birthday', sortable: true},
-    ]
-        %}
+        [
+            {name: 'id'},
+            {name: 'actions', condition: is_granted('ROLE_ADMIN')},
+            {name: 'firstName', sortable: true},
+            {name: 'gender', sortable: true},
+            {name: 'lastName', sortable: true},
+            {name: 'officialName', sortable: true},
+            {name: 'birthday', sortable: true},
+        ] %}
 
     <twig:api_grid
             :class="class"
             :caller="_self"
             :columns="columns"
     >
-
         <twig:block name="officialName">
             <a href="{{ path('app_congress_show', {'id': row.id}) }}">
                 {{ row.officialName }}

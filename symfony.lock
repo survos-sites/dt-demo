@@ -159,9 +159,6 @@
     "survos/deployment-bundle": {
         "version": "1.5.79"
     },
-    "survos/grid-bundle": {
-        "version": "dev-main"
-    },
     "survos/html-prettify-bundle": {
         "version": "dev-main"
     },

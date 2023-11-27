@@ -35,16 +35,16 @@ return [
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
-        'version' => '1.13.7',
+        'version' => '1.13.8',
     ],
     'jquery' => [
         'version' => '3.7.1',
     ],
     'datatables.net' => [
-        'version' => '1.13.7',
+        'version' => '1.13.8',
     ],
     'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => [
-        'version' => '1.13.7',
+        'version' => '1.13.8',
         'type' => 'css',
     ],
     'axios' => [
@@ -181,5 +181,12 @@ return [
     ],
     'datatables.net-searchpanes' => [
         'version' => '2.2.0',
+    ],
+    'perfect-scrollbar' => [
+        'version' => '1.5.5',
+    ],
+    'perfect-scrollbar/css/perfect-scrollbar.min.css' => [
+        'version' => '1.5.5',
+        'type' => 'css',
     ],
 ];
