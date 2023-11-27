@@ -163,7 +163,7 @@
         "version": "dev-main"
     },
     "survos/inspection-bundle": {
-        "version": "dev-main"
+        "version": "1.5.93"
     },
     "survos/scraper-bundle": {
         "version": "dev-sy64"

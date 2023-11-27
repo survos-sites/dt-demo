@@ -182,7 +182,7 @@ return [
     'datatables.net-searchpanes' => [
         'version' => '2.2.0',
     ],
-    'perfect-scrollbar' => [
+        'perfect-scrollbar' => [
         'version' => '1.5.5',
     ],
     'perfect-scrollbar/css/perfect-scrollbar.min.css' => [
