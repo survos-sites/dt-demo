@@ -17,21 +17,33 @@
     Some Grid Demos
 
     {% set url = 'https://jsonplaceholder.typicode.com/posts' %}
-    {% set data = request_data(url) %}
+    {% set data = request_data(url)|slice(0, 4) %}
 
     {% set columns = data[0]|keys %}
+
+    <twig:alert message="abc" dismissible="true">
+        <twig:block name="alert_message">
+            I can override the alert_message block and access the {{ message }} too!
+        </twig:block>
+    </twig:alert>
+
+
+    <h3>using component</h3>
+    {% component 'grid' with {
+        data: data,
+        columns: columns
+    } %}
+        {% block title %}
+            <i>{{ row.title }}</i>
+        {% endblock %}
+    {% endcomponent %}
+
+    <h3>using twig:grid</h3>
     <twig:grid :data="data" tableId="example" :columns="columns" useDatatables="false">
-        <twig:block name="id">
-            {{ row.id }}
+        <twig:block name="title">
+            {{ row.title|default('throws a compile error without default') }}
         </twig:block>
     </twig:grid>
-
-    <twig:grid :data="data" :columns="columns|reverse" useDatatables="true">
-        <twig:block name="id">
-            {{ row.id }}
-        </twig:block>
-    </twig:grid>
-
 
 {% endblock %}
 
