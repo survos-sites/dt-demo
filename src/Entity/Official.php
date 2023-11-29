@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     'lastName',
     'officialName',
     'gender',
+    'currentParty',
     'birthday'
 ])]
 

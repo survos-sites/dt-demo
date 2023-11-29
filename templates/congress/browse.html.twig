@@ -8,21 +8,29 @@
         This page uses the <code>api_grid</code> component, and the datatable's AJAX call using API Platform.
     </p>
 
-
-
-    {#    <twig:hola /> #}
-    {% set class = 'App\\Entity\\Official' %}
-
     {% set columns =
         [
             {name: 'id'},
             {name: 'actions', condition: is_granted('ROLE_ADMIN')},
+            {name: 'gender', sortable: true, browsable: true},
+            {name: 'currentParty', sortable: true, browsable: true},
             {name: 'firstName', sortable: true},
-            {name: 'gender', sortable: true},
             {name: 'lastName', sortable: true},
             {name: 'officialName', sortable: true},
             {name: 'birthday', sortable: true},
         ] %}
+
+    <div class="dtsp-verticalContainer row">
+        <div class="search-panes col-3">
+        </div>
+        <div class="col-9">
+            {{ block('gridTable') }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block gridTable %}
+
 
     <twig:api_grid
             :class="class"

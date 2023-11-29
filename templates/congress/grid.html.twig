@@ -12,8 +12,10 @@
     {% set _sc = 'locale_display' %}
     {{ app.request.locale }}
 
-    <div class="dtsp-verticalContainer row">
-        <div class="search-panes col-3">
+
+    <div class="dtsp-verticalContainer row" id="verticalContainer">
+        <div class="search-panes col-3" id="searchPanesVerticalContainer">
+            searchPanes on left.
         </div>
         <div class="col-9">
             {{ block('gridTable') }}
