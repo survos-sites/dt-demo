@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Official;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Survos\CoreBundle\Traits\QueryBuilderHelperInterface;
+use Survos\CoreBundle\Traits\QueryBuilderHelperTrait;
 
 /**
  * @extends ServiceEntityRepository<Official>
@@ -14,8 +16,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Official[]    findAll()
  * @method Official[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OfficialRepository extends ServiceEntityRepository
+class OfficialRepository extends ServiceEntityRepository implements QueryBuilderHelperInterface
 {
+    use QueryBuilderHelperTrait;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Official::class);
