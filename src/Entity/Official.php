@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: OfficialRepository::class)]
 #[ApiResource]
@@ -21,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     'currentParty',
     'birthday'
 ])]
-
+#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty'])]
 class Official
 {
     #[ORM\Id]
