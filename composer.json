@@ -23,6 +23,7 @@
         "survos/auth-bundle": "^1.5",
         "survos/bootstrap-bundle": "^1.5",
         "survos/core-bundle": "^1.5",
+        "survos/crawler-bundle": "^1.5",
         "survos/deployment-bundle": "^1.5",
         "survos/html-prettify-bundle": "^1.5",
         "survos/inspection-bundle": "^1.5",
@@ -122,7 +123,8 @@
         "symfony/maker-bundle": "^1.51.1",
         "symfony/phpunit-bridge": "^6.3.6",
         "symfony/stopwatch": "^6.4 || ^7.0",
-        "symfony/web-profiler-bundle": "^6.4 || ^7.0"
+        "symfony/web-profiler-bundle": "^6.4 || ^7.0",
+        "symplify/easy-coding-standard": "^12.0"
     },
     "repositories": {
 
