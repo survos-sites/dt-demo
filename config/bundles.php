@@ -25,7 +25,6 @@ return [
     Survos\ApiGrid\SurvosApiGridBundle::class => ['all' => true],
     Survos\Scraper\SurvosScraperBundle::class => ['all' => true],
     Survos\SimpleDatatables\SurvosSimpleDatatablesBundle::class => ['all' => true],
-    Stenope\Bundle\StenopeBundle::class => ['all' => true],
     Sentry\SentryBundle\SentryBundle::class => ['prod' => true],
     Survos\DeploymentBundle\SurvosDeploymentBundle::class => ['all' => true],
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],

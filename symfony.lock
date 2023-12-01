@@ -165,9 +165,6 @@
             "phpcs.xml.dist"
         ]
     },
-    "stenope/stenope": {
-        "version": "v0.8.0"
-    },
     "survos/api-grid-bundle": {
         "version": "dev-main"
     },
