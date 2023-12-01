@@ -8,6 +8,8 @@
         This page uses the <code>api_grid</code> component, and the datatable's AJAX call using API Platform.
     </p>
 
+    {% set filter = app.request.query.all %}
+
     {% set columns =
         [
             {name: 'id'},
@@ -36,6 +38,7 @@
             :class="class"
             :caller="_self"
             :columns="columns"
+            :filter="filter"
     >
         <twig:block name="officialName">
             <a href="{{ path('app_congress_show', {'id': row.id}) }}">
