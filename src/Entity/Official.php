@@ -11,7 +11,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
+use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
 use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: OfficialRepository::class)]
 #[ApiResource]
 #[ApiFilter(OrderFilter::class, properties: ['id',
@@ -22,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     'currentParty',
     'birthday'
 ])]
+#[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
 #[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty'])]
 class Official
 {
