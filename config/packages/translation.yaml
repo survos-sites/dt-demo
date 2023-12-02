@@ -1,5 +1,6 @@
 framework:
     default_locale: en
+    enabled_locales: ['en', 'fr', 'es']
     translator:
         default_path: '%kernel.project_dir%/translations'
         fallbacks:
@@ -13,3 +14,4 @@ framework:
 #                dsn: '%env(LOKALISE_DSN)%'
 #            phrase:
 #                dsn: '%env(PHRASE_DSN)%'
+

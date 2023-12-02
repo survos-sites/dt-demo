@@ -68,10 +68,10 @@ return [
         'type' => 'css',
     ],
     'simple-datatables' => [
-        'version' => '8.0.0',
+        'version' => '8.0.1',
     ],
     'simple-datatables/dist/style.min.css' => [
-        'version' => '8.0.0',
+        'version' => '8.0.1',
         'type' => 'css',
     ],
     'twig' => [
@@ -118,20 +118,20 @@ return [
         'version' => '0.0.6',
     ],
     '@fortawesome/fontawesome-free' => [
-        'version' => '6.4.2',
+        'version' => '6.5.1',
     ],
     '@fortawesome/fontawesome-free/css/fontawesome.min.css' => [
-        'version' => '6.4.2',
+        'version' => '6.5.1',
         'type' => 'css',
     ],
     '@fortawesome/free-solid-svg-icons' => [
-        'version' => '6.4.2',
+        'version' => '6.5.1',
     ],
     '@fortawesome/fontawesome-svg-core' => [
-        'version' => '6.4.2',
+        'version' => '6.5.1',
     ],
     '@fortawesome/fontawesome-svg-core/styles.min.css' => [
-        'version' => '6.4.2',
+        'version' => '6.5.1',
         'type' => 'css',
     ],
     'bootswatch/dist/cerulean/bootstrap.min.css' => [
@@ -182,7 +182,7 @@ return [
     'datatables.net-searchpanes' => [
         'version' => '2.2.0',
     ],
-        'perfect-scrollbar' => [
+    'perfect-scrollbar' => [
         'version' => '1.5.5',
     ],
     'perfect-scrollbar/css/perfect-scrollbar.min.css' => [
