@@ -30,4 +30,5 @@ return [
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
     Survos\InspectionBundle\SurvosInspectionBundle::class => ['all' => true],
     Survos\CrawlerBundle\SurvosCrawlerBundle::class => ['all' => true],
+    Survos\CommandBundle\SurvosCommandBundle::class => ['all' => true],
 ];
