@@ -68,10 +68,10 @@ return [
         'type' => 'css',
     ],
     'simple-datatables' => [
-        'version' => '8.0.1',
+        'version' => '9.0.0',
     ],
     'simple-datatables/dist/style.min.css' => [
-        'version' => '8.0.1',
+        'version' => '9.0.0',
         'type' => 'css',
     ],
     'twig' => [

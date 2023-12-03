@@ -18,7 +18,7 @@ class Term
 
     #[ORM\ManyToOne(inversedBy: 'terms')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Official $offical = null;
+    private ?Official $official = null;
 
     #[ORM\Column(length: 16, nullable: true)]
     private ?string $type = null;
@@ -44,14 +44,14 @@ class Term
         return $this->id;
     }
 
-    public function getOffical(): ?Official
+    public function getOfficial(): ?Official
     {
-        return $this->offical;
+        return $this->official;
     }
 
-    public function setOffical(?Official $offical): static
+    public function setOfficial(?Official $official): static
     {
-        $this->offical = $offical;
+        $this->official = $official;
 
         return $this;
     }

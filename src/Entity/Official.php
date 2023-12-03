@@ -5,6 +5,11 @@ namespace App\Entity;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
 use App\Repository\OfficialRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,10 +17,21 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
 use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
+use Survos\ApiGrid\State\MeilliSearchStateProvider;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OfficialRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [new Get(), new Put(), new Delete(), new Patch(),
+        new GetCollection(
+            provider: MeilliSearchStateProvider::class,
+        )],
+    shortName: 'congress',
+    normalizationContext: [
+        'groups' => ['official.read', 'project.related', 'marking', 'rp', 'preview', 'translation'],
+    ]
+)]
 #[ApiFilter(OrderFilter::class, properties: ['id',
     'firstName',
     'lastName',
@@ -26,6 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 ])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
 #[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty'])]
+#[Groups(['official.read'])]
 class Official
 {
     #[ORM\Id]
@@ -48,12 +65,15 @@ class Official
     #[ORM\Column(length: 1, nullable: true)]
     private ?string $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'offical', targetEntity: Term::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'official', targetEntity: Term::class, orphanRemoval: true)]
     private Collection $terms;
 
     #[ORM\Column(length: 12, nullable: true)]
     #[Assert\Length(min: 0, max: 12)]
     private ?string $currentParty = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $code = null;
 
     public function __construct()
     {
@@ -137,7 +157,7 @@ class Official
     {
         if (!$this->terms->contains($term)) {
             $this->terms->add($term);
-            $term->setOffical($this);
+            $term->setOfficial($this);
         }
 
         return $this;
@@ -147,8 +167,8 @@ class Official
     {
         if ($this->terms->removeElement($term)) {
             // set the owning side to null (unless already changed)
-            if ($term->getOffical() === $this) {
-                $term->setOffical(null);
+            if ($term->getOfficial() === $this) {
+                $term->setOfficial(null);
             }
         }
 
@@ -168,6 +188,18 @@ class Official
     public function setCurrentParty(?string $currentParty): static
     {
         $this->currentParty = $currentParty;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): static
+    {
+        $this->code = $code;
 
         return $this;
     }

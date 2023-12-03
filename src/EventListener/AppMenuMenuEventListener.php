@@ -24,7 +24,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
     use KnpMenuHelperTrait;
 
     public function __construct(
-        private ContextService $contextService,
+        private ContextService                 $contextService,
         private ?AuthorizationCheckerInterface $security = null,
     )
     {
@@ -53,8 +53,8 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
 //                    </li>
 //
 
-    $menu = $event->getMenu();
-        foreach ($this->contextService->getConfig()['app']['social']??[] as $platform=>$value) {
+        $menu = $event->getMenu();
+        foreach ($this->contextService->getConfig()['app']['social'] ?? [] as $platform => $value) {
             $this->add($menu, uri: $value, label: $platform, external: true, icon: 'bi bi-' . $platform);
         }
         $this->add($menu, label: ' ', dividerAppend: true);
@@ -66,16 +66,18 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         }
     }
 
-        public function startNavbarMenu(KnpMenuEvent $event): void
+    public function startNavbarMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
         $options = $event->getOptions();
 
 
         $nestedMenu = $this->addSubmenu($menu, 'App');
-        foreach (['app_homepage','app_credit', 'app_simple','app_grid'] as $route) {
-            $this->add($nestedMenu, $route, label: u($route)->after('app_'));
+        foreach (['app_homepage', 'app_credit', 'app_simple', 'app_grid'] as $route)
+        {
+            $this->add($nestedMenu, $route); // label: u($route)->after('app_')
         }
+        $this->add($nestedMenu, 'survos_commands');
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem
 
 //        $nestedMenu = $this->addSubmenu($menu, 'Credits');
@@ -89,27 +91,27 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
                  ] as $controllerClass) {
             $controllerMenu = $this->addSubmenu($menu,
                 label: (new \ReflectionClass($controllerClass))->getShortName());
-            foreach (['grid','api_grid','simple_datatables',
+            foreach (['grid', 'api_grid', 'simple_datatables',
 //                         'index',
 //                         'crud_index'
                      ] as $controllerRoute) {
-                $this->add($controllerMenu, $controllerClass.'::'.$controllerRoute,
+                $this->add($controllerMenu, $controllerClass . '::' . $controllerRoute,
                     label: $controllerRoute);
             }
 
         }
     }
 
-public function pageMenu(KnpMenuEvent $event): void
-{
-}
+    public function pageMenu(KnpMenuEvent $event): void
+    {
+    }
 
     public function footerMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
         $options = $event->getOptions();
 
-        foreach (['app_homepage','app_credit', 'app_simple','app_grid'] as $route) {
+        foreach (['app_homepage', 'app_credit', 'app_simple', 'app_grid'] as $route) {
             $this->add($menu, $route);
         }
         $nestedMenu = $this->addSubmenu($menu, 'Credits');
@@ -121,6 +123,6 @@ public function pageMenu(KnpMenuEvent $event): void
     }
 
     public function sidebarMenu(KnpMenuEvent $event): void
-{
-}
+    {
+    }
 }

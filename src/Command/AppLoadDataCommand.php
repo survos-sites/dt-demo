@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Zenstruck\Console\Attribute\Option;
@@ -45,6 +46,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => file_get_contents($url));
 //        dd($json);
 
+        $slugger = new AsciiSlugger();
         foreach (json_decode($json) as $idx => $record) {
 
 //            $official = $serializer->denormalize(
@@ -65,7 +67,10 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                 ->setGender($bio->gender)
                 ->setFirstName($name->first)
                 ->setLastName($name->last)
-                ->setOfficialName($name->official_full ?? "$name->first $name->last");
+                ->setOfficialName($officialName = $name->official_full ?? "$name->first $name->last")
+                ->setCode($slugger->slug($officialName))
+            ;
+
             $manager->persist($official);
 
             foreach ($record->terms as $t) {

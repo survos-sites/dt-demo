@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
-    public function index(): Response
+    public function homepage(): Response
     {
         return $this->render('app/index.html.twig', [
             'controller_name' => 'AppController',
@@ -25,7 +25,7 @@ class AppController extends AbstractController
     }
 
     #[Route('/grid', name: 'app_grid')]
-    public function grid(): Response
+    public function grid_example(): Response
     {
         return $this->render('app/grid.html.twig', [
             'controllerClass' => self::class

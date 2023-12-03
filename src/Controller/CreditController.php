@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CreditController extends AbstractController
 {
     #[Route('/credit', name: 'app_credit')]
-    public function index(ParameterBagInterface $bag): Response
+    public function credits(ParameterBagInterface $bag): Response
     {
         $map = require($bag->get('kernel.project_dir') . '/importmap.php');
         $data = [];
