@@ -12,29 +12,19 @@
         [
             {name: 'id'},
             {name: 'actions', condition: is_granted('ROLE_ADMIN')},
-            {name: 'gender', sortable: true, browsable: true},
-            {name: 'currentParty', sortable: true, browsable: true},
+            {name: 'gender'},
+            {name: 'currentParty'},
             {name: 'firstName', sortable: true},
             {name: 'lastName', sortable: true},
             {name: 'officialName', sortable: true},
             {name: 'birthday', sortable: true},
         ] %}
 
-    <div class="dtsp-verticalContainer row">
-        <div class="dtsp-verticalPanes col-3">
-        </div>
-        <div class="col-9">
-            {{ block('gridTable') }}
-        </div>
-    </div>
-{% endblock %}
-
-{% block gridTable %}
-
-
     <twig:api_grid
             :class="class"
             :caller="_self"
+            :apiGetCollectionUrl="apiCall"
+            useMeili="false"
             :columns="columns"
     >
         <twig:block name="officialName">

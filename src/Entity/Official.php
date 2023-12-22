@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [new Get(), new Put(), new Delete(), new Patch(),
         new GetCollection(
-            provider: MeilliSearchStateProvider::class,
+//            provider: MeilliSearchStateProvider::class,
         )],
     shortName: 'congress',
     normalizationContext: [
@@ -41,7 +41,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     'birthday'
 ])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty'])]
+// run grid:index after changes if using meili
+#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','lastName'])]
 #[Groups(['official.read'])]
 class Official
 {

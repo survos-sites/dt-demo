@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use ApiPlatform\Doctrine\Orm\State\CollectionProvider;
 use App\Entity\Official;
 use App\Form\OfficialType;
 use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Survos\ApiGrid\State\MeiliSearchStateProvider;
+use Survos\InspectionBundle\Services\InspectionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,10 +45,16 @@ class CongressController extends AbstractController
 
 
     #[Route('/api_grid',  name: 'congress_api_grid', methods: ['GET'], options: ['label' => "Browse (api_grid)"])]
-    public function api_grid(): Response
+    public function api_grid(InspectionService $inspectionService): Response
     {
+        $class = Official::class;
+        $endpoints = $inspectionService->getAllUrlsForResource($class);
+        $useMeili = false;
+        $apiCall = $endpoints[$useMeili ? MeiliSearchStateProvider::class : CollectionProvider::class];
+
         return $this->render('congress/browse.html.twig', [
-            'class' => Official::class
+            'class' => Official::class,
+            'apiCall' => $apiCall
         ]);
     }
 
