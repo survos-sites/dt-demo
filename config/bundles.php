@@ -31,4 +31,5 @@ return [
     Survos\InspectionBundle\SurvosInspectionBundle::class => ['all' => true],
     Survos\CrawlerBundle\SurvosCrawlerBundle::class => ['all' => true],
     Survos\CommandBundle\SurvosCommandBundle::class => ['all' => true],
+    Survos\Bundle\MakerBundle\SurvosMakerBundle::class => ['dev' => true, 'test' => true],
 ];
