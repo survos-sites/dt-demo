@@ -34,6 +34,9 @@
             </div>
         </div>
 
+    <a href="{{ path('congress_api_grid') }}">Meili officials</a>
+    <a href="{{ path('congress_api_grid', {doctrine: true}) }}">Doctrine officials</a>
+
         <div class="row">
 
             <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table') }}>

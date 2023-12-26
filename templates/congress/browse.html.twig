@@ -13,6 +13,9 @@
             {name: 'id'},
             {name: 'actions', condition: is_granted('ROLE_ADMIN')},
             {name: 'gender'},
+            {name: 'house'},
+            {name: 'state'},
+            {name: 'district'},
             {name: 'currentParty'},
             {name: 'firstName', sortable: true},
             {name: 'lastName', sortable: true},
@@ -20,11 +23,13 @@
             {name: 'birthday', sortable: true},
         ] %}
 
+    :apiGetCollectionUrl="apiCall"
+    useMeili="false"
+
     <twig:api_grid
             :class="class"
             :caller="_self"
-            :apiGetCollectionUrl="apiCall"
-            useMeili="false"
+            :apiRoute="apiRoute"
             :columns="columns"
     >
         <twig:block name="officialName">

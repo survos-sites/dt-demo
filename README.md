@@ -1,6 +1,12 @@
-## Complete datatables-demo project, Symfony 6.4 
+## Complete datatables-demo project, Symfony 7.0
 
-### Basic Setup
+gh repo clone survos-sites/dt-demo
+cd dt-demo
+composer install
+bin/console d:sch:update --force 
+bin/console app:load-data
+
+### Recreate the demo
 
 Use 6.4 beta, add stimulus, api-platform, doctrine-futures
 Later we'll add the survos bundles

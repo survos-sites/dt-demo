@@ -45,16 +45,18 @@ class CongressController extends AbstractController
 
 
     #[Route('/api_grid',  name: 'congress_api_grid', methods: ['GET'], options: ['label' => "Browse (api_grid)"])]
-    public function api_grid(InspectionService $inspectionService): Response
+    public function api_grid(Request $request, InspectionService $inspectionService): Response
     {
         $class = Official::class;
         $endpoints = $inspectionService->getAllUrlsForResource($class);
-        $useMeili = false;
-        $apiCall = $endpoints[$useMeili ? MeiliSearchStateProvider::class : CollectionProvider::class];
+        $apiRoute = $request->get('doctrine', false) ? 'doctrine-officials' : 'meili-officials';
+//        dd($endpoints);
+//        $apiCall = $endpoints[$useMeili ? MeiliSearchStateProvider::class : CollectionProvider::class];
 
         return $this->render('congress/browse.html.twig', [
             'class' => Official::class,
-            'apiCall' => $apiCall
+            'apiRoute' => $apiRoute,
+            'apiCall' => $apiCall??null
         ]);
     }
 

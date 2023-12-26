@@ -81,7 +81,11 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                     ->setDistrict($t->district ?? null)
                     ->setStartDate(new \DateTimeImmutable($t->start))
                     ->setEndDate(new \DateTimeImmutable($t->end));
-                $official->setCurrentParty($term->getParty());
+                $official
+                    ->setDistrict($term->getDistrict())
+                    ->setState($term->getStateAbbreviation())
+                    ->setHouse($term->getType())
+                    ->setCurrentParty($term->getParty());
                 $manager->persist($term);
                 $official->addTerm($term);
                 $errors = $this->validator->validate($term);

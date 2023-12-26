@@ -123,6 +123,9 @@
         columns: ['id',
             {name: 'gender', sortable: true, inSearchPane: true},
             {name: 'currentParty', sortable: true, inSearchPane: true},
+            {name: 'state'},
+            {name: 'house'},
+            {name: 'district'},
             {name: 'firstName', sortable: true},
             {name: 'lastName', sortable: true},
             'officialName']|merge(is_granted('ROLE_ADMIN')?['actions']:['birthday'])

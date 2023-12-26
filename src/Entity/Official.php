@@ -17,6 +17,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
 use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
+use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\ApiGrid\State\MeilliSearchStateProvider;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: OfficialRepository::class)]
 #[ApiResource(
     operations: [new Get(), new Put(), new Delete(), new Patch(),
-        new GetCollection(
+        new GetCollection(name: 'doctrine-officials'
 //            provider: MeilliSearchStateProvider::class,
         )],
     shortName: 'congress',
@@ -32,6 +33,16 @@ use Symfony\Component\Validator\Constraints as Assert;
         'groups' => ['official.read', 'project.related', 'marking', 'rp', 'preview', 'translation'],
     ]
 )]
+#[GetCollection(
+    name: 'meili-officials',
+    uriTemplate: "meili/officials",
+//    uriVariables: ["indexName"],
+    provider: MeiliSearchStateProvider::class,
+    normalizationContext: [
+        'groups' => ['official.read', 'tree', 'rp'],
+    ]
+)]
+
 #[ApiFilter(OrderFilter::class, properties: ['id',
     'firstName',
     'lastName',
@@ -42,7 +53,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 ])]
 #[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
 // run grid:index after changes if using meili
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','lastName'])]
+#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','house','state'])]
 #[Groups(['official.read'])]
 class Official
 {
@@ -75,6 +86,15 @@ class Official
 
     #[ORM\Column(length: 255)]
     private ?string $code = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $house = null;
+
+    #[ORM\Column(length: 2, nullable: true)]
+    private ?string $state = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $district = null;
 
     public function __construct()
     {
@@ -201,6 +221,42 @@ class Official
     public function setCode(string $code): static
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getHouse(): ?string
+    {
+        return $this->house;
+    }
+
+    public function setHouse(?string $house): static
+    {
+        $this->house = $house;
+
+        return $this;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): static
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getDistrict(): ?int
+    {
+        return $this->district;
+    }
+
+    public function setDistrict(?int $district): static
+    {
+        $this->district = $district;
 
         return $this;
     }
