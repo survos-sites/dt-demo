@@ -10,7 +10,7 @@
         "ext-pdo_sqlite": "*",
         "ext-sodium": "*",
         "ext-sqlite3": "*",
-        "api-platform/core": "dev-main",
+        "api-platform/core": "^3.2",
         "doctrine/doctrine-bundle": "^2.10.2",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^2.16.2",

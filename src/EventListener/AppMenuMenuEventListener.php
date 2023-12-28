@@ -73,11 +73,14 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
 
 
         $nestedMenu = $this->addSubmenu($menu, 'App');
-        foreach (['app_homepage', 'app_credit', 'app_simple', 'app_grid'] as $route)
+        // app_simple?
+        foreach (['app_homepage', 'app_credit', 'app_grid'] as $route)
         {
             $this->add($nestedMenu, $route); // label: u($route)->after('app_')
         }
-        $this->add($nestedMenu, 'survos_commands');
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $this->add($nestedMenu, 'survos_commands');
+        }
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem
 
 //        $nestedMenu = $this->addSubmenu($menu, 'Credits');
