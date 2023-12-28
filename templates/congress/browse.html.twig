@@ -51,8 +51,10 @@
         </twig:block>
 
         <twig:block name="actions">
+            {% if is_granted('ROLE_ADMIN') %}
             <span class="fas fa-pencil"></span>
             <a href="{{ path('app_congress_edit', {'id': row.id}) }}">edit</a>
+            {% endif %}
         </twig:block>
 
     </twig:api_grid>

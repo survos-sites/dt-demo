@@ -21,16 +21,15 @@ git clone clone git@github.com:survos/survos
 ```
 
 ```bash
-git clone clone git@github.com:survos-sites/dt-demo
-cd dt-demo
+git clone git@github.com:survos-sites/dt-demo && cd dt-demo
 composer install
-../survos/link . # developers only
 bin/console d:sch:update --force 
 bin/console app:load-data
 symfony server:start -d
-symfony open:local /congress/api_grid
+symfony open:local --path /congress/grid
 ```
 
+../survos/link . # developers only
 
 ### Recreate the demo
 
