@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Official;
 use App\Entity\Term;
+use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -37,10 +38,19 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         IO   $io,
         EntityManagerInterface $manager,
         SerializerInterface $serializer,
+        OfficialRepository $officialRepository,
         #[Option(description: 'reload the json even if already in the cache')] bool $refresh = false,
         #[Option(description: 'max records to load')] int $limit=0,
     ): void
     {
+        $count = $officialRepository->createQueryBuilder('o')
+            ->delete()
+            ->getQuery()
+            ->execute();
+        if ($count) {
+            $io->success("$count records deleted");
+        }
+
 
         $url = 'https://theunitedstates.io/congress-legislators/legislators-current.json';
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => file_get_contents($url));
@@ -62,7 +72,8 @@ final class AppLoadDataCommand extends InvokableServiceCommand
 //            $serializer = new Serializer($normalizers, []);
             $name = $record->name; // an object with name parts
             $bio = $record->bio; // a bio with gender, etc.
-            $official = (new Official())
+            $id = $record->id->wikidata;
+            $official = (new Official($id))
                 ->setBirthday(new \DateTimeImmutable($bio->birthday))
                 ->setGender($bio->gender)
                 ->setFirstName($name->first)

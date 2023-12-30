@@ -19,6 +19,7 @@ use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
 use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\ApiGrid\State\MeilliSearchStateProvider;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -56,12 +57,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 // run grid:index after changes if using meili
 #[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','house','state'])]
 #[Groups(['official.read'])]
+#[UniqueEntity(['id'])]
 class Official
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: Types::STRING)]
+    private string $id; // wikidata ID
 
     #[ORM\Column(length: 16, nullable: true)]
     private ?string $firstName = null;
@@ -97,12 +98,13 @@ class Official
     #[ORM\Column(nullable: true)]
     private ?int $district = null;
 
-    public function __construct()
+    public function __construct(string $id=null)
     {
+        $this->id = $id;
         $this->terms = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): string
     {
         return $this->id;
     }

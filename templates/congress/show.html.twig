@@ -3,13 +3,17 @@
 {% block title %}Official{% endblock %}
 
 {% block body %}
-    <h1>Official</h1>
+    <h1>{{ official.officialName }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ official.id }}</td>
+                <th>Wikidata ID</th>
+                <td>
+                    <a href="https://www.wikidata.org/wiki/{{ official.id }}" target="_blank">
+                    {{ official.id }}
+                    </a>
+                </td>
             </tr>
             <tr>
                 <th>FirstName</th>
@@ -18,10 +22,6 @@
             <tr>
                 <th>LastName</th>
                 <td>{{ official.lastName }}</td>
-            </tr>
-            <tr>
-                <th>OfficialName</th>
-                <td>{{ official.officialName }}</td>
             </tr>
             <tr>
                 <th>Birthday</th>
@@ -33,5 +33,35 @@
             </tr>
         </tbody>
     </table>
+
+    {% set columns = [
+        'type',
+        'district',
+        'party',
+        {name: 'startDate', block: 'date'},
+        {name: 'endDate', block: 'date'},
+    ] %}
+
+    <h3>{{ official.terms|length }} Term(s)</h3>
+    <twig:grid
+        :data="official.terms"
+        :columns="columns"
+        >
+        <twig:block name="dump">
+            {{ row|json_encode }}
+{#            {{ row.keys|join(',') }}#}
+        </twig:block>
+
+        {# these could be combined, at least in api_grid #}
+        <twig:block name="startDate">
+            {{ row.startDate|date('Y-m-d') }}
+        </twig:block>
+
+        <twig:block name="endDate">
+            {{ row.endDate|date('Y-m-d') }}
+        </twig:block>
+
+
+    </twig:grid>
 
 {% endblock %}

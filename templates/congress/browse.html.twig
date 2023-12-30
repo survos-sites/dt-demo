@@ -12,14 +12,13 @@
 
     {% set columns =
         [
-            {name: 'id'},
             {name: 'actions', condition: is_granted('ROLE_ADMIN')},
-            {name: 'gender'},
-            {name: 'house'},
-            {name: 'state'},
-            {name: 'district'},
-            {name: 'currentParty'},
             {name: 'officialName', sortable: true},
+            {name: 'house'},
+            {name: 'id'},
+            {name: 'state'},
+            {name: 'currentParty', title: 'party'},
+            {name: 'gender'},
             {name: 'birthday', sortable: true},
         ] %}
 
@@ -37,6 +36,11 @@
 
         <twig:block name="birthday">
             {{ row.birthday|date('Y-m-d') }}
+        </twig:block>
+
+        <twig:block name="house">
+            {{ row.house }}
+            {{ row.house == 'rep' ? '-' ~ row.district }}
         </twig:block>
 
         <twig:block name="lastName">
