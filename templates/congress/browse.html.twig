@@ -7,6 +7,8 @@
     <p>
         This page uses the <code>api_grid</code> component, and the datatable's AJAX call using API Platform.
     </p>
+{#    {name: 'firstName', sortable: true},#}
+{#    {name: 'lastName', sortable: true},#}
 
     {% set columns =
         [
@@ -17,14 +19,9 @@
             {name: 'state'},
             {name: 'district'},
             {name: 'currentParty'},
-            {name: 'firstName', sortable: true},
-            {name: 'lastName', sortable: true},
             {name: 'officialName', sortable: true},
             {name: 'birthday', sortable: true},
         ] %}
-
-    :apiGetCollectionUrl="apiCall"
-    useMeili="false"
 
     <twig:api_grid
             :class="class"
