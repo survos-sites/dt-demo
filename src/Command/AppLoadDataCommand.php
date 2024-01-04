@@ -4,10 +4,12 @@ namespace App\Command;
 
 use App\Entity\Official;
 use App\Entity\Term;
+use App\Message\FetchWikidataMessage;
 use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -29,6 +31,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
     public function __construct(
         private ValidatorInterface $validator,
         private CacheInterface $cache,
+        private MessageBusInterface $bus,
         string $name = null)
     {
         parent::__construct($name);
@@ -57,6 +60,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
 //        dd($json);
 
         $slugger = new AsciiSlugger();
+        $ids = []; // save for dispatching detail messages until after flush()
         foreach (json_decode($json) as $idx => $record) {
 
 //            $official = $serializer->denormalize(
@@ -74,6 +78,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
             $bio = $record->bio; // a bio with gender, etc.
             $id = $record->id->wikidata;
             $official = (new Official($id))
+                ->setWikidataId($id)
                 ->setBirthday(new \DateTimeImmutable($bio->birthday))
                 ->setGender($bio->gender)
                 ->setFirstName($name->first)
@@ -81,7 +86,6 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                 ->setOfficialName($officialName = $name->official_full ?? "$name->first $name->last")
                 ->setCode($slugger->slug($officialName))
             ;
-
             $manager->persist($official);
 
             foreach ($record->terms as $t) {
@@ -108,6 +112,8 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                 }
             }
 
+            $ids[] = $official->getWikidataId();
+
             if ($limit && ($idx >= $limit)) {
                 break;
             }
@@ -115,6 +121,11 @@ final class AppLoadDataCommand extends InvokableServiceCommand
 
         }
         $manager->flush();
+
+        foreach ($ids as $id) {
+            $this->bus->dispatch(new FetchWikidataMessage($id));
+        }
+
         $io->success('app:load-data success.');
     }
 }

@@ -1,0 +1,6 @@
+# config/packages/zenstruck_messenger_monitor.yaml
+
+zenstruck_messenger_monitor:
+  storage:
+    orm:
+      entity_class: App\Entity\ProcessedMessage

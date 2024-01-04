@@ -49,6 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     'lastName',
     'officialName',
     'gender',
+    'imageCount',
     'house',
     'currentParty',
     'birthday'
@@ -97,6 +98,18 @@ class Official
 
     #[ORM\Column(nullable: true)]
     private ?int $district = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $wikidataId = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $wikiData = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $imageCodes = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageCount = null;
 
     public function __construct(string $id=null)
     {
@@ -260,6 +273,55 @@ class Official
     public function setDistrict(?int $district): static
     {
         $this->district = $district;
+
+        return $this;
+    }
+
+    public function getWikidataId(): ?string
+    {
+        return $this->wikidataId;
+    }
+
+    public function setWikidataId(?string $wikidataId): static
+    {
+        $this->wikidataId = $wikidataId;
+
+        return $this;
+    }
+
+    public function getWikiData(): ?array
+    {
+        return $this->wikiData;
+    }
+
+    public function setWikiData(?array $wikiData): static
+    {
+        $this->wikiData = $wikiData;
+
+        return $this;
+    }
+
+    public function getImageCodes(): ?array
+    {
+        return $this->imageCodes;
+    }
+
+    public function setImageCodes(?array $imageCodes): static
+    {
+        $this->imageCodes = $imageCodes;
+        $this->setImageCount(count($imageCodes));
+
+        return $this;
+    }
+
+    public function getImageCount(): ?int
+    {
+        return $this->imageCount;
+    }
+
+    public function setImageCount(?int $imageCount): static
+    {
+        $this->imageCount = $imageCount;
 
         return $this;
     }

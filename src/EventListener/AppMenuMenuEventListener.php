@@ -9,6 +9,7 @@ use Survos\BootstrapBundle\Event\KnpMenuEvent;
 use Survos\BootstrapBundle\Service\ContextService;
 use Survos\BootstrapBundle\Traits\KnpMenuHelperInterface;
 use Survos\BootstrapBundle\Traits\KnpMenuHelperTrait;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use function Symfony\Component\String\u;
@@ -25,6 +26,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
 
     public function __construct(
         private ContextService                 $contextService,
+        #[Autowire('%kernel.environment%')] private string $env,
         private ?AuthorizationCheckerInterface $security = null,
     )
     {
@@ -38,7 +40,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
 //        foreach (['app_credit'] as $route) {
 //            $this->add($menu, $route, label: u($route)->after('app_'));
 //        }
-    }
+        }
 
     public function lastNavbarMenu(KnpMenuEvent $event): void
     {
@@ -66,6 +68,11 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         }
     }
 
+    private function isDev(): bool
+    {
+        return $this->env === 'dev';
+    }
+
     public function startNavbarMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
@@ -79,8 +86,9 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         {
             $this->add($nestedMenu, $route); // label: u($route)->after('app_')
         }
-        if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isDev() || $this->isGranted('ROLE_ADMIN')) {
             $this->add($nestedMenu, 'survos_commands');
+            $this->add($nestedMenu, 'zenstruck_messenger_monitor_dashboard');
         }
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem
 

@@ -18,6 +18,10 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        default_options:
+            headers:
+                'User-Agent': 'Survos (tacman@gmail.com)'
 when@test:
     framework:
         test: true
