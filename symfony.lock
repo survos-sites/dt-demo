@@ -91,6 +91,32 @@
             "config/packages/knpu_oauth2_client.yaml"
         ]
     },
+    "league/flysystem-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "913dc3d7a5a1af0d2b044c5ac3a16e2f851d7380"
+        },
+        "files": [
+            "config/packages/flysystem.yaml",
+            "var/storage/.gitignore"
+        ]
+    },
+    "liip/imagine-bundle": {
+        "version": "2.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.8",
+            "ref": "d1227d002b70d1a1f941d91845fcd7ac7fbfc929"
+        },
+        "files": [
+            "config/packages/liip_imagine.yaml",
+            "config/routes/liip_imagine.yaml"
+        ]
+    },
     "nelmio/cors-bundle": {
         "version": "2.3",
         "recipe": {
@@ -220,6 +246,9 @@
     },
     "survos/simple-datatables-bundle": {
         "version": "dev-main"
+    },
+    "survos/wiki-bundle": {
+        "version": "1.5.124"
     },
     "symfony/asset-mapper": {
         "version": "6.4",
@@ -480,5 +509,8 @@
     },
     "twig/extra-bundle": {
         "version": "v3.7.1"
+    },
+    "zenstruck/messenger-monitor-bundle": {
+        "version": "1.x-dev"
     }
 }

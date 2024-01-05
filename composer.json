@@ -1,7 +1,7 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
@@ -15,6 +15,8 @@
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^2.16.2",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
+        "league/flysystem-bundle": "^3.3",
+        "liip/imagine-bundle": "^2.12",
         "meilisearch/meilisearch-php": "^1.5",
         "nelmio/cors-bundle": "^2.3.1",
         "nyholm/psr7": "^1.0",
@@ -32,6 +34,7 @@
         "survos/inspection-bundle": "^1.5",
         "survos/scraper-bundle": "^1.5",
         "survos/simple-datatables-bundle": "^1.5",
+        "survos/wiki-bundle": "^1.5",
         "symfony/asset": "^6.4 || ^7.0",
         "symfony/asset-mapper": "^6.4",
         "symfony/console": "^6.4 || ^7.0",
@@ -50,6 +53,7 @@
         "symfony/process": "^6.4 || ^7.0",
         "symfony/property-access": "^6.4 || ^7.0",
         "symfony/property-info": "^6.4 || ^7.0",
+        "symfony/redis-messenger": "^6.4",
         "symfony/runtime": "^6.4 || ^7.0",
         "symfony/security-bundle": "^6.4 || ^7.0",
         "symfony/serializer": "^6.4 || ^7.0",
@@ -64,7 +68,8 @@
         "twig/extra-bundle": "^2.12|^3.7.1",
         "twig/intl-extra": "^3.8",
         "twig/markdown-extra": "^3.8",
-        "twig/twig": "^3.7.1"
+        "twig/twig": "^3.7.1",
+        "zenstruck/messenger-monitor-bundle": "1.x-dev"
     },
     "config": {
         "allow-plugins": {
@@ -108,9 +113,6 @@
         "post-update-cmd": [
             "@auto-scripts"
         ]
-    },
-    "conflict": {
-        "symfony/symfony": "*"
     },
     "extra": {
         "symfony": {

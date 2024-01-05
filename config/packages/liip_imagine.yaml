@@ -1,0 +1,37 @@
+# config/packages/liip_imagine.yamn
+liip_imagine:
+    driver: "gd"
+    twig:
+        mode: lazy
+
+    loaders:
+        flysystem_loader:
+            flysystem:
+                # this comes from flysystem.yaml
+                filesystem_service: default.storage
+
+    # default loader to use for all filter sets
+    data_loader: flysystem_loader
+
+    filter_sets:
+        auto_rotate: ~
+        squared_thumbnail_medium:
+            filters:
+                thumbnail:
+                    size:          [400, 400]
+                    allow_upscale: true
+                    mode: inset
+        squared_thumbnail_small:
+            filters:
+                thumbnail:
+                    size:          [200, 200]
+                    allow_upscale: true
+                    mode: inset
+
+        squared_thumbnail_tiny:
+            filters:
+                thumbnail:
+                    size:          [100, 100]
+                    allow_upscale: true
+                    mode: inset
+
