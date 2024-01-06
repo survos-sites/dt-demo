@@ -80,7 +80,7 @@ class Official
     #[ORM\Column(length: 1, nullable: true)]
     private ?string $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'official', targetEntity: Term::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'official', targetEntity: Term::class, orphanRemoval: true, cascade: ['remove', 'persist'])]
     private Collection $terms;
 
     #[ORM\Column(length: 12, nullable: true)]

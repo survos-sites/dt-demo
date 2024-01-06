@@ -40,6 +40,7 @@
         "survos/scraper-bundle": "^1.5",
         "survos/simple-datatables-bundle": "^1.5",
         "survos/wiki-bundle": "^1.5",
+        "symfony/amqp-messenger": "^6.4",
         "symfony/asset": "^6.4 || ^7.0",
         "symfony/asset-mapper": "^6.4",
         "symfony/console": "^6.4 || ^7.0",

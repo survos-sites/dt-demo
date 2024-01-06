@@ -17,7 +17,7 @@ class Term
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'terms')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Official $official = null;
 
     #[ORM\Column(length: 16, nullable: true)]
