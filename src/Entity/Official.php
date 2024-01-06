@@ -105,7 +105,8 @@ class Official
     #[ORM\Column(nullable: true)]
     private ?array $wikiData = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    #[Groups(['official.read'])]
     private ?array $imageCodes = null;
 
     #[ORM\Column(nullable: true)]

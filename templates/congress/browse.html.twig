@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Browse Elected Officials</h1>
     <p>
-        This page uses the <code>api_grid</code> component, and the datatable's AJAX call using API Platform.
+        This page uses the <code>api_grid</code> component, and the datatable's AJAX call using API Platform and meili
     </p>
 {#    {name: 'firstName', sortable: true},#}
 {#    {name: 'lastName', sortable: true},#}
@@ -29,6 +29,12 @@
             :apiRoute="apiRoute"
             :columns="columns"
     >
+        <twig:block name="imageCount">
+            {{ row.imageCount }}
+            {% for imageData in row.imageCodes %}
+                <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" />
+            {% endfor %}
+        </twig:block>
         <twig:block name="officialName">
             <a href="{{ path('app_congress_show', {'id': row.id}) }}">
                 {{ row.officialName }}

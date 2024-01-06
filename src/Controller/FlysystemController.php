@@ -9,15 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FlysystemController extends AbstractController
 {
-    #[Route('/flysystem', name: 'flysystem_browse')]
-    public function index(FilesystemOperator $defaultStorage): Response
+    #[Route('/flysystem_default', name: 'flysystem_browse_default')]
+    public function default(FilesystemOperator $defaultStorage): Response
     {
-
         return $this->render('flysystem/index.html.twig', [
-            'images' => $defaultStorage->listContents('/', deep: true),
+            'images' => $defaultStorage->listContents('/', deep: false),
             'controller_name' => 'FlysystemController',
         ]);
     }
-
 
 }

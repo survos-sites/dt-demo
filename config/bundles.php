@@ -36,4 +36,5 @@ return [
     Zenstruck\Messenger\Monitor\ZenstruckMessengerMonitorBundle::class => ['all' => true],
     League\FlysystemBundle\FlysystemBundle::class => ['all' => true],
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
+    Aws\Symfony\AwsBundle::class => ['all' => true],
 ];

@@ -37,7 +37,10 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         $menu = $event->getMenu();
         $options = $event->getOptions();
         $this->add($menu, 'app_credit', label: "Javascript Packages");
-        $this->add($menu, 'flysystem_browse', label: "Browse Images");
+        $submenu = $this->addSubmenu($menu, 'Flysystem');
+        foreach (['flysystem_browse_default'] as $route) {
+            $this->add($submenu, $route);
+        }
 //        foreach (['app_credit'] as $route) {
 //            $this->add($menu, $route, label: u($route)->after('app_'));
 //        }

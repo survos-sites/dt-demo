@@ -9,6 +9,7 @@ use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -44,16 +45,19 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         OfficialRepository $officialRepository,
         #[Option(description: 'reload the json even if already in the cache')] bool $refresh = false,
         #[Option(description: 'max records to load')] int $limit=0,
+        #[Option(description: 'purge database first')] bool $purge=false,
+        #[Option(description: 'dispatch request for details')] bool $details=false,
     ): void
     {
-        $count = $officialRepository->createQueryBuilder('o')
-            ->delete()
-            ->getQuery()
-            ->execute();
-        if ($count) {
-            $io->success("$count records deleted");
+        if ($purge) {
+            $count = $officialRepository->createQueryBuilder('o')
+                ->delete()
+                ->getQuery()
+                ->execute();
+            if ($count) {
+                $io->success("$count records deleted");
+            }
         }
-
 
         $url = 'https://theunitedstates.io/congress-legislators/legislators-current.json';
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => file_get_contents($url));
@@ -61,7 +65,10 @@ final class AppLoadDataCommand extends InvokableServiceCommand
 
         $slugger = new AsciiSlugger();
         $ids = []; // save for dispatching detail messages until after flush()
-        foreach (json_decode($json) as $idx => $record) {
+        $congressData = json_decode($json);
+        $progressBar = new ProgressBar($io->output(), count($congressData));
+        foreach ($congressData as $idx => $record) {
+            $progressBar->advance();
 
 //            $official = $serializer->denormalize(
 //                $record,
@@ -77,8 +84,11 @@ final class AppLoadDataCommand extends InvokableServiceCommand
             $name = $record->name; // an object with name parts
             $bio = $record->bio; // a bio with gender, etc.
             $id = $record->id->wikidata;
-            $official = (new Official($id))
-                ->setWikidataId($id)
+            if (!$official = $officialRepository->findOneBy(['wikidataId' => $id])) {
+                $official = (new Official($id))
+                    ->setWikidataId($id);
+            }
+            $official
                 ->setBirthday(new \DateTimeImmutable($bio->birthday))
                 ->setGender($bio->gender)
                 ->setFirstName($name->first)
@@ -114,18 +124,24 @@ final class AppLoadDataCommand extends InvokableServiceCommand
 
             $ids[] = $official->getWikidataId();
 
-            if ($limit && ($idx >= $limit)) {
+            if ($limit && ($progressBar->getProgress() >= $limit)) {
                 break;
             }
 
 
         }
         $manager->flush();
+        $progressBar->finish();
 
-        foreach ($ids as $id) {
-            $this->bus->dispatch(new FetchWikidataMessage($id));
+        if ($details) {
+            $progressBar = new ProgressBar($io->output(), count($ids));
+            foreach ($ids as $id) {
+                $progressBar->advance();
+                $this->bus->dispatch(new FetchWikidataMessage($id));
+            }
+            $progressBar->finish();
         }
 
-        $io->success('app:load-data success.');
+        $io->success(sprintf('app:load-data success, %s records processed', count($ids)));
     }
 }

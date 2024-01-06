@@ -40,22 +40,24 @@
     <ul>
     {% for imageCode in official.imageCodes %}
         <li>
-            {% set imagePath = '/images/%s/%s'|format(official.wikidataId, imageCode) %}
-            {% set url = asset(imagePath)   %}
-            {% set flysystemPath = '/%s/%s'|format(official.wikidataId, imageCode) %}
+            {% set flysystemPath = imageCode.code %}
             {% for filter in ['squared_thumbnail_medium','squared_thumbnail_small','squared_thumbnail_tiny'] %}
                 {% set thumbUrl = flysystemPath | imagine_filter(filter)   %}
                 <figure class="figure">
                     <a href="{{ thumbUrl }}" target="_blank">
                     <img src="{{ thumbUrl }}" class="figure-img img-fluid rounded" alt="{{ thumbUrl }}">
                     </a>
-                    <figcaption class="figure-caption text-end">{{ filter }}</figcaption>
+                    <figcaption class="figure-caption text-end">{{ filter }}
+                        <b>
+                            {{ flysystemPath }}
+
+                        </b>
+                    </figcaption>
                 </figure>
 {#                <br /><b>{{ thumbUrl }}</b>#}
 {#                <br /><b>{{ imagePath }}</b>#}
 
             {% endfor %}
-            <br /><a href="{{ url }}" target="_blank">Original: {{ url }}</a>
         </li>
     {% endfor %}
     </ul>

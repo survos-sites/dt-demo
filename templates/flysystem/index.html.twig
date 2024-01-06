@@ -12,7 +12,7 @@
     <ul>
         {% for image in images %}
             <li>
-                {{ dump(image) }}
+                {{ image.path }} ({{ image.type }})
             </li>
         {% endfor %}
     </ul>

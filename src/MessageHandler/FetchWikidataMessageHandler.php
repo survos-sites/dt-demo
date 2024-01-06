@@ -19,11 +19,11 @@ final class FetchWikidataMessageHandler
 {
 
     public function __construct(
-        private WikiService $wikiService,
-        private EntityManagerInterface $entityManager,
-        private HttpClientInterface $httpClient,
-        private FilesystemOperator $defaultStorage,
-        private LoggerInterface $logger,
+        private WikiService                                $wikiService,
+        private EntityManagerInterface                     $entityManager,
+        private HttpClientInterface                        $httpClient,
+        private FilesystemOperator                         $defaultStorage,
+        private LoggerInterface                            $logger,
         #[Autowire('%kernel.project_dir%')] private string $projectDir,
     )
     {
@@ -31,18 +31,24 @@ final class FetchWikidataMessageHandler
 
     public function __invoke(FetchWikidataMessage $message)
     {
+        $filesystem = $this->defaultStorage;
+        $client = $this->httpClient;
         $wikidataId = $message->getWikidataId();
+        $this->wikiService->setCacheTimeout(60 * 60 * 24);
         $wikiData = $this->wikiService->fetchWikidataPage($wikidataId);
         $official = $this->entityManager->getRepository(Official::class)->findOneBy(['wikidataId' => $wikidataId]);
-        $p18 = $wikiData->properties['P18'];
-        /** @var Collection $values */
-        $values = $p18->values;
+
+//        dd($wikiData->properties->has('P18'), $wikiData->properties);
+        if ($wikiData->properties->has('P18')) {
+            $p18 = $wikiData->properties['P18'];
+            /** @var Collection $values */
+            $values = $p18->values;
 //        dump($p18, $values->getIterator());
-        /** @var Value $item */
-        $images = [];
-        foreach ($values->getIterator() as $item) {
-            // we could do this in an async message, too.
-            $url = $item->id;
+            /** @var Value $item */
+            $images = [];
+            foreach ($values->getIterator() as $item) {
+                // we could do this in an async message, too.
+                $url = $item->id;
 //            $downloadedFileLocation = sprintf('%s/public/images/%s/', $this->projectDir, $wikidataId);
 //            // this will fail on production, unless /public/images is linked to persistent storage
 //            if (!is_dir($downloadedFileLocation)) {
@@ -52,31 +58,33 @@ final class FetchWikidataMessageHandler
 //                    dd($downloadedFileLocation, $exception);
 //                }
 //            }
-            $code = md5($url) . '.' . pathinfo($url, PATHINFO_EXTENSION);
+                $code = sprintf("%s/%s.%s", $wikidataId, md5($url), pathinfo($url, PATHINFO_EXTENSION));
 //            $path = $downloadedFileLocation . $code;
-            if (!$this->defaultStorage->has($code)) {
-                $this->logger->warning("Fetching $url");
-                $request = $this->httpClient->request('GET', $url, [
-//                    'User-Agent' => 'SurvosBot/0.1 (tacman@gmail.com) generic-library/0.0'
-                ]);
-                if ($request->getStatusCode() == 200) {
-                    $this->defaultStorage->write($code, $request->getContent());
-
-//                    file_put_contents($path, $request->getContent());
+                if (!$filesystem->has($code)) {
+                    $this->logger->info("Fetching image $url");
+                    $response = $this->httpClient->request('GET', $url, []);
+                    // https://symfony.com/doc/current/http_client.html#streaming-responses
+                    if ($response->getStatusCode() == 200) {
+                        $filesystem->writeStream($code, $response->toStream());
+                    } else {
+                        dd($response);
+                    }
                 } else {
-                    dd($request);
+                    $this->logger->info("$code already exists");
                 }
-            } else {
-                $this->logger->warning("$code already exists");
-            }
-            $images[] = $code;
+                $images[] = [
+                    'code' => $code,
+                    'url' => $url
+                ];
 
-            // create thumbnail
+                // create thumbnail
+            }
+            $official->setImageCodes($images);
+
         }
 
 
 //        $official->setWikiData($wikiData);
-        $official->setImageCodes($images);
         $this->entityManager->flush();
 
         return $wikiData;
