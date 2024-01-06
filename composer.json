@@ -9,6 +9,7 @@
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-pdo_sqlite": "*",
+        "ext-redis": "*",
         "ext-sodium": "*",
         "ext-sqlite3": "*",
         "api-platform/core": "^3.2",
