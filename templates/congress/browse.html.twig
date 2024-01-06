@@ -32,7 +32,9 @@
         <twig:block name="imageCount">
             {{ row.imageCount }}
             {% for imageData in row.imageCodes %}
-                <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" />
+                <a href="{{ imageData.thumb }}" target="_blank">
+                    <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" />
+                </a>
             {% endfor %}
         </twig:block>
         <twig:block name="officialName">
