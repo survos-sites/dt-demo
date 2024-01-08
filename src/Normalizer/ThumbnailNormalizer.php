@@ -33,6 +33,11 @@ class ThumbnailNormalizer implements NormalizerInterface, SerializerAwareInterfa
 //        return $this->normalizer->normalize($object, $format, $context);
     }
 
+//    public function getSupportedTypes(?string $format): array
+//    {
+//        return [Official::class];
+//    }
+
     public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         // this is the collection, not the item!

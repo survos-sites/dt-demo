@@ -5,6 +5,7 @@ namespace App\MessageHandler;
 use App\Entity\Official;
 use App\Message\FetchWikidataMessage;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemOperator;
 use Psr\Log\LoggerInterface;
 use Survos\WikiBundle\Service\WikiService;
@@ -49,17 +50,7 @@ final class FetchWikidataMessageHandler
             foreach ($values->getIterator() as $item) {
                 // we could do this in an async message, too.
                 $url = $item->id;
-//            $downloadedFileLocation = sprintf('%s/public/images/%s/', $this->projectDir, $wikidataId);
-//            // this will fail on production, unless /public/images is linked to persistent storage
-//            if (!is_dir($downloadedFileLocation)) {
-//                try {
-//                    mkdir($downloadedFileLocation, recursive: true);
-//                } catch (\Exception $exception) {
-//                    dd($downloadedFileLocation, $exception);
-//                }
-//            }
                 $code = sprintf("%s/%s.%s", $wikidataId, md5($url), pathinfo($url, PATHINFO_EXTENSION));
-//            $path = $downloadedFileLocation . $code;
                 if (!$filesystem->has($code)) {
                     $this->logger->info("Fetching image $url");
                     $response = $this->httpClient->request('GET', $url, []);
@@ -69,9 +60,22 @@ final class FetchWikidataMessageHandler
                     } else {
                         dd($response);
                     }
+
+                    $exif = exif_read_data($response->toStream());
+                    if ($exif) {
+                        $this->logger->info("Orientation : " . ($exif['Orientation']??'--'));
+                    }
+
                 } else {
                     $this->logger->info("$code already exists");
                 }
+//                $filesystem->fileExists($path);
+                $meta = $filesystem->fileExists($code);
+                /** @var  Filesystem $filesystem */
+
+//                dd($meta,
+//                    exif_read_data($filesystem->readStream($code)),
+//                    $filesystem::class, $filesystem->mimeType($code));
                 $images[] = [
                     'code' => $code,
                     'url' => $url

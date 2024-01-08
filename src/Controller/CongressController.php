@@ -7,6 +7,7 @@ use App\Entity\Official;
 use App\Form\OfficialType;
 use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Flysystem\FilesystemOperator;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\InspectionBundle\Services\InspectionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +19,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/congress')]
 class CongressController extends AbstractController
 {
+
+    public function __construct()
+    {
+    }
+
     #[Route('/crud_index', name: 'congress_crud_index', methods: ['GET'], options: ['label' => ['en' => 'Simple Datatables']])]
     public function congressSimpleDatatables(OfficialRepository $officialRepository): Response
     {
@@ -82,8 +88,15 @@ class CongressController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_congress_show', methods: ['GET'])]
-    public function show(Official $official): Response
+    public function show(Official $official, FilesystemOperator $defaultStorage): Response
     {
+        foreach ($official->getImageCodes() as $imageCodeData) {
+            $path = $imageCodeData['code'];
+            // or fileExists?
+            $mimeType = $defaultStorage->mimeType($path);
+            $image = $defaultStorage->has($path);
+//            dd($image, $mimeType);
+        }
         return $this->render('congress/show.html.twig', [
             'official' => $official,
         ]);

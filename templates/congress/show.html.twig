@@ -3,7 +3,7 @@
 {% block title %}Official{% endblock %}
 
 {% block body %}
-    <h1>{{ official.officialName }}</h1>
+    <h1>{{ official.officialName }} ({{ official.currentParty }} - {{ official.state }})</h1>
 
     <table class="table">
         <tbody>
@@ -41,7 +41,7 @@
     {% for imageCode in official.imageCodes %}
         <li>
             {% set flysystemPath = imageCode.code %}
-            {% for filter in ['squared_thumbnail_medium','squared_thumbnail_small','squared_thumbnail_tiny'] %}
+            {% for filter in ['squared_thumbnail_medium','squared_thumbnail_tiny'] %}
                 {% set thumbUrl = flysystemPath | imagine_filter(filter)   %}
                 <figure class="figure">
                     <a href="{{ thumbUrl }}" target="_blank">

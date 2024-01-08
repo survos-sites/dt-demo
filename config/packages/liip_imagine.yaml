@@ -1,6 +1,6 @@
 # config/packages/liip_imagine.yamn
 liip_imagine:
-    driver: "gd"
+    driver: vips
     twig:
         mode: lazy
 
