@@ -8,6 +8,7 @@ use App\Form\OfficialType;
 use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\FilesystemOperator;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\InspectionBundle\Services\InspectionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -100,6 +101,16 @@ class CongressController extends AbstractController
         return $this->render('congress/show.html.twig', [
             'official' => $official,
         ]);
+    }
+    #[Route('/{id}/refresh', name: 'congress_refresh', methods: ['GET', 'POST'])]
+    public function refresh(Request $request, Official $official, CacheManager $cacheManager): Response
+    {
+        foreach ($official->getImageCodes() as $imageData) {
+            $cacheManager->remove($imageData['code']);
+        }
+        return $this->redirectToRoute('app_congress_show', $official->getrp());
+
+
     }
 
 

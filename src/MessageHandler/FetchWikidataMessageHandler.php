@@ -61,9 +61,14 @@ final class FetchWikidataMessageHandler
                         dd($response);
                     }
 
-                    $exif = exif_read_data($response->toStream());
-                    if ($exif) {
-                        $this->logger->info("Orientation : " . ($exif['Orientation']??'--'));
+                    try {
+                        $exif = exif_read_data($response->toStream());
+                        if ($exif) {
+                            $this->logger->info("Orientation : " . ($exif['Orientation']??'--'));
+                        }
+                    } catch (\Exception $exception) {
+                        // we probably need to write a temp file and read exif there
+                        $this->logger->error("Unable to get exif: " . $url);
                     }
 
                 } else {

@@ -5,6 +5,8 @@
 {% block body %}
     <h1>{{ official.officialName }} ({{ official.currentParty }} - {{ official.state }})</h1>
 
+    <a class="btn btn-danger" href="{{ path('congress_refresh', official.rp) }}">Refresh </a>
+
     <table class="table">
         <tbody>
             <tr>

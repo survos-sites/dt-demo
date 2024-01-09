@@ -19,6 +19,8 @@ use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
 use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\ApiGrid\State\MeilliSearchStateProvider;
+use Survos\CoreBundle\Entity\RouteParametersInterface;
+use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -59,8 +61,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','house','state'])]
 #[Groups(['official.read'])]
 #[UniqueEntity(['id'])]
-class Official
+class Official implements RouteParametersInterface
 {
+    use RouteParametersTrait;
     #[ORM\Id]
     #[ORM\Column(type: Types::STRING)]
     private string $id; // wikidata ID
@@ -318,6 +321,11 @@ class Official
     public function getImageCount(): ?int
     {
         return $this->imageCount;
+    }
+
+    public function getUniqueIdentifiers(): array
+    {
+        return ['id' => $this->getId()];
     }
 
     public function setImageCount(?int $imageCount): static
