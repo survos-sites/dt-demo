@@ -1,6 +1,6 @@
 {
     "name": "dt-demo",
-    "description": "A repo, maybe get this from github",
+    "description": "Display members of congress in a datatable",
     "keywords": [
         "php",
         "symfony"
@@ -8,7 +8,7 @@
     "repository": "https:\/\/github.com\/survos-sites\/dt-demo",
     "scripts": {
         "dokku": {
-            "predeploy": "php bin\/console importmap:install && php bin\/console asset-map:compile",
+            "predeploy": "",
             "postdeploy": ""
         }
     },
@@ -17,6 +17,11 @@
             "description": "A secret key for verifying the integrity of signed cookies.",
             "value": "secret"
         },
+        "DUMMY": {
+            "description": "bin/console importmap:install && bin/console asset-map:compile",
+            "value": "secret"
+        },
+
         "WEB_CONCURRENCY": {
             "description": "The number of processes to run.",
             "generator": "echo 5"
