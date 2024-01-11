@@ -1,20 +1,14 @@
 # config/packages/liip_imagine.yamn
-# liip_imagine:
-#     driver: gd
-#     twig:
-#         mode: lazy
 liip_imagine:
-  resolvers:
-    default:
-      web_path: ~
+    driver: gd
+    twig:
+        mode: lazy
 
-  loaders:
-    default:
-      filesystem:
-        data_root:
-          - '%kernel.project_dir%/public'
-          - '%kernel.project_dir%/../../shared/public'
-
+    loaders:
+        flysystem_loader:
+            flysystem:
+                # this comes from flysystem.yaml
+                filesystem_service: default.storage
 
     # default loader to use for all filter sets
     data_loader: flysystem_loader
