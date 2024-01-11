@@ -1,8 +1,12 @@
 # config/packages/liip_imagine.yamn
+# liip_imagine:
+#     driver: gd
+#     twig:
+#         mode: lazy
 liip_imagine:
-    driver: gd
-    twig:
-        mode: lazy
+  resolvers:
+    default:
+      web_path: ~
 
     loaders:
         flysystem_loader:
