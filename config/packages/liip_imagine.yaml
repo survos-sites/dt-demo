@@ -8,11 +8,13 @@ liip_imagine:
     default:
       web_path: ~
 
-    loaders:
-        flysystem_loader:
-            flysystem:
-                # this comes from flysystem.yaml
-                filesystem_service: default.storage
+  loaders:
+    default:
+      filesystem:
+        data_root:
+          - '%kernel.project_dir%/public'
+          - '%kernel.project_dir%/../../shared/public'
+
 
     # default loader to use for all filter sets
     data_loader: flysystem_loader
