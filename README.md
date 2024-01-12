@@ -24,7 +24,7 @@ git clone clone git@github.com:survos/survos
 git clone git@github.com:survos-sites/dt-demo && cd dt-demo
 composer install
 bin/console d:sch:update --force 
-bin/console app:load-data
+bin/console app:load-data --limit 5 --details
 symfony server:start -d
 symfony open:local --path /congress/grid
 ```
