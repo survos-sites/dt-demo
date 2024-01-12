@@ -45,38 +45,6 @@
     </div>
 </div>
 {% endblock %}
-{% block example %}
-                <table id="example" class="display nowrap" width="100%">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Fred Jones</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>62</td>
-                        <td>2011/04/25</td>
-                        <td>$3,120</td>
-                    </tr>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$3,120</td>
-                    </tr>
-                    </tbody>
-                </table>
-{% endblock %}
 
 {% block body %}
 {#    <div class="dtsp-verticalContainer">#}
@@ -126,7 +94,7 @@
             {name: 'imageCount', sortable: true, title: '#images'},
             {name: 'gender', sortable: true, inSearchPane: true},
             {name: 'currentParty', sortable: true, inSearchPane: true},
-            {name: 'state', sortable: true, inSearchPane: true},
+            {name: 'state', sortable: true, searchable: true, inSearchPane: true},
             {name: 'house', sortable: true, inSearchPane: true},
             {name: 'district'},
 ]

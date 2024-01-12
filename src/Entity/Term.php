@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Term
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "SEQUENCE")]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+//    #[ORM\GeneratedValue(strategy: "SEQUENCE")]
     #[ORM\Column]
     private ?int $id = null;
 
