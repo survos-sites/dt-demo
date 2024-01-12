@@ -13,8 +13,7 @@ With docker, installing meilisearch is easy.
 sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili_data getmeili/meilisearch:v1.5 meilisearch
 ```
 
-Install the application 
-
+## Install the application
 
 ```bash
 git clone git@github.com:survos-sites/dt-demo && cd dt-demo
@@ -25,7 +24,7 @@ symfony server:start -d
 symfony open:local --path /congress/grid
 ```
 
-# Survos Developers only
+## With Survos Bundle Development
 ```bash
 git clone git@github.com:survos/survos ../survos
 cd ../survos && composer install && cd ../dt-demo
