@@ -32,7 +32,9 @@ cd ../survos && composer install && cd ../dt-demo
 ../survos/link . 
 ```
 
-Now changes made in files such as ../survos/packages/api-grid-bundle/assets/src/datatables-plugins.js are reflects
+Now changes made in files such as ../survos/packages/api-grid-bundle/assets/src/datatables-plugins.js are loaded when you refresh the page..
+
+uncomment the searchbuilder lines in datatable-plugins.
 
 
 ### Recreate the demo
