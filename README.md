@@ -15,10 +15,6 @@ sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili
 
 Install the application 
 
-# Survos Developers only
-```bash
-git clone clone git@github.com:survos/survos
-```
 
 ```bash
 git clone git@github.com:survos-sites/dt-demo && cd dt-demo
@@ -29,7 +25,15 @@ symfony server:start -d
 symfony open:local --path /congress/grid
 ```
 
-../survos/link . # developers only
+# Survos Developers only
+```bash
+git clone git@github.com:survos/survos ../survos
+cd ../survos && composer install && cd ../dt-demo
+../survos/link . 
+```
+
+Now changes made in files such as ../survos/packages/api-grid-bundle/assets/src/datatables-plugins.js are reflects
+
 
 ### Recreate the demo
 
