@@ -227,16 +227,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.295.10",
+            "version": "3.296.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4d8b4f47639275248e212bd61b6bc51f9dd709f2"
+                "reference": "38e47bbd3b5f76f008dd71c8a68545f9e4e47b6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4d8b4f47639275248e212bd61b6bc51f9dd709f2",
-                "reference": "4d8b4f47639275248e212bd61b6bc51f9dd709f2",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/38e47bbd3b5f76f008dd71c8a68545f9e4e47b6b",
+                "reference": "38e47bbd3b5f76f008dd71c8a68545f9e4e47b6b",
                 "shasum": ""
             },
             "require": {
@@ -316,9 +316,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.295.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.296.1"
             },
-            "time": "2024-01-11T19:04:31+00:00"
+            "time": "2024-01-14T05:20:33+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -16405,16 +16405,16 @@
         },
         {
             "name": "symplify/easy-coding-standard",
-            "version": "12.1.3",
+            "version": "12.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
-                "reference": "333771289a714037d9233e78b1e73334f94cd372"
+                "reference": "22bf2e05921de7f3092fc4036a12bdd6f18f68b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/333771289a714037d9233e78b1e73334f94cd372",
-                "reference": "333771289a714037d9233e78b1e73334f94cd372",
+                "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/22bf2e05921de7f3092fc4036a12bdd6f18f68b2",
+                "reference": "22bf2e05921de7f3092fc4036a12bdd6f18f68b2",
                 "shasum": ""
             },
             "require": {
@@ -16447,7 +16447,7 @@
             ],
             "support": {
                 "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
-                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.1.3"
+                "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/12.1.4"
             },
             "funding": [
                 {
@@ -16459,7 +16459,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-07T21:36:48+00:00"
+            "time": "2024-01-14T08:46:54+00:00"
         },
         {
             "name": "theseer/tokenizer",

@@ -14,7 +14,7 @@ use Survos\InspectionBundle\Services\InspectionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/congress')]
@@ -105,7 +105,7 @@ class CongressController extends AbstractController
     #[Route('/{id}/refresh', name: 'congress_refresh', methods: ['GET', 'POST'])]
     public function refresh(Request $request, Official $official, CacheManager $cacheManager): Response
     {
-        foreach ($official->getImageCodes() as $imageData) {
+        foreach ($official->getImageCodes()??[] as $imageData) {
             $cacheManager->remove($imageData['code']);
         }
         return $this->redirectToRoute('app_congress_show', $official->getrp());

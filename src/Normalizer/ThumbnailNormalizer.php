@@ -14,8 +14,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ThumbnailNormalizer implements NormalizerInterface, SerializerAwareInterface
 {
     public function __construct(private NormalizerInterface $normalizer,
-                                private CacheManager $cacheManager,
-                                private Security $security)
+                                private CacheManager $cacheManager
+    )
     {
     }
 
@@ -54,10 +54,24 @@ class ThumbnailNormalizer implements NormalizerInterface, SerializerAwareInterfa
         dd($x, $data, $format);
     }
 
-    public function setSerializer(SerializerInterface $serializer)
+    public function setSerializer(SerializerInterface $serializer): void
     {
         if ($this->normalizer instanceof SerializerAwareInterface) {
             $this->normalizer->setSerializer($serializer);
         }
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        // @todo: only return valid supportedd types
+        return [
+            '*' => true
+        ];
+
+        return [
+            'object' => null, // Doesn't supports any classes or interfaces
+            '*' => false, // Supports any other types, but the result is not cacheable
+            MyCustomClass::class => true, // Supports MyCustomClass and result is cacheable
+        ];
     }
 }
