@@ -48,7 +48,7 @@ return [
         'type' => 'css',
     ],
     'axios' => [
-        'version' => '1.6.2',
+        'version' => '1.6.5',
     ],
     'datatables.net-searchpanes-bs5' => [
         'version' => '2.2.0',
