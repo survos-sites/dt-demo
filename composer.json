@@ -13,7 +13,6 @@
         "ext-sodium": "*",
         "ext-sqlite3": "*",
         "api-platform/core": "^3.2",
-        "aws/aws-sdk-php": "^3.295",
         "doctrine/doctrine-bundle": "^2.10.2",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^2.16.2",
