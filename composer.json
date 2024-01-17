@@ -14,7 +14,6 @@
         "ext-sqlite3": "*",
         "api-platform/core": "^3.2",
         "aws/aws-sdk-php": "^3.295",
-        "aws/aws-sdk-php-symfony": "^2.6",
         "doctrine/doctrine-bundle": "^2.10.2",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^2.16.2",
@@ -125,13 +124,12 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "^6.4"
+            "require": "^7.0"
         }
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4.4",
         "nunomaduro/phpinsights": "^2.10",
-        "pestphp/pest": "^1.23",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.6.13",
         "spaze/phpstan-disallowed-calls": "^3.0",

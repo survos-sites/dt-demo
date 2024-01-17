@@ -12,6 +12,23 @@ class AppController extends AbstractController
     public function homepage(): Response
     {
         // testing
+        return $this->render('app/index.html.twig', [
+            'controller_name' => 'AppController',
+        ]);
+    }
+
+    #[Route('/simple', name: 'app_simple')]
+    public function simple(): Response
+    {
+        return $this->render('app/simple.html.twig', [
+            'controllerClass' => self::class
+        ]);
+    }
+
+    #[Route('/wikidata', name: 'app_wikidata')]
+    public function wikidata(): Response
+    {
+
         $filename = __DIR__ . '/../../chunk2.gz';
         assert(file_exists($filename), $filename);
 
@@ -49,15 +66,8 @@ class AppController extends AbstractController
             $idx++;
         }
         dd($idx . ' records searched');
-        return $this->render('app/index.html.twig', [
-            'controller_name' => 'AppController',
-        ]);
-    }
 
-    #[Route('/simple', name: 'app_simple')]
-    public function simple(): Response
-    {
-        return $this->render('app/simple.html.twig', [
+        return $this->render('app/wikidata.html.twig', [
             'controllerClass' => self::class
         ]);
     }
