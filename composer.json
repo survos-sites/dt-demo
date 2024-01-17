@@ -6,6 +6,7 @@
     "require": {
         "php": ">=8.2",
         "ext-ctype": "*",
+        "ext-ffi": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-pdo_sqlite": "*",
@@ -25,6 +26,7 @@
         "nyholm/psr7": "^1.8",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.24.2",
+        "rokka/imagine-vips": "^0.31.0",
         "sentry/sentry-symfony": "^4.12",
         "survos/api-grid-bundle": "^1.5",
         "survos/auth-bundle": "^1.5",
