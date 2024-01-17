@@ -91,13 +91,13 @@ class CongressController extends AbstractController
     #[Route('/{id}', name: 'app_congress_show', methods: ['GET'])]
     public function show(Official $official, FilesystemOperator $defaultStorage): Response
     {
-        foreach ($official->getImageCodes() as $imageCodeData) {
-            $path = $imageCodeData['code'];
-            // or fileExists?
-            $mimeType = $defaultStorage->mimeType($path);
-            $image = $defaultStorage->has($path);
-//            dd($image, $mimeType);
-        }
+//        foreach ($official->getImageCodes() as $imageCodeData) {
+//            $path = $imageCodeData['code'];
+//            // or fileExists?
+//            $mimeType = $defaultStorage->mimeType($path);
+//            $image = $defaultStorage->has($path);
+////            dd($image, $mimeType);
+//        }
         return $this->render('congress/show.html.twig', [
             'official' => $official,
         ]);
