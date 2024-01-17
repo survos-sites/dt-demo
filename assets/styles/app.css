@@ -6,3 +6,28 @@
 /*    outline-style: dotted;*/
 /*    outline-color: red;*/
 /*}*/
+
+/* same as liip filter */
+/*img {*/
+/*    .app-img-thumbnail {*/
+/*        width: 100px;*/
+/*        height: 100px;*/
+/*        border-bottom-color: red;*/
+/*        border-bottom-width: thick;*/
+/*    }*/
+/*}*/
+
+/*https://stackoverflow.com/questions/15300059/css-how-to-make-image-container-width-fixed-and-height-auto-stretched*/
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item {
+    width: 100px;
+    min-height: 100px;
+    max-height: fit-content;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}

@@ -33,7 +33,6 @@ final class FetchWikidataMessageHandler
     public function __invoke(FetchWikidataMessage $message)
     {
         $filesystem = $this->defaultStorage;
-        $client = $this->httpClient;
         $wikidataId = $message->getWikidataId();
         $this->wikiService->setCacheTimeout(60 * 60 * 24);
         $wikiData = $this->wikiService->fetchWikidataPage($wikidataId);
@@ -72,10 +71,10 @@ final class FetchWikidataMessageHandler
                     }
 
                 } else {
-                    $this->logger->info("$code already exists");
+                    $this->logger->info("image $code already exists in filesystem");
                 }
 //                $filesystem->fileExists($path);
-                $meta = $filesystem->fileExists($code);
+//                $meta = $filesystem->fileExists($code);
                 /** @var  Filesystem $filesystem */
 
 //                dd($meta,

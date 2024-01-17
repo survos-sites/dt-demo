@@ -305,9 +305,9 @@ class Official implements RouteParametersInterface
         return $this;
     }
 
-    public function getImageCodes(): ?array
+    public function getImageCodes(): array
     {
-        return $this->imageCodes;
+        return $this->imageCodes??[];
     }
 
     public function setImageCodes(?array $imageCodes): static

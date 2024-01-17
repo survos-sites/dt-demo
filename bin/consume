@@ -7,4 +7,4 @@ symfony console mess:stats async
 SYMFONY_DEPRECATIONS_HELPER=disabled symfony console messenger:consume  async -vv --limit 1 --time-limit 10
 
 ## use sleep  so that you can break out with ^C
-while true; do symfony console mess:stats && bin/console messenger:consume async -v --limit 100 --time-limit 90; sleep 2;   done;
+while true; do symfony console mess:stats && bin/console messenger:consume async -vv --limit 1 --time-limit 90; sleep 2;   done;

@@ -86,19 +86,45 @@
     {#    <h1>SearchPanes</h1>#}
 {#    <div class="searchPanes">SearchPanes DOM</div>#}
 
-    {% component grid with {
-        data: data,
-        columns: [
-'id',
-            'officialName',
-            {name: 'imageCount', sortable: true, title: '#images'},
-            {name: 'gender', sortable: true, inSearchPane: true},
-            {name: 'currentParty', sortable: true, inSearchPane: true},
-            {name: 'state', sortable: true, searchable: true, inSearchPane: true},
-            {name: 'house', sortable: true, inSearchPane: true},
-            {name: 'district'},
-]
-    } %}
+    {% set columns = [
+        'id',
+        'officialName',
+        {name: 'imageCount', sortable: true, title: '#images'},
+        {name: 'gender', sortable: true, inSearchPane: true},
+        {name: 'currentParty', sortable: true, inSearchPane: true},
+        {name: 'state', sortable: true, searchable: true, inSearchPane: true},
+        {name: 'house', sortable: true, inSearchPane: true},
+        {name: 'district'},
+    ] %}
+    <twig:grid
+            :data="data"
+            dom="lfrtipP"
+            :columns="columns"
+    >
+
+        <twig:block name="imageCount">
+            {{ row.imageCount }}
+
+            {% for imageData in row.imageCodes %}
+                {% set thumb = imageData.code|imagine_filter('squared_thumbnail_tiny') %}
+                <div class="item">
+
+{#                    <img#}
+{#                    class="app-img-thumbnail"#}
+{#                    alt="{{ thumb }}"#}
+{#                    src="{{ asset('/load-icon-png-7952.png') }}"#}
+{#                {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {#}
+{#                    src: thumb#}
+{#                }) }}#}
+{#                    />#}
+
+
+                <a href="{{ thumb }}" target="_blank">
+                    <img src="{{ thumb }}" alt="{{ thumb }}" class="app-img-thumbnail" />
+                </a>
+                </div>
+            {% endfor %}
+        </twig:block>
 
         {% block officialName %}
             <a href="{{ path('app_congress_show', {'id': row.id}) }}">
@@ -116,6 +142,5 @@
         {% block actions %}
             <a href="{{ path('app_congress_edit', {'id': row.id}) }}">edit</a>
         {% endblock %}
-
-    {% endcomponent %}
+    </twig:grid>
 {% endblock %}
