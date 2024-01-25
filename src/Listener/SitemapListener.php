@@ -2,8 +2,7 @@
 
 namespace App\Listener;
 
-use App\Entity\BlogPost;
-use App\Entity\Page;
+use App\Entity\Official;
 use Doctrine\ORM\EntityManagerInterface;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\UrlContainerInterface;
@@ -14,21 +13,14 @@ use Presta\SitemapBundle\Sitemap\Url\GoogleVideoUrlDecorator;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Yann Eugoné <yeugone@prestaconcept.net>
  */
 class SitemapListener implements EventSubscriberInterface
 {
-    private EntityManagerInterface $doctrine;
-
-    private UrlGeneratorInterface $router;
-
-    public function __construct(EntityManagerInterface $doctrine, UrlGeneratorInterface $router)
+    public function __construct(private readonly EntityManagerInterface $doctrine, private readonly UrlGeneratorInterface $router)
     {
-        $this->doctrine = $doctrine;
-        $this->router = $router;
     }
 
     public static function getSubscribedEvents(): array
@@ -40,27 +32,37 @@ class SitemapListener implements EventSubscriberInterface
 
     public function populateSitemap(SitemapPopulateEvent $event): void
     {
-        if (\in_array($event->getSection(), ['default', null], true)) {
+        if (\in_array($event->getSection(), ['congress', null], true)) {
             $this->registerPages($event->getUrlContainer());
         }
         if (\in_array($event->getSection(), ['blog', null], true)) {
-            $this->registerBlogPosts($event->getUrlContainer());
+//            $this->registerBlogPosts($event->getUrlContainer());
         }
     }
 
     private function registerPages(UrlContainerInterface $urlContainer): void
     {
-        $pages = $this->doctrine->getRepository(Page::class)->findAll();
+        $pages = $this->doctrine->getRepository(Official::class)->findAll();
 
-        /** @var Page $page */
-        foreach ($pages as $page) {
-            $urlContainer->addUrl(
-                $this->url(
-                    'page',
-                    ['slug' => $page->getSlug()],
-                ),
-                'default'
+        /** @var Official $official */
+        foreach ($pages as $official) {
+            $url = $this->url(
+                'app_congress_show',
+                $official->getrp()
             );
+            if (count($official->getImageCodes()) > 0) {
+                $url = new GoogleImageUrlDecorator($url);
+                foreach ($official->getImageCodes() as $idx => $image) {
+                    $actualUrl = $image['url'];
+                    $url->addImage(
+                        new GoogleImage($actualUrl, sprintf('%s - %d', $official->getOfficialName(), $idx + 1))
+                    );
+//                    dd($actualUrl, $googleImageUrl);
+                }
+            }
+
+            $urlContainer->addUrl($url, 'congress');
+
         }
     }
 
@@ -85,7 +87,7 @@ class SitemapListener implements EventSubscriberInterface
             }
 
             if ($post->getVideo() !== null) {
-                parse_str(parse_url($post->getVideo(), PHP_URL_QUERY), $parameters);
+                parse_str(parse_url((string)$post->getVideo(), PHP_URL_QUERY), $parameters);
                 $url = new GoogleVideoUrlDecorator($url);
                 $url->addVideo(
                     $video = new GoogleVideo(
@@ -104,7 +106,7 @@ class SitemapListener implements EventSubscriberInterface
     private function url(string $route, array $parameters = []): UrlConcrete
     {
         return new UrlConcrete(
-            $this->router->generate($route, $parameters, RouterInterface::ABSOLUTE_URL)
+            $this->router->generate($route, $parameters, UrlGeneratorInterface::ABSOLUTE_URL)
         );
     }
 }

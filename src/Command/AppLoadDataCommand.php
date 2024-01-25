@@ -30,9 +30,9 @@ final class AppLoadDataCommand extends InvokableServiceCommand
     use RunsProcesses;
 
     public function __construct(
-        private ValidatorInterface $validator,
-        private CacheInterface $cache,
-        private MessageBusInterface $bus,
+        private readonly ValidatorInterface $validator,
+        private readonly CacheInterface $cache,
+        private readonly MessageBusInterface $bus,
         string $name = null)
     {
         parent::__construct($name);

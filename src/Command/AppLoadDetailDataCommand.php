@@ -27,8 +27,8 @@ final class AppLoadDetailDataCommand extends InvokableServiceCommand
     use RunsProcesses;
 
     public function __construct(
-        private ValidatorInterface $validator,
-        private CacheInterface     $cache,
+        private readonly ValidatorInterface $validator,
+        private readonly CacheInterface     $cache,
         string                     $name = null)
     {
         parent::__construct($name);
