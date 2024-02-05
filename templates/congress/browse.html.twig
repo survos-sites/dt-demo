@@ -33,7 +33,8 @@
             {{ row.imageCount }}
             {% for imageData in row.imageCodes %}
                 <a href="{{ imageData.thumb }}" target="_blank">
-                    <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" />
+                    {# https://levelup.gitconnected.com/html-attributes-that-every-web-developer-should-know-8ffd4cd88288 #}
+                    <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" loading="lazy" />
                 </a>
             {% endfor %}
         </twig:block>
