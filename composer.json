@@ -2,6 +2,8 @@
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "dev",
+    "name": "survos/dt-demo",
+    "description": "A Symfony application that demonstrations datatables and other survos bundles",
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
