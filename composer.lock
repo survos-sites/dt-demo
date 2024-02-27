@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba37f29061d218db32cbb32215191a1a",
+    "content-hash": "b77c17196bce86f5e7eee5adaca6bcff",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13924,27 +13924,25 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.0.1",
+            "version": "v4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "2218c2252c874a4624ab2f613d86ac32d227bc69"
+                "reference": "1bcbb2179f97633e98bbbc87044ee2611c7d7999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/2218c2252c874a4624ab2f613d86ac32d227bc69",
-                "reference": "2218c2252c874a4624ab2f613d86ac32d227bc69",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1bcbb2179f97633e98bbbc87044ee2611c7d7999",
+                "reference": "1bcbb2179f97633e98bbbc87044ee2611c7d7999",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
-                "ext-json": "*",
                 "ext-tokenizer": "*",
-                "php": ">=7.4"
+                "php": ">=7.0"
             },
             "require-dev": {
                 "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -13952,7 +13950,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "4.9-dev"
                 }
             },
             "autoload": {
@@ -13976,9 +13974,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.18.0"
             },
-            "time": "2024-02-21T19:24:10+00:00"
+            "time": "2023-12-10T21:03:43+00:00"
         },
         {
             "name": "nunomaduro/phpinsights",
@@ -14796,22 +14794,22 @@
         },
         {
             "name": "roave/better-reflection",
-            "version": "dev-renovate/nikic-php-parser-5.x",
+            "version": "6.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/BetterReflection.git",
-                "reference": "41b0f37520e1906f2d5e4527063dbda1f40588c0"
+                "reference": "f509e0b1b9f34bd44082ec0b86848970aa1da78a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/BetterReflection/zipball/41b0f37520e1906f2d5e4527063dbda1f40588c0",
-                "reference": "41b0f37520e1906f2d5e4527063dbda1f40588c0",
+                "url": "https://api.github.com/repos/Roave/BetterReflection/zipball/f509e0b1b9f34bd44082ec0b86848970aa1da78a",
+                "reference": "f509e0b1b9f34bd44082ec0b86848970aa1da78a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "jetbrains/phpstorm-stubs": "2023.3",
-                "nikic/php-parser": "^5.0.1",
+                "nikic/php-parser": "^4.18.0",
                 "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
                 "roave/signature": "^1.8.0"
             },
@@ -14820,11 +14818,11 @@
             },
             "require-dev": {
                 "doctrine/coding-standard": "^12.0.0",
-                "phpstan/phpstan": "^1.10.58",
+                "phpstan/phpstan": "^1.10.56",
                 "phpstan/phpstan-phpunit": "^1.3.15",
-                "phpunit/phpunit": "^10.5.10",
+                "phpunit/phpunit": "^10.5.8",
                 "roave/infection-static-analysis-plugin": "^1.34.0",
-                "vimeo/psalm": "5.21.1"
+                "vimeo/psalm": "5.20.0"
             },
             "suggest": {
                 "composer/composer": "Required to use the ComposerSourceLocator"
@@ -14864,9 +14862,9 @@
             "description": "Better Reflection - an improved code reflection API",
             "support": {
                 "issues": "https://github.com/Roave/BetterReflection/issues",
-                "source": "https://github.com/Roave/BetterReflection/tree/renovate/nikic-php-parser-5.x"
+                "source": "https://github.com/Roave/BetterReflection/tree/6.23.0"
             },
-            "time": "2024-02-26T03:53:20+00:00"
+            "time": "2024-01-19T10:33:13+00:00"
         },
         {
             "name": "roave/signature",
@@ -16768,7 +16766,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
         "symfony/stimulus-bundle": 20,
