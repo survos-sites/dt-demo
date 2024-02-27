@@ -43,7 +43,7 @@
         "survos/wiki-bundle": "^1.5",
         "symfony/amqp-messenger": "^6.4",
         "symfony/asset": "^7.0",
-        "symfony/asset-mapper": "6.4.3",
+        "symfony/asset-mapper": "7.0.3",
         "symfony/console": "^7.0",
         "symfony/doctrine-messenger": "^7.0",
         "symfony/dotenv": "^7.0",
