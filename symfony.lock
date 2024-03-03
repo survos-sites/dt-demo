@@ -191,6 +191,9 @@
             "config/packages/sentry.yaml"
         ]
     },
+    "spomky-labs/phpwa": {
+        "version": "1.0.3"
+    },
     "squizlabs/php_codesniffer": {
         "version": "3.7",
         "recipe": {
