@@ -131,15 +131,15 @@ return [
         'type' => 'css',
     ],
     'bootswatch/dist/cerulean/bootstrap.min.css' => [
-        'version' => '5.3.2',
+        'version' => '5.3.3',
         'type' => 'css',
     ],
     'bootswatch/dist/sandstone/bootstrap.min.css' => [
-        'version' => '5.3.2',
+        'version' => '5.3.3',
         'type' => 'css',
     ],
     'bootswatch/dist/materia/bootstrap.min.css' => [
-        'version' => '5.3.2',
+        'version' => '5.3.3',
         'type' => 'css',
     ],
     'datatables.net-plugins/i18n/en-GB.mjs' => [
