@@ -12,7 +12,7 @@ pwa:
         scope: "/"
         display_override: ['fullscreen', 'minimal-ui', 'window-controls-overlay']
         id: "/"
-        start_url: "./index"
+        start_url: "./"
         icons:
             # https://www.veryicon.com/icons/miscellaneous/smart-site/noise-3.html
             - src: "images/capitol-building.png"
@@ -30,6 +30,4 @@ pwa:
         src: "sw.js"
         skip_waiting: true
         workbox:
-            warm_cache_urls:
-                - 'app_homepage'
             page_fallback: 'app_homepage'

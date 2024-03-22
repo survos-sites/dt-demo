@@ -39,4 +39,5 @@ return [
     Symfony\UX\LazyImage\LazyImageBundle::class => ['all' => true],
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
     SpomkyLabs\PwaBundle\SpomkyLabsPwaBundle::class => ['all' => true],
+    Survos\PwaExtraBundle\SurvosPwaExtraBundle::class => ['all' => true],
 ];
