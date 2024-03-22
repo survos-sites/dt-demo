@@ -35,20 +35,20 @@ return [
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
-        'version' => '2.0.1',
+        'version' => '2.0.2',
     ],
     'jquery' => [
         'version' => '3.7.1',
     ],
     'datatables.net' => [
-        'version' => '2.0.1',
+        'version' => '2.0.2',
     ],
     'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => [
-        'version' => '2.0.1',
+        'version' => '2.0.2',
         'type' => 'css',
     ],
     'axios' => [
-        'version' => '1.6.7',
+        'version' => '1.6.8',
     ],
     'datatables.net-searchpanes-bs5' => [
         'version' => '2.3.0',
@@ -61,7 +61,7 @@ return [
         'version' => '1.0.7',
     ],
     'datatables.net-dt' => [
-        'version' => '2.0.1',
+        'version' => '2.0.2',
     ],
     'simple-datatables' => [
         'version' => '9.0.0',
@@ -143,16 +143,16 @@ return [
         'type' => 'css',
     ],
     'datatables.net-plugins/i18n/en-GB.mjs' => [
-        'version' => '1.13.6',
+        'version' => '2.0.2',
     ],
     'datatables.net-buttons-bs5' => [
-        'version' => '3.0.0',
+        'version' => '3.0.1',
     ],
     'datatables.net-buttons' => [
-        'version' => '3.0.0',
+        'version' => '3.0.1',
     ],
     'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css' => [
-        'version' => '3.0.0',
+        'version' => '3.0.1',
         'type' => 'css',
     ],
     'datatables.net-responsive-bs5' => [
@@ -163,13 +163,13 @@ return [
         'type' => 'css',
     ],
     'datatables.net-scroller-bs5' => [
-        'version' => '2.4.0',
+        'version' => '2.4.1',
     ],
     'datatables.net-scroller' => [
-        'version' => '2.4.0',
+        'version' => '2.4.1',
     ],
     'datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css' => [
-        'version' => '2.4.0',
+        'version' => '2.4.1',
         'type' => 'css',
     ],
     'datatables.net-select' => [
@@ -196,7 +196,7 @@ return [
         'type' => 'css',
     ],
     'datatables.net-dt/css/dataTables.dataTables.min.css' => [
-        'version' => '2.0.1',
+        'version' => '2.0.2',
         'type' => 'css',
     ],
 ];
