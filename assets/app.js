@@ -10,7 +10,9 @@ import './styles/app.css'
 import './bootstrap.js';
 
 // bootstrap 5
-import bootstrap from 'bootstrap'; // bootstrap javascript
+// import bootstrap from 'bootstrap'; // bootstrap javascript
+import * as bootstrap from 'bootstrap';
+
 window.bootstrap = bootstrap;
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootswatch/dist/sandstone/bootstrap.min.css'
