@@ -35,16 +35,16 @@ return [
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
-        'version' => '2.0.0',
+        'version' => '2.0.3',
     ],
     'jquery' => [
         'version' => '3.7.1',
     ],
     'datatables.net' => [
-        'version' => '2.0.0',
+        'version' => '2.0.3',
     ],
     'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => [
-        'version' => '2.0.0',
+        'version' => '2.0.3',
         'type' => 'css',
     ],
     'axios' => [
@@ -61,7 +61,7 @@ return [
         'version' => '1.0.7',
     ],
     'datatables.net-dt' => [
-        'version' => '2.0.2',
+        'version' => '2.0.3',
     ],
     'simple-datatables' => [
         'version' => '9.0.0',
@@ -101,7 +101,7 @@ return [
         'version' => '2.0.16',
     ],
     'datatables.net-responsive' => [
-        'version' => '3.0.0',
+        'version' => '3.0.1',
     ],
     'datatables.net-select-bs5' => [
         'version' => '2.0.0',
@@ -156,10 +156,10 @@ return [
         'type' => 'css',
     ],
     'datatables.net-responsive-bs5' => [
-        'version' => '3.0.0',
+        'version' => '3.0.1',
     ],
     'datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css' => [
-        'version' => '3.0.0',
+        'version' => '3.0.1',
         'type' => 'css',
     ],
     'datatables.net-scroller-bs5' => [
@@ -196,7 +196,10 @@ return [
         'type' => 'css',
     ],
     'datatables.net-dt/css/dataTables.dataTables.min.css' => [
-        'version' => '2.0.2',
+        'version' => '2.0.3',
         'type' => 'css',
+    ],
+    'bootstrap/js/dist/modal' => [
+        'version' => '5.3.3',
     ],
 ];
