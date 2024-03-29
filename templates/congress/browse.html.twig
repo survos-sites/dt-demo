@@ -29,6 +29,21 @@
             :apiRoute="apiRoute"
             :columns="columns"
     >
+        <twig:block name="_header">
+            <i>{{ row.officialName }}</i>
+        </twig:block>
+        <twig:block name="_modal">
+            <h1>{{ row.officialName}}</h1>
+
+            <table>
+            {% for column in columns %}
+                <tr>
+                    <th>{{ column.title }}</th>
+                    <td>{{ column.data }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </twig:block>
         <twig:block name="imageCount">
             {{ row.imageCount }}
             {% for imageData in row.imageCodes %}
@@ -39,9 +54,10 @@
             {% endfor %}
         </twig:block>
         <twig:block name="officialName">
-            <a href="{{ path('app_congress_show', {'id': row.id}) }}">
-                {{ row.officialName }}
-            </a>
+            {{ row.officialName }}
+            {#  use the modal instead! #}
+{#            <a href="{{ path('app_congress_show', {'id': row.id}) }}">#}
+{#            </a>#}
         </twig:block>
 
         <twig:block name="birthday">
