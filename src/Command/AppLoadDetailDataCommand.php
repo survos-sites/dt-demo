@@ -22,7 +22,6 @@ use Zenstruck\Console\RunsProcesses;
 #[AsCommand('app:load-detail-data', 'Load the basic congressional data')]
 final class AppLoadDetailDataCommand extends InvokableServiceCommand
 {
-    use ConfigureWithAttributes;
     use RunsCommands;
     use RunsProcesses;
 

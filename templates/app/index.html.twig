@@ -1,60 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-{#    {% block title %}YY{% endblock %}#}
+{% block dummy %}
 
+    {% set _sc = 'dummy' %}
+    <div {{ stimulus_controller(_sc) }}>
+        {% for count in [0, 50, 500, 5000, 50000] %}
+            {{ stimulus_action(_sc, 'reload', null, {abc: 'def', reset: true}) }}>
+            <button class="btn btn-danger"
+                    {{ stimulus_action(_sc, 'reload', null, {count: count}) }}>
+                Reload {{ count }}</button>
+
+        {% endfor %}
+        <ol {{ stimulus_target(_sc, 'message') }} class="display nowrap" style="width:100%">
+        </ol>
+    </div>
+
+{% endblock %}
+
+    {% block body %}
+        {% set _sc = 'dexie' %}
+        <div {{ stimulus_controller(_sc, {dbName: 'test', count: 50000}) }}>
+            {% for count in [0, 50, 500, 5000, 50000] %}
+                <button class="btn btn-info"
+                        {{ stimulus_action(_sc, 'reload', null, {count: count}) }}>
+                    Reload {{ count }}
+                </button>
+
+            {% endfor %}
+            <ol {{ stimulus_target(_sc, 'message') }} class="display nowrap" style="width:100%">
+            </ol>
+
+            <table id="example" {{ stimulus_target(_sc, 'table') }} class="display nowrap" style="width:100%">
+                {#        <thead> #}
+                {#        <tr> #}
+                {#            <th>ID</th> #}
+                {#            <th>First name</th> #}
+                {#            <th>Last name</th> #}
+                {#            <th>ZIP / Post code</th> #}
+                {#            <th>Country</th> #}
+                {#        </tr> #}
+                {#        </thead> #}
+            </table>
+
+            <div {{ stimulus_target(_sc, 'message') }}>
+                Message goes here.
+            </div>
+            {#        <table {{ stimulus_target(_sc, 'table') }}></table> #}
+        </div>
+
+    {% endblock %}
+{% block simple_datatables %}
     <twig:block name="title">XX</twig:block>
-        <!-- the cards with each type of grid -->
-        <div class="row mt-5">
+    <!-- the cards with each type of grid -->
+    <div class="row mt-5">
 
-            <div class="row mb-5">
-                <div class="col-md-6 col-lg-4 mb-3">
-                    {% component card with {} %}
-                        {% block title 'Simple Datatables' %}
-                        {% block text %}
-                            <p>
-                                A wrapper around simple datatables.
-                                Pros: no dependencies, just one js file and one css file.
-                                Simple.
-                            </p>
-                            <p>
-                                For example, the credits links use simple-datatables
-                            </p>
-                        {% endblock %}
-                        {% block links %}
-                            <div class="demo-inline-spacing">
-                                <a href="https://github.com/fiduswriter/simple-datatables/" target="_blank"
-                                   class="btn btn-outline-primary">Simple Datatables Library</a>
-                                <a href="https://github.com/survos/SurvosSimpleDatatablesBundle" target="_blank"
-                                   class="btn btn-outline-success">Simple Datatables Bundle</a>
-                            </div>
-                        {% endblock %}
-                    {% endcomponent %}
-                </div>
+        <div class="row mb-5">
+            <div class="col-md-6 col-lg-4 mb-3">
+                {% component card with {} %}
+                    {% block title 'Simple Datatables' %}
+                    {% block text %}
+                        <p>
+                            A wrapper around simple datatables.
+                            Pros: no dependencies, just one js file and one css file.
+                            Simple.
+                        </p>
+                        <p>
+                            For example, the credits links use simple-datatables
+                        </p>
+                    {% endblock %}
+                    {% block links %}
+                        <div class="demo-inline-spacing">
+                            <a href="https://github.com/fiduswriter/simple-datatables/" target="_blank"
+                               class="btn btn-outline-primary">Simple Datatables Library</a>
+                            <a href="https://github.com/survos/SurvosSimpleDatatablesBundle" target="_blank"
+                               class="btn btn-outline-success">Simple Datatables Bundle</a>
+                        </div>
+                    {% endblock %}
+                {% endcomponent %}
             </div>
         </div>
+    </div>
 
     <a href="{{ path('congress_api_grid') }}">Meili officials</a>
     <a href="{{ path('congress_api_grid', {doctrine: true}) }}">Doctrine officials</a>
 
-        <div class="row">
+    <div class="row">
 
-            <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table') }}>
-                <thead>
+        <table class="table" {{ stimulus_controller('@survos/simple-datatables-bundle/table') }}>
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>number</th>
+            </thead>
+            <tbody>
+            {% for j in 1..12 %}
                 <tr>
-                    <th>name</th>
-                    <th>number</th>
-                </thead>
-                <tbody>
-                {% for j in 1..12 %}
-                    <tr>
-                        <td>{{ j |date('2023-' ~ j ~ '-01') |date('F') }}</td>
-                        <td>{{ j }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    <td>{{ j |date('2023-' ~ j ~ '-01') |date('F') }}</td>
+                    <td>{{ j }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}
 

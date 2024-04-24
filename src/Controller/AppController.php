@@ -26,6 +26,14 @@ class AppController extends AbstractController
         ]);
     }
 
+    #[Route('/dexie', name: 'app_dexie')]
+    public function dexie(): Response
+    {
+        return $this->render('app/dexie2.html.twig', [
+            'controllerClass' => self::class
+        ]);
+    }
+
     #[Route('/wikidata', name: 'app_wikidata')]
     public function wikidata(): Response
     {
@@ -58,15 +66,15 @@ class AppController extends AbstractController
                     foreach ($claimList as $claim) {
 //                        dd(claim: $claim, qualifiers: $claim->qualifiers);
                         foreach ($claim->qualifiers??[] as $propertyCode => $qualifier) {
-                            dump($propertyCode, $qualifier[0]);
+//                            dump($propertyCode, $qualifier[0]);
                         }
                     }
                 }
-                dd($data, $data->labels->en,$line);
+//                dd($data, $data->labels->en,$line);
             }
             $idx++;
         }
-        dd($idx . ' records searched');
+//        dd($idx . ' records searched');
 
         return $this->render('app/wikidata.html.twig', [
             'controllerClass' => self::class
