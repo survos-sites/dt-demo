@@ -64,70 +64,70 @@ return [
         'version' => '2.0.3',
     ],
     'simple-datatables' => [
-        'version' => '9.0.0',
+        'version' => '9.0.3',
     ],
     'simple-datatables/dist/style.min.css' => [
-        'version' => '9.0.0',
+        'version' => '9.0.3',
         'type' => 'css',
     ],
     'twig' => [
         'version' => '1.17.1',
     ],
     'locutus/php/strings/sprintf' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/strings/vsprintf' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/math/round' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/math/max' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/math/min' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/strings/strip_tags' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/datetime/strtotime' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/datetime/date' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'locutus/php/var/boolval' => [
-        'version' => '2.0.16',
+        'version' => '2.0.32',
     ],
     'datatables.net-responsive' => [
         'version' => '3.0.1',
     ],
     'datatables.net-select-bs5' => [
-        'version' => '2.0.0',
+        'version' => '2.0.1',
     ],
     'datatables.net-select-bs5/css/select.bootstrap5.min.css' => [
-        'version' => '2.0.0',
+        'version' => '2.0.1',
         'type' => 'css',
     ],
     'fos-routing' => [
         'version' => '0.0.6',
     ],
     '@fortawesome/fontawesome-free' => [
-        'version' => '6.5.1',
+        'version' => '6.5.2',
     ],
     '@fortawesome/fontawesome-free/css/fontawesome.min.css' => [
-        'version' => '6.5.1',
+        'version' => '6.5.2',
         'type' => 'css',
     ],
     '@fortawesome/free-solid-svg-icons' => [
-        'version' => '6.5.1',
+        'version' => '6.5.2',
     ],
     '@fortawesome/fontawesome-svg-core' => [
-        'version' => '6.5.1',
+        'version' => '6.5.2',
     ],
     '@fortawesome/fontawesome-svg-core/styles.min.css' => [
-        'version' => '6.5.1',
+        'version' => '6.5.2',
         'type' => 'css',
     ],
     'bootswatch/dist/cerulean/bootstrap.min.css' => [
@@ -173,7 +173,7 @@ return [
         'type' => 'css',
     ],
     'datatables.net-select' => [
-        'version' => '2.0.0',
+        'version' => '2.0.1',
     ],
     'datatables.net-searchpanes' => [
         'version' => '2.3.0',
@@ -186,13 +186,13 @@ return [
         'type' => 'css',
     ],
     'datatables.net-searchbuilder-bs5' => [
-        'version' => '1.7.0',
+        'version' => '1.7.1',
     ],
     'datatables.net-searchbuilder' => [
-        'version' => '1.7.0',
+        'version' => '1.7.1',
     ],
     'datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.min.css' => [
-        'version' => '1.7.0',
+        'version' => '1.7.1',
         'type' => 'css',
     ],
     'datatables.net-dt/css/dataTables.dataTables.min.css' => [
@@ -201,5 +201,11 @@ return [
     ],
     'bootstrap/js/dist/modal' => [
         'version' => '5.3.3',
+    ],
+    'imposterjs' => [
+        'version' => '1.0.9',
+    ],
+    'dexie' => [
+        'version' => '4.0.4',
     ],
 ];

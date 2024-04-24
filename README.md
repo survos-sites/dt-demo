@@ -53,3 +53,4 @@ The key stimulus controllers for datatables are located in survos/packages/api-g
 the 'grid' component/controller gets its data from HTML, the 'api-grid' components get its data from API Platform.  Within API Platform, there are 2 providers, doctrine and meili.  Doctrine uses the database (usually postgres or sqlite), and meili uses the meili search server, which itself is populated usually (but not always) from the database via doctrine, by serializing the data.
 
 See the example usage in the [api-grid-bundle] README.
+
