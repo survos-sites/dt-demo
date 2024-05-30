@@ -18,6 +18,7 @@ sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili
 ```bash
 git clone git@github.com:survos-sites/dt-demo && cd dt-demo
 composer install
+symfony check:req
 bin/console d:sch:update --force --complete
 bin/console cache:pool:clear cache.app
 bin/console app:load-data --limit 50 --details -vv
