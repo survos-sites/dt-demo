@@ -126,15 +126,6 @@
             "config/routes/liip_imagine.yaml"
         ]
     },
-    "liip/monitor-bundle": {
-        "version": "3.9999999",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "3.0",
-            "ref": "c38820baed9dec9cab54517c47aa6844c5347d54"
-        }
-    },
     "nelmio/cors-bundle": {
         "version": "2.3",
         "recipe": {

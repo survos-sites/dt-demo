@@ -41,5 +41,4 @@ return [
     SpomkyLabs\PwaBundle\SpomkyLabsPwaBundle::class => ['all' => true],
     Survos\PwaExtraBundle\SurvosPwaExtraBundle::class => ['all' => true],
     Pierstoval\SmokeTesting\SmokeTestingBundle::class => ['dev' => true, 'test' => true],
-    Liip\Monitor\LiipMonitorBundle::class => ['all' => true],
 ];
