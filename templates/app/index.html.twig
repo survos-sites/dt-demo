@@ -19,7 +19,7 @@
 
     {% block body %}
         {% set _sc = 'dexie' %}
-        <div {{ stimulus_controller(_sc, {dbName: 'test', count: 50000}) }}>
+        <div {{ stimulus_controller(_sc, {dbName: 'test', count: 400}) }}>
             {% for count in [0, 50, 500, 5000, 50000] %}
                 <button class="btn btn-info"
                         {{ stimulus_action(_sc, 'reload', null, {count: count}) }}>

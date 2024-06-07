@@ -557,8 +557,5 @@
             "version": "0.6",
             "ref": "e4da12a48e8138479bd24a675321bcfd84950266"
         }
-    },
-    "zenstruck/messenger-monitor-bundle": {
-        "version": "1.x-dev"
     }
 }
