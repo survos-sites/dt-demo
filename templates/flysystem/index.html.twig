@@ -4,7 +4,8 @@
 
 {% block body %}
 
-<h3>{{ images|length }} Assets in Flysystem</h3>
+    {# cannot add count because images is an iterator #}
+<h3>Assets in Flysystem</h3>
 <div class="example-wrapper">
     <ul>
         {% for image in images %}
