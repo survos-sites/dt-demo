@@ -54,10 +54,10 @@
             {% endfor %}
         </twig:block>
         <twig:block name="officialName">
+                        <a target="_blank" href="{{ path('app_congress_show', {'id': row.id}) }}">
             {{ row.officialName }}
-            {#  use the modal instead! #}
-{#            <a href="{{ path('app_congress_show', {'id': row.id}) }}">#}
-{#            </a>#}
+            {#  use the modal instead? #}
+            </a>
         </twig:block>
 
         <twig:block name="birthday">
