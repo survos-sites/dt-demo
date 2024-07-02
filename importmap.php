@@ -35,20 +35,20 @@ return [
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
-        'version' => '2.0.3',
+        'version' => '2.0.8',
     ],
     'jquery' => [
         'version' => '3.7.1',
     ],
     'datatables.net' => [
-        'version' => '2.0.3',
+        'version' => '2.0.8',
     ],
     'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => [
-        'version' => '2.0.3',
+        'version' => '2.0.8',
         'type' => 'css',
     ],
     'axios' => [
-        'version' => '1.6.8',
+        'version' => '1.7.2',
     ],
     'datatables.net-searchpanes-bs5' => [
         'version' => '2.3.0',
@@ -61,7 +61,7 @@ return [
         'version' => '1.0.7',
     ],
     'datatables.net-dt' => [
-        'version' => '2.0.3',
+        'version' => '2.0.8',
     ],
     'simple-datatables' => [
         'version' => '9.0.4',
@@ -101,13 +101,13 @@ return [
         'version' => '2.0.32',
     ],
     'datatables.net-responsive' => [
-        'version' => '3.0.1',
+        'version' => '3.0.2',
     ],
     'datatables.net-select-bs5' => [
-        'version' => '2.0.1',
+        'version' => '2.0.3',
     ],
     'datatables.net-select-bs5/css/select.bootstrap5.min.css' => [
-        'version' => '2.0.1',
+        'version' => '2.0.3',
         'type' => 'css',
     ],
     'fos-routing' => [
@@ -143,37 +143,37 @@ return [
         'type' => 'css',
     ],
     'datatables.net-plugins/i18n/en-GB.mjs' => [
-        'version' => '2.0.2',
+        'version' => '2.0.8',
     ],
     'datatables.net-buttons-bs5' => [
-        'version' => '3.0.1',
+        'version' => '3.0.2',
     ],
     'datatables.net-buttons' => [
-        'version' => '3.0.1',
+        'version' => '3.0.2',
     ],
     'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css' => [
-        'version' => '3.0.1',
+        'version' => '3.0.2',
         'type' => 'css',
     ],
     'datatables.net-responsive-bs5' => [
-        'version' => '3.0.1',
+        'version' => '3.0.2',
     ],
     'datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css' => [
-        'version' => '3.0.1',
+        'version' => '3.0.2',
         'type' => 'css',
     ],
     'datatables.net-scroller-bs5' => [
-        'version' => '2.4.1',
+        'version' => '2.4.3',
     ],
     'datatables.net-scroller' => [
-        'version' => '2.4.1',
+        'version' => '2.4.3',
     ],
     'datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css' => [
-        'version' => '2.4.1',
+        'version' => '2.4.3',
         'type' => 'css',
     ],
     'datatables.net-select' => [
-        'version' => '2.0.1',
+        'version' => '2.0.3',
     ],
     'datatables.net-searchpanes' => [
         'version' => '2.3.0',
@@ -196,7 +196,7 @@ return [
         'type' => 'css',
     ],
     'datatables.net-dt/css/dataTables.dataTables.min.css' => [
-        'version' => '2.0.3',
+        'version' => '2.0.8',
         'type' => 'css',
     ],
     'bootstrap/js/dist/modal' => [
@@ -206,6 +206,6 @@ return [
         'version' => '1.0.9',
     ],
     'dexie' => [
-        'version' => '4.0.4',
+        'version' => '4.0.7',
     ],
 ];
