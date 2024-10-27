@@ -51,6 +51,13 @@
                 }
             }
         },
+        "@survos/bootstrap-bundle": {
+            "search": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        },
         "@survos/html-prettify-bundle": {
             "prettify": {
                 "enabled": true,

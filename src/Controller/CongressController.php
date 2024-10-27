@@ -12,6 +12,7 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\InspectionBundle\Services\InspectionService;
 use Survos\WikiBundle\Service\WikiService;
+use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,11 +45,12 @@ class CongressController extends AbstractController
     }
 
     #[Route('/grid', methods: ['GET'])]
-    public function grid(OfficialRepository $officialRepository): Response
+    #[Template('congress/grid.html.twig')]
+    public function grid(OfficialRepository $officialRepository): array
     {
-        return $this->render('congress/grid.html.twig', [
+        return  [
             'data' => $officialRepository->findAll(),
-        ]);
+        ];
     }
 
 

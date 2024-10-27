@@ -46,7 +46,7 @@ return [
         'type' => 'css',
     ],
     'axios' => [
-        'version' => '1.7.3',
+        'version' => '1.7.7',
     ],
     'datatables.net-searchpanes-bs5' => [
         'version' => '2.3.0',
@@ -205,5 +205,11 @@ return [
     ],
     'dexie' => [
         'version' => '4.0.8',
+    ],
+    'datatables.net-plugins/i18n/es-ES.mjs' => [
+        'version' => '2.1.7',
+    ],
+    'datatables.net-plugins/i18n/de-DE.mjs' => [
+        'version' => '2.1.7',
     ],
 ];
