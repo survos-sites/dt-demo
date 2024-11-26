@@ -1,6 +1,29 @@
 {
     "controllers": {
+        "@spomky-labs/pwa-bundle": {
+            "connection-status": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "backgroundsync-form": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "sync-broadcast": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "prefetch-on-demand": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        },
         "@survos/api-grid-bundle": {
+            "js_twig": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            },
             "api_grid": {
                 "enabled": true,
                 "fetch": "lazy",
@@ -28,10 +51,34 @@
                 }
             }
         },
+        "@survos/bootstrap-bundle": {
+            "search": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            }
+        },
         "@survos/html-prettify-bundle": {
             "prettify": {
                 "enabled": true,
                 "fetch": "eager"
+            }
+        },
+        "@survos/pwa-extra-bundle": {
+            "detector": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            },
+            "toggle_online": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
+            },
+            "install": {
+                "enabled": true,
+                "fetch": "lazy",
+                "autoimport": []
             }
         },
         "@survos/simple-datatables-bundle": {
@@ -41,6 +88,12 @@
                 "autoimport": {
                     "@survos/simple-datatables/style.css": true
                 }
+            }
+        },
+        "@survos/workflow-helper-bundle": {
+            "workflow": {
+                "enabled": true,
+                "fetch": "eager"
             }
         },
         "@symfony/ux-lazy-image": {

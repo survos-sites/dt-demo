@@ -1,0 +1,9 @@
+survos_command:
+  resource: '@SurvosCommandBundle/config/routes.yaml'
+  prefix: '/admin/{_locale}/command'
+
+when@dev:
+  survos_command:
+    resource: '@SurvosCommandBundle/config/routes.yaml'
+    prefix: '/admin/{_locale}/command'
+

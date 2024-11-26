@@ -7,6 +7,44 @@
 
     <a class="btn btn-danger" href="{{ path('congress_refresh', official.rp) }}">Refresh </a>
 
+{#    {{ dump(official) }}#}
+    <h3>
+        {{ official.imageCount }} Image(s)
+    </h3>
+    <ul>
+        {% for imageCode in official.imageCodes %}
+            <li>
+                {% set flysystemPath = imageCode.code %}
+                {% for filter in ['squared_thumbnail_medium','squared_thumbnail_tiny'] %}
+                    {% set thumbUrl = flysystemPath | imagine_filter(filter)   %}
+                    <figure class="figure">
+                        <a href="{{ thumbUrl }}" target="_blank">
+                            <img src="{{ thumbUrl }}" class="figure-img img-fluid rounded" alt="{{ thumbUrl }}">
+                        </a>
+                        <figcaption class="figure-caption text-end">{{ filter }}
+                            <b>
+                                {{ flysystemPath }}
+
+                            </b>
+                        </figcaption>
+                    </figure>
+                    {#                <br /><b>{{ thumbUrl }}</b>#}
+                    {#                <br /><b>{{ imagePath }}</b>#}
+
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+
+
+    <h3>twig:item_grid (wikidata)</h3>
+    {{ dump(official.wikiData) }}
+    <twig:item_grid :data="official.wikidata">
+
+    </twig:item_grid>
+
+
+    <h3>Database [official] Record</h3>
     <table class="table">
         <tbody>
             <tr>
@@ -35,34 +73,6 @@
             </tr>
         </tbody>
     </table>
-
-    <h3>
-        {{ official.imageCount }} Image(s)
-    </h3>
-    <ul>
-    {% for imageCode in official.imageCodes %}
-        <li>
-            {% set flysystemPath = imageCode.code %}
-            {% for filter in ['squared_thumbnail_medium','squared_thumbnail_tiny'] %}
-                {% set thumbUrl = flysystemPath | imagine_filter(filter)   %}
-                <figure class="figure">
-                    <a href="{{ thumbUrl }}" target="_blank">
-                    <img src="{{ thumbUrl }}" class="figure-img img-fluid rounded" alt="{{ thumbUrl }}">
-                    </a>
-                    <figcaption class="figure-caption text-end">{{ filter }}
-                        <b>
-                            {{ flysystemPath }}
-
-                        </b>
-                    </figcaption>
-                </figure>
-{#                <br /><b>{{ thumbUrl }}</b>#}
-{#                <br /><b>{{ imagePath }}</b>#}
-
-            {% endfor %}
-        </li>
-    {% endfor %}
-    </ul>
 
     {% set columns = [
         'type',

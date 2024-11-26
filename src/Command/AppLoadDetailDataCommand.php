@@ -22,13 +22,12 @@ use Zenstruck\Console\RunsProcesses;
 #[AsCommand('app:load-detail-data', 'Load the basic congressional data')]
 final class AppLoadDetailDataCommand extends InvokableServiceCommand
 {
-    use ConfigureWithAttributes;
     use RunsCommands;
     use RunsProcesses;
 
     public function __construct(
-        private ValidatorInterface $validator,
-        private CacheInterface     $cache,
+        private readonly ValidatorInterface $validator,
+        private readonly CacheInterface     $cache,
         string                     $name = null)
     {
         parent::__construct($name);

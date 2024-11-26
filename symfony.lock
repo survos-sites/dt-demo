@@ -80,7 +80,7 @@
         "version": "v3.2.0"
     },
     "knpuniversity/oauth2-client-bundle": {
-        "version": "2.16",
+        "version": "2.18",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
@@ -167,6 +167,12 @@
             "tests/bootstrap.php"
         ]
     },
+    "pierstoval/smoke-testing": {
+        "version": "v1.0.0"
+    },
+    "presta/sitemap-bundle": {
+        "version": "v4.0.0"
+    },
     "sentry/sentry-symfony": {
         "version": "4.12",
         "recipe": {
@@ -178,6 +184,12 @@
         "files": [
             "config/packages/sentry.yaml"
         ]
+    },
+    "spomky-labs/phpwa": {
+        "version": "1.0.3"
+    },
+    "spomky-labs/pwa-bundle": {
+        "version": "1.1.x-dev"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.7",
@@ -241,14 +253,23 @@
     "survos/maker-bundle": {
         "version": "1.5.103"
     },
+    "survos/pwa-extra-bundle": {
+        "version": "1.5.188"
+    },
     "survos/scraper-bundle": {
         "version": "dev-sy64"
     },
     "survos/simple-datatables-bundle": {
         "version": "dev-main"
     },
+    "survos/sitemap-parser-bundle": {
+        "version": "1.5.133"
+    },
     "survos/wiki-bundle": {
         "version": "1.5.124"
+    },
+    "survos/workflow-helper-bundle": {
+        "version": "1.5.376"
     },
     "symfony/asset-mapper": {
         "version": "6.4",
@@ -377,6 +398,15 @@
             "config/packages/notifier.yaml"
         ]
     },
+    "symfony/panther": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "3ead1b290ba6d708cc0cbcb8b1dbbf8e6fa3c0c0"
+        }
+    },
     "symfony/phpunit-bridge": {
         "version": "6.3",
         "recipe": {
@@ -458,6 +488,18 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/ux-icons": {
+        "version": "2.21",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.17",
+            "ref": "803a3bbd5893f9584969ab8670290cdfb6a0a5b5"
+        },
+        "files": [
+            "assets/icons/symfony.svg"
+        ]
+    },
     "symfony/ux-lazy-image": {
         "version": "v2.13.2"
     },
@@ -510,10 +552,37 @@
             "config/packages/messenger.yaml"
         ]
     },
+    "symfony/workflow": {
+        "version": "7.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.3",
+            "ref": "3b2f8ca32a07fcb00f899649053943fa3d8bbfb6"
+        },
+        "files": [
+            "config/packages/workflow.yaml"
+        ]
+    },
     "twig/extra-bundle": {
         "version": "v3.7.1"
     },
-    "zenstruck/messenger-monitor-bundle": {
-        "version": "1.x-dev"
+    "vincentlanglet/twig-cs-fixer": {
+        "version": "2.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.6",
+            "ref": "e4da12a48e8138479bd24a675321bcfd84950266"
+        }
+    },
+    "zenstruck/browser": {
+        "version": "1.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.9",
+            "ref": "66c5290398734ff02cedddf44dce6eb2002d958c"
+        }
     }
 }

@@ -18,11 +18,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
 use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
-use Survos\ApiGrid\State\MeilliSearchStateProvider;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
+use Survos\WorkflowBundle\Traits\MarkingInterface;
+use Survos\WorkflowBundle\Traits\MarkingTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OfficialRepository::class)]
@@ -61,20 +63,37 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','house','state'])]
 #[Groups(['official.read'])]
 #[UniqueEntity(['id'])]
-class Official implements RouteParametersInterface
+class Official implements RouteParametersInterface, MarkingInterface
 {
     use RouteParametersTrait;
+    use MarkingTrait;
+    public const UNIQUE_PARAMETERS=['id' => 'id'];
+
     #[ORM\Id]
     #[ORM\Column(type: Types::STRING)]
-    private string $id; // wikidata ID
+    #[SerializedName('id.wikidata')]
+    private string $id;
+
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setTerms(Collection $terms): void
+    {
+        $this->terms = $terms;
+    } // wikidata ID
 
     #[ORM\Column(length: 16, nullable: true)]
+    #[SerializedName('name.first')]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 32)]
+    #[SerializedName('name.last')]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 48)]
+    #[SerializedName('name.official_full')]
     private ?string $officialName = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
@@ -83,7 +102,7 @@ class Official implements RouteParametersInterface
     #[ORM\Column(length: 1, nullable: true)]
     private ?string $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'official', targetEntity: Term::class, orphanRemoval: true, cascade: ['remove', 'persist'])]
+    #[ORM\OneToMany(targetEntity: Term::class, mappedBy: 'official', cascade: ['remove', 'persist'], orphanRemoval: true)]
     private Collection $terms;
 
     #[ORM\Column(length: 12, nullable: true)]
@@ -115,7 +134,10 @@ class Official implements RouteParametersInterface
     #[ORM\Column(nullable: true)]
     private ?int $imageCount = null;
 
-    public function __construct(string $id=null)
+    #[ORM\Column(nullable: true)]
+    private ?array $ids = null;
+
+    public function __construct(string $id)
     {
         $this->id = $id;
         $this->terms = new ArrayCollection();
@@ -323,14 +345,22 @@ class Official implements RouteParametersInterface
         return $this->imageCount;
     }
 
-    public function getUniqueIdentifiers(): array
-    {
-        return ['id' => $this->getId()];
-    }
 
     public function setImageCount(?int $imageCount): static
     {
         $this->imageCount = $imageCount;
+
+        return $this;
+    }
+
+    public function getIds(): ?array
+    {
+        return $this->ids;
+    }
+
+    public function setIds(?array $ids): static
+    {
+        $this->ids = $ids;
 
         return $this;
     }

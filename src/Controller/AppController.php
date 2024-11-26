@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class AppController extends AbstractController
 {
-    #[Route('/', name: 'app_homepage')]
+
+    #[Route(path: '/', name: 'app_homepage', options: ['sitemap' => ['priority' => 1]])]
     public function homepage(): Response
     {
         // testing
@@ -21,6 +22,14 @@ class AppController extends AbstractController
     public function simple(): Response
     {
         return $this->render('app/simple.html.twig', [
+            'controllerClass' => self::class
+        ]);
+    }
+
+    #[Route('/dexie', name: 'app_dexie')]
+    public function dexie(): Response
+    {
+        return $this->render('app/dexie2.html.twig', [
             'controllerClass' => self::class
         ]);
     }
@@ -57,15 +66,15 @@ class AppController extends AbstractController
                     foreach ($claimList as $claim) {
 //                        dd(claim: $claim, qualifiers: $claim->qualifiers);
                         foreach ($claim->qualifiers??[] as $propertyCode => $qualifier) {
-                            dump($propertyCode, $qualifier[0]);
+//                            dump($propertyCode, $qualifier[0]);
                         }
                     }
                 }
-                dd($data, $data->labels->en,$line);
+//                dd($data, $data->labels->en,$line);
             }
             $idx++;
         }
-        dd($idx . ' records searched');
+//        dd($idx . ' records searched');
 
         return $this->render('app/wikidata.html.twig', [
             'controllerClass' => self::class

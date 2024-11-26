@@ -1,0 +1,33 @@
+pwa:
+    image_processor: 'pwa.image_processor.imagick'
+    manifest:
+        enabled: true
+        background_color: "#c026d3"
+        theme_color: "#c026d3"
+        name: 'Datatables Demo'
+        short_name: 'dt-demo'
+        description: 'Use Datatables.net in a PWA'
+        orientation: "any"
+        display: "standalone"
+        scope: "/"
+        display_override: ['fullscreen', 'minimal-ui', 'window-controls-overlay']
+        id: "/"
+        start_url: "./"
+        icons:
+            # https://www.veryicon.com/icons/miscellaneous/smart-site/noise-3.html
+            - src: "images/capitol-building.png"
+              sizes: "any"
+        screenshots:
+            - "images/screenshot1.png"
+            - "images/screenshot2.png"
+        categories: []
+        shortcuts: []
+        edge_side_panel:
+            preferred_width: 280
+        widgets: []
+    serviceworker:
+        enabled: true
+        src: "sw.js"
+        skip_waiting: true
+        workbox:
+            page_fallback: 'app_homepage'

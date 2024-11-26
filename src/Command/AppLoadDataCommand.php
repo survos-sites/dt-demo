@@ -16,23 +16,21 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Zenstruck\Console\Attribute\Option;
-use Zenstruck\Console\ConfigureWithAttributes;
 use Zenstruck\Console\InvokableServiceCommand;
 use Zenstruck\Console\IO;
 use Zenstruck\Console\RunsCommands;
 use Zenstruck\Console\RunsProcesses;
 
-    #[AsCommand('app:load-data', 'Load the congressional data')]
+#[AsCommand('app:load-data', 'Load the congressional data')]
 final class AppLoadDataCommand extends InvokableServiceCommand
 {
-    use ConfigureWithAttributes;
     use RunsCommands;
     use RunsProcesses;
 
     public function __construct(
-        private ValidatorInterface $validator,
-        private CacheInterface $cache,
-        private MessageBusInterface $bus,
+        private readonly ValidatorInterface $validator,
+        private readonly CacheInterface $cache,
+        private readonly MessageBusInterface $bus,
         string $name = null)
     {
         parent::__construct($name);
@@ -69,11 +67,16 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         $progressBar = new ProgressBar($io->output(), count($congressData));
         foreach ($congressData as $idx => $record) {
             $progressBar->advance();
-
+//
+//            $record['ids'] = $record['id'];
+//            $record['id'] = $record['id']['wikidata'];
+//            $terms = $record['terms'];
+//            unset($record['terms']);
+//            $serializer->denormalize($record, Official::class);
+//
 //            $official = $serializer->denormalize(
 //                $record,
-//                Official::class,
-//                null
+//                Official::class
 //            );
 //            dd($official);
 //

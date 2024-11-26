@@ -15,7 +15,7 @@ survos_bootstrap:
   options:
     # consider https://startbootstrap.com/previews/simple-sidebar as another theme
 #    theme: bs5
-    theme: bootswatch
+    theme: tabler
     allow_login: false
     offcanvas: end
 

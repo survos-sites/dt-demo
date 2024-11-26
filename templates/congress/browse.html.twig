@@ -14,7 +14,7 @@
         [
             {name: 'actions', condition: is_granted('ROLE_ADMIN')},
             {name: 'officialName', sortable: true},
-            {name: 'imageCount'},
+            {name: 'imageCount', className: 'min-tablet'},
             {name: 'house'},
             {name: 'id'},
             {name: 'state', searchable: true},
@@ -29,17 +29,34 @@
             :apiRoute="apiRoute"
             :columns="columns"
     >
+        <twig:block name="_header">
+            <i>{{ row.officialName }}</i>
+        </twig:block>
+        <twig:block name="_modal">
+            <h1>{{ row.officialName}}</h1>
+
+            <table class="nowrap">
+            {% for column in columns %}
+                <tr>
+                    <th>{{ column.title }}</th>
+                    <td>{{ column.data }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </twig:block>
         <twig:block name="imageCount">
             {{ row.imageCount }}
             {% for imageData in row.imageCodes %}
                 <a href="{{ imageData.thumb }}" target="_blank">
-                    <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" />
+                    {# https://levelup.gitconnected.com/html-attributes-that-every-web-developer-should-know-8ffd4cd88288 #}
+                    <img src="{{ imageData.thumb }}" alt="{{ imageData.thumb }}" class="img-thumbnail" loading="lazy" />
                 </a>
             {% endfor %}
         </twig:block>
         <twig:block name="officialName">
-            <a href="{{ path('app_congress_show', {'id': row.id}) }}">
-                {{ row.officialName }}
+                        <a target="_blank" href="{{ path('app_congress_show', {'id': row.id}) }}">
+            {{ row.officialName }}
+            {#  use the modal instead? #}
             </a>
         </twig:block>
 

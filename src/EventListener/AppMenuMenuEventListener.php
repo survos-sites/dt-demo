@@ -26,7 +26,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
 
     public function __construct(
         private ContextService                 $contextService,
-        #[Autowire('%kernel.environment%')] private string $env,
+        #[Autowire('%kernel.environment%')] protected string $env,
         private ?AuthorizationCheckerInterface $security = null,
     )
     {
@@ -92,7 +92,6 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         }
         if ($this->isDev() || $this->isGranted('ROLE_ADMIN')) {
             $this->add($nestedMenu, 'survos_commands');
-            $this->add($nestedMenu, 'zenstruck_messenger_monitor_dashboard');
             $this->add($nestedMenu, 'api_doc');
         }
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem

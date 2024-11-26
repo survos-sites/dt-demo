@@ -1,10 +1,9 @@
-Use 6.4 beta, add stimulus, api-platform, doctrine-futures
-Later we'll add the survos bundles
+latest Symfony, plus api-platform
+and some survos bundles
 
 ```bash
 rm -rf all-demo
 symfony new all-demo --webapp --version=next && cd all-demo
-composer req symfony/asset-mapper api symfony/stimulus-bundle:^2.x-dev
 composer req survos/scraper-bundle survos/bootstrap-bundle
 composer req survos/maker-bundle --dev
 composer config extra.symfony.allow-contrib true
@@ -44,9 +43,6 @@ cat > templates/app/index.html.twig <<END
 {% endblock %}
 END
 
-composer req symfony/stimulus-bundle:2.x-dev
-
-
 composer require orm-fixtures --dev 
 
 echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data.db" > .env.local
@@ -83,7 +79,7 @@ cat > src/DataFixtures/AppFixtures.php < 'END'
 bin/console doctrine:fixtures:load -n 
 ```
 
-### Generate CRUD Controllers
+### Generate Symfony CRUD Controllers
 echo "Official,CongressCrudController,no" | sed "s/,/\n/g"  | bin/console make:crud
 echo "Term,TermCrudController,no" | sed "s/,/\n/g"  | bin/console make:crud
 
@@ -144,7 +140,7 @@ kbond p4ssw0rd -r ROLE_EDITOR -r ROLE_ADMIN
 
 composer req survos/datatables-bundle
 
-## Deploying to github pages
+## Deploying to github pages (Experimental)
 
 bin/console asset-map:compile
 bin/console -e prod cache:clear

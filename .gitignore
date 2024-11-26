@@ -44,3 +44,8 @@ phpstan.neon
 
 /public/images
 congress.db
+/public/js/fos_js_routes.js
+
+###> vincentlanglet/twig-cs-fixer ###
+/.twig-cs-fixer.cache
+###< vincentlanglet/twig-cs-fixer ###

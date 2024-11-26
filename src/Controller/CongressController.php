@@ -11,6 +11,8 @@ use League\Flysystem\FilesystemOperator;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\InspectionBundle\Services\InspectionService;
+use Survos\WikiBundle\Service\WikiService;
+use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,11 +45,12 @@ class CongressController extends AbstractController
     }
 
     #[Route('/grid', methods: ['GET'])]
-    public function grid(OfficialRepository $officialRepository): Response
+    #[Template('congress/grid.html.twig')]
+    public function grid(OfficialRepository $officialRepository): array
     {
-        return $this->render('congress/grid.html.twig', [
+        return  [
             'data' => $officialRepository->findAll(),
-        ]);
+        ];
     }
 
 
@@ -103,11 +106,18 @@ class CongressController extends AbstractController
         ]);
     }
     #[Route('/{id}/refresh', name: 'congress_refresh', methods: ['GET', 'POST'])]
-    public function refresh(Request $request, Official $official, CacheManager $cacheManager): Response
+    public function refresh(Request $request, Official $official,
+                            WikiService $wikiService,
+                            EntityManagerInterface $entityManager,
+                            CacheManager $cacheManager): Response
     {
         foreach ($official->getImageCodes()??[] as $imageData) {
             $cacheManager->remove($imageData['code']);
         }
+        $wikiData = $wikiService->fetchWikidataPage($official->getWikidataId());
+        $official->setWikiData($wikiData->toArray());
+        $entityManager->flush();
+
         return $this->redirectToRoute('app_congress_show', $official->getrp());
 
 
