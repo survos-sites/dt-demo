@@ -25,10 +25,11 @@ final class AppScreenshotsCommand extends InvokableServiceCommand
     ): void {
 
         $_SERVER['BROWSER_SCREENSHOT_DIR'] = './screenshots';
-        $_SERVER['PANTHER_CHROME_ARGUMENTS'] = "--disable-dev-shm-usage --window-size=600,800 --no-sandbox --headless --hide-scrollbars";
+        $_SERVER['PANTHER_CHROME_ARGUMENTS'] = "--disable-dev-shm-usage --window-size=600,800 --no-sandbox --no-headless --hide-scrollbars";
 
         $browser = $this->pantherBrowser();
         $browser->visit('/')
+            ->pause()
             ->takeScreenshot('homepage.jpg');
 
 //        $browser->visit('/congress/api_grid')
