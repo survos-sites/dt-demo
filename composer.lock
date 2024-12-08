@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b428a4303b1062f85bca178a3eade899",
+    "content-hash": "a58c176180f4eccb277cfe7ff9a35331",
     "packages": [
         {
             "name": "api-platform/core",
@@ -5832,6 +5832,63 @@
                 }
             ],
             "time": "2024-11-24T12:52:31+00:00"
+        },
+        {
+            "name": "survos/image-client-bundle",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/SurvosImageClientBundle.git",
+                "reference": "5f6db5fd6323aa08cb3987b51f26316f279fb369"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/SurvosImageClientBundle/zipball/5f6db5fd6323aa08cb3987b51f26316f279fb369",
+                "reference": "5f6db5fd6323aa08cb3987b51f26316f279fb369",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "symfony/config": "^6.4 || ^7.1",
+                "symfony/dependency-injection": "^6.4 || ^7.1",
+                "symfony/http-client": "^6.4 || ^7.1",
+                "symfony/http-kernel": "^6.4 || ^7.1",
+                "twig/twig": "^3.4"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "symfony/browser-kit": "^6.4 || ^7.1",
+                "symfony/framework-bundle": "^6.4 || ^7.1",
+                "symfony/phpunit-bridge": "^6.4 || ^7.1",
+                "symfony/twig-bundle": "^6.4 || ^7.1",
+                "symfony/var-dumper": "^6.4 || ^7.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\ImageClientBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "image-client-bundle Bundle",
+            "keywords": [
+                "symfony-ux",
+                "symfony6"
+            ],
+            "support": {
+                "issues": "https://github.com/survos/SurvosImageClientBundle/issues",
+                "source": "https://github.com/survos/SurvosImageClientBundle/tree/1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-12-07T22:30:07+00:00"
         },
         {
             "name": "survos/inspection-bundle",

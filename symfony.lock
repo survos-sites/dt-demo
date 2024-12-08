@@ -247,6 +247,9 @@
     "survos/html-prettify-bundle": {
         "version": "dev-main"
     },
+    "survos/image-client-bundle": {
+        "version": "1.0"
+    },
     "survos/inspection-bundle": {
         "version": "1.5.93"
     },

@@ -127,6 +127,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     #[ORM\Column(nullable: true)]
     private ?array $wikiData = null;
 
+    // now an object with code => [{filter: size, filter2: size}]
     #[ORM\Column(type: Types::JSON, nullable: true)]
     #[Groups(['official.read'])]
     private ?array $imageCodes = null;

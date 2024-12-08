@@ -8,14 +8,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemOperator;
 use Psr\Log\LoggerInterface;
+use Survos\ImageClientBundle\Service\ImageClientService;
 use Survos\WikiBundle\Service\WikiService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Illuminate\Support\Collection;
 use Wikidata\Value;
 
-#[AsMessageHandler]
 final class FetchWikidataMessageHandler
 {
 
@@ -23,13 +24,16 @@ final class FetchWikidataMessageHandler
         private WikiService                                $wikiService,
         private EntityManagerInterface                     $entityManager,
         private HttpClientInterface                        $httpClient,
+        private ImageClientService                         $imageClientService,
         private FilesystemOperator                         $defaultStorage,
         private LoggerInterface                            $logger,
+        private UrlGeneratorInterface                      $urlGenerator, // could be moved to somewhere else and inject the callback here.
         #[Autowire('%kernel.project_dir%')] private string $projectDir,
     )
     {
     }
 
+    #[AsMessageHandler]
     public function __invoke(FetchWikidataMessage $message)
     {
         $filesystem = $this->defaultStorage;
@@ -49,9 +53,25 @@ final class FetchWikidataMessageHandler
             foreach ($values->getIterator() as $item) {
                 // we could do this in an async message, too.
                 $url = $item->id;
+
+                // trigger the download
+                $response = $this->imageClientService->dispatchProcess(
+                    [
+                        $url
+                    ],
+                    ['small'],
+                    callbackUrl: $this->urlGenerator->generate('app_webhook', [
+                    'id' => $item->id
+                ], $this->urlGenerator::ABSOLUTE_URL)
+                );
+                dd($url, $response);
+
                 $code = sprintf("%s/%s.%s", $wikidataId, md5($url), pathinfo($url, PATHINFO_EXTENSION));
+
+
                 if (!$filesystem->has($code)) {
                     $this->logger->info("Fetching image $url");
+                    dd($url);
                     $response = $this->httpClient->request('GET', $url, []);
                     // https://symfony.com/doc/current/http_client.html#streaming-responses
                     if ($response->getStatusCode() == 200) {
@@ -63,7 +83,7 @@ final class FetchWikidataMessageHandler
                     try {
                         $exif = exif_read_data($response->toStream());
                         if ($exif) {
-                            $this->logger->info("Orientation : " . ($exif['Orientation']??'--'));
+                            $this->logger->info("Orientation : " . ($exif['Orientation'] ?? '--'));
                         }
                     } catch (\Exception $exception) {
                         // we probably need to write a temp file and read exif there

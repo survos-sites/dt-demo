@@ -24,6 +24,9 @@ framework:
         default_options:
             headers:
                 'User-Agent': 'Survos (tacman@gmail.com)'
+            max_redirects: 3
+            proxy: '%env(HTTP_PROXY)%'
+
 when@test:
     framework:
         test: true

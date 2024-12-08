@@ -42,4 +42,5 @@ return [
     Pierstoval\SmokeTesting\SmokeTestingBundle::class => ['dev' => true, 'test' => true],
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Survos\WorkflowBundle\SurvosWorkflowBundle::class => ['all' => true],
+    Survos\ImageClientBundle\SurvosImageClientBundle::class => ['all' => true],
 ];

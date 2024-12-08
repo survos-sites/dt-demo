@@ -91,6 +91,11 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                 $official = (new Official($id))
                     ->setWikidataId($id);
             }
+            if ($details) {
+                $this->bus->dispatch(new FetchWikidataMessage($id));
+            }
+            dd();
+
             $official
                 ->setBirthday(new \DateTimeImmutable($bio->birthday))
                 ->setGender($bio->gender)

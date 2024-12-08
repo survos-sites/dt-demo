@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -24,6 +25,13 @@ class AppController extends AbstractController
         return $this->render('app/simple.html.twig', [
             'controllerClass' => self::class
         ]);
+    }
+
+    #[Route('/test-webhook', name: 'app_webhook')]
+    public function webhook(Request $request): Response
+    {
+        // update the database with available filters.  This probably means the images need to move to their own database, or attach metadata to the resize request
+        return new Response(json_encode($request->request->all(), JSON_PRETTY_PRINT+ JSON_UNESCAPED_SLASHES));
     }
 
     #[Route('/dexie', name: 'app_dexie')]

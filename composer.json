@@ -41,6 +41,7 @@
         "survos/crawler-bundle": "^1.5",
         "survos/deployment-bundle": "^1.5",
         "survos/html-prettify-bundle": "^1.5",
+        "survos/image-client-bundle": "^1.0",
         "survos/inspection-bundle": "^1.5",
         "survos/pwa-extra-bundle": "^1.5",
         "survos/scraper-bundle": "^1.5",
