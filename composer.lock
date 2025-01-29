@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "edba0c13c8b440a151445bda71419cae",
+    "content-hash": "e21bf2fa0b5710e72d47855f62a63db0",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2638,67 +2638,6 @@
             "time": "2024-12-03T14:37:55+00:00"
         },
         {
-            "name": "jcupitt/vips",
-            "version": "v2.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/libvips/php-vips.git",
-                "reference": "256575d7c5247d4fb3e98bf10ab1e10a571684c7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/libvips/php-vips/zipball/256575d7c5247d4fb3e98bf10ab1e10a571684c7",
-                "reference": "256575d7c5247d4fb3e98bf10ab1e10a571684c7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ffi": "*",
-                "php": ">=7.4",
-                "psr/log": "^1.1.3|^2.0|^3.0"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-parallel-lint": "^1.3",
-                "phpdocumentor/shim": "^3.3",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jcupitt\\Vips\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "John Cupitt",
-                    "email": "jcupitt@gmail.com",
-                    "homepage": "https://github.com/jcupitt",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A high-level interface to the libvips image processing library.",
-            "homepage": "https://github.com/libvips/php-vips",
-            "keywords": [
-                "image",
-                "libvips",
-                "processing"
-            ],
-            "support": {
-                "issues": "https://github.com/libvips/php-vips/issues",
-                "source": "https://github.com/libvips/php-vips/tree/v2.4.1"
-            },
-            "time": "2025-01-13T16:58:09+00:00"
-        },
-        {
             "name": "jean85/pretty-package-versions",
             "version": "2.1.0",
             "source": {
@@ -3804,51 +3743,6 @@
             "time": "2024-06-24T21:25:28+00:00"
         },
         {
-            "name": "phenx/php-font-lib",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dompdf/php-font-lib.git",
-                "reference": "6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d",
-                "reference": "6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^3 || ^4 || ^5 || ^6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FontLib\\": "src/FontLib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-2.1-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "The FontLib Community",
-                    "homepage": "https://github.com/dompdf/php-font-lib/blob/master/AUTHORS.md"
-                }
-            ],
-            "description": "A library to read, parse, export and make subsets of different types of font files.",
-            "homepage": "https://github.com/dompdf/php-font-lib",
-            "support": {
-                "issues": "https://github.com/dompdf/php-font-lib/issues",
-                "source": "https://github.com/dompdf/php-font-lib/tree/1.0.1"
-            },
-            "time": "2024-12-02T14:37:59+00:00"
-        },
-        {
             "name": "php-http/discovery",
             "version": "1.20.0",
             "source": {
@@ -4777,69 +4671,6 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
-        },
-        {
-            "name": "rokka/imagine-vips",
-            "version": "0.40.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rokka-io/imagine-vips.git",
-                "reference": "c1ad61d63fad5e83adf8ff10a40b2ceeace3132a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rokka-io/imagine-vips/zipball/c1ad61d63fad5e83adf8ff10a40b2ceeace3132a",
-                "reference": "c1ad61d63fad5e83adf8ff10a40b2ceeace3132a",
-                "shasum": ""
-            },
-            "require": {
-                "imagine/imagine": "^1.0",
-                "jcupitt/vips": "^2.1.1 || ^1.0.3",
-                "phenx/php-font-lib": "^0.5.2 || ^1.0",
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.4",
-                "phpstan/phpstan": "^1.8",
-                "phpunit/phpunit": "^8 || ^9"
-            },
-            "suggest": {
-                "ext-gd": "to use the GD implementation fallback for saving unsupported file formats",
-                "ext-imagick": "to use the Imagick implementation fallback for saving unsupported file formats"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Imagine": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "rokka",
-                    "email": "rokka@rokka.io",
-                    "homepage": "https://rokka.io"
-                }
-            ],
-            "description": "libvips adapter for imagine",
-            "homepage": "https://github.com/rokka-io/imagine-vips",
-            "keywords": [
-                "drawing",
-                "graphics",
-                "image manipulation",
-                "image processing",
-                "libvips",
-                "php-vips",
-                "vips"
-            ],
-            "support": {
-                "issues": "https://github.com/rokka-io/imagine-vips/issues",
-                "source": "https://github.com/rokka-io/imagine-vips/tree/0.40.0"
-            },
-            "time": "2025-01-16T08:04:03+00:00"
         },
         {
             "name": "sentry/sentry",
@@ -18038,7 +17869,6 @@
     "platform": {
         "php": ">=8.3",
         "ext-ctype": "*",
-        "ext-ffi": "*",
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-imagick": "*",
