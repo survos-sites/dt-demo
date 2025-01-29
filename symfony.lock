@@ -13,6 +13,18 @@
             "src/ApiResource/.gitignore"
         ]
     },
+    "bizkit/versioning-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "ecb844d4e78c7e1834fb360fbb4d3846da02e581"
+        },
+        "files": [
+            "config/packages/bizkit_versioning.yaml"
+        ]
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.10",
         "recipe": {
@@ -259,6 +271,9 @@
     "survos/pwa-extra-bundle": {
         "version": "1.5.188"
     },
+    "survos/sais-bundle": {
+        "version": "1.5.490"
+    },
     "survos/scraper-bundle": {
         "version": "dev-sy64"
     },
@@ -323,6 +338,18 @@
         },
         "files": [
             ".env"
+        ]
+    },
+    "symfony/form": {
+        "version": "7.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.2",
+            "ref": "7d86a6723f4a623f59e2bf966b6aad2fc461d36b"
+        },
+        "files": [
+            "config/packages/csrf.yaml"
         ]
     },
     "symfony/framework-bundle": {

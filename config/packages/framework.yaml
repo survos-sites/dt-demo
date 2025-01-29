@@ -27,6 +27,9 @@ framework:
             max_redirects: 3
             proxy: '%env(HTTP_PROXY)%'
 
+    router:
+        default_uri: '%env(BASE_URL)%'
+
 when@test:
     framework:
         test: true

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -48,7 +49,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     ]
 )]
 
-#[ApiFilter(OrderFilter::class, properties: ['id',
+#[ApiFilter(OrderFilter::class, properties: [
+    'id',
     'firstName',
     'lastName',
     'officialName',
@@ -70,8 +72,9 @@ class Official implements RouteParametersInterface, MarkingInterface
     public const UNIQUE_PARAMETERS=['id' => 'id'];
 
     #[ORM\Id]
+    #[ApiProperty(identifier: true)]
     #[ORM\Column(type: Types::STRING)]
-    #[SerializedName('id.wikidata')]
+    #[SerializedName('id')]
     private string $id;
 
     public function setId(string $id): void

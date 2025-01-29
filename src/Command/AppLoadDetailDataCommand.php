@@ -28,7 +28,7 @@ final class AppLoadDetailDataCommand extends InvokableServiceCommand
     public function __construct(
         private readonly ValidatorInterface $validator,
         private readonly CacheInterface     $cache,
-        string                     $name = null)
+        ?string                     $name = null)
     {
         parent::__construct($name);
     }

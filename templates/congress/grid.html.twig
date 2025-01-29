@@ -104,25 +104,18 @@
 
         <twig:block name="imageCount">
             {{ row.imageCount }}
-
-            {% for imageData in row.imageCodes %}
-                {% set thumb = imageData.code|imagine_filter('squared_thumbnail_tiny') %}
-                <div class="item">
-
-{#                    <img#}
-{#                    class="app-img-thumbnail"#}
-{#                    alt="{{ thumb }}"#}
-{#                    src="{{ asset('/load-icon-png-7952.png') }}"#}
-{#                {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {#}
-{#                    src: thumb#}
-{#                }) }}#}
-{#                    />#}
-
-
-                <a href="{{ thumb }}" target="_blank">
-                    <img src="{{ thumb }}" alt="{{ thumb }}" class="app-img-thumbnail" />
-                </a>
-                </div>
+            {% for code, imageData in row.imageCodes|slice(0,1) %}
+                {% for filter, size in imageData %}
+                    {% if filter == 'small' %}
+                    {% set thumb = code|survos_image_filter(filter) %}
+                    <div class="item">
+                        <a href="{{ thumb }}" target="_blank">
+                            <img src="{{ thumb }}" alt="{{ thumb }}" class="app-img-thumbnail" />
+                        </a>
+                        <br />{{ (size/1024)|number_format(1) }}kb
+                    </div>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         </twig:block>
 

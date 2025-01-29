@@ -24,7 +24,8 @@ img {
 }
 
 .item {
-    width: 100px;
+    min-width: 100px;
+    max-width: 600px;
     min-height: 100px;
     max-height: fit-content;
     float: left;

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Official;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
 
 class AppController extends AbstractController
@@ -14,8 +17,7 @@ class AppController extends AbstractController
     public function homepage(): Response
     {
         // testing
-        return $this->render('app/index.html.twig', [
-            'controller_name' => 'AppController',
+        return $this->render('app/homepage.html.twig', [
         ]);
     }
 
@@ -27,11 +29,20 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/test-webhook', name: 'app_webhook')]
-    public function webhook(Request $request): Response
+    #[Route('/test-webhook/{id}', name: 'app_webhook')]
+    public function webhook(Request $request, Official $official, EntityManagerInterface $em): Response
     {
+        // best practice: push this message to a queue and handle elsewhere
+
+        // update the official images block with
+        $images = $official->getImageCodes();
+        $data = $request->request->all(); // it's a post
+
+        $images[$data['path']] = $data['filters']??[];
+        $official->setImageCodes($images);
+        $em->flush();
         // update the database with available filters.  This probably means the images need to move to their own database, or attach metadata to the resize request
-        return new Response(json_encode($request->request->all(), JSON_PRETTY_PRINT+ JSON_UNESCAPED_SLASHES));
+        return new Response(json_encode($official->getImageCodes(), JSON_PRETTY_PRINT+ JSON_UNESCAPED_SLASHES));
     }
 
     #[Route('/dexie', name: 'app_dexie')]

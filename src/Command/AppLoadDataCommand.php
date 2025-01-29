@@ -31,7 +31,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         private readonly ValidatorInterface $validator,
         private readonly CacheInterface $cache,
         private readonly MessageBusInterface $bus,
-        string $name = null)
+        ?string $name = null)
     {
         parent::__construct($name);
     }
@@ -91,10 +91,6 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                 $official = (new Official($id))
                     ->setWikidataId($id);
             }
-            if ($details) {
-                $this->bus->dispatch(new FetchWikidataMessage($id));
-            }
-            dd();
 
             $official
                 ->setBirthday(new \DateTimeImmutable($bio->birthday))

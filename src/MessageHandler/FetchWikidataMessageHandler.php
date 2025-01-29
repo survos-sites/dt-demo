@@ -9,6 +9,8 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemOperator;
 use Psr\Log\LoggerInterface;
 use Survos\ImageClientBundle\Service\ImageClientService;
+use Survos\SaisBundle\Model\ProcessPayload;
+use Survos\SaisBundle\Service\SaisClientService;
 use Survos\WikiBundle\Service\WikiService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -24,7 +26,7 @@ final class FetchWikidataMessageHandler
         private WikiService                                $wikiService,
         private EntityManagerInterface                     $entityManager,
         private HttpClientInterface                        $httpClient,
-        private ImageClientService                         $imageClientService,
+        private SaisClientService                         $imageClientService,
         private FilesystemOperator                         $defaultStorage,
         private LoggerInterface                            $logger,
         private UrlGeneratorInterface                      $urlGenerator, // could be moved to somewhere else and inject the callback here.
@@ -53,62 +55,30 @@ final class FetchWikidataMessageHandler
             foreach ($values->getIterator() as $item) {
                 // we could do this in an async message, too.
                 $url = $item->id;
-
-                // trigger the download
+                // trigger the download.  we could batch this, too.
                 $response = $this->imageClientService->dispatchProcess(
-                    [
-                        $url
-                    ],
-                    ['small'],
-                    callbackUrl: $this->urlGenerator->generate('app_webhook', [
-                    'id' => $item->id
-                ], $this->urlGenerator::ABSOLUTE_URL)
+                    new ProcessPayload(
+                        [$url],
+                        ['small','medium','large'],
+                        callbackUrl: $this->urlGenerator->generate('app_webhook', [
+                            'id' => $official->getId(),
+                        ], $this->urlGenerator::ABSOLUTE_URL)
+                    )
                 );
-                dd($url, $response);
-
-                $code = sprintf("%s/%s.%s", $wikidataId, md5($url), pathinfo($url, PATHINFO_EXTENSION));
-
-
-                if (!$filesystem->has($code)) {
-                    $this->logger->info("Fetching image $url");
-                    dd($url);
-                    $response = $this->httpClient->request('GET', $url, []);
-                    // https://symfony.com/doc/current/http_client.html#streaming-responses
-                    if ($response->getStatusCode() == 200) {
-                        $filesystem->writeStream($code, $response->toStream());
+                dd($response);
+                // we won't get a callback if it's already loaded, so we need to load the images that already exist.
+                $imageCodes = $official->getImageCodes()??[];
+                foreach ($response as $responseImage) {
+                    if ($responseImage['path']??false) {
+                        $imageCodes[$responseImage['path']] = $responseImage['filters'];
                     } else {
                         dd($response);
                     }
-
-                    try {
-                        $exif = exif_read_data($response->toStream());
-                        if ($exif) {
-                            $this->logger->info("Orientation : " . ($exif['Orientation'] ?? '--'));
-                        }
-                    } catch (\Exception $exception) {
-                        // we probably need to write a temp file and read exif there
-                        $this->logger->error("Unable to get exif: " . $url);
-                    }
-
-                } else {
-                    $this->logger->info("image $code already exists in filesystem");
                 }
-//                $filesystem->fileExists($path);
-//                $meta = $filesystem->fileExists($code);
-                /** @var  Filesystem $filesystem */
-
-//                dd($meta,
-//                    exif_read_data($filesystem->readStream($code)),
-//                    $filesystem::class, $filesystem->mimeType($code));
-                $images[] = [
-                    'code' => $code,
-                    'url' => $url
-                ];
-
-                // create thumbnail
+                $official->setImageCodes($imageCodes);
+                $this->entityManager->flush();
+                dd($imageCodes);
             }
-            $official->setImageCodes($images);
-
         }
 
 

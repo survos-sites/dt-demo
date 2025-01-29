@@ -1,22 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block dummy %}
-
-    {% set _sc = 'dummy' %}
-    <div {{ stimulus_controller(_sc) }}>
-        {% for count in [0, 50, 500, 5000, 50000] %}
-            {{ stimulus_action(_sc, 'reload', null, {abc: 'def', reset: true}) }}>
-            <button class="btn btn-danger"
-                    {{ stimulus_action(_sc, 'reload', null, {count: count}) }}>
-                Reload {{ count }}</button>
-
-        {% endfor %}
-        <ol {{ stimulus_target(_sc, 'message') }} class="display nowrap" style="width:100%">
-        </ol>
-    </div>
-
-{% endblock %}
-
     {% block body %}
         {% set _sc = 'dexie' %}
         <div {{ stimulus_controller(_sc, {dbName: 'test', count: 400}) }}>

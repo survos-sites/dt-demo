@@ -19,7 +19,7 @@ class ThumbnailNormalizer implements NormalizerInterface, SerializerAwareInterfa
     {
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         if ($object['imageCount']) {
             foreach ($object['imageCodes'] as $idx => $imageData) {
@@ -38,7 +38,7 @@ class ThumbnailNormalizer implements NormalizerInterface, SerializerAwareInterfa
 //        return [Official::class];
 //    }
 
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         // this is the collection, not the item!
 //        if (is_array($data)  && array_is_list($data)) {
