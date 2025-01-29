@@ -45,6 +45,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         #[Option(description: 'max records to load')] int $limit=0,
         #[Option(description: 'purge database first')] bool $purge=false,
         #[Option(description: 'dispatch request for details')] bool $details=false,
+        #[Option(description: 'url to json')] string $url='https://unitedstates.github.io/congress-legislators/legislators-current.json',
     ): void
     {
         if ($purge) {
@@ -56,8 +57,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
                 $io->success("$count records deleted");
             }
         }
-
-        $url = 'https://theunitedstates.io/congress-legislators/legislators-current.json';
+        $this->io()->info("fetching data..." . $url);
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => (string)file_get_contents($url));
 //        dd($json);
 
