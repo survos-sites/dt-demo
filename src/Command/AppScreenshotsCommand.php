@@ -18,7 +18,7 @@ final class AppScreenshotsCommand extends InvokableServiceCommand
     use RunsProcesses;
 
 //    use PantherTestCaseTrait;
-    use HasBrowser;
+//    use HasBrowser;
 
     public function __invoke(
         IO $io,
