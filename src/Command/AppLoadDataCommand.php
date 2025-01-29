@@ -93,7 +93,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
             }
 
             $official
-                ->setBirthday(new \DateTimeImmutable($bio->birthday))
+//                ->setBirthday(new \DateTimeImmutable($bio->birthday))
                 ->setGender($bio->gender)
                 ->setFirstName($name->first)
                 ->setLastName($name->last)

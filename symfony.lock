@@ -428,15 +428,6 @@
             "config/packages/notifier.yaml"
         ]
     },
-    "symfony/panther": {
-        "version": "2.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "1.0",
-            "ref": "3ead1b290ba6d708cc0cbcb8b1dbbf8e6fa3c0c0"
-        }
-    },
     "symfony/phpunit-bridge": {
         "version": "6.3",
         "recipe": {
