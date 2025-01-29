@@ -2,4 +2,4 @@
 bin/console app:load-data --limit 50  -vv
 bin/console grid:index
 symfony server:start -d
-symfony open:local --path /congress/grid
+symfony open:local
