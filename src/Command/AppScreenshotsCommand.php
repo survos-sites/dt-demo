@@ -17,7 +17,7 @@ final class AppScreenshotsCommand extends InvokableServiceCommand
     use RunsCommands;
     use RunsProcesses;
 
-    use PantherTestCaseTrait;
+//    use PantherTestCaseTrait;
     use HasBrowser;
 
     public function __invoke(
