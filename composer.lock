@@ -5169,16 +5169,16 @@
         },
         {
             "name": "survos/bootstrap-bundle",
-            "version": "1.5.490",
+            "version": "1.5.495",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/BootstrapBundle.git",
-                "reference": "de48f9fa81e41e89b178aeab1beca22a0a915ebe"
+                "reference": "6d4bb16ce53209ce7967747124b0d48b1092927b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/BootstrapBundle/zipball/de48f9fa81e41e89b178aeab1beca22a0a915ebe",
-                "reference": "de48f9fa81e41e89b178aeab1beca22a0a915ebe",
+                "url": "https://api.github.com/repos/survos/BootstrapBundle/zipball/6d4bb16ce53209ce7967747124b0d48b1092927b",
+                "reference": "6d4bb16ce53209ce7967747124b0d48b1092927b",
                 "shasum": ""
             },
             "require": {
@@ -5256,7 +5256,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/BootstrapBundle/issues",
-                "source": "https://github.com/survos/BootstrapBundle/tree/1.5.490"
+                "source": "https://github.com/survos/BootstrapBundle/tree/1.5.495"
             },
             "funding": [
                 {
@@ -5264,7 +5264,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-29T12:37:44+00:00"
+            "time": "2025-01-30T02:59:43+00:00"
         },
         {
             "name": "survos/command-bundle",
