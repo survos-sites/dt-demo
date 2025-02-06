@@ -1,11 +1,11 @@
 {
     "name": "dt-demo",
-    "description": "Display members of congress in a datatable",
+    "description": "A Symfony application that demonstrations datatables and other survos bundles",
     "keywords": [
         "php",
         "symfony"
     ],
-    "repository": "https:\/\/github.com\/survos-sites\/dt-demo",
+    "repository": "https://github.com/survos-sites/dt-demo",
     "scripts": {
         "dokku": {
             "predeploy": "bin/console importmap:install && bin/console asset-map:compile && bin/console  secrets:decrypt-to-local --force && bin/console doctrine:migrations:migrate -n --allow-no-migration",
@@ -22,14 +22,14 @@
             "generator": "echo 5"
         }
     },
-    "image": "gliderlabs\/herokuish",
+    "image": "gliderlabs/herokuish",
     "addons": [
         "dokku-postgres",
         "dokku-redis"
     ],
     "buildpacks": [
         {
-            "url": "https:\/\/github.com\/heroku\/heroku-buildpack-php.git"
+            "url": "https://github.com/heroku/heroku-buildpack-php.git"
         }
     ]
 }
