@@ -33,16 +33,16 @@ return [
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
-        'version' => '2.2.1',
+        'version' => '2.2.2',
     ],
     'jquery' => [
         'version' => '3.7.1',
     ],
     'datatables.net' => [
-        'version' => '2.2.1',
+        'version' => '2.2.2',
     ],
     'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => [
-        'version' => '2.2.1',
+        'version' => '2.2.2',
         'type' => 'css',
     ],
     'axios' => [
@@ -59,13 +59,13 @@ return [
         'version' => '1.0.7',
     ],
     'datatables.net-dt' => [
-        'version' => '2.2.1',
+        'version' => '2.2.2',
     ],
     'simple-datatables' => [
-        'version' => '9.2.1',
+        'version' => '9.2.2',
     ],
     'simple-datatables/dist/style.min.css' => [
-        'version' => '9.2.1',
+        'version' => '9.2.2',
         'type' => 'css',
     ],
     'twig' => [
@@ -141,16 +141,16 @@ return [
         'type' => 'css',
     ],
     'datatables.net-plugins/i18n/en-GB.mjs' => [
-        'version' => '2.1.7',
+        'version' => '2.2.1',
     ],
     'datatables.net-buttons-bs5' => [
-        'version' => '3.2.1',
+        'version' => '3.2.2',
     ],
     'datatables.net-buttons' => [
-        'version' => '3.2.1',
+        'version' => '3.2.2',
     ],
     'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css' => [
-        'version' => '3.2.1',
+        'version' => '3.2.2',
         'type' => 'css',
     ],
     'datatables.net-responsive-bs5' => [
@@ -184,17 +184,17 @@ return [
         'type' => 'css',
     ],
     'datatables.net-searchbuilder-bs5' => [
-        'version' => '1.8.1',
+        'version' => '1.8.2',
     ],
     'datatables.net-searchbuilder' => [
-        'version' => '1.8.1',
+        'version' => '1.8.2',
     ],
     'datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.min.css' => [
-        'version' => '1.8.1',
+        'version' => '1.8.2',
         'type' => 'css',
     ],
     'datatables.net-dt/css/dataTables.dataTables.min.css' => [
-        'version' => '2.2.1',
+        'version' => '2.2.2',
         'type' => 'css',
     ],
     'bootstrap/js/dist/modal' => [
@@ -207,10 +207,10 @@ return [
         'version' => '4.0.11',
     ],
     'datatables.net-plugins/i18n/es-ES.mjs' => [
-        'version' => '2.1.7',
+        'version' => '2.2.1',
     ],
     'datatables.net-plugins/i18n/de-DE.mjs' => [
-        'version' => '2.1.7',
+        'version' => '2.2.1',
     ],
     '@tabler/core' => [
         'version' => '1.0.0',
