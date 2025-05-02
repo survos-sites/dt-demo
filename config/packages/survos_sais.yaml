@@ -1,5 +1,6 @@
 # Default configuration for extension with alias: "survos_sais"
 survos_sais:
+    root: dt-demo
     api_endpoint:         'https://sais.wip'
     api_key:              'abc'
 

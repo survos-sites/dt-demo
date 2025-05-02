@@ -33,16 +33,16 @@ return [
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
-        'version' => '2.2.2',
+        'version' => '2.1.6',
     ],
     'jquery' => [
         'version' => '3.7.1',
     ],
     'datatables.net' => [
-        'version' => '2.2.2',
+        'version' => '2.1.6',
     ],
     'datatables.net-bs5/css/dataTables.bootstrap5.min.css' => [
-        'version' => '2.2.2',
+        'version' => '2.1.6',
         'type' => 'css',
     ],
     'axios' => [
@@ -102,10 +102,10 @@ return [
         'version' => '3.0.3',
     ],
     'datatables.net-select-bs5' => [
-        'version' => '3.0.0',
+        'version' => '2.1.0',
     ],
     'datatables.net-select-bs5/css/select.bootstrap5.min.css' => [
-        'version' => '3.0.0',
+        'version' => '2.1.0',
         'type' => 'css',
     ],
     'fos-routing' => [
@@ -171,7 +171,7 @@ return [
         'type' => 'css',
     ],
     'datatables.net-select' => [
-        'version' => '3.0.0',
+        'version' => '2.1.0',
     ],
     'datatables.net-searchpanes' => [
         'version' => '2.3.3',

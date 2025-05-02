@@ -71,26 +71,6 @@ class CongressController extends AbstractController
     }
 
 
-    #[Route('/new', name: 'app_congress_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $official = new Official();
-        $form = $this->createForm(OfficialType::class, $official);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($official);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('congress_crud_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('congress/new.html.twig', [
-            'official' => $official,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_congress_show', methods: ['GET'])]
     public function show(Official $official, FilesystemOperator $defaultStorage): Response
     {
@@ -123,35 +103,4 @@ class CongressController extends AbstractController
 
     }
 
-
-    #[Route('/{id}/edit', name: 'app_congress_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function edit(Request $request, Official $official, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(OfficialType::class, $official);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('congress_crud_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('congress/edit.html.twig', [
-            'official' => $official,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_congress_delete', methods: ['POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, Official $official, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$official->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($official);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('congress_crud_index', [], Response::HTTP_SEE_OTHER);
-    }
 }

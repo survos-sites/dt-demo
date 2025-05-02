@@ -1,7 +1,7 @@
 pwa:
     image_processor: 'pwa.image_processor.imagick'
     manifest:
-        enabled: true
+        enabled: false
         background_color: "#c026d3"
         theme_color: "#c026d3"
         name: 'Datatables Demo'
@@ -26,7 +26,7 @@ pwa:
             preferred_width: 280
         widgets: []
     serviceworker:
-        enabled: true
+        enabled: false
         src: "sw.js"
         skip_waiting: true
         workbox:

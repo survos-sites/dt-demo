@@ -1,6 +1,6 @@
 {
     "name": "dt-demo",
-    "description": "A Symfony application that demonstrations datatables and other survos bundles",
+    "description": "Datatables demo with congressional data.  Also a playground for and other Survos bundles",
     "keywords": [
         "php",
         "symfony"
