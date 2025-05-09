@@ -2,10 +2,10 @@
 
 ### Requirements
 
-* PHP 8.2 with Sqlite
-* composer
-* MeiliSearch
-* Symfony CLI
+* [PHP 8.4](https://www.php.net/) with [PostgreSQL](https://www.postgresql.org/), [imagick](https://www.php.net/manual/en/book.imagick.php) & [AMQP]()
+* [composer](https://getcomposer.org/)
+* [MeiliSearch](https://www.meilisearch.com/)
+* [Symfony CLI](https://symfony.com/download)
 
 With docker, installing meilisearch is easy.
 
@@ -54,4 +54,3 @@ The key stimulus controllers for datatables are located in survos/packages/api-g
 the 'grid' component/controller gets its data from HTML, the 'api-grid' components get its data from API Platform.  Within API Platform, there are 2 providers, doctrine and meili.  Doctrine uses the database (usually postgres or sqlite), and meili uses the meili search server, which itself is populated usually (but not always) from the database via doctrine, by serializing the data.
 
 See the example usage in the [api-grid-bundle] README.
-
