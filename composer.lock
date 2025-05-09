@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "843e8b478cef4bef1bdd4cfc2dde3552",
+    "content-hash": "e1c97e336614fba910d16a5cffff3ec4",
     "packages": [
         {
             "name": "api-platform/core",
@@ -6143,16 +6143,16 @@
         },
         {
             "name": "survos/workflow-helper-bundle",
-            "version": "1.5.529",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/SurvosWorkflowHelperBundle.git",
-                "reference": "437da665c4ac0d8d95db5e78ea4332b2cc7f29c3"
+                "reference": "0f08b7d72d7f174f11303d73c01bee73cf90fbff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosWorkflowHelperBundle/zipball/437da665c4ac0d8d95db5e78ea4332b2cc7f29c3",
-                "reference": "437da665c4ac0d8d95db5e78ea4332b2cc7f29c3",
+                "url": "https://api.github.com/repos/survos/SurvosWorkflowHelperBundle/zipball/0f08b7d72d7f174f11303d73c01bee73cf90fbff",
+                "reference": "0f08b7d72d7f174f11303d73c01bee73cf90fbff",
                 "shasum": ""
             },
             "require": {
@@ -6164,6 +6164,7 @@
                 "symfony/http-kernel": "^6.4 || ^7.1",
                 "symfony/messenger": "^6.4 || ^7.1",
                 "symfony/process": "^6.4 || ^7.1",
+                "symfony/string": "^7.2",
                 "symfony/workflow": "^6.4 || ^7.1",
                 "symfony/yaml": "^6.4 || ^7.1",
                 "zenstruck/console-extra": "^1.4"
@@ -6195,6 +6196,7 @@
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^11.5",
                 "psr/log": "^3.0",
+                "roave/better-reflection": "^6.57",
                 "survos/bootstrap-bundle": "^1.5",
                 "symfony/browser-kit": "^6.4 || ^7.1",
                 "symfony/config": "^6.4 || ^7.1",
@@ -6206,6 +6208,7 @@
                 "symfony/var-dumper": "^6.4 || ^7.1",
                 "zenstruck/class-metadata": "^1.1"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "symfony": {
@@ -6238,7 +6241,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/SurvosWorkflowHelperBundle/issues",
-                "source": "https://github.com/survos/SurvosWorkflowHelperBundle/tree/1.5.529"
+                "source": "https://github.com/survos/SurvosWorkflowHelperBundle/tree/main"
             },
             "funding": [
                 {
@@ -6246,7 +6249,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-24T18:22:02+00:00"
+            "time": "2025-05-03T15:15:31+00:00"
         },
         {
             "name": "symfony/amqp-messenger",
@@ -17963,6 +17966,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
+        "survos/workflow-helper-bundle": 20,
         "symfony/panther": 20,
         "symfony/stimulus-bundle": 20
     },
