@@ -44,4 +44,5 @@ return [
     Survos\WorkflowBundle\SurvosWorkflowBundle::class => ['all' => true],
     Bizkit\VersioningBundle\BizkitVersioningBundle::class => ['all' => true],
     Survos\SaisBundle\SurvosSaisBundle::class => ['all' => true],
+    Jawira\DoctrineDiagramBundle\DoctrineDiagramBundle::class => ['dev' => true, 'test' => true],
 ];

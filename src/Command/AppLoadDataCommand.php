@@ -9,38 +9,33 @@ use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
-use Zenstruck\Console\Attribute\Option;
-use Zenstruck\Console\InvokableServiceCommand;
-use Zenstruck\Console\IO;
-use Zenstruck\Console\RunsCommands;
-use Zenstruck\Console\RunsProcesses;
 
 #[AsCommand('app:load-data', 'Load the congressional data')]
-final class AppLoadDataCommand extends InvokableServiceCommand
+final class AppLoadDataCommand # extends InvokableServiceCommand
 {
-    use RunsCommands;
-    use RunsProcesses;
 
     public function __construct(
         private readonly ValidatorInterface $validator,
         private readonly CacheInterface $cache,
         private readonly MessageBusInterface $bus,
+        private EntityManagerInterface $manager,
+        private SerializerInterface $serializer,
+        private OfficialRepository $officialRepository,
         ?string $name = null)
     {
-        parent::__construct($name);
+//        parent::__construct($name);
     }
 
     public function __invoke(
-        IO   $io,
-        EntityManagerInterface $manager,
-        SerializerInterface $serializer,
-        OfficialRepository $officialRepository,
+        SymfonyStyle   $io,
         #[Option(description: 'reload the json even if already in the cache')] bool $refresh = false,
         #[Option(description: 'max records to load')] int $limit=0,
         #[Option(description: 'purge database first')] bool $purge=false,
@@ -48,6 +43,7 @@ final class AppLoadDataCommand extends InvokableServiceCommand
         #[Option(description: 'url to json')] string $url='https://unitedstates.github.io/congress-legislators/legislators-current.json',
     ): void
     {
+        dd($url);
         if ($purge) {
             $count = $officialRepository->createQueryBuilder('o')
                 ->delete()

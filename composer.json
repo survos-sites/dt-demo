@@ -4,7 +4,7 @@
     "keywords": ["symfony","datatables.net","api-platform"],
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "require": {
         "php": "^8.4",
@@ -13,7 +13,6 @@
         "ext-iconv": "*",
         "ext-imagick": "*",
         "ext-pdo_sqlite": "*",
-        "ext-redis": "*",
         "ext-sodium": "*",
         "ext-sqlite3": "*",
         "api-platform/core": "^4.0",
@@ -130,12 +129,14 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": true
+            "allow-contrib": "true",
+            "require": "^7.3"
         }
     },
     "require-dev": {
         "dbrekelmans/bdi": "^1.4",
         "doctrine/doctrine-fixtures-bundle": "^3.4.4||^4.0",
+        "jawira/doctrine-diagram-bundle": "dev-main",
         "nunomaduro/phpinsights": "^2.10",
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.4",
