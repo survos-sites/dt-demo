@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -41,11 +42,10 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
         #[Option(description: 'purge database first')] bool $purge=false,
         #[Option(description: 'dispatch request for details')] bool $details=false,
         #[Option(description: 'url to json')] string $url='https://unitedstates.github.io/congress-legislators/legislators-current.json',
-    ): void
+    ): int
     {
-        dd($url);
         if ($purge) {
-            $count = $officialRepository->createQueryBuilder('o')
+            $count = $this->officialRepository->createQueryBuilder('o')
                 ->delete()
                 ->getQuery()
                 ->execute();
@@ -53,14 +53,14 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
                 $io->success("$count records deleted");
             }
         }
-        $this->io()->info("fetching data..." . $url);
+        $io->info("fetching data..." . $url);
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => (string)file_get_contents($url));
 //        dd($json);
 
         $slugger = new AsciiSlugger();
         $ids = []; // save for dispatching detail messages until after flush()
         $congressData = json_decode($json);
-        $progressBar = new ProgressBar($io->output(), count($congressData));
+        $progressBar = new ProgressBar($io, count($congressData));
         foreach ($congressData as $idx => $record) {
             $progressBar->advance();
 //
@@ -83,10 +83,12 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
             $name = $record->name; // an object with name parts
             $bio = $record->bio; // a bio with gender, etc.
             $id = $record->id->wikidata;
-            if (!$official = $officialRepository->findOneBy(['wikidataId' => $id])) {
+            if (!$official = $this->officialRepository->findOneBy(['wikidataId' => $id])) {
                 $official = (new Official($id))
                     ->setWikidataId($id);
             }
+
+            $manager = $this->manager;
 
             $official
 //                ->setBirthday(new \DateTimeImmutable($bio->birthday))
@@ -96,7 +98,7 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
                 ->setOfficialName($officialName = $name->official_full ?? "$name->first $name->last")
                 ->setCode($slugger->slug($officialName))
             ;
-            $manager->persist($official);
+            $this->manager->persist($official);
 
             foreach ($record->terms as $t) {
                 $term = (new Term())
@@ -142,6 +144,7 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
             $progressBar->finish();
         }
 
-        $io->success(sprintf('app:load-data success, %s records processed', count($ids)));
+        $io->success(self::class . ' ' . sprintf('app:load-data success, %s records processed', count($ids)));
+        return Command::SUCCESS;
     }
 }

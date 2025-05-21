@@ -26,11 +26,12 @@ final class FetchWikidataMessageHandler
         private WikiService                                $wikiService,
         private EntityManagerInterface                     $entityManager,
         private HttpClientInterface                        $httpClient,
-        private SaisClientService                         $imageClientService,
+        private SaisClientService                          $imageClientService,
         private FilesystemOperator                         $defaultStorage,
         private LoggerInterface                            $logger,
         private UrlGeneratorInterface                      $urlGenerator, // could be moved to somewhere else and inject the callback here.
         #[Autowire('%kernel.project_dir%')] private string $projectDir,
+        private readonly SaisClientService $saisClientService,
     )
     {
     }
@@ -44,7 +45,7 @@ final class FetchWikidataMessageHandler
         $wikiData = $this->wikiService->fetchWikidataPage($wikidataId);
         $official = $this->entityManager->getRepository(Official::class)->findOneBy(['wikidataId' => $wikidataId]);
 
-//        dd($wikiData->properties->has('P18'), $wikiData->properties);
+        dd($wikiData->properties->has('P18'), $wikiData->properties);
         if ($wikiData->properties->has('P18')) {
             $p18 = $wikiData->properties['P18'];
             /** @var Collection $values */
@@ -58,9 +59,10 @@ final class FetchWikidataMessageHandler
                 // trigger the download.  we could batch this, too.
                 $response = $this->imageClientService->dispatchProcess(
                     new ProcessPayload(
+                        'dt-demo', // hack! ROOT
                         [$url],
                         ['small','medium','large'],
-                        callbackUrl: $this->urlGenerator->generate('app_webhook', [
+                        mediaCallbackUrl: $this->urlGenerator->generate('app_webhook', [
                             'id' => $official->getId(),
                         ], $this->urlGenerator::ABSOLUTE_URL)
                     )

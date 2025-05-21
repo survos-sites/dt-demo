@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "099be79623024f390183ddeae2e79c1c",
+    "content-hash": "d761fcedf8fd45a9ff9d6501e4fe9930",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13774,46 +13774,40 @@
         },
         {
             "name": "jawira/doctrine-diagram-bundle",
-            "version": "dev-main",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jawira/doctrine-diagram-bundle.git",
-                "reference": "f4b43313a45404638ce6501d22e6cc8c6e39ccf7"
+                "reference": "7ae2817cd237610fd5487fcb1ffddc017dbfeda5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jawira/doctrine-diagram-bundle/zipball/f4b43313a45404638ce6501d22e6cc8c6e39ccf7",
-                "reference": "f4b43313a45404638ce6501d22e6cc8c6e39ccf7",
+                "url": "https://api.github.com/repos/jawira/doctrine-diagram-bundle/zipball/7ae2817cd237610fd5487fcb1ffddc017dbfeda5",
+                "reference": "7ae2817cd237610fd5487fcb1ffddc017dbfeda5",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "^2.5",
                 "doctrine/orm": "^2.9 || ^3.0",
                 "jawira/db-draw": "^1.6",
-                "jawira/doctrine-diagram-contracts": "^1.0",
-                "jawira/entity-draw": "^1.0",
                 "jawira/plantuml-client": "^1.0",
-                "jawira/plantuml-to-image": "^1.1",
-                "php": "^8.1",
-                "symfony/config": "^6.0 || ^7.0",
+                "php": "^8.0",
                 "symfony/console": "^6.0 || ^7.0",
-                "symfony/dependency-injection": "^6.0 || ^7.0",
                 "symfony/filesystem": "^6.0 || ^7.0",
-                "symfony/http-kernel": "^6.0 || ^7.0"
+                "symfony/framework-bundle": "^6.0 || ^7.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.42",
-                "friendsofphp/php-cs-fixer": "^3.54",
-                "jawira/plantuml": "^1.2024.4",
+                "ergebnis/composer-normalize": "^2.31",
+                "friendsofphp/php-cs-fixer": "^3.46",
+                "jawira/plantuml": "^1.2023",
                 "jawira/skeleton": "^2.22",
                 "phpstan/extension-installer": "^1.3.1",
-                "phpstan/phpstan": "^1.10.67",
-                "phpstan/phpstan-symfony": "^1.3.12"
+                "phpstan/phpstan": "^1.10.55",
+                "phpstan/phpstan-symfony": "^1.3.7"
             },
             "suggest": {
-                "jawira/plantuml": "Install PlantUML executable/jar with Composer."
+                "jawira/plantuml": "Install PlantUML executable with Composer."
             },
-            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -13839,11 +13833,10 @@
                 "symfony-bundle"
             ],
             "support": {
-                "docs": "https://jawira.github.io/doctrine-diagram-bundle",
                 "issues": "https://github.com/jawira/doctrine-diagram-bundle/issues",
-                "source": "https://github.com/jawira/doctrine-diagram-bundle/tree/main"
+                "source": "https://github.com/jawira/doctrine-diagram-bundle/tree/v0.8.0"
             },
-            "time": "2025-05-11T11:45:21+00:00"
+            "time": "2024-02-10T00:27:24+00:00"
         },
         {
             "name": "jawira/doctrine-diagram-contracts",
@@ -13888,52 +13881,6 @@
                 "source": "https://github.com/jawira/doctrine-diagram-contracts/tree/v1.0.0"
             },
             "time": "2025-01-27T21:37:53+00:00"
-        },
-        {
-            "name": "jawira/entity-draw",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jawira/entity-draw.git",
-                "reference": "292bd3d843c3a6a414815a21d8c931409199a612"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jawira/entity-draw/zipball/292bd3d843c3a6a414815a21d8c931409199a612",
-                "reference": "292bd3d843c3a6a414815a21d8c931409199a612",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.9 || ^3",
-                "jawira/doctrine-diagram-contracts": "^v1",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v3.75",
-                "jawira/skeleton": "^v2.27",
-                "vimeo/psalm": "6.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jawira\\EntityDraw\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jawira Portugal"
-                }
-            ],
-            "description": "This library generates class diagrams from your Doctrine ORM entities.",
-            "support": {
-                "issues": "https://github.com/jawira/entity-draw/issues",
-                "source": "https://github.com/jawira/entity-draw/tree/v1.0.0"
-            },
-            "time": "2025-05-09T15:12:40+00:00"
         },
         {
             "name": "jawira/plantuml-client",
@@ -14042,61 +13989,6 @@
                 "source": "https://github.com/jawira/plantuml-encoding/tree/v1.1.1"
             },
             "time": "2024-12-22T17:49:30+00:00"
-        },
-        {
-            "name": "jawira/plantuml-to-image",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jawira/plantuml-to-image.git",
-                "reference": "26eea37a474df81b8891d583e876217916926973"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jawira/plantuml-to-image/zipball/26eea37a474df81b8891d583e876217916926973",
-                "reference": "26eea37a474df81b8891d583e876217916926973",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "symfony/process": "^5.4 || ^6.0 || ^7.0"
-            },
-            "require-dev": {
-                "ergebnis/composer-normalize": "^2.28",
-                "ext-libxml": "*",
-                "ext-simplexml": "*",
-                "friendsofphp/php-cs-fixer": "^3.68",
-                "jawira/plantuml": "^1.2022",
-                "jawira/skeleton": "^2.16",
-                "jawira/the-lost-functions": "^1.5.0",
-                "phpunit/phpunit": "^9.6.17",
-                "vimeo/psalm": "^5.26.1"
-            },
-            "suggest": {
-                "jawira/plantuml": "Provides PlantUml (jar and executable)"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Jawira\\PlantUmlToImage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jawira Portugal",
-                    "email": "dev@tugal.be"
-                }
-            ],
-            "description": "PlantUml wrapper to convert puml diagrams to images.",
-            "support": {
-                "issues": "https://github.com/jawira/plantuml-to-image/issues",
-                "source": "https://github.com/jawira/plantuml-to-image/tree/v1.1.2"
-            },
-            "time": "2025-01-25T11:29:31+00:00"
         },
         {
             "name": "jawira/the-lost-functions",
@@ -18427,7 +18319,6 @@
     "minimum-stability": "beta",
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
-        "jawira/doctrine-diagram-bundle": 20,
         "symfony/panther": 20,
         "symfony/stimulus-bundle": 20
     },

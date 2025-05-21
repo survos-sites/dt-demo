@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
 use App\Repository\OfficialRepository;
+use App\Workflow\OfficialWorkflowInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -144,6 +145,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     public function __construct(string $id)
     {
         $this->id = $id;
+        $this->marking = OfficialWorkflowInterface::PLACE_NEW;
         $this->terms = new ArrayCollection();
     }
 
