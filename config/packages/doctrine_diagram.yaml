@@ -7,7 +7,7 @@ doctrine_diagram:
         connection:           null
         exclude:              []
     class:
-        filename:             '%kernel.project_dir%/database'
+        filename:             '%kernel.project_dir%/class'
         size:                 midi # One of "mini"; "midi"; "maxi"
         theme:                _none_
         em:                   null

@@ -277,9 +277,6 @@
     "survos/inspection-bundle": {
         "version": "1.5.93"
     },
-    "survos/maker-bundle": {
-        "version": "1.5.103"
-    },
     "survos/pwa-extra-bundle": {
         "version": "1.5.188"
     },

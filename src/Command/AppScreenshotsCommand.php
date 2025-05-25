@@ -3,27 +3,22 @@
 namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Panther\Client;
 use Symfony\Component\Panther\PantherTestCaseTrait;
 use Zenstruck\Browser\Test\HasBrowser;
-use Zenstruck\Console\ConfigureWithAttributes;
-use Zenstruck\Console\InvokableServiceCommand;
-use Zenstruck\Console\IO;
-use Zenstruck\Console\RunsCommands;
-use Zenstruck\Console\RunsProcesses;
 
 #[AsCommand('app:screenshots', 'create screenshots from a sequence of instructions')]
-final class AppScreenshotsCommand extends InvokableServiceCommand
+final class AppScreenshotsCommand
 {
-    use RunsCommands;
-    use RunsProcesses;
 
 //    use PantherTestCaseTrait;
 //    use HasBrowser;
 
     public function __invoke(
-        IO $io,
-    ): void {
+        SymfonyStyle $io,
+    ): int {
 
         $_SERVER['BROWSER_SCREENSHOT_DIR'] = './screenshots';
         $_SERVER['PANTHER_CHROME_ARGUMENTS'] = "--disable-dev-shm-usage --window-size=600,800 --no-sandbox --no-headless --hide-scrollbars";
@@ -33,11 +28,10 @@ final class AppScreenshotsCommand extends InvokableServiceCommand
 //        $client = Client::createFirefoxClient();
         foreach (['dt-demo.wip'] as $uri) {
             $uri = 'dt-demo.survos.com';
-            $uri = 'dt-demo.survos.com';
             $client->request('GET', "https://$uri");
 
-            $client->clickLink('Credits');
-            dd($client->getCurrentURL());
+//            $client->clickLink('Credits');
+//            dd($client->getCurrentURL());
 
             $client->takeScreenshot($fn = "public/$uri.png");
 
@@ -45,7 +39,7 @@ final class AppScreenshotsCommand extends InvokableServiceCommand
             $link = "$uri.png";
             $io->writeln("<href>$base/$link</href> $link");
         }
-        $io->success($this->getName().' success: ');
+        $io->success(self::class .' success: ');
 
 
 //        $browser = $this->pantherBrowser();
@@ -59,5 +53,6 @@ final class AppScreenshotsCommand extends InvokableServiceCommand
 
 
         $io->success('app:screenshots success.');
+        return Command::SUCCESS;
     }
 }
