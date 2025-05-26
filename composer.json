@@ -4,7 +4,7 @@
     "keywords": ["symfony","datatables.net","api-platform"],
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "beta",
+    "minimum-stability": "RC",
     "prefer-stable": true,
     "require": {
         "php": "^8.4",

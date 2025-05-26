@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47c50e769af36578770c9ece259a85e2",
+    "content-hash": "b6a3737a75adede37b09be6029e5b351",
     "packages": [
         {
             "name": "api-platform/core",
@@ -18065,7 +18065,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "beta",
+    "minimum-stability": "RC",
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
         "symfony/panther": 20,

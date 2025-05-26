@@ -108,7 +108,6 @@
                 {% for filter, size in imageData %}
                     {% if filter == 'small' %}
                         {% set thumb = 'x' %}
-                        {{ dump(code, filter) }}
 {#                    {% set thumb = code|survos_image_filter(filter) %}#}
                     <div class="item">
                         <a href="{{ thumb }}" target="_blank">
