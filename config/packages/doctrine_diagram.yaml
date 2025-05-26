@@ -1,20 +1,21 @@
-# Default configuration for extension with alias: "doctrine_diagram"
-doctrine_diagram:
-    er:
-        filename:             '%kernel.project_dir%/er'
-        size:                 midi # One of "mini"; "midi"; "maxi"
-        theme:                _none_
-        connection:           null
-        exclude:              []
-    class:
-        filename:             '%kernel.project_dir%/class'
-        size:                 midi # One of "mini"; "midi"; "maxi"
-        theme:                _none_
-        em:                   null
-        exclude:              []
-    convert:
-        format:               svg # One of "puml"; "png"; "svg"
-        converter:            auto # One of "auto"; "jar"; "server"
-        jar:                  null
-        server:               'http://www.plantuml.com/plantuml'
+when@dev:
+    # Default configuration for extension with alias: "doctrine_diagram"
+    doctrine_diagram:
+        er:
+            filename:             '%kernel.project_dir%/er'
+            size:                 midi # One of "mini"; "midi"; "maxi"
+            theme:                _none_
+            connection:           null
+            exclude:              []
+        class:
+            filename:             '%kernel.project_dir%/class'
+            size:                 midi # One of "mini"; "midi"; "maxi"
+            theme:                _none_
+            em:                   null
+            exclude:              []
+        convert:
+            format:               svg # One of "puml"; "png"; "svg"
+            converter:            auto # One of "auto"; "jar"; "server"
+            jar:                  null
+            server:               'http://www.plantuml.com/plantuml'
 
