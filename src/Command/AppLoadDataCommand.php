@@ -7,6 +7,8 @@ use App\Entity\Term;
 use App\Message\FetchWikidataMessage;
 use App\Repository\OfficialRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Survos\SaisBundle\Model\AccountSetup;
+use Survos\SaisBundle\Service\SaisClientService;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -22,15 +24,17 @@ use Symfony\Contracts\Cache\CacheInterface;
 #[AsCommand('app:load-data', 'Load the congressional data')]
 final class AppLoadDataCommand # extends InvokableServiceCommand
 {
+    public const SAIS_CLIENT='dt-demo';
 
     public function __construct(
-        private readonly ValidatorInterface $validator,
-        private readonly CacheInterface $cache,
+        private readonly ValidatorInterface  $validator,
+        private readonly CacheInterface      $cache,
         private readonly MessageBusInterface $bus,
-        private EntityManagerInterface $manager,
-        private SerializerInterface $serializer,
-        private OfficialRepository $officialRepository,
-        ?string $name = null)
+        private EntityManagerInterface       $manager,
+        private SerializerInterface          $serializer,
+        private OfficialRepository           $officialRepository,
+        private readonly SaisClientService $saisClientService,
+        ?string                              $name = null)
     {
 //        parent::__construct($name);
     }
@@ -136,7 +140,12 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
         $progressBar->finish();
 
         if ($details) {
-            $progressBar = new ProgressBar($io->output(), count($ids));
+            $this->saisClientService->accountSetup(new AccountSetup(
+                self::SAIS_CLIENT,
+                3000
+            ));
+
+            $progressBar = new ProgressBar($io, count($ids));
             foreach ($ids as $id) {
                 $progressBar->advance();
                 $this->bus->dispatch(new FetchWikidataMessage($id));
