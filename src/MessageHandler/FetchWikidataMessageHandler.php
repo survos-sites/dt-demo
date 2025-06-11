@@ -2,6 +2,7 @@
 
 namespace App\MessageHandler;
 
+use App\Command\AppLoadDataCommand;
 use App\Entity\Official;
 use App\Message\FetchWikidataMessage;
 use Doctrine\ORM\EntityManagerInterface;
@@ -58,7 +59,7 @@ final class FetchWikidataMessageHandler
                 // trigger the download.  we could batch this, too.
                 $response = $this->imageClientService->dispatchProcess(
                     new ProcessPayload(
-                        'dt-demo', // hack! ROOT
+                        AppLoadDataCommand::SAIS_CLIENT,
                         [$url],
                         ['small','medium','large'],
                         mediaCallbackUrl: $this->urlGenerator->generate('app_webhook', [
