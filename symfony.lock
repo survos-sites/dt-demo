@@ -277,11 +277,11 @@
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
             "version": "1.5",
-            "ref": "d98d3a77f60f60a5a1fc49f2fb151e43abb54dfc"
+            "ref": "d16db1be85e21925f873d8099ca9ae7c4d50a208"
         },
         "files": [
             "config/packages/survos_crawler.yaml",
-            "config/routes/survos_crawler.php"
+            "config/routes/survos_crawler.yaml"
         ]
     },
     "survos/deployment-bundle": {
