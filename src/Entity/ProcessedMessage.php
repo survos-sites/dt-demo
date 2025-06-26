@@ -2,15 +2,15 @@
 //
 //// src/Entity/ProcessedMessage.php
 //
-//namespace App\Entity;
+namespace App\Entity;
 //
 //use Zenstruck\Messenger\Monitor\History\Model\ProcessedMessage as BaseProcessedMessage;
 //use Doctrine\ORM\Mapping as ORM;
 //
 //#[ORM\Entity(readOnly: true)]
 //#[ORM\Table('processed_messages')]
-//class ProcessedMessage extends BaseProcessedMessage
-//{
+class ProcessedMessage # extends BaseProcessedMessage
+{
 //    #[ORM\Id]
 //    #[ORM\GeneratedValue(strategy: "SEQUENCE")]
 //    #[ORM\Column]
@@ -20,4 +20,4 @@
 //    {
 //        return $this->id;
 //    }
-//}
+}
