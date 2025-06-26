@@ -1,12 +1,6 @@
 api_platform:
     title: Congress API
     version: 1.0.0
-    formats:
-        jsonld: ['application/ld+json']
-    docs_formats:
-        jsonld: ['application/ld+json']
-        jsonopenapi: ['application/vnd.openapi+json']
-        html: ['text/html']
     defaults:
         stateless: true
         cache_headers:
@@ -14,10 +8,8 @@ api_platform:
         extra_properties:
             standard_put: true
             rfc_7807_compliant_errors: true
+        # These don't really work :-(
         item_operations:
             get: ~
-
-        # Only expose the GET collection operation
         collection_operations:
             get: ~
-
