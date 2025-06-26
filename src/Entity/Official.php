@@ -75,7 +75,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     public const GENDERS = ['M', 'F']; // @todo: map to string?
 
     #[ORM\Id]
-    #[ApiProperty(identifier: true)]
+    #[ApiProperty("the wikiCode is unique, so we use it", identifier: true)]
     #[ORM\Column(type: Types::STRING)]
     #[SerializedName('id')]
     private string $id;
@@ -132,11 +132,11 @@ class Official implements RouteParametersInterface, MarkingInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $wikidataId = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::JSON,  nullable: true, options: ['jsonb' => true])]
     private ?array $wikiData = null;
 
     // now an object with code => [{filter: size, filter2: size}]
-    #[ORM\Column(type: Types::JSON, nullable: true)]
+    #[ORM\Column(type: Types::JSON,  nullable: true, options: ['jsonb' => true])]
     #[Groups(['official.read'])]
     private ?array $imageCodes = null;
 

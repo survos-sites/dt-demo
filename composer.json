@@ -138,8 +138,9 @@
     "require-dev": {
         "dbrekelmans/bdi": "^1.4",
         "doctrine/doctrine-fixtures-bundle": "^3.4.4||^4.0",
-        "jawira/doctrine-diagram-bundle": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.70",
+        "jawira/doctrine-diagram-bundle": "^1.0",
+        "nette/php-generator": "^4.1",
         "nunomaduro/phpinsights": "^2.10",
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^12.1",

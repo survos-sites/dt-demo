@@ -36,7 +36,9 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
     {
         $menu = $event->getMenu();
         $options = $event->getOptions();
-        $this->add($menu, 'survos_commands', label: "Commands");
+        if ($this->env === 'dev') {
+            $this->add($menu, 'survos_commands', label: "Commands");
+        }
         $this->add($menu, 'app_credit', label: "Javascript Packages");
         $submenu = $this->addSubmenu($menu, 'Flysystem');
         foreach (['flysystem_browse_default'] as $route) {
