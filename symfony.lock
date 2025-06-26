@@ -260,11 +260,11 @@
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
             "version": "1.5",
-            "ref": "31483097a99800fa6b049af3c61ad0ebf5727751"
+            "ref": "2ae59ea83b8aeb1c288a149af0f594ee9ff52524"
         },
         "files": [
             "config/packages/survos_command.yaml",
-            "config/routes/survos_command.php"
+            "config/routes/survos_command.yaml"
         ]
     },
     "survos/core-bundle": {

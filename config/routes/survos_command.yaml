@@ -1,9 +1,14 @@
 survos_command:
+#  prefix: /admin/commands
+  type: attribute
+#  resource:
+#    path: '@SurvosCommandBundle/src/Controller/'
+#    namespace: Survos\CommandBundle\Controller
+
   resource: '@SurvosCommandBundle/config/routes.yaml'
-  prefix: '/admin/{_locale}/command'
 
 when@dev:
   survos_command:
     resource: '@SurvosCommandBundle/config/routes.yaml'
-    prefix: '/admin/{_locale}/command'
+#    prefix: '/command'
 
