@@ -1,21 +1,13 @@
-when@dev:
-    # Default configuration for extension with alias: "doctrine_diagram"
+when@dev: &dev
     doctrine_diagram:
         er:
-            filename:             '%kernel.project_dir%/er'
-            size:                 midi # One of "mini"; "midi"; "maxi"
-            theme:                _none_
-            connection:           null
-            exclude:              []
+            filename: '%kernel.project_dir%/er'
+            size: midi
         class:
-            filename:             '%kernel.project_dir%/class'
-            size:                 midi # One of "mini"; "midi"; "maxi"
-            theme:                _none_
-            em:                   null
-            exclude:              []
+            filename: '%kernel.project_dir%/class'
+            size: midi
         convert:
-            format:               svg # One of "puml"; "png"; "svg"
-            converter:            auto # One of "auto"; "jar"; "server"
-            jar:                  null
-            server:               'http://www.plantuml.com/plantuml'
+            format: svg
+            converter: auto
 
+when@test: *dev
