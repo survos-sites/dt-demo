@@ -12,6 +12,7 @@
         "ext-gd": "*",
         "ext-iconv": "*",
         "ext-imagick": "*",
+        "ext-intl": "*",
         "ext-pdo_sqlite": "*",
         "ext-sodium": "*",
         "ext-sqlite3": "*",
