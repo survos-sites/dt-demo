@@ -1,3 +1,4 @@
+import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -7,7 +8,6 @@
 import './styles/app.css';
 
 // stimulus
-import './bootstrap.js';
 
 import '@tabler/core';
 import '@tabler/core/dist/css/tabler.min.css';
