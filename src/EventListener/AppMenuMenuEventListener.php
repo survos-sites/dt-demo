@@ -36,11 +36,13 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
     {
         $menu = $event->getMenu();
         $options = $event->getOptions();
+        $this->add($menu, 'survos_commands', label: "Commands");
         $this->add($menu, 'app_credit', label: "Javascript Packages");
         $submenu = $this->addSubmenu($menu, 'Flysystem');
         foreach (['flysystem_browse_default'] as $route) {
             $this->add($submenu, $route);
         }
+
 //        foreach (['app_credit'] as $route) {
 //            $this->add($menu, $route, label: u($route)->after('app_'));
 //        }
@@ -107,11 +109,11 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
                  ] as $controllerClass) {
             $controllerMenu = $this->addSubmenu($menu,
                 label: (new \ReflectionClass($controllerClass))->getShortName());
-            foreach (['grid', 'api_grid', 'simple_datatables',
+            foreach (['simple_datatables',
 //                         'index',
 //                         'crud_index'
                      ] as $controllerRoute) {
-                $this->add($controllerMenu, $controllerClass . '::' . $controllerRoute,
+                $this->add($menu, $controllerClass . '::' . $controllerRoute,
                     label: $controllerRoute);
             }
 

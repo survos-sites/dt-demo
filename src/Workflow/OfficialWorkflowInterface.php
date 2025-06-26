@@ -14,7 +14,7 @@ interface OfficialWorkflowInterface
 
     public const PLACE_NEW = 'new';
     public const PLACE_DETAILS = 'details';
-    public const PLACE_RESIZED = 'images_resized';
+    public const string PLACE_RESIZED = 'images_resized';
 
     #[Transition([self::PLACE_NEW], self::PLACE_DETAILS, info: "scrape wiki data")]
     public const TRANSITION_FETCH_WIKI = 'fetch_wiki';

@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsCommand('app:load-data', 'Load the congressional data')]
-final class AppLoadDataCommand # extends InvokableServiceCommand
+final class AppLoadDataCommand
 {
 
     public function __construct(
@@ -136,7 +136,7 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
         $progressBar->finish();
 
         if ($details) {
-            $progressBar = new ProgressBar($io->output(), count($ids));
+            $progressBar = new ProgressBar($io, count($ids));
             foreach ($ids as $id) {
                 $progressBar->advance();
                 $this->bus->dispatch(new FetchWikidataMessage($id));

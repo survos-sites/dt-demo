@@ -25,6 +25,15 @@
             "config/packages/bizkit_versioning.yaml"
         ]
     },
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "87424683adc81d7dc305eefec1fced883084aab9"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.10",
         "recipe": {
@@ -239,9 +248,6 @@
             "phpcs.xml.dist"
         ]
     },
-    "survos/api-grid-bundle": {
-        "version": "dev-main"
-    },
     "survos/auth-bundle": {
         "version": "1.5.67"
     },
@@ -288,6 +294,9 @@
     },
     "survos/inspection-bundle": {
         "version": "1.5.93"
+    },
+    "survos/meili-admin-bundle": {
+        "version": "1.5.529"
     },
     "survos/pwa-extra-bundle": {
         "version": "1.5.188"
@@ -471,6 +480,18 @@
             "bin/phpunit",
             "phpunit.xml.dist",
             "tests/bootstrap.php"
+        ]
+    },
+    "symfony/property-info": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
+        },
+        "files": [
+            "config/packages/property_info.yaml"
         ]
     },
     "symfony/routing": {

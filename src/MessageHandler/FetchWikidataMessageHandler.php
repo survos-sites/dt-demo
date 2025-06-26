@@ -25,7 +25,6 @@ final class FetchWikidataMessageHandler
     public function __construct(
         private WikiService                                $wikiService,
         private EntityManagerInterface                     $entityManager,
-        private HttpClientInterface                        $httpClient,
         private SaisClientService                          $imageClientService,
         private FilesystemOperator                         $defaultStorage,
         private LoggerInterface                            $logger,
