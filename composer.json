@@ -75,7 +75,6 @@
         "symfony/translation": "^7.0",
         "symfony/twig-bundle": "^7.0",
         "symfony/ux-icons": "^2.21",
-        "symfony/ux-lazy-image": "^2.13",
         "symfony/ux-twig-component": "^2.13",
         "symfony/validator": "^7.0",
         "symfony/web-link": "^7.0",

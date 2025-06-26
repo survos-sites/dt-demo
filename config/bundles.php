@@ -33,7 +33,6 @@ return [
     Survos\WikiBundle\SurvosWikiBundle::class => ['all' => true],
     League\FlysystemBundle\FlysystemBundle::class => ['all' => true],
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
-    Symfony\UX\LazyImage\LazyImageBundle::class => ['all' => true],
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
     SpomkyLabs\PwaBundle\SpomkyLabsPwaBundle::class => ['all' => true],
     Survos\PwaExtraBundle\SurvosPwaExtraBundle::class => ['all' => true],

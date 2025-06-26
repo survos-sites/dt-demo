@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06454d9bb6f0d0eee3a45befdb2bb293",
+    "content-hash": "3165f7009b91704cd214c77fa3b23b65",
     "packages": [
         {
             "name": "api-platform/core",
@@ -11692,86 +11692,6 @@
                 }
             ],
             "time": "2025-05-30T02:07:34+00:00"
-        },
-        {
-            "name": "symfony/ux-lazy-image",
-            "version": "v2.26.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/ux-lazy-image.git",
-                "reference": "fb6c5174f407d04c263589aeb5dc205e1a4b0e52"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-lazy-image/zipball/fb6c5174f407d04c263589aeb5dc205e1a4b0e52",
-                "reference": "fb6c5174f407d04c263589aeb5dc205e1a4b0e52",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1",
-                "symfony/config": "^5.4|^6.0|^7.0",
-                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/http-kernel": "^5.4|^6.0|^7.0"
-            },
-            "require-dev": {
-                "intervention/image": "^2.5|^3.0",
-                "kornrunner/blurhash": "^1.1",
-                "symfony/cache-contracts": "^2.2",
-                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
-                "symfony/phpunit-bridge": "^5.2|^6.0|^7.0",
-                "symfony/twig-bundle": "^5.4|^6.0|^7.0",
-                "symfony/var-dumper": "^5.4|^6.0|^7.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "thanks": {
-                    "url": "https://github.com/symfony/ux",
-                    "name": "symfony/ux"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\UX\\LazyImage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Titouan Galopin",
-                    "email": "galopintitouan@gmail.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Lazy image loader and utilities for Symfony",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "symfony-ux"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/ux-lazy-image/tree/v2.26.1"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2025-06-05T20:47:06+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
