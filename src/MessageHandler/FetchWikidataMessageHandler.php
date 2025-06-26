@@ -2,6 +2,7 @@
 
 namespace App\MessageHandler;
 
+use App\Command\AppLoadDataCommand;
 use App\Entity\Official;
 use App\Message\FetchWikidataMessage;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,7 +45,7 @@ final class FetchWikidataMessageHandler
         $wikiData = $this->wikiService->fetchWikidataPage($wikidataId);
         $official = $this->entityManager->getRepository(Official::class)->findOneBy(['wikidataId' => $wikidataId]);
 
-        dd($wikiData->properties->has('P18'), $wikiData->properties);
+//        dd($wikiData->properties->has('P18'), $wikiData->properties);
         if ($wikiData->properties->has('P18')) {
             $p18 = $wikiData->properties['P18'];
             /** @var Collection $values */
@@ -58,7 +59,7 @@ final class FetchWikidataMessageHandler
                 // trigger the download.  we could batch this, too.
                 $response = $this->imageClientService->dispatchProcess(
                     new ProcessPayload(
-                        'dt-demo', // hack! ROOT
+                        AppLoadDataCommand::SAIS_CLIENT,
                         [$url],
                         ['small','medium','large'],
                         mediaCallbackUrl: $this->urlGenerator->generate('app_webhook', [
@@ -66,19 +67,18 @@ final class FetchWikidataMessageHandler
                         ], $this->urlGenerator::ABSOLUTE_URL)
                     )
                 );
-                dd($response);
                 // we won't get a callback if it's already loaded, so we need to load the images that already exist.
                 $imageCodes = $official->getImageCodes()??[];
                 foreach ($response as $responseImage) {
                     if ($responseImage['path']??false) {
-                        $imageCodes[$responseImage['path']] = $responseImage['filters'];
+                        $imageCodes[$responseImage['path']] = $responseImage['resized'];
                     } else {
-                        dd($response);
+                        // queued, @todo: configure callback
+//                        dd($response);
                     }
                 }
                 $official->setImageCodes($imageCodes);
                 $this->entityManager->flush();
-                dd($imageCodes);
             }
         }
 
