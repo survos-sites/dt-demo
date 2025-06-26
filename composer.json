@@ -40,7 +40,7 @@
         "survos/deployment-bundle": "^1.5",
         "survos/html-prettify-bundle": "^1.5",
         "survos/inspection-bundle": "^1.5",
-        "survos/meili-admin-bundle": "^1.5",
+        "survos/meili-admin-bundle": "dev-main",
         "survos/pwa-extra-bundle": "^1.5",
         "survos/sais-bundle": "*",
         "survos/scraper-bundle": "^1.5",
