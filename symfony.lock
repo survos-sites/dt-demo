@@ -299,9 +299,6 @@
     "survos/meili-admin-bundle": {
         "version": "1.5.529"
     },
-    "survos/pwa-extra-bundle": {
-        "version": "1.5.188"
-    },
     "survos/sais-bundle": {
         "version": "1.5.490"
     },

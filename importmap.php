@@ -219,4 +219,7 @@ return [
         'version' => '1.0.0',
         'type' => 'css',
     ],
+    'idb' => [
+        'version' => '8.0.3',
+    ],
 ];

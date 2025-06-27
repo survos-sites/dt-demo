@@ -1,12 +1,19 @@
 when@dev: &dev
-  survos_command:
-  #  prefix: /admin/commands
-    type: attribute
-  #  resource:
-  #    path: '@SurvosCommandBundle/src/Controller/'
-  #    namespace: Survos\CommandBundle\Controller
+    survos_command:
+        prefix: /admin/commands
+        type: attribute
+        resource:
+            path: '@SurvosCommandBundle/src/Controller/'
+            namespace: Survos\CommandBundle\Controller
 
-    resource: '@SurvosCommandBundle/config/routes.yaml'
+#  survos_command:
+#  #  prefix: /admin/commands
+#    type: attribute
+#  #  resource:
+#  #    path: '@SurvosCommandBundle/src/Controller/'
+#  #    namespace: Survos\CommandBundle\Controller
+#
+#    resource: '@SurvosCommandBundle/config/routes.yaml'
 
 when@test: *dev
 

@@ -1,4 +1,5 @@
 # config/packages/ux_icons.yaml
+#when@dev:
 ux_icons:
   default_icon_attributes:
     width: 30px
@@ -47,4 +48,9 @@ ux_icons:
     # Ignore error when an icon is not found.
     # Set to 'true' to fail silently.
   ignore_not_found:     true
+
+#when@prod:
+#    ux_icons:
+#        iconify:
+#            enabled: false
 

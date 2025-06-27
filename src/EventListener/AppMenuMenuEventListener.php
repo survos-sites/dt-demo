@@ -70,7 +70,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         $this->add($menu, label: ' ', dividerAppend: true);
 
         if (0) {
-            $nested = $this->addSubmenu($menu, 'github', icon: 'bi bi-github');
+            $nested = $this->addSubmenu($menu, 'github', icon: 'bi:github');
             $this->add($nested, label: 'repo', uri: $this->contextService->getConfig()['app']['social']['github']);
             $this->add($nested, label: 'issues', uri: $this->contextService->getConfig()['app']['social']['github'] . '/issues');
         }
@@ -94,10 +94,8 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         {
             $this->add($nestedMenu, $route); // label: u($route)->after('app_')
         }
-        if ($this->isDev() || $this->isGranted('ROLE_ADMIN')) {
-            $this->add($nestedMenu, 'survos_commands');
-            $this->add($nestedMenu, 'api_doc');
-        }
+
+        $this->add($nestedMenu, 'api_doc', external: true);
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem
 
 //        $nestedMenu = $this->addSubmenu($menu, 'Credits');
