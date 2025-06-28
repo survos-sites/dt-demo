@@ -19,12 +19,12 @@ use function Symfony\Component\String\u;
     operations: [
         new Get(),
         new GetCollection()],
-    shortName: 'jeopardy',
+//    shortName: 'jeopardy',
     normalizationContext: [
         'groups' => ['jeopardy.read'],
     ]
 )]
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['category', 'value', 'round'])]
+#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['category', 'value', 'round', 'airDate','show'])]
 #[Groups(['jeopardy.read'])]
 class Jeopardy
 {
@@ -39,6 +39,13 @@ class Jeopardy
         #[Map(transform: [self::class, 'cleanup'])]
         private(set) string     $question  {
             set => self::cleanup($value);
+        },
+
+        #[ORM\Column(type: Types::DATE_MUTABLE)]
+        #[Map(source: 'air_date')] // , transform: [\DateTimeImmutable::class, 'createFromFormat'])]
+        public \DateTime|string $airDate {
+            set => \DateTime::createFromFormat('Y-m-d', $value);
+            get => $this->airDate->format('Y-m-d');
         },
 
         #[ORM\Column(length: 255)]

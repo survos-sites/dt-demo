@@ -62,6 +62,7 @@ class JeopardyFixtures extends Fixture implements FixtureGroupInterface
                 }
                 dump($entity, $idx);
                 $manager->clear();
+                break;
             }
         }
 
