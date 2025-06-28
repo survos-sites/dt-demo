@@ -222,4 +222,7 @@ return [
     'idb' => [
         'version' => '8.0.3',
     ],
+    '@stimulus-components/reveal' => [
+        'version' => '5.0.0',
+    ],
 ];

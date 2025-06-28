@@ -255,6 +255,9 @@
     "survos/bootstrap-bundle": {
         "version": "dev-main"
     },
+    "survos/code-bundle": {
+        "version": "dev-main"
+    },
     "survos/command-bundle": {
         "version": "1.5",
         "recipe": {
