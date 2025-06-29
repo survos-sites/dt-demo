@@ -56,7 +56,7 @@ class Jeopardy
             set => self::cleanupCategory($value);
         },
 
-        #[ORM\Column]
+        #[ORM\Column(type: Types::INTEGER, nullable: true)]
         private(set) int|string|null $value {
             set => $value ? (int)str_replace('$', '', $value): 0;
         },
