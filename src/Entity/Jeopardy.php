@@ -33,11 +33,11 @@ class Jeopardy
         #[ORM\GeneratedValue]
         #[ORM\Column]
         #[Map(if: false)] // no id in the question.  We could use the idx, or a hash or slug of the question.
-        private(set) ?int $id = null,
+        private(set) ?int $id,
 
         #[ORM\Column(type: Types::TEXT)]
         #[Map(transform: [self::class, 'cleanup'])]
-        private(set) string     $question  {
+        public /* private(set) */string     $question  {
             set => self::cleanup($value);
         },
 
@@ -52,12 +52,12 @@ class Jeopardy
         public ?string    $answer = null,
 
         #[ORM\Column(length: 255)]
-        private(set) string $category {
+        public /* private(set) */ string $category {
             set => self::cleanupCategory($value);
         },
 
         #[ORM\Column(type: Types::INTEGER, nullable: true)]
-        private(set) int|string|null $value {
+        public /* private(set) */ int|string|null $value {
             set => $value ? (int)str_replace('$', '', $value): 0;
         },
 
