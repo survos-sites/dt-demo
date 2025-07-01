@@ -10,7 +10,7 @@
 With docker, installing meilisearch is easy.  
 
 ```bash
-sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili_data getmeili/meilisearch:v1.5 meilisearch
+sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili_data getmeili/meilisearch:latest meilisearch
 ```
 
 ## Install the application
@@ -39,3 +39,13 @@ cd ../survos && composer install && cd ../dt-demo
 ```
 
 @todo: meili-bundle component
+
+
+## Jeopardy
+
+https://github.com/jwolle1/jeopardy_clue_dataset/raw/refs/heads/main/combined_season1-40.tsv
+
+or https://github.com/jwolle1/jeopardy_clue_dataset/archive/refs/heads/main.zip
+
+or kaggle, but can't find direct download link
+
