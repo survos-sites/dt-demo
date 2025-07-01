@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -24,8 +25,10 @@ use function Symfony\Component\String\u;
         'groups' => ['jeopardy.read'],
     ]
 )]
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['category', 'value', 'round', 'airDate','show'])]
+#[ApiFilter(FacetsFieldSearchFilter::class,
+    properties: ['category', 'value', 'round', 'monthIndex'])]
 #[Groups(['jeopardy.read'])]
+#[ApiProperty(extraProperties: ['list' => ['label','category','value']])]
 class Jeopardy
 {
     public function __construct(
@@ -43,12 +46,15 @@ class Jeopardy
 
         #[ORM\Column(type: Types::DATE_MUTABLE)]
         #[Map(source: 'air_date')] // , transform: [\DateTimeImmutable::class, 'createFromFormat'])]
+        // this _might_ be better outside the constructor
+// see        https://www.php.net/manual/en/language.oop5.property-hooks.php
         public \DateTime|string $airDate {
             set => \DateTime::createFromFormat('Y-m-d', $value);
-            get => $this->airDate->format('Y-m-d');
+//            get => $this->airDate->format('Y-m-d');
         },
 
         #[ORM\Column(length: 255)]
+        #[ApiProperty(extraProperties: ['list' => true])]
         public ?string    $answer = null,
 
         #[ORM\Column(length: 255)]
@@ -83,6 +89,14 @@ class Jeopardy
         $s = strip_tags($s);
         $s = trim($s, "'");
         return $s;
+    }
+
+    #[Groups(['jeopardy.read'])]
+    public function getMonthIndex(): int
+    {
+        return ($this->airDate->format('Y') * 12) + (int)$this->airDate->format('m');
+//        date.getFullYear() * 12 + date.getMonth();
+
     }
 
 
