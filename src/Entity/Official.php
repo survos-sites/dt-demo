@@ -63,7 +63,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
 // run grid:index after changes if using meili
 #[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['gender', 'currentParty','house','state'])
+    properties: ['gender', 'currentParty','house','state','marking'])
 ]
 #[Groups(['official.read'])]
 #[UniqueEntity(['id'])]
@@ -328,7 +328,7 @@ class Official implements RouteParametersInterface, MarkingInterface
         return $this;
     }
 
-    public function getWikiData(): ?array
+    public function     getWikiData(): ?array
     {
         return $this->wikiData;
     }
