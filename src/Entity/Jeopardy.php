@@ -63,6 +63,7 @@ class Jeopardy
         },
 
         #[ORM\Column(type: Types::INTEGER, nullable: true)]
+        #[Map(source: 'clue_value')]
         public /* private(set) */ int|string|null $value {
             set => $value ? (int)str_replace('$', '', $value): 0;
         },
@@ -71,8 +72,7 @@ class Jeopardy
         private(set) ?string $round = null ,
 
         #[ORM\Column]
-        #[Map(source: 'show_number')]
-        private(set) ?int      $show = null,
+        private(set) ?string      $comments = null,
     )
     {
 

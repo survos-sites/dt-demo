@@ -22,6 +22,7 @@
         "doctrine/orm": "^3.4.2",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "inspector-apm/inspector-symfony": "^1.8",
+        "league/csv": "^9.24",
         "league/flysystem-aws-s3-v3": "^3.22",
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.12",

@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Jeopardy;
 use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -26,43 +27,55 @@ class JeopardyCommand
 	public function __invoke(
 		SymfonyStyle $io,
 		#[Argument('path or url to json file')]
-		string $filename = 'data/jeopardy.json',
+		string $filename = 'data/jeopardy.tsv',
 		#[Option('limit the number of records imported')] ?int $limit = null,
 		#[Option('batch size for flush')] int $batch = 10000,
 		#[Option('purge the table first')] ?bool $reset = null,
 	): int
 	{
+        $url = 'https://github.com/jwolle1/jeopardy_clue_dataset/raw/refs/heads/main/combined_season1-40.tsv';
+        if (!file_exists($filename)) {
+            $io->writeln("Fetching " . $filename);
+            file_put_contents($filename, file_get_contents($url));
+        }
         // @todo: don't always reset.
-            $this->entityManager->getRepository(Jeopardy::class)->createQueryBuilder('jeopardy')->delete();
+        $this->entityManager->getRepository(Jeopardy::class)->createQueryBuilder('jeopardy')->delete();
         if ($reset) {
         }
 
+        $csv = Reader::createFromPath($filename, 'r');
+        $csv
+            ->setDelimiter("\t")
+            ->setHeaderOffset(0);
+
+        $header = $csv->getHeader(); //returns the CSV header record
+        dump($header);
         $mapper = new ObjectMapper();
-//        $filename = 'data/jeopardy.json';
-//        $filename = 'data/sample.json';
-        // $product = new Product();
-        // $manager->persist($product);
-        $data = json_decode(file_get_contents($filename));
-        $progressBar = new ProgressBar($io, count($data));
-        foreach ($data as $idx => $value) {
+        $progressBar = new ProgressBar($io, 515890);
+
+        foreach ($csv->getRecords() as $idx => $record) {
             $progressBar->advance();
-            $entity = $mapper->map($value, Jeopardy::class);
+            $record = (object) $record;
+            $entity = $mapper->map($record, Jeopardy::class);
             $this->entityManager->persist($entity);
-////            }
             if ( $progressBar->getProgress() % ($batch-1) === 0) {
                 try {
                     $this->entityManager->flush();
                 } catch (\Exception $e) {
-                    dd($value, $idx, $e->getMessage());
+                    dd($record, $idx, $e->getMessage());
                 }
                 if ($io->isVerbose()) {
                     dump($entity, idx: $idx);
                 }
                 $this->entityManager->clear();
+                if ($limit && ($idx >= $limit)) {
+                    break;
+                }
             }
         }
         $this->entityManager->flush();
         $progressBar->finish();
+
 
 		$io->success(self::class . " success.");
 		return Command::SUCCESS;
