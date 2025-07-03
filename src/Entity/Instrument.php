@@ -45,7 +45,9 @@ class Instrument
         },
 
         #[ORM\Column(type: Types::TEXT)]
-        public ?string $description = null,
+        private(set) ?string $description {
+            set => strip_tags($value);
+        },
 
         #[ORM\Column(length: 255, nullable: true)]
         public /* private(set) */ ?string $type,
