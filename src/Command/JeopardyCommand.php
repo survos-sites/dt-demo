@@ -17,22 +17,22 @@ use Symfony\Component\ObjectMapper\ObjectMapper;
 #[AsCommand('app:jeopardy', 'Import 200k jeopardy questions')]
 class JeopardyCommand
 {
-	public function __construct(
+    public function __construct(
         private EntityManagerInterface $entityManager,
     )
-	{
-	}
+    {
+    }
 
 
-	public function __invoke(
-		SymfonyStyle $io,
-		#[Argument('path or url to json file')]
-		string $filename = 'data/jeopardy.tsv',
-		#[Option('limit the number of records imported')] ?int $limit = null,
-		#[Option('batch size for flush')] int $batch = 10000,
-		#[Option('purge the table first')] ?bool $reset = null,
-	): int
-	{
+    public function __invoke(
+        SymfonyStyle                                           $io,
+        #[Argument('path or url to json file')]
+        string                                                 $filename = 'data/jeopardy.tsv',
+        #[Option('limit the number of records imported')] ?int $limit = null,
+        #[Option('batch size for flush')] int                  $batch = 1000,
+        #[Option('purge the table first')] ?bool               $reset = null,
+    ): int
+    {
         $url = 'https://github.com/jwolle1/jeopardy_clue_dataset/raw/refs/heads/main/combined_season1-40.tsv';
         if (!file_exists($filename)) {
             $io->writeln("Fetching " . $filename);
@@ -55,29 +55,28 @@ class JeopardyCommand
 
         foreach ($csv->getRecords() as $idx => $record) {
             $progressBar->advance();
-            $record = (object) $record;
+            $record = (object)$record;
             $entity = $mapper->map($record, Jeopardy::class);
             $this->entityManager->persist($entity);
-            if ( $progressBar->getProgress() % ($batch-1) === 0) {
+            if (($progressBar->getProgress() % ($batch - 1)) === 0) {
                 try {
                     $this->entityManager->flush();
                 } catch (\Exception $e) {
                     dd($record, $idx, $e->getMessage());
                 }
-                if ($io->isVerbose()) {
-                    dump($entity, idx: $idx);
-                }
                 $this->entityManager->clear();
-                if ($limit && ($idx >= $limit)) {
-                    break;
-                }
+            }
+
+            if ($limit && ($progressBar->getProgress() >= $limit)) {
+                dump($limit);
+                break;
             }
         }
         $this->entityManager->flush();
         $progressBar->finish();
 
 
-		$io->success(self::class . " success.");
-		return Command::SUCCESS;
-	}
+        $io->success(self::class . " success.");
+        return Command::SUCCESS;
+    }
 }
