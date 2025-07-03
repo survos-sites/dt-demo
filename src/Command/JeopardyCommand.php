@@ -29,6 +29,7 @@ class JeopardyCommand
         #[Argument('path or url to json file')]
         string                                                 $filename = 'data/jeopardy.tsv',
         #[Option('limit the number of records imported')] ?int $limit = null,
+        #[Option('dump the nth record')] ?int                  $dump = null,
         #[Option('batch size for flush')] int                  $batch = 1000,
         #[Option('purge the table first')] ?bool               $reset = null,
     ): int
@@ -49,16 +50,19 @@ class JeopardyCommand
             ->setHeaderOffset(0);
 
         $header = $csv->getHeader(); //returns the CSV header record
-        dump($header);
         $mapper = new ObjectMapper();
         $progressBar = new ProgressBar($io, 515890);
 
         foreach ($csv->getRecords() as $idx => $record) {
             $progressBar->advance();
             $record = (object)$record;
+            if ($dump && $idx === $dump) {
+                dd($record);
+            }
             $entity = $mapper->map($record, Jeopardy::class);
             $this->entityManager->persist($entity);
-            if (($progressBar->getProgress() % ($batch - 1)) === 0) {
+//            if (($progressBar->getProgress() % ($batch - 1)) === 0)
+            {
                 try {
                     $this->entityManager->flush();
                 } catch (\Exception $e) {

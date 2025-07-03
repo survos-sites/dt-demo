@@ -62,16 +62,16 @@
         },
         {
             "name": "api-platform/core",
-            "version": "v4.1.17",
+            "version": "v4.1.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "e1191ca86e548d7610251bba2d8498b440cfd631"
+                "reference": "fe921cda3edd0c2efa0c75446dea56a3fb69000d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/e1191ca86e548d7610251bba2d8498b440cfd631",
-                "reference": "e1191ca86e548d7610251bba2d8498b440cfd631",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/fe921cda3edd0c2efa0c75446dea56a3fb69000d",
+                "reference": "fe921cda3edd0c2efa0c75446dea56a3fb69000d",
                 "shasum": ""
             },
             "require": {
@@ -272,9 +272,9 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v4.1.17"
+                "source": "https://github.com/api-platform/core/tree/v4.1.18"
             },
-            "time": "2025-06-19T10:14:20+00:00"
+            "time": "2025-07-03T13:10:08+00:00"
         },
         {
             "name": "aws/aws-crt-php",
@@ -332,16 +332,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.348.1",
+            "version": "3.349.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c384263bebbfcdd0f59b459e630851f59080955f"
+                "reference": "037ffa3dd4c9f25768743cf796955bf2d50cffac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c384263bebbfcdd0f59b459e630851f59080955f",
-                "reference": "c384263bebbfcdd0f59b459e630851f59080955f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/037ffa3dd4c9f25768743cf796955bf2d50cffac",
+                "reference": "037ffa3dd4c9f25768743cf796955bf2d50cffac",
                 "shasum": ""
             },
             "require": {
@@ -423,9 +423,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.348.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.349.1"
             },
-            "time": "2025-06-27T19:02:10+00:00"
+            "time": "2025-07-02T18:04:45+00:00"
         },
         {
             "name": "bizkit/versioning-bundle",
@@ -1607,16 +1607,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.4.2",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "b4ca0cd5fbf74b33fdd3d54d89746ab9748803b9"
+                "reference": "6deec3655ba3e8f15280aac11e264225854d2369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/b4ca0cd5fbf74b33fdd3d54d89746ab9748803b9",
-                "reference": "b4ca0cd5fbf74b33fdd3d54d89746ab9748803b9",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/6deec3655ba3e8f15280aac11e264225854d2369",
+                "reference": "6deec3655ba3e8f15280aac11e264225854d2369",
                 "shasum": ""
             },
             "require": {
@@ -1691,9 +1691,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.4.2"
+                "source": "https://github.com/doctrine/orm/tree/3.5.0"
             },
-            "time": "2025-06-26T18:51:01+00:00"
+            "time": "2025-07-01T17:40:53+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2674,16 +2674,16 @@
         },
         {
             "name": "inspector-apm/inspector-php",
-            "version": "3.15.8",
+            "version": "3.15.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/inspector-apm/inspector-php.git",
-                "reference": "9f563eeded9ef5686c4a2e76ff5ba6cd50df98a2"
+                "reference": "6544817949a24d927e9908088bfcb55433a4dba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/9f563eeded9ef5686c4a2e76ff5ba6cd50df98a2",
-                "reference": "9f563eeded9ef5686c4a2e76ff5ba6cd50df98a2",
+                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/6544817949a24d927e9908088bfcb55433a4dba2",
+                "reference": "6544817949a24d927e9908088bfcb55433a4dba2",
                 "shasum": ""
             },
             "require": {
@@ -2722,9 +2722,9 @@
             ],
             "support": {
                 "issues": "https://github.com/inspector-apm/inspector-php/issues",
-                "source": "https://github.com/inspector-apm/inspector-php/tree/3.15.8"
+                "source": "https://github.com/inspector-apm/inspector-php/tree/3.15.9"
             },
-            "time": "2025-06-19T12:13:16+00:00"
+            "time": "2025-07-01T08:07:10+00:00"
         },
         {
             "name": "inspector-apm/inspector-symfony",
