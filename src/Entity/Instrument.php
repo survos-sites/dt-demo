@@ -26,7 +26,7 @@ use function Symfony\Component\String\u;
         'groups' => ['instrument.read'],
     ]
 )]
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['type', 'genres','tags','countries'])]
+#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['type', 'genres','countries'])]
 #[Groups(['instrument.read'])]
 class Instrument
 {
