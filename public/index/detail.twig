@@ -1,0 +1,12 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+
+    hit: {{ hit.id|default('~') }}
+    is this detail.twig
+    {{ title|default('no title') }}
+    an include:
+
+    {% include 'include.twig' with {title: title} %}
+
+{% endblock %}
