@@ -1,0 +1,5 @@
+survos_meili:
+  core_name: 'table'
+  meiliHost: '%env(MEILI_SERVER)%'
+
+
