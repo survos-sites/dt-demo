@@ -1,0 +1,90 @@
+{# <div class="hit-category">{{ hit._highlightResult.category.value }} #}
+{#    <span class="hit-value">for ${{ hit.value }}</span> #}
+{# </div> #}
+
+{# <div class="hit-question">{{ hit._highlightResult.question.value }}</div> #}
+
+{% set _sc = 'reveal' %}
+
+{# <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"> #}
+{#    <div class="col"> #}
+<div class="card h-100">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span class="fw-bold">{{ hit._highlightResult.name.value }}</span>
+    </div>
+
+    <div class="card-body">
+        <div class="blockquote">
+            {{ hit._highlightResult.description.value }}
+        </div>
+        {% set _sc = 'locale_display' %}
+        {#        <ul {{ stimulus_controller(_sc) }}>#}
+        <ul}}>
+
+        {% for country in hit.countries %}
+            <li>
+                <span class="fi fi-{{ country|lower }}"></span>
+                <span
+                    class="text-tiny" {{ stimulus_target(_sc, 'country') }} data-cc="{{ country|lower }}">{{ country }}
+                    </span>
+
+            </li>
+        {% endfor %}
+        </ul >
+        {#                <p class="card-text"> #}
+        {#                    {{ hit._highlightResult.question.value|raw }} #}
+        {#                </p> #}
+
+        {#        {% set _sc = 'reveal' %}#}
+        {#        <div data-controller="reveal" data-reveal-hidden-class="d-none">#}
+        {#            #}{# @todo: disappear when answer show.s #}
+        {#            <button {{ stimulus_action(_sc, 'toggle') }}#}
+        {#                data-reveal-target="item"#}
+        {#                class="btn btn-sm btn-primary mb-2">#}
+        {#                Wiki?#}
+        {#            </button>#}
+        {#        </div>#}
+    </div>
+
+    <div class="card-footer clearfix xxd-flex float-end xjustify-content-end">
+        <div class="float-start">
+            {{ hit._highlightResult.type.value }}
+        </div>
+        {% if hit._rankingScore != 1 %}
+            <span class="m-4">
+                        score: {{ hit._rankingScore|number_format(2) }}
+                </span>
+        {% endif %}
+
+        <button
+            {{ stimulus_action(_sc_modal|default('debug_dialog'), 'modal') }}
+            data-hit-id="{{ hit.id }}"
+            class="float-end btn btn-sm btn-outline-primary">
+            {{ icons.json }}
+        </button>
+    </div>
+</div>
+{#    </div> #}
+{# </div> #}
+
+{# <div data-controller="reveal" data-reveal-hidden-class="d-none"> #}
+{#    #}{# our plugin doesn't support classes! #}
+{#     {{ stimulus_controller(_sc, {hiddenClass: 'd-none'}) }} #}
+{#    #}
+{#    <button {{ stimulus_action(_sc, 'toggle') }} class="btn btn-sm btn-primary"> #}
+{#        show #}
+{#    </button> #}
+
+{#    <div data-reveal-target="item" class="d-none mt-4 hit-answer"> #}
+{#        {{ hit.answer }} #}
+{#    </div> #}
+{# </div> #}
+
+{#    #}{# this button should always be in same spot, and removed from the main text #}
+{#    <br/> #}
+{#    <button #}
+{#        {{ stimulus_action(_sc_modal|default('debug_dialog'), 'modal') }} #}
+{#        data-hit-id="{{ hit.id }}" #}
+{#        class="btn btn-sm btn-outline-primary"> #}
+{#        {{ icons.json }} #}
+{#    </button> #}
