@@ -44,7 +44,7 @@ class MusicCommand
 
 
         // @todo: fetch /latest
-        $base = 'https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/20250628-001001/';
+        $base = 'https://data.metabrainz.org/pub/musicbrainz/data/json-dumps//20250705-001001/';
         if (0) {
             $html = file_get_contents($base);
             preg_match_all('/"(.*?).tar.xz"/', $html, $matches, PREG_SET_ORDER);
