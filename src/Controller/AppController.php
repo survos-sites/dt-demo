@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Instrument;
 use App\Entity\Official;
 use Doctrine\ORM\EntityManagerInterface;
+use Survos\MeiliBundle\Service\MeiliService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +16,18 @@ class AppController extends AbstractController
 {
 
     #[Route(path: '/', name: 'app_homepage', options: ['sitemap' => ['priority' => 1]])]
-    public function homepage(): Response
+    public function homepage(MeiliService $meiliService): Response
     {
+        dump($meiliService->getConfig());
         // testing
         return $this->render('app/homepage.html.twig', [
+            'indexName' => 'dtdemo_Instrument',
+            'server' => $meiliService->getConfig()['meiliHost'],
+            'apiKey' => $meiliService->getConfig()['meiliKey'],
+            '_sc_locale' => 'displayh_local',
+            'embedder' => null,
+            'class' => Instrument::class,
+
         ]);
     }
 

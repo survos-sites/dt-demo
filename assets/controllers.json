@@ -115,6 +115,16 @@
                 "fetch": "eager"
             }
         },
+        "@survos/meili-bundle": {
+            "insta": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": {
+                    "flag-icons/css/flag-icons.min.css": true,
+                    "pretty-print-json/dist/css/pretty-print-json.min.css": true
+                }
+            }
+        },
         "@survos/simple-datatables-bundle": {
             "table": {
                 "enabled": true,

@@ -62,7 +62,11 @@ class MusicCommand
         // to run live we need to map storage.  For dt-demo, we can use public/images/uploads
         $directory .= $entity;
         if (!file_exists($directory)) {
-            mkdir($directory, 0777, true);
+            try {
+                mkdir($directory, 0777, true);
+            } catch (\Exception $e) {
+                $io->error($e->getMessage() . PHP_EOL . $directory);
+            }
         }
         if (!str_ends_with($directory, '/')) {
             $directory .= '/';

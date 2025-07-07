@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ea668d5100675af37a0234c5fdf4e9d",
+    "content-hash": "fbf2b54e38ea5c37094a1077f3a3ec88",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -6277,17 +6277,17 @@
             "time": "2025-05-25T21:53:47+00:00"
         },
         {
-            "name": "survos/meili-admin-bundle",
+            "name": "survos/meili-bundle",
             "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/survos/SurvosMeiliAdminBundle.git",
-                "reference": "39b0c10097a35a616cc26ee17613ec927166daac"
+                "url": "https://github.com/survos/meili-bundle.git",
+                "reference": "311b99a799f63bbade2d7ea3d44a17d68e8a68a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosMeiliAdminBundle/zipball/39b0c10097a35a616cc26ee17613ec927166daac",
-                "reference": "39b0c10097a35a616cc26ee17613ec927166daac",
+                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/311b99a799f63bbade2d7ea3d44a17d68e8a68a8",
+                "reference": "311b99a799f63bbade2d7ea3d44a17d68e8a68a8",
                 "shasum": ""
             },
             "require": {
@@ -6296,6 +6296,7 @@
                 "meilisearch/meilisearch-php": "^1.14",
                 "php": "^8.3",
                 "survos/core-bundle": "^1.5",
+                "survos/inspection-bundle": "^1.5",
                 "survos/installer": "^1.5 || ^2.0",
                 "symfony/config": "^6.4 || ^7.1",
                 "symfony/console": "^7.3",
@@ -6315,26 +6316,27 @@
                 "symfony/phpunit-bridge": "^6.4 || ^7.1",
                 "symfony/twig-bundle": "^6.4 || ^7.1",
                 "symfony/ux-chartjs": "^2.23",
+                "symfony/ux-twig-component": "^2.27",
                 "symfony/var-dumper": "^6.4 || ^7.1"
             },
             "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Survos\\MeiliAdminBundle\\": "src/"
+                    "Survos\\MeiliBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Utilies for managing a meilisearch server",
+            "description": "Utilies for managing a meilisearch indexes",
             "keywords": [
                 "symfony-ux"
             ],
             "support": {
-                "issues": "https://github.com/survos/SurvosMeiliAdminBundle/issues",
-                "source": "https://github.com/survos/SurvosMeiliAdminBundle/tree/main"
+                "issues": "https://github.com/survos/meili-bundle/issues",
+                "source": "https://github.com/survos/meili-bundle/tree/main"
             },
             "funding": [
                 {
@@ -6342,7 +6344,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-29T23:53:47+00:00"
+            "time": "2025-07-07T18:59:25+00:00"
         },
         {
             "name": "survos/sais-bundle",
@@ -18879,7 +18881,7 @@
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
         "survos/code-bundle": 20,
-        "survos/meili-admin-bundle": 20,
+        "survos/meili-bundle": 20,
         "symfony/panther": 20,
         "symfony/stimulus-bundle": 20
     },

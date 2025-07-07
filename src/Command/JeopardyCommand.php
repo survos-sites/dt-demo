@@ -55,13 +55,22 @@ class JeopardyCommand
 
         foreach ($csv->getRecords() as $idx => $record) {
             $progressBar->advance();
-            $record = (object)$record;
             if ($dump && $idx === $dump) {
                 dd($record);
             }
+            $answer = $record['answer'];
+            if (empty($answer)) {
+                continue;
+            }
+//            if (strlen($answer) < strlen($q=$record['question']) ) {
+//                $io->warning($answer . " < " . $q);
+//            }
+            $record = (object)$record;
+//            if (str_contains($answer, $record['question'])) {}
             $entity = $mapper->map($record, Jeopardy::class);
+
             $this->entityManager->persist($entity);
-//            if (($progressBar->getProgress() % ($batch - 1)) === 0)
+            if (($progressBar->getProgress() % ($batch - 1)) === 0)
             {
                 try {
                     $this->entityManager->flush();
