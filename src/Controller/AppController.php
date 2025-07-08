@@ -18,12 +18,11 @@ class AppController extends AbstractController
     #[Route(path: '/', name: 'app_homepage', options: ['sitemap' => ['priority' => 1]])]
     public function homepage(MeiliService $meiliService): Response
     {
-        dump($meiliService->getConfig());
         // testing
         return $this->render('app/homepage.html.twig', [
             'indexName' => 'dtdemo_Instrument',
-            'server' => $meiliService->getConfig()['meiliHost'],
-            'apiKey' => $meiliService->getConfig()['meiliKey'],
+            'server' => $meiliService->getHost(),
+            'apiKey' => $meiliService->getPublicApiKey(),
             '_sc_locale' => 'displayh_local',
             'embedder' => null,
             'class' => Instrument::class,

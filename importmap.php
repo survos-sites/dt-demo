@@ -296,4 +296,11 @@ return [
         'version' => '3.0.4',
         'type' => 'css',
     ],
+    'instantsearch.css/themes/algolia.min.css' => [
+        'version' => '8.5.1',
+        'type' => 'css',
+    ],
+    '@stimulus-components/dialog' => [
+        'version' => '1.0.1',
+    ],
 ];

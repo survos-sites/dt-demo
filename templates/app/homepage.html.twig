@@ -2,10 +2,11 @@
 
     {% block body %}
 
-
+    Stats:
+    <a href="{{ path('survos_meili_realtime_stats', {indexName: indexName}) }}">Stats</a>
 
     {% set _sc = '@survos/meili-bundle/insta' %} {#  for loading hits #}
-    {% set _sc_modal = 'debug_dialog' %} {#  for the debugger #}
+    {% set _sc_modal = '@survos/meili-bundle/debug_meili' %} {#  for loading hits #}
 {{ _sc }}
     {#        {{ stimulus_controller(_sc_modal) }}#}
     {% set globals = {
@@ -27,12 +28,12 @@
         indexName: indexName,
         embedderName: embedder,
         templateUrl: "/js/instrument.html.twig",
+        # templateUrl: path('meili_template', {indexName: indexName})
 
         hitClass: hitClass,
         sortingJson: sorting|default([])|json_encode,
         globalsJson: globals|default([])|json_encode,
         iconsJson: icons|default([])|json_encode,
-        # path('app_template', {indexName: indexName})
     }) }}
             class="container-fluid py-4"
     >

@@ -35,6 +35,12 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
     public function midNavbarMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
+        foreach (['app_homepage'] as $route)
+        {
+            $this->add($menu, $route); // label: u($route)->after('app_')
+        }
+        $this->add($menu, 'meili_insta', ['indexName' => 'dtdemo_Instrument']);
+
         $options = $event->getOptions();
         if ($this->env === 'dev') {
             $this->add($menu, 'survos_commands', label: "Commands");
@@ -89,7 +95,6 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
 
         $nestedMenu = $this->addSubmenu($menu, 'App');
         // app_simple?
-        if (0)
         foreach (['app_homepage', 'app_credit', 'app_grid'] as $route)
         {
             $this->add($nestedMenu, $route); // label: u($route)->after('app_')

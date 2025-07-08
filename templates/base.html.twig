@@ -1,8 +1,8 @@
 {% extends "@SurvosBootstrap/%s/base.html.twig"|format(theme_option('theme')) %}
 
      {% block stylesheets %}
-         {# @todo: meili grid css #}
          <link rel="stylesheet" type="text/css" href="{{ asset('bundles/survosbootstrap/bootstrap/style.css') }}">
+         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/survosmeili/style.css') }}">
 
          {{ parent() }}
      {% endblock %}

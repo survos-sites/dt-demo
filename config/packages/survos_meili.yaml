@@ -1,5 +1,7 @@
 survos_meili:
-  core_name: 'table'
-  meiliHost: '%env(MEILI_SERVER)%'
+    core_name: 'table'
+    host: '%env(MEILI_SERVER)%'
+    apiKey: '%env(MEILI_API_KEY)%'
+    searchKey: '%env(MEILI_SEARCH_KEY)%'
 
 
