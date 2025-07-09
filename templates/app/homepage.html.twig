@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
     {% block body %}
+    @todo: index of indexes!
+    {% endblock %}
+    {% block XXbody %}
 
     Stats:
     <a href="{{ path('survos_meili_realtime_stats', {indexName: indexName}) }}">Stats</a>
 
     {% set _sc = '@survos/meili-bundle/insta' %} {#  for loading hits #}
     {% set _sc_modal = '@survos/meili-bundle/debug_meili' %} {#  for loading hits #}
-{{ _sc }}
     {#        {{ stimulus_controller(_sc_modal) }}#}
     {% set globals = {
         serverUrl: server|default(null),
@@ -83,6 +85,8 @@
                         <div class="mt-4" {{ stimulus_target(_sc, 'sort') }}></div>
 
                         {# Main: hits + pagination #}
+                        <code>{{ _sc_modal }} stimulus_controller</code>
+
                         <main
                                 {{ stimulus_controller(_sc_modal, {
                                     serverUrl: server,
@@ -95,7 +99,7 @@
                             <div {{ stimulus_target(_sc_modal, 'modal') }}
                             >
                                 {# all them templates use this modal #}
-{#                                {{ include('components/_modal.html.twig', {_sc_modal: _sc_modal}) }}#}
+                                {{ include('@SurvosMeili/components/_modal.html.twig', {_sc_modal: _sc_modal}) }}
                             </div>
 
                             <div {{ stimulus_target(_sc, 'hits') }}>
