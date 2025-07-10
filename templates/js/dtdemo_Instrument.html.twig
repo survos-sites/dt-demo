@@ -18,9 +18,7 @@
             {{ hit._highlightResult.description.value }}
         </div>
         {% set _sc = 'locale_display' %}
-        {#        <ul {{ stimulus_controller(_sc) }}>#}
-        <ul}}>
-
+        <ul>
         {% for country in hit.countries %}
             <li>
                 <span class="fi fi-{{ country|lower }}"></span>
@@ -57,10 +55,11 @@
         {% endif %}
 
         <button
-            {{ stimulus_action(_sc_modal|default('debug_dialog'), 'modal') }}
+            data-action="survos--meili-bundle--json#modal"
+            {#            {{ stimulus_action(_sc_modal, 'modal', 'click') }}#}
             data-hit-id="{{ hit.id }}"
             class="float-end btn btn-sm btn-outline-primary">
-            {{ icons.json }}
+            <span class="me-1 icon-wrapper">{{ icons.json|raw }}</span>
         </button>
     </div>
 </div>
