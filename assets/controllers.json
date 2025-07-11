@@ -125,7 +125,7 @@
                     "pretty-print-json/dist/css/pretty-print-json.min.css": true
                 }
             },
-            "debug": {
+            "json": {
                 "enabled": true,
                 "fetch": "lazy",
                 "autoimport": []

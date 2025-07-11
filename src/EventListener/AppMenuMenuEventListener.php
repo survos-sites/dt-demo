@@ -4,7 +4,10 @@ namespace App\EventListener;
 
 use App\Controller\CongressController;
 use App\Controller\TermCrudController;
+use App\Entity\Instrument;
+use App\Entity\Jeopardy;
 use App\Entity\Official;
+use App\Entity\Work;
 use Survos\BootstrapBundle\Event\KnpMenuEvent;
 use Survos\BootstrapBundle\Service\ContextService;
 use Survos\BootstrapBundle\Traits\KnpMenuHelperInterface;
@@ -39,7 +42,10 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         {
             $this->add($menu, $route); // label: u($route)->after('app_')
         }
-        $this->add($menu, 'meili_insta', ['indexName' => 'dtdemo_Instrument']);
+        foreach ([Instrument::class, Official::class, Jeopardy::class] as $class) {
+            $shortName = new \ReflectionClass($class)->getShortName();
+            $this->add($menu, 'meili_insta', ['indexName' => 'dtdemo_' . $shortName], label: $shortName);
+        }
 
         $options = $event->getOptions();
         if ($this->env === 'dev') {

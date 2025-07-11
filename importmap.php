@@ -23,13 +23,13 @@ return [
         'version' => '3.2.2',
     ],
     'bootstrap' => [
-        'version' => '5.3.3',
+        'version' => '5.3.7',
     ],
     '@popperjs/core' => [
         'version' => '2.11.8',
     ],
     'bootstrap/dist/css/bootstrap.min.css' => [
-        'version' => '5.3.3',
+        'version' => '5.3.7',
         'type' => 'css',
     ],
     'datatables.net-bs5' => [
@@ -302,5 +302,8 @@ return [
     ],
     '@stimulus-components/dialog' => [
         'version' => '1.0.1',
+    ],
+    '@andypf/json-viewer' => [
+        'version' => '2.1.10',
     ],
 ];
