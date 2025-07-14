@@ -31,6 +31,17 @@ symfony server:start -d
 symfony open:local --path /congress/simple_datatables
 ```
 
+## Idea: Workflow for new datasets
+
+```bash
+wget https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json -O data/wine.json
+c inspect:json --dto src/Dto/Wine.php 
+# Add Facet and other attributes to Wine.php
+c meili:index Wine data/wine.json --update-settings --import
+symfony open:local /meili/wine
+
+```
+
 ## With Survos Bundle Development
 ```bash
 git clone git@github.com:survos/survos ../survos
