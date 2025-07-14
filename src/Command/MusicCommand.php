@@ -44,7 +44,9 @@ class MusicCommand
 
 
         // @todo: fetch /latest
-        $base = 'https://data.metabrainz.org/pub/musicbrainz/data/json-dumps//20250705-001001/';
+        $latest = trim(file_get_contents('https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/LATEST'));
+
+        $base = 'https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/' . $latest . '/';
         if (0) {
             $html = file_get_contents($base);
             preg_match_all('/"(.*?).tar.xz"/', $html, $matches, PREG_SET_ORDER);
@@ -124,6 +126,12 @@ class MusicCommand
     private function downloadFile(string $url, string $entity, string $outPath, SymfonyStyle $io, ?bool $refresh): string|int
     {
         $outFilename = $outPath . "$entity.tar.xz";
+        $ndJson = $outPath . 'mbdump/' . $entity;
+
+        if (file_exists($ndJson)) {
+            return  $ndJson;
+        }
+        return  $ndJson;
         if ($refresh || !file_exists($outFilename)) {
             if (false === $fp = fopen($outFilename, 'wb')) {
                 $io->error("Cannot open $outPath for writing.");
@@ -179,7 +187,7 @@ class MusicCommand
             fclose($fp);
         }
 
-        $ndJson = $outPath . 'mbdump/' . $entity;
+
         if (!file_exists($ndJson)) {
             $io->writeln("Extracting $outFilename to $outPath.");
             $process = new Process([
