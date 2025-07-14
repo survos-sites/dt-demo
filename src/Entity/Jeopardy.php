@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -10,7 +11,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\JeopardyRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Survos\MeiliAdminBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Symfony\Component\ObjectMapper\Attribute\Map;
 use Symfony\Component\Serializer\Attribute\Groups;
 use function Symfony\Component\String\u;
@@ -25,8 +26,13 @@ use function Symfony\Component\String\u;
         'groups' => ['jeopardy.read'],
     ]
 )]
+#[ApiFilter(OrderFilter::class, properties: [
+    'value',
+    'monthIndex',
+])]
+
 #[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['category', 'value', 'round', 'monthIndex'])]
+    properties: ['category', 'value', 'monthIndex'])]
 #[Groups(['jeopardy.read'])]
 #[ApiProperty(extraProperties: ['list' => ['label','category','value']])]
 class Jeopardy
@@ -55,7 +61,12 @@ class Jeopardy
 
         #[ORM\Column(length: 255)]
         #[ApiProperty(extraProperties: ['list' => true])]
-        public ?string    $answer = null,
+        public ?string    $answer = null {
+            set {
+//                if (strlen($value) >= 244) { dd($value); }
+                $this->answer = mb_substr($value, 0, 255);
+            }
+        },
 
         #[ORM\Column(length: 255)]
         public /* private(set) */ string $category {
@@ -63,6 +74,7 @@ class Jeopardy
         },
 
         #[ORM\Column(type: Types::INTEGER, nullable: true)]
+        #[Map(source: 'clue_value')]
         public /* private(set) */ int|string|null $value {
             set => $value ? (int)str_replace('$', '', $value): 0;
         },
@@ -70,9 +82,8 @@ class Jeopardy
         #[ORM\Column(length: 255)]
         private(set) ?string $round = null ,
 
-        #[ORM\Column]
-        #[Map(source: 'show_number')]
-        private(set) ?int      $show = null,
+        #[ORM\Column(type: Types::TEXT, nullable: true)]
+        private(set) ?string      $comments = null,
     )
     {
 

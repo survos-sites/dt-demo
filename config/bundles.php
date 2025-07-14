@@ -42,6 +42,6 @@ return [
     Survos\SaisBundle\SurvosSaisBundle::class => ['all' => true],
     Jawira\DoctrineDiagramBundle\DoctrineDiagramBundle::class => ['dev' => true, 'test' => true],
     Inspector\Symfony\Bundle\InspectorBundle::class => ['all' => true],
-    Survos\MeiliAdminBundle\SurvosMeiliAdminBundle::class => ['all' => true],
     Survos\CodeBundle\SurvosCodeBundle::class => ['dev' => true, 'test' => true],
+    Survos\MeiliBundle\SurvosMeiliBundle::class => ['all' => true],
 ];

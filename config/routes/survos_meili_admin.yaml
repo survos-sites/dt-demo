@@ -1,3 +1,0 @@
-survos_meiliAdmin:
-  resource: '@SurvosMeiliAdminBundle/config/routes.yaml'
-  prefix: '/meiliAdmin'
