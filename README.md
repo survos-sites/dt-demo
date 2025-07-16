@@ -19,11 +19,16 @@ sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili
 git clone git@github.com:survos-sites/dt-demo && cd dt-demo
 composer install
 symfony check:req
+# if using sqlite
 bin/console d:sch:update --force --complete
 bin/console cache:pool:clear cache.app
 bin/console app:load --limit 50 
 bin/console meili:index App\\Entity\\Official
+# this loads the wiki data.
 bin/console workflow:iterate App\\Entity\\Official --marking=new --transition=load
+# dispatch the resize
+bin/console workflow:iterate App\\Entity\\Official --marking=details --transition=resize
+
 bin/console mess:consume async  
 
 bin/console meili:index App\\Entity\\Official

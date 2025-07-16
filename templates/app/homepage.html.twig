@@ -9,7 +9,6 @@
     <a href="{{ path('survos_meili_realtime_stats', {indexName: indexName}) }}">Stats</a>
 
     {% set _sc = '@survos/meili-bundle/insta' %} {#  for loading hits #}
-    {% set _sc_modal = '@survos/meili-bundle/debug_meili' %} {#  for loading hits #}
     {#        {{ stimulus_controller(_sc_modal) }}#}
     {% set globals = {
         serverUrl: server|default(null),

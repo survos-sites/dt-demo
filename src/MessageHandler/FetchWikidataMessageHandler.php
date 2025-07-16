@@ -62,11 +62,12 @@ final class FetchWikidataMessageHandler
                         AppLoadDataCommand::SAIS_CLIENT,
                         [$url],
                         ['small','medium','large'],
-                        mediaCallbackUrl: $this->urlGenerator->generate('app_webhook', [
-                            'id' => $official->getId(),
-                        ], $this->urlGenerator::ABSOLUTE_URL)
+//                        mediaCallbackUrl: $this->urlGenerator->generate('app_webhook', [
+//                            'id' => $official->getId(),
+//                        ], $this->urlGenerator::ABSOLUTE_URL)
                     )
                 );
+                dump($response);
                 // we won't get a callback if it's already loaded, so we need to load the images that already exist.
                 $imageCodes = $official->getImageCodes()??[];
                 foreach ($response as $responseImage) {

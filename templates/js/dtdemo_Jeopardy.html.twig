@@ -1,0 +1,80 @@
+{#<div class="hit-category">{{ hit._highlightResult.category.value }}#}
+{#    <span class="hit-value">for ${{ hit.value }}</span>#}
+{#</div>#}
+
+{#<div class="hit-question">{{ hit._highlightResult.question.value }}</div>#}
+
+{% set _sc = 'reveal' %}
+
+{#<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">#}
+{#    <div class="col">#}
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span class="fw-bold">{{ hit._highlightResult.category.value }}</span>
+                <span class="badge bg-success">${{ hit.value|number_format }}</span>
+            </div>
+
+            <div class="card-body">
+                <div class="blockquote">
+                    {{ hit._highlightResult.answer.value|raw }}
+                </div>
+{#                <p class="card-text">#}
+{#                    {{ hit._highlightResult.question.value|raw }}#}
+{#                </p>#}
+
+                {% set _sc = 'reveal' %}
+                <div data-controller="reveal" data-reveal-hidden-class="d-none">
+                    {# @todo: disappear when answer show.s #}
+                    <button {{ stimulus_action(_sc, 'toggle') }}
+                        data-reveal-target="item"
+                        class="btn btn-sm btn-primary mb-2">
+                        Show Answer
+                    </button>
+
+                    <div data-reveal-target="item" class="d-none mt-2">
+                        <div class="alert alert-info mb-0">{{ hit.question }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer clearfix xxd-flex float-end xjustify-content-end">
+                <div class="float-start">
+                    {{ hit.airDate|date('Y (D, M j)') }}
+                </div>
+                <span>
+                    {% if hit._rankingScore != 1 %}
+                    score: {{ hit._rankingScore|number_format(2) }}
+                    {% endif %}
+                </span>
+                <button
+                    data-action="survos--meili-bundle--json#modal"
+                    data-hit-id="{{ hit.id }}"
+                    class="float-end btn btn-sm btn-outline-primary">
+                    <span class="me-1 icon-wrapper">{{ icons.json|raw }}</span>
+                </button>
+            </div>
+        </div>
+{#    </div>#}
+{#</div>#}
+
+{#<div data-controller="reveal" data-reveal-hidden-class="d-none">#}
+{#    #}{# our plugin doesn't support classes!#}
+{#     {{ stimulus_controller(_sc, {hiddenClass: 'd-none'}) }}#}
+{#    #}
+{#    <button {{ stimulus_action(_sc, 'toggle') }} class="btn btn-sm btn-primary">#}
+{#        show#}
+{#    </button>#}
+
+{#    <div data-reveal-target="item" class="d-none mt-4 hit-answer">#}
+{#        {{ hit.answer }}#}
+{#    </div>#}
+{#</div>#}
+
+{#    #}{# this button should always be in same spot, and removed from the main text #}
+{#    <br/>#}
+{#    <button#}
+{#        {{ stimulus_action(_sc_modal|default('debug_dialog'), 'modal') }}#}
+{#        data-hit-id="{{ hit.id }}"#}
+{#        class="btn btn-sm btn-outline-primary">#}
+{#        {{ icons.json }}#}
+{#    </button>#}
