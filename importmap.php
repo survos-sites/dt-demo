@@ -423,4 +423,7 @@ return [
     'get-proto/Reflect.getPrototypeOf' => [
         'version' => '1.0.1',
     ],
+    'idb-keyval' => [
+        'version' => '6.2.2',
+    ],
 ];

@@ -73,10 +73,6 @@
                 "enabled": false,
                 "fetch": "eager"
             },
-            "share": {
-                "enabled": false,
-                "fetch": "eager"
-            },
             "capture": {
                 "enabled": false,
                 "fetch": "eager"
@@ -98,6 +94,10 @@
                 "fetch": "eager"
             },
             "web-push": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "web-share": {
                 "enabled": false,
                 "fetch": "eager"
             }
