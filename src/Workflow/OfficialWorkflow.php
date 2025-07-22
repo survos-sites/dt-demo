@@ -12,7 +12,7 @@ use Survos\SaisBundle\Model\ProcessPayload;
 use Survos\SaisBundle\Service\SaisClientService;
 use Survos\WikiBundle\Service\WikiService;
 use Survos\WorkflowBundle\Attribute\Workflow;
-use Survos\WorkflowBundle\Message\AsyncTransitionMessage;
+use Survos\WorkflowBundle\Message\TransitionMessage;
 use Symfony\Component\DependencyInjection\Attribute\Target;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Workflow\Attribute\AsCompletedListener;
@@ -78,7 +78,7 @@ final class OfficialWorkflow implements OfficialWorkflowInterface
         $official = $this->entityManager->find(Official::class, $this->getOfficial($event)->getId());
         foreach ([self::TRANSITION_RESIZE] as $nextTransition) {
             if ($this->officialWorkflow->can($official, $nextTransition)) {
-                $env = $this->messageBus->dispatch(new AsyncTransitionMessage(
+                $env = $this->messageBus->dispatch(new TransitionMessage(
                     $official->getId(),
                     $official::class,
                     $nextTransition,

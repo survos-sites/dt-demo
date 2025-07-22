@@ -22,8 +22,8 @@ symfony check:req
 # if using sqlite
 bin/console d:sch:update --force --complete
 bin/console cache:pool:clear cache.app
-bin/console app:load --limit 50 
-bin/console meili:index App\\Entity\\Official
+bin/console init:congress --limit 50 
+bin/console meili:index Official
 # this loads the wiki data.
 bin/console workflow:iterate App\\Entity\\Official --marking=new --transition=load
 # dispatch the resize

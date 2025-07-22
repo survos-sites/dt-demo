@@ -44,4 +44,5 @@ return [
     Inspector\Symfony\Bundle\InspectorBundle::class => ['all' => true],
     Survos\CodeBundle\SurvosCodeBundle::class => ['dev' => true, 'test' => true],
     Survos\MeiliBundle\SurvosMeiliBundle::class => ['all' => true],
+    Zenstruck\Messenger\Monitor\ZenstruckMessengerMonitorBundle::class => ['all' => true],
 ];

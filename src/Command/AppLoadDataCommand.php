@@ -21,7 +21,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-#[AsCommand('app:load-data', 'Load the congressional data')]
+#[AsCommand('init:congress', 'Load the congressional data')]
 final class AppLoadDataCommand
 {
     public const SAIS_CLIENT='dtDemo_Officials';
