@@ -17,11 +17,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Survos\ApiGrid\Api\Filter\FacetsFieldSearchFilter;
-use Survos\ApiGrid\Api\Filter\MultiFieldSearchFilter;
-use Survos\ApiGrid\State\MeiliSearchStateProvider;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
+use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -31,7 +29,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OfficialRepository::class)]
 #[ApiResource(
-    operations: [new Get(), new Put(), new Delete(), new Patch(),
+    operations: [new Get(),
+//        new Put(), new Delete(), new Patch(),
         new GetCollection(name: 'doctrine-officials'
 //            provider: MeilliSearchStateProvider::class,
         )],
@@ -61,9 +60,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     'currentParty',
     'birthday'
 ])]
-#[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
+//#[ApiFilter(MultiFieldSearchFilter::class, properties: ['firstName', 'lastName', 'officialName'])]
 // run grid:index after changes if using meili
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['gender', 'currentParty','house','state'])]
+#[ApiFilter(FacetsFieldSearchFilter::class,
+    properties: ['gender', 'currentParty','house','state','marking'])
+]
 #[Groups(['official.read'])]
 #[UniqueEntity(['id'])]
 class Official implements RouteParametersInterface, MarkingInterface
@@ -71,9 +72,10 @@ class Official implements RouteParametersInterface, MarkingInterface
     use RouteParametersTrait;
     use MarkingTrait;
     public const UNIQUE_PARAMETERS=['id' => 'id'];
+    public const GENDERS = ['M', 'F']; // @todo: map to string?
 
     #[ORM\Id]
-    #[ApiProperty(identifier: true)]
+    #[ApiProperty("the wikiCode is unique, so we use it", identifier: true)]
     #[ORM\Column(type: Types::STRING)]
     #[SerializedName('id')]
     private string $id;
@@ -104,6 +106,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     private ?\DateTimeImmutable $birthday = null;
 
     #[ORM\Column(length: 1, nullable: true)]
+    #[Assert\Choice(self::GENDERS)]
     private ?string $gender = null;
 
     #[ORM\OneToMany(targetEntity: Term::class, mappedBy: 'official', cascade: ['remove', 'persist'], orphanRemoval: true)]
@@ -111,6 +114,7 @@ class Official implements RouteParametersInterface, MarkingInterface
 
     #[ORM\Column(length: 12, nullable: true)]
     #[Assert\Length(min: 0, max: 12)]
+    #[Assert\Choice(['Democrat', 'Republican','Independent'])]
     private ?string $currentParty = null;
 
     #[ORM\Column(length: 255)]
@@ -128,11 +132,11 @@ class Official implements RouteParametersInterface, MarkingInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $wikidataId = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::JSON,  nullable: true, options: ['jsonb' => true])]
     private ?array $wikiData = null;
 
     // now an object with code => [{filter: size, filter2: size}]
-    #[ORM\Column(type: Types::JSON, nullable: true)]
+    #[ORM\Column(type: Types::JSON,  nullable: true, options: ['jsonb' => true])]
     #[Groups(['official.read'])]
     private ?array $imageCodes = null;
 
@@ -141,6 +145,9 @@ class Official implements RouteParametersInterface, MarkingInterface
 
     #[ORM\Column(nullable: true)]
     private ?array $ids = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $originalImageUrl = null;
 
     public function __construct(string $id)
     {
@@ -321,7 +328,7 @@ class Official implements RouteParametersInterface, MarkingInterface
         return $this;
     }
 
-    public function getWikiData(): ?array
+    public function     getWikiData(): ?array
     {
         return $this->wikiData;
     }
@@ -367,6 +374,18 @@ class Official implements RouteParametersInterface, MarkingInterface
     public function setIds(?array $ids): static
     {
         $this->ids = $ids;
+
+        return $this;
+    }
+
+    public function getOriginalImageUrl(): ?string
+    {
+        return $this->originalImageUrl;
+    }
+
+    public function setOriginalImageUrl(?string $originalImageUrl): static
+    {
+        $this->originalImageUrl = $originalImageUrl;
 
         return $this;
     }

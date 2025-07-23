@@ -1,54 +1,105 @@
 {
     "controllers": {
         "@spomky-labs/pwa-bundle": {
-            "connection-status": {
-                "enabled": true,
+            "background-fetch": {
+                "enabled": false,
                 "fetch": "eager"
             },
             "backgroundsync-form": {
                 "enabled": true,
                 "fetch": "eager"
             },
-            "sync-broadcast": {
+            "badge": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "barcode-detection": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "battery": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "connection-status": {
                 "enabled": true,
+                "fetch": "eager"
+            },
+            "contact": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "device-motion": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "device-orientation": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "file-handling": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "fullscreen": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "geolocation": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "install": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "network-information": {
+                "enabled": false,
                 "fetch": "eager"
             },
             "prefetch-on-demand": {
                 "enabled": true,
                 "fetch": "eager"
-            }
-        },
-        "@survos/api-grid-bundle": {
-            "js_twig": {
-                "enabled": true,
-                "fetch": "lazy",
-                "autoimport": []
             },
-            "api_grid": {
-                "enabled": true,
-                "fetch": "lazy",
-                "autoimport": {
-                    "datatables.net-bs5/css/dataTables.bootstrap5.min.css": true,
-                    "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css": true,
-                    "datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css": true,
-                    "datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css": true,
-                    "datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css": true,
-                    "datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.min.css": true,
-                    "datatables.net-select-bs5/css/select.bootstrap5.min.css": true
-                }
+            "picture-in-picture": {
+                "enabled": false,
+                "fetch": "eager"
             },
-            "grid": {
+            "presentation": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "receiver": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "capture": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "speech-synthesis": {
                 "enabled": true,
-                "fetch": "lazy",
-                "autoimport": {
-                    "datatables.net-bs5/css/dataTables.bootstrap5.min.css": true,
-                    "datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css": true,
-                    "datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css": true,
-                    "datatables.net-scroller-bs5/css/scroller.bootstrap5.min.css": true,
-                    "datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css": true,
-                    "datatables.net-searchbuilder-bs5/css/searchBuilder.bootstrap5.min.css": true,
-                    "datatables.net-select-bs5/css/select.bootstrap5.min.css": true
-                }
+                "fetch": "false"
+            },
+            "touch": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "vibration": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "wake-lock": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "web-push": {
+                "enabled": false,
+                "fetch": "eager"
+            },
+            "web-share": {
+                "enabled": false,
+                "fetch": "eager"
             }
         },
         "@survos/bootstrap-bundle": {
@@ -64,18 +115,17 @@
                 "fetch": "eager"
             }
         },
-        "@survos/pwa-extra-bundle": {
-            "detector": {
+        "@survos/meili-bundle": {
+            "insta": {
                 "enabled": true,
-                "fetch": "lazy",
-                "autoimport": []
+                "fetch": "eager",
+                "autoimport": {
+                    "flag-icons/css/flag-icons.min.css": true,
+                    "instantsearch.css/themes/algolia.min.css": true,
+                    "pretty-print-json/dist/css/pretty-print-json.min.css": true
+                }
             },
-            "toggle_online": {
-                "enabled": true,
-                "fetch": "lazy",
-                "autoimport": []
-            },
-            "install": {
+            "json": {
                 "enabled": true,
                 "fetch": "lazy",
                 "autoimport": []
@@ -92,12 +142,6 @@
         },
         "@survos/workflow-helper-bundle": {
             "workflow": {
-                "enabled": true,
-                "fetch": "eager"
-            }
-        },
-        "@symfony/ux-lazy-image": {
-            "lazy-image": {
                 "enabled": true,
                 "fetch": "eager"
             }

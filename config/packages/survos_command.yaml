@@ -1,4 +1,6 @@
-survos_command:
-    # expose app:my-command, etc.
-    namespaces: [app, api, grid]
+when@dev: &dev
+    survos_command:
+        # expose app:my-command, etc.
+        namespaces: [workflow, meili, app]
 
+when@test: *dev

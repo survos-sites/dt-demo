@@ -1,4 +1,3 @@
-survos_bunny:
-  resource: '@SurvosCrawlerBundle/config/routes.yaml'
-  # consider adding /admin to this route and securing it in security.yaml
-  prefix: '/crawler'
+survos_crawler:
+    resource: '@SurvosCrawlerBundle/config/routes.yaml'
+    prefix: '/crawler'

@@ -1,0 +1,17 @@
+## config/packages/http_client.yaml
+#framework:
+#    http_client:
+#        # global defaults (optional)
+#        default_options:
+#            # e.g. default timeout for all clients
+#            timeout: 30
+#
+#        # define one (or more) “scoped” clients with their own options
+#        scoped_clients:
+#            download.client:
+#                default_options:
+#                    # no timeout for long downloads
+#                    timeout: 0
+#                    # chunk size: 1 MiB
+#                    buffer_size: 1024 * 1024
+#

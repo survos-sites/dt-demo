@@ -21,10 +21,10 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
-#[AsCommand('app:load-data', 'Load the congressional data')]
-final class AppLoadDataCommand # extends InvokableServiceCommand
+#[AsCommand('init:congress', 'Load the congressional data')]
+final class AppLoadDataCommand
 {
-    public const SAIS_CLIENT='dt-demo';
+    public const SAIS_CLIENT='dtDemo_Officials';
 
     public function __construct(
         private readonly ValidatorInterface  $validator,
@@ -57,6 +57,13 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
                 $io->success("$count records deleted");
             }
         }
+
+        // make sure we have a sais account!
+        $this->saisClientService->accountSetup(new AccountSetup(
+            self::SAIS_CLIENT,
+            3000
+        ));
+
         $io->info("fetching data..." . $url);
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => (string)file_get_contents($url));
 //        dd($json);
@@ -139,19 +146,15 @@ final class AppLoadDataCommand # extends InvokableServiceCommand
         $manager->flush();
         $progressBar->finish();
 
-        if ($details) {
-            $this->saisClientService->accountSetup(new AccountSetup(
-                self::SAIS_CLIENT,
-                3000
-            ));
-
-            $progressBar = new ProgressBar($io, count($ids));
-            foreach ($ids as $id) {
-                $progressBar->advance();
-                $this->bus->dispatch(new FetchWikidataMessage($id));
-            }
-            $progressBar->finish();
-        }
+            // moved to OfficialWorkflow
+//        if ($details) {
+//            $progressBar = new ProgressBar($io, count($ids));
+//                foreach ($ids as $id) {
+//                $progressBar->advance();
+//                $this->bus->dispatch(new FetchWikidataMessage($id));
+//            }
+//            $progressBar->finish();
+//        }
 
         $io->success(self::class . ' ' . sprintf('app:load-data success, %s records processed', count($ids)));
         return Command::SUCCESS;
