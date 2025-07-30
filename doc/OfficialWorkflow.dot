@@ -3,11 +3,11 @@ digraph workflow {
   node [fontsize="8" fontname="Arial" color="#333333" fillcolor="lightgreen" fixedsize="false" width="1"];
   edge [fontsize="7" fontname="Arial" color="#333333" arrowhead="normal" arrowsize="0.5"];
 
-  place_new [label=<<B>new</B>>, shape=oval fillcolor="lightgreen" style="filled"];
-  place_details [label=<<B>details</B>>, shape=oval fillcolor="lightgreen" style="filled"];
-  place_images_resized [label=<<B>images_resized</B>>, shape=oval fillcolor="lightgreen" style="filled"];
-  transition_0 [label=<<B>fetch_wiki</B><BR/><I>scrape wiki data</I><BR/>transport: official_fetch_wiki>, shape="box" regular=""];
-  transition_1 [label=<<B>resize</B><BR/><I>dispatch resize<BR/>request</I>>, shape="box" regular=""];
+  place_new [label=<<B>new</B><BR/><I>loaded from JSON</I>>, shape=oval fillcolor="lightgreen" style="filled"];
+  place_details [label=<<B>details</B><BR/><I>enhanced with<BR/>wikidata</I>>, shape=oval fillcolor="lightgreen" style="filled"];
+  place_images_resized [label=<<B>images_resized</B><BR/><I>resize requested(via<BR/>sais)</I>>, shape=oval fillcolor="lightgreen" style="filled"];
+  transition_0 [label=<<B>fetch_wiki</B><BR/><I>scrape wiki data</I><BR/>transport: official_fetch_wikiNext: resize>, shape="box" regular=""];
+  transition_1 [label=<<B>resize</B><BR/><I>dispatch resize to<BR/>sais</I>>, shape="box" regular=""];
   place_new -> transition_0 [style="solid", comment="new"];
   transition_0 -> place_details [style="solid"];
   place_details -> transition_1 [style="solid", comment="details"];
