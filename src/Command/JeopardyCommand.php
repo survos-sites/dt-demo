@@ -70,7 +70,7 @@ class JeopardyCommand
             $entity = $mapper->map($record, Jeopardy::class);
 
             $this->entityManager->persist($entity);
-            if (($progressBar->getProgress() % ($batch - 1)) === 0)
+            if (($progressBar->getProgress() % ($batch)) === 0)
             {
                 try {
                     $this->entityManager->flush();

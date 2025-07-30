@@ -13,18 +13,6 @@
             "src/ApiResource/.gitignore"
         ]
     },
-    "bizkit/versioning-bundle": {
-        "version": "1.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "1.0",
-            "ref": "ecb844d4e78c7e1834fb360fbb4d3846da02e581"
-        },
-        "files": [
-            "config/packages/bizkit_versioning.yaml"
-        ]
-    },
     "doctrine/deprecations": {
         "version": "1.1",
         "recipe": {
@@ -286,9 +274,6 @@
             "config/packages/survos_crawler.yaml",
             "config/routes/survos_crawler.yaml"
         ]
-    },
-    "survos/deployment-bundle": {
-        "version": "1.5.79"
     },
     "survos/html-prettify-bundle": {
         "version": "dev-main"

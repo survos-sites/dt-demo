@@ -1,21 +1,19 @@
 <?php
 
-namespace App\EventListener;
+namespace App\Menu;
 
 use App\Controller\CongressController;
-use App\Controller\TermCrudController;
 use App\Entity\Instrument;
 use App\Entity\Jeopardy;
 use App\Entity\Official;
-use App\Entity\Work;
 use Survos\BootstrapBundle\Event\KnpMenuEvent;
 use Survos\BootstrapBundle\Service\ContextService;
 use Survos\BootstrapBundle\Traits\KnpMenuHelperInterface;
 use Survos\BootstrapBundle\Traits\KnpMenuHelperTrait;
+use Survos\MeiliBundle\Service\MeiliService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use function Symfony\Component\String\u;
 
 #[AsEventListener(event: KnpMenuEvent::SIDEBAR_MENU, method: 'sidebarMenu')]
 #[AsEventListener(event: KnpMenuEvent::PAGE_MENU, method: 'pageMenu')]
@@ -23,7 +21,7 @@ use function Symfony\Component\String\u;
 #[AsEventListener(event: KnpMenuEvent::NAVBAR_MENU2, method: 'midNavbarMenu')]
 #[AsEventListener(event: KnpMenuEvent::NAVBAR_MENU3, method: 'lastNavbarMenu')]
 #[AsEventListener(event: KnpMenuEvent::FOOTER_MENU, method: 'footerMenu')]
-final class AppMenuMenuEventListener implements KnpMenuHelperInterface
+final class AppMenu implements KnpMenuHelperInterface
 {
     use KnpMenuHelperTrait;
 
@@ -31,6 +29,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
         private ContextService                 $contextService,
         #[Autowire('%kernel.environment%')] protected string $env,
         private ?AuthorizationCheckerInterface $security = null,
+        private MeiliService $meiliService,
     )
     {
     }
@@ -38,6 +37,7 @@ final class AppMenuMenuEventListener implements KnpMenuHelperInterface
     public function midNavbarMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
+        $this->add($menu, 'survos_workflow_entities', label: "*entities");
         foreach (['app_homepage'] as $route)
         {
             $this->add($menu, $route); // label: u($route)->after('app_')

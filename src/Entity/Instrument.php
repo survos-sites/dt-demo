@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\JeopardyRepository;
 use Doctrine\DBAL\Types\Types;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\ObjectMapper\Attribute\Map;
 use Symfony\Component\Serializer\Attribute\Groups;
 use function Symfony\Component\String\u;
@@ -28,6 +29,7 @@ use function Symfony\Component\String\u;
 )]
 #[ApiFilter(FacetsFieldSearchFilter::class, properties: ['type', 'genres','countries'])]
 #[Groups(['instrument.read'])]
+#[MeiliIndex()]
 class Instrument
 {
     #[Map(if: false)]

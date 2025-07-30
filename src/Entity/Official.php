@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Survos\WorkflowBundle\Traits\MarkingInterface;
 use Survos\WorkflowBundle\Traits\MarkingTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -67,6 +68,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 ]
 #[Groups(['official.read'])]
 #[UniqueEntity(['id'])]
+#[MeiliIndex()]
 class Official implements RouteParametersInterface, MarkingInterface
 {
     use RouteParametersTrait;

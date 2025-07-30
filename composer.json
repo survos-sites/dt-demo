@@ -39,7 +39,6 @@
         "survos/command-bundle": "^1.5",
         "survos/core-bundle": "^1.5",
         "survos/crawler-bundle": "^1.5",
-        "survos/deployment-bundle": "^1.5",
         "survos/html-prettify-bundle": "^1.5",
         "survos/inspection-bundle": "^1.5",
         "survos/meili-bundle": "dev-main",

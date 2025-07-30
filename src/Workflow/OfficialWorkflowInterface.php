@@ -16,7 +16,7 @@ interface OfficialWorkflowInterface
     public const PLACE_DETAILS = 'details';
     public const string PLACE_RESIZED = 'images_resized';
 
-    #[Transition([self::PLACE_NEW], self::PLACE_DETAILS, transport: 'official_fetch_wiki', info: "scrape wiki data")]
+    #[Transition([self::PLACE_NEW], self::PLACE_DETAILS, transport: 'official_fetch_wiki', info: "scrape wiki data",next: [self::TRANSITION_RESIZE])]
     public const TRANSITION_FETCH_WIKI = 'fetch_wiki';
 
     #[Transition([self::PLACE_DETAILS], self::PLACE_RESIZED, info: "dispatch resize request")]
