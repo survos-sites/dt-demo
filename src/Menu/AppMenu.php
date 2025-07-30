@@ -37,11 +37,11 @@ final class AppMenu implements KnpMenuHelperInterface
     public function midNavbarMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
-        $this->add($menu, 'survos_workflow_entities', label: "*entities");
         foreach (['app_homepage'] as $route)
         {
             $this->add($menu, $route); // label: u($route)->after('app_')
         }
+        $this->add($menu, 'survos_workflow_entities', label: "*entities");
         foreach ([Instrument::class, Official::class, Jeopardy::class] as $class) {
             $shortName = new \ReflectionClass($class)->getShortName();
             $this->add($menu, 'meili_insta', ['indexName' => 'dtdemo_' . $shortName], label: $shortName);
@@ -51,10 +51,13 @@ final class AppMenu implements KnpMenuHelperInterface
         if ($this->env === 'dev') {
             $this->add($menu, 'survos_commands', label: "Commands");
         }
-        $this->add($menu, 'app_credit', label: "Javascript Packages");
         $submenu = $this->addSubmenu($menu, 'Flysystem');
         foreach (['flysystem_browse_default'] as $route) {
             $this->add($submenu, $route);
+        }
+
+        foreach ($this->contextService->getConfig()['app']['social'] ?? [] as $platform => $value) {
+            $this->add($menu, uri: $value, label: $platform, external: true, icon: 'bi bi-' . $platform);
         }
 
 //        foreach (['app_credit'] as $route) {
@@ -64,6 +67,7 @@ final class AppMenu implements KnpMenuHelperInterface
 
     public function lastNavbarMenu(KnpMenuEvent $event): void
     {
+        return;
 //        <li class="nav-item">
 //                        <a target="_blank" rel="noopener" class="nav-link"
 //                           href="https://github.com/thomaspark/bootswatch/"><i class="bi bi-github"></i><span
@@ -95,25 +99,16 @@ final class AppMenu implements KnpMenuHelperInterface
 
     public function startNavbarMenu(KnpMenuEvent $event): void
     {
+        return;
         $menu = $event->getMenu();
         $options = $event->getOptions();
 
 
-        $nestedMenu = $this->addSubmenu($menu, 'App');
+        $this->add($menu, 'app_homepage', label: "Home");
         // app_simple?
-        foreach (['app_homepage', 'app_credit', 'app_grid'] as $route)
-        {
-            $this->add($nestedMenu, $route); // label: u($route)->after('app_')
-        }
 
-        $this->add($nestedMenu, 'api_doc', external: true);
+        $this->add($menu, 'api_doc', label: 'API', external: true);
         // for nested menus, don't add a route, just a label, then use it for the argument to addMenuItem
-
-//        $nestedMenu = $this->addSubmenu($menu, 'Credits');
-//        foreach (['bundles', 'javascript'] as $type) {
-//            // $this->addMenuItem($nestedMenu, ['route' => 'survos_base_credits', 'rp' => ['type' => $type], 'label' => ucfirst($type)]);
-//            $this->addMenuItem($nestedMenu, ['uri' => "#$type", 'label' => ucfirst($type)]);
-//        }
 
         foreach ([CongressController::class,
 //                     TermCrudController::class
@@ -140,9 +135,10 @@ final class AppMenu implements KnpMenuHelperInterface
         $menu = $event->getMenu();
         $options = $event->getOptions();
 
-        foreach (['app_homepage', 'app_credit', 'app_simple', 'app_grid'] as $route) {
+        foreach (['app_homepage'] as $route) {
             $this->add($menu, $route);
         }
+        return;
         $nestedMenu = $this->addSubmenu($menu, 'Credits');
         foreach (['bundles', 'javascript'] as $type) {
             // $this->addMenuItem($nestedMenu, ['route' => 'survos_base_credits', 'rp' => ['type' => $type], 'label' => ucfirst($type)]);
