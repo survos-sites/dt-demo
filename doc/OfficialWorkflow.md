@@ -1,12 +1,17 @@
+
 Markdown for OfficialWorkflow
 
 ![OfficialWorkflow.svg](OfficialWorkflow.svg)
 
 
 
-## fetch_wiki -- guard
+---
+## Transition: fetch_wiki
 
+### fetch_wiki.Guard
 
+        onGuard()
+        // scrape wiki data
 ```php
 #[AsGuardListener(self::WORKFLOW_NAME, self::TRANSITION_FETCH_WIKI)]
 public function onGuard(GuardEvent $event): void
@@ -17,13 +22,12 @@ public function onGuard(GuardEvent $event): void
     }
 }
 ```
-blob/main/src/Workflow/OfficialWorkflow.php#L49-55
-        
+[View source](dt-demo/blob/main/src/Workflow/OfficialWorkflow.php#L49-L55)
 
+### fetch_wiki.Transition
 
-## fetch_wiki -- transition
-
-
+        onFetchWiki()
+        // scrape wiki data
 ```php
 #[AsTransitionListener(self::WORKFLOW_NAME, self::TRANSITION_FETCH_WIKI)]
 public function onFetchWiki(TransitionEvent $event): void
@@ -34,12 +38,18 @@ public function onFetchWiki(TransitionEvent $event): void
     $official->setWikiData($wikiData->toArray());
 }
 ```
-blob/main/src/Workflow/OfficialWorkflow.php#L58-64
-        
-
-## resize -- transition
+[View source](dt-demo/blob/main/src/Workflow/OfficialWorkflow.php#L58-L64)
 
 
+
+
+---
+## Transition: resize
+
+### resize.Transition
+
+        onResize()
+        // dispatch resize to sais
 ```php
     #[AsTransitionListener(self::WORKFLOW_NAME, self::TRANSITION_RESIZE)]
     public function onResize(TransitionEvent $event): void
@@ -68,5 +78,6 @@ blob/main/src/Workflow/OfficialWorkflow.php#L58-64
         }
     }
 ```
-blob/main/src/Workflow/OfficialWorkflow.php#L67-91
-        
+[View source](dt-demo/blob/main/src/Workflow/OfficialWorkflow.php#L67-L91)
+
+
