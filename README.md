@@ -23,9 +23,10 @@ symfony check:req
 bin/console d:sch:update --force --complete
 bin/console cache:pool:clear cache.app
 bin/console init:congress --limit 50 
+# not needed!  meili automatically updated, but need to consume the meili queue
 bin/console meili:index Official
 # this loads the wiki data.
-bin/console workflow:iterate App\\Entity\\Official --marking=new --transition=load
+bin/console workflow:iterate Official --marking=new --transition=fetch_wiki
 # dispatch the resize
 bin/console workflow:iterate App\\Entity\\Official --marking=details --transition=resize
 

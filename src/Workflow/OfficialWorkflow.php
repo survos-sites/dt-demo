@@ -33,15 +33,9 @@ final class OfficialWorkflow implements OfficialWorkflowInterface
 {
 
     public function __construct(
-        private WikiService                              $wikiService,
-        private FilesystemOperator                       $defaultStorage,
-        private UrlGeneratorInterface                    $urlGenerator,
-        private MessageBusInterface                      $messageBus,
-        #[Target(self::WORKFLOW_NAME)] private WorkflowInterface $officialWorkflow,
-//        private SaisClientService                        $aisClientService,
-        private EntityManagerInterface                   $entityManager,
-        private readonly SaisClientService               $saisClientService,
-        // add services
+        private readonly WikiService           $wikiService,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly SaisClientService     $saisClientService,
     )
     {
     }
@@ -54,6 +48,7 @@ final class OfficialWorkflow implements OfficialWorkflowInterface
     #[AsGuardListener(self::WORKFLOW_NAME, self::TRANSITION_FETCH_WIKI)]
     public function onGuard(GuardEvent $event): void
     {
+        // @todo: move to guard: in workflow
         if (!$this->getOfficial($event)->getWikidataId()) {
             $event->setBlocked(true, "missing wiki id.");
         }
@@ -63,31 +58,10 @@ final class OfficialWorkflow implements OfficialWorkflowInterface
     public function onFetchWiki(TransitionEvent $event): void
     {
         $official = $this->getOfficial($event);
-        $filesystem = $this->defaultStorage;
         $this->wikiService->setCacheTimeout(60 * 60 * 24);
         $wikiData = $this->wikiService->fetchWikidataPage($official->getWikidataId());
         $official->setWikiData($wikiData->toArray());
     }
-
-    #[AsCompletedListener(self::WORKFLOW_NAME, self::TRANSITION_FETCH_WIKI)]
-    public function onFetchWikiCompleted(CompletedEvent $event): void
-    {
-        $this->entityManager->flush();
-        $this->entityManager->clear();
-        // this is because Properties is an Illuminate collection and needs to be an array
-        $official = $this->entityManager->find(Official::class, $this->getOfficial($event)->getId());
-        foreach ([self::TRANSITION_RESIZE] as $nextTransition) {
-            if ($this->officialWorkflow->can($official, $nextTransition)) {
-                $env = $this->messageBus->dispatch(new TransitionMessage(
-                    $official->getId(),
-                    $official::class,
-                    $nextTransition,
-                    self::WORKFLOW_NAME,
-                ));
-            }
-        }
-    }
-
 
     #[AsTransitionListener(self::WORKFLOW_NAME, self::TRANSITION_RESIZE)]
     public function onResize(TransitionEvent $event): void

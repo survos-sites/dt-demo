@@ -12,6 +12,7 @@ use App\Repository\JeopardyRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\ObjectMapper\Attribute\Map;
 use Symfony\Component\Serializer\Attribute\Groups;
 use function Symfony\Component\String\u;
@@ -35,7 +36,8 @@ use function Symfony\Component\String\u;
     properties: ['category', 'value', 'monthIndex'])]
 #[Groups(['jeopardy.read'])]
 #[ApiProperty(extraProperties: ['list' => ['label','category','value']])]
-class Jeopardy
+#[MeiliIndex()]
+class Jeopardy implements \Stringable
 {
     public function __construct(
         #[ORM\Id]
@@ -111,4 +113,8 @@ class Jeopardy
     }
 
 
+    public function __toString(): string
+    {
+        return $this->answer;
+    }
 }
