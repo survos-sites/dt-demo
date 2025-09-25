@@ -10,9 +10,10 @@ use Illuminate\Support\Collection;
 use League\Flysystem\FilesystemOperator;
 use Survos\SaisBundle\Model\ProcessPayload;
 use Survos\SaisBundle\Service\SaisClientService;
+use Survos\WikiBundle\Service\WikidataService;
 use Survos\WikiBundle\Service\WikiService;
-use Survos\WorkflowBundle\Attribute\Workflow;
-use Survos\WorkflowBundle\Message\TransitionMessage;
+use Survos\StateBundle\Attribute\Workflow;
+use Survos\StateBundle\Message\TransitionMessage;
 use Symfony\Component\DependencyInjection\Attribute\Target;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Workflow\Attribute\AsCompletedListener;
@@ -24,16 +25,16 @@ use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Event\TransitionEvent;
 use Symfony\Component\Workflow\WorkflowInterface;
 use Wikidata\Value;
+use App\Workflow\OfficialWorkflowInterface as WF;
 
 
 // See events at https://symfony.com/doc/current/workflow.html#using-events
 
-#[Workflow(supports: [Official::class], name: self::WORKFLOW_NAME)]
-final class OfficialWorkflow implements OfficialWorkflowInterface
+final class OfficialWorkflow
 {
 
     public function __construct(
-        private readonly WikiService           $wikiService,
+        private readonly WikidataService           $wikiService,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly SaisClientService     $saisClientService,
     )
@@ -45,7 +46,7 @@ final class OfficialWorkflow implements OfficialWorkflowInterface
         /** @var Official */ return $event->getSubject();
     }
 
-    #[AsGuardListener(self::WORKFLOW_NAME, self::TRANSITION_FETCH_WIKI)]
+    #[AsGuardListener(WF::WORKFLOW_NAME, WF::TRANSITION_FETCH_WIKI)]
     public function onGuard(GuardEvent $event): void
     {
         // @todo: move to guard: in workflow
@@ -54,16 +55,16 @@ final class OfficialWorkflow implements OfficialWorkflowInterface
         }
     }
 
-    #[AsTransitionListener(self::WORKFLOW_NAME, self::TRANSITION_FETCH_WIKI)]
+    #[AsTransitionListener(WF::WORKFLOW_NAME, WF::TRANSITION_FETCH_WIKI)]
     public function onFetchWiki(TransitionEvent $event): void
     {
         $official = $this->getOfficial($event);
-        $this->wikiService->setCacheTimeout(60 * 60 * 24);
-        $wikiData = $this->wikiService->fetchWikidataPage($official->getWikidataId());
-        $official->setWikiData($wikiData->toArray());
+//        $this->wikiService->setCacheTimeout(60 * 60 * 24);
+        $wikiData = $this->wikiService->get($official->getWikidataId());
+        $official->setWikiData($wikiData);
     }
 
-    #[AsTransitionListener(self::WORKFLOW_NAME, self::TRANSITION_RESIZE)]
+    #[AsTransitionListener(WF::WORKFLOW_NAME, WF::TRANSITION_RESIZE)]
     public function onResize(TransitionEvent $event): void
     {
         $official = $this->getOfficial($event);

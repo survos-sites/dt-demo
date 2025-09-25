@@ -109,6 +109,9 @@
             "config/packages/doctrine_diagram.yaml"
         ]
     },
+    "jwage/phpamqplib-messenger": {
+        "version": "0.8.5"
+    },
     "knplabs/knp-menu-bundle": {
         "version": "v3.2.0"
     },
@@ -299,11 +302,11 @@
     "survos/sitemap-parser-bundle": {
         "version": "1.5.133"
     },
+    "survos/state-bundle": {
+        "version": "1.5.600"
+    },
     "survos/wiki-bundle": {
         "version": "1.5.124"
-    },
-    "survos/workflow-helper-bundle": {
-        "version": "1.5.376"
     },
     "symfony/asset-mapper": {
         "version": "7.3",

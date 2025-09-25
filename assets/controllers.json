@@ -9,6 +9,10 @@
                 "enabled": true,
                 "fetch": "eager"
             },
+            "backgroundsync-queue": {
+                "enabled": false,
+                "fetch": "eager"
+            },
             "badge": {
                 "enabled": false,
                 "fetch": "eager"
@@ -142,12 +146,6 @@
                 "autoimport": {
                     "@survos/simple-datatables/style.css": true
                 }
-            }
-        },
-        "@survos/workflow-helper-bundle": {
-            "workflow": {
-                "enabled": true,
-                "fetch": "eager"
             }
         }
     },

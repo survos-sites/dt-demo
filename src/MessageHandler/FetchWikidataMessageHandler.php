@@ -12,6 +12,7 @@ use Psr\Log\LoggerInterface;
 use Survos\ImageClientBundle\Service\ImageClientService;
 use Survos\SaisBundle\Model\ProcessPayload;
 use Survos\SaisBundle\Service\SaisClientService;
+use Survos\WikiBundle\Service\WikidataService;
 use Survos\WikiBundle\Service\WikiService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -24,7 +25,7 @@ final class FetchWikidataMessageHandler
 {
 
     public function __construct(
-        private WikiService                                $wikiService,
+        private WikidataService                                $wikiService,
         private EntityManagerInterface                     $entityManager,
         private SaisClientService                          $imageClientService,
         private FilesystemOperator                         $defaultStorage,
