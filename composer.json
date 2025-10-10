@@ -20,6 +20,7 @@
         "doctrine/doctrine-bundle": "^2.10.2",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^3.4.2",
+        "easycorp/easyadmin-bundle": "^4.24",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "inspector-apm/inspector-symfony": "^1.8",
         "league/csv": "^9.24",
