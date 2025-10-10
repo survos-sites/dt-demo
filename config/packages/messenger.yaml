@@ -3,28 +3,28 @@ framework:
         failure_transport: failed
 
         transports:
-            _base_rabbitmq: &base_rabbitmq
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-#                serializer: messenger.transport.symfony_serializer
-                retry_strategy:
-                    max_retries: 3
-                    multiplier: 2
-
-            official_fetch_wiki:
-                <<: *base_rabbitmq
-                options:
-                    queues:
-                        official_fetch_wiki: ~
-
+#            _base_rabbitmq: &base_rabbitmq
+#                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+##                serializer: messenger.transport.symfony_serializer
+#                retry_strategy:
+#                    max_retries: 3
+#                    multiplier: 2
+#
+#            official_fetch_wiki:
+#                <<: *base_rabbitmq
+#                options:
+#                    queues:
+#                        official_fetch_wiki: ~
+#
 
             # https://symfony.com/doc/current/messenger.html#transport-configuration
 #            official_fetch_wiki:
 #                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-            async:
+            meili:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-                options:
-                    queues:
-                        async: ~
+#                options:
+#                    queues:
+#                        async: ~
 # these are doctrine only
 #                options:
 #                    use_notify: true
@@ -38,10 +38,10 @@ framework:
             messenger.bus.default: []
 
         routing:
-            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
-            Symfony\Component\Notifier\Message\ChatMessage: async
-            Symfony\Component\Notifier\Message\SmsMessage: async
-            Survos\MeiliBundle\Message\BatchIndexEntitiesMessage: async
+#            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
+#            Symfony\Component\Notifier\Message\ChatMessage: async
+#            Symfony\Component\Notifier\Message\SmsMessage: async
+            Survos\MeiliBundle\Message\BatchIndexEntitiesMessage: meili
 
             # Route your messages to the transports
             # 'App\Message\YourMessage': async

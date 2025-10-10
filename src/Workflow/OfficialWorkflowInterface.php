@@ -2,12 +2,15 @@
 
 namespace App\Workflow;
 
-use Survos\WorkflowBundle\Attribute\Place;
-use Survos\WorkflowBundle\Attribute\Transition;
+use App\Entity\Official;
+use Survos\StateBundle\Attribute\Place;
+use Survos\StateBundle\Attribute\Transition;
+use Survos\StateBundle\Attribute\Workflow;
 
 // See events at https://symfony.com/doc/current/workflow.html#using-events
 
-interface OfficialWorkflowInterface
+#[Workflow(supports: [Official::class], name: self::WORKFLOW_NAME)]
+class OfficialWorkflowInterface
 {
     // This name is used for injecting the workflow into a service
     // #[Target(OfficialWorkflowInterface::WORKFLOW_NAME)] private WorkflowInterface $workflow

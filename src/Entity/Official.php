@@ -21,8 +21,8 @@ use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
-use Survos\WorkflowBundle\Traits\MarkingInterface;
-use Survos\WorkflowBundle\Traits\MarkingTrait;
+use Survos\StateBundle\Traits\MarkingInterface;
+use Survos\StateBundle\Traits\MarkingTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Serializer\Attribute\SerializedName;
@@ -151,7 +151,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $originalImageUrl = null;
 
-    public function __construct(string $id)
+    public function Festruct(string $id)
     {
         $this->id = $id;
         $this->marking = OfficialWorkflowInterface::PLACE_NEW;
