@@ -45,4 +45,5 @@ return [
     Survos\StateBundle\SurvosStateBundle::class => ['all' => true],
     Zenstruck\Messenger\Monitor\ZenstruckMessengerMonitorBundle::class => ['all' => true],
     Jwage\PhpAmqpLibMessengerBundle\PhpAmqpLibMessengerBundle::class => ['all' => true],
+    Survos\EzBundle\SurvosEzBundle::class => ['all' => true],
 ];

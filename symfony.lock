@@ -290,6 +290,9 @@
             "config/routes/survos_crawler.yaml"
         ]
     },
+    "survos/ez-bundle": {
+        "version": "2.0.19"
+    },
     "survos/html-prettify-bundle": {
         "version": "dev-main"
     },
