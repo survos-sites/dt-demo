@@ -32,11 +32,14 @@ use function Symfony\Component\String\u;
     'monthIndex',
 ])]
 
-#[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['category', 'value', 'monthIndex'])]
+//#[ApiFilter(FacetsFieldSearchFilter::class,
+//    properties: ['category', 'value', 'monthIndex'])]
 #[Groups(['jeopardy.read'])]
 #[ApiProperty(extraProperties: ['list' => ['label','category','value']])]
-#[MeiliIndex()]
+#[MeiliIndex(
+    filterable: ['category', 'value', 'monthIndex'],
+    sortable: ['value', 'monthIndex'],
+)]
 class Jeopardy implements \Stringable
 {
     public function __construct(

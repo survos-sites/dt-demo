@@ -68,7 +68,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 ]
 #[Groups(['official.read'])]
 #[UniqueEntity(['id'])]
-#[MeiliIndex()]
+#[MeiliIndex(
+    filterable: ['gender','house','currentParty','state','marking'],
+)]
 class Official implements RouteParametersInterface, MarkingInterface
 {
     use RouteParametersTrait;
@@ -79,7 +81,6 @@ class Official implements RouteParametersInterface, MarkingInterface
     #[ORM\Id]
     #[ApiProperty("the wikiCode is unique, so we use it", identifier: true)]
     #[ORM\Column(type: Types::STRING)]
-    #[SerializedName('id')]
     private string $id;
 
     public function setId(string $id): void
@@ -151,7 +152,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $originalImageUrl = null;
 
-    public function Festruct(string $id)
+    public function __construct(string $id)
     {
         $this->id = $id;
         $this->marking = OfficialWorkflowInterface::PLACE_NEW;

@@ -12,6 +12,9 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Repository\JeopardyRepository;
 use Doctrine\DBAL\Types\Types;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
+use Survos\MeiliBundle\Metadata\Facet;
+use Survos\MeiliBundle\Metadata\Fields;
+use Survos\MeiliBundle\Metadata\Select;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
 use Symfony\Component\ObjectMapper\Attribute\Map;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -27,12 +30,20 @@ use function Symfony\Component\String\u;
         'groups' => ['instrument.read'],
     ]
 )]
-#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['type', 'genres','countries'])]
+// old way, use API Platform
+//#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['type', 'genres','countries'])]
+// since no relations, this gets ALL the properties
 #[Groups(['instrument.read'])]
-#[MeiliIndex()]
+#[MeiliIndex(
+    persisted: new Fields(
+        groups: ['instrument.read','marking.read'],
+    ),
+    filterable: ['type', 'genres','countries']
+)]
 class Instrument
 {
     #[Map(if: false)]
+    #[Facet(format: 'flag', showMoreThreshold: 9)]
     #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
     public array $countries=[]; // really country codes
     public function __construct(
@@ -55,6 +66,7 @@ class Instrument
         public /* private(set) */ ?string $type,
 
         #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
+
         public private(set) array $tags,
 
         #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
@@ -75,6 +87,8 @@ class Instrument
     {
 
     }
+
+    public string $snippet { get => mb_substr($this->description, 0, 60); }
 
     private function addRelations(array $relations): array {
     {

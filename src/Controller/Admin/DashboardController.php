@@ -3,16 +3,27 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Instrument;
+use App\Entity\Jeopardy;
 use App\Entity\Official;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Meilisearch\Meilisearch;
+use Survos\MeiliBundle\Service\MeiliService;
 use Symfony\Component\HttpFoundation\Response;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private readonly MeiliService $meiliService,
+    )
+    {
+    }
+
     public function index(): Response
     {
 //        return parent::index();
@@ -47,8 +58,19 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Official', 'fas fa-list', Official::class);
-        yield MenuItem::linkToCrud('Instrument', 'fas fa-list', Instrument::class);
+        foreach ($this->meiliService->indexedByClass() as $class => $indexes) {
+            $shortName = new \ReflectionClass($class)->getShortName();
+            yield MenuItem::linkToCrud($shortName, 'fas fa-database', $class)
+                ->setBadge($this->entityManager->getRepository($class)->count());
+            foreach ($indexes as $indexName => $index) {
+                yield MenuItem::linkToRoute(
+                    $index['rawName'],
+                    'fas fa-search',
+                    'meili_insta',
+                    ['indexName' => $indexName])
+                    ->setLinkTarget('_blank');
+            }
+        }
         yield MenuItem::linkToRoute('Home', 'fas fa-home', 'app_homepage');
     }
 }

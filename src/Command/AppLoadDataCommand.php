@@ -58,12 +58,6 @@ final class AppLoadDataCommand
             }
         }
 
-        // make sure we have a sais account!
-        $this->saisClientService->accountSetup(new AccountSetup(
-            self::SAIS_CLIENT,
-            3000
-        ));
-
         $io->info("fetching data..." . $url);
         $json = $this->cache->get(md5($url), fn(CacheItem $cacheItem) => (string)file_get_contents($url));
 //        dd($json);

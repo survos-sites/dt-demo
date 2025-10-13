@@ -32,7 +32,7 @@ class MusicCommand
         SymfonyStyle $io,
         #[Option('the directory for local (downloaded) files')]
 //        string       $directory = 'data/music/',
-        string       $directory = '/media/tac/9C382A5C382A3624/Data/music/',
+        string       $directory = '/mnt/data/music/',
         #[Option('filter downloaded files, e.g. genre|artist')]
         ?string      $entity = null,
         #[Option('fetch the latest data')] ?bool        $refresh = null,
@@ -47,7 +47,7 @@ class MusicCommand
         $latest = trim(file_get_contents('https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/LATEST'));
 
         $base = 'https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/' . $latest . '/';
-        if (0) {
+        if (true) {
             $html = file_get_contents($base);
             preg_match_all('/"(.*?).tar.xz"/', $html, $matches, PREG_SET_ORDER);
             foreach ($matches as $match) {
@@ -131,7 +131,7 @@ class MusicCommand
         if (file_exists($ndJson)) {
             return  $ndJson;
         }
-        return  $ndJson;
+//        return  $ndJson;
         if ($refresh || !file_exists($outFilename)) {
             if (false === $fp = fopen($outFilename, 'wb')) {
                 $io->error("Cannot open $outPath for writing.");
