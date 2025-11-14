@@ -4,7 +4,7 @@
     "keywords": ["symfony","datatables.net","api-platform"],
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "dev",
+    "minimum-stability": "RC",
     "prefer-stable": true,
     "require": {
         "php": "^8.4",
@@ -17,13 +17,13 @@
         "ext-sodium": "*",
         "ext-sqlite3": "*",
         "api-platform/core": "^4.0",
-        "doctrine/doctrine-bundle": "^2.10.2",
+        "doctrine/doctrine-bundle": "^3.0",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^3.4.2",
         "easycorp/easyadmin-bundle": "^4.24",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "inspector-apm/inspector-symfony": "^1.8",
-        "jwage/phpamqplib-messenger": "^0.8.5",
+        "jwage/phpamqplib-messenger": "^0.9.0",
         "league/csv": "^9.24",
         "league/flysystem-aws-s3-v3": "^3.22",
         "league/flysystem-bundle": "^3.3",
@@ -138,7 +138,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": "true",
-            "require": "^7.3"
+            "require": "^7.4"
         }
     },
     "require-dev": {
@@ -162,7 +162,7 @@
         "symfony/phpunit-bridge": "^7.0",
         "symfony/stopwatch": "^7.0",
         "symfony/web-profiler-bundle": "^7.0",
-        "symplify/easy-coding-standard": "^12.0",
+        "symplify/easy-coding-standard": "^13.0",
         "vincentlanglet/twig-cs-fixer": "^3.0",
         "zenstruck/browser": "^1.8"
     },
