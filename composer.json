@@ -64,7 +64,7 @@
         "symfony/intl": "^7.0",
         "symfony/mailer": "^7.0",
         "symfony/mime": "^7.0",
-        "symfony/monolog-bundle": "^4.x-dev",
+        "symfony/monolog-bundle": "^4.x-dever",
         "symfony/notifier": "^7.0",
         "symfony/object-mapper": "^7.3",
         "symfony/process": "^7.0",
