@@ -137,7 +137,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": "true",
+            "allow-contrib": "false",
             "require": "^7.4"
         },
         "paas": {
