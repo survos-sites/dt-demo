@@ -23,6 +23,7 @@
         "easycorp/easyadmin-bundle": "^4.24",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "inspector-apm/inspector-symfony": "^1.8",
+        "jolicode/castor": "^1.0",
         "jwage/phpamqplib-messenger": "^0.9.0",
         "league/csv": "^9.24",
         "league/flysystem-aws-s3-v3": "^3.22",

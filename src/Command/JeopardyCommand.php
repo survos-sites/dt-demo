@@ -13,8 +13,10 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\ObjectMapper\ObjectMapper;
+use Castor\Attribute\AsSymfonyTask;
 
 #[AsCommand('app:jeopardy', 'Import 200k jeopardy questions')]
+#[AsSymfonyTask('jeopardy')]
 class JeopardyCommand
 {
     public function __construct(

@@ -20,8 +20,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
+use Castor\Attribute\AsSymfonyTask;
 
 #[AsCommand('init:congress', 'Load the congressional data')]
+#[AsSymfonyTask('congress')]
 final class AppLoadDataCommand
 {
     public const SAIS_CLIENT='dtDemo_Officials';
