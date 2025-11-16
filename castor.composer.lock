@@ -1,0 +1,62 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c9e42b3603c28b0cff333058c6e2e85c",
+    "packages": [
+        {
+            "name": "tacman/castor-tools",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tacman/castor-tools.git",
+                "reference": "7d4369a06d7a1947e6ce44c21093f0a6f529e11b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tacman/castor-tools/zipball/7d4369a06d7a1947e6ce44c21093f0a6f529e11b",
+                "reference": "7d4369a06d7a1947e6ce44c21093f0a6f529e11b",
+                "shasum": ""
+            },
+            "require-dev": {
+                "jolicode/castor": "^1.0"
+            },
+            "type": "castor-plugin",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Tacman\\CastorTools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tac Tacelosky",
+                    "email": "tacman@gmail.com"
+                }
+            ],
+            "description": "Extend castor with some common tools",
+            "support": {
+                "issues": "https://github.com/tacman/castor-tools/issues",
+                "source": "https://github.com/tacman/castor-tools/tree/1.0.0"
+            },
+            "time": "2025-10-25T12:09:18+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

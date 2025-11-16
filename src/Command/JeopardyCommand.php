@@ -36,7 +36,10 @@ class JeopardyCommand
         #[Option('purge the table first')] ?bool               $reset = null,
     ): int
     {
-        $url = 'https://github.com/jwolle1/jeopardy_clue_dataset/raw/refs/heads/main/combined_season1-40.tsv';
+        $url = 'https://github.com/jwolle1/jeopardy_clue_dataset/raw/refs/heads/main/combined_season1-41.tsv';
+        if (!file_exists(dirname($filename))) {
+            mkdir(dirname($filename), 0777, recursive: true);
+        }
         if (!file_exists($filename)) {
             $io->writeln("Fetching " . $filename);
             file_put_contents($filename, file_get_contents($url));
