@@ -25,7 +25,6 @@ use function Symfony\Component\String\u;
     operations: [
         new Get(),
         new GetCollection()],
-//    shortName: 'jeopardy',
     normalizationContext: [
         'groups' => ['instrument.read'],
     ]
