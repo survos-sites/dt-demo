@@ -28,8 +28,8 @@ final class AppMenu implements KnpMenuHelperInterface
     public function __construct(
         private ContextService                 $contextService,
         #[Autowire('%kernel.environment%')] protected string $env,
-        private ?AuthorizationCheckerInterface $security = null,
         private MeiliService $meiliService,
+        private ?AuthorizationCheckerInterface $security = null,
     )
     {
     }

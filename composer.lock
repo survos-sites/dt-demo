@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05f96480d248470d7977f88f9441fc26",
+    "content-hash": "49be3d02935a830ed1e3282ab72310aa",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1094,16 +1094,16 @@
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "49ecc564568d7da101779112579e78b677fbc94a"
+                "reference": "1e380c6dd8ac8488217f39cff6b77e367f1a644b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/49ecc564568d7da101779112579e78b677fbc94a",
-                "reference": "49ecc564568d7da101779112579e78b677fbc94a",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/1e380c6dd8ac8488217f39cff6b77e367f1a644b",
+                "reference": "1e380c6dd8ac8488217f39cff6b77e367f1a644b",
                 "shasum": ""
             },
             "require": {
@@ -1159,7 +1159,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineMigrationsBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.6.0"
+                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.7.0"
             },
             "funding": [
                 {
@@ -1175,7 +1175,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-07T19:40:03+00:00"
+            "time": "2025-11-15T19:02:59+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -5920,110 +5920,6 @@
             "time": "2025-09-24T13:41:01+00:00"
         },
         {
-            "name": "spomky-labs/pwa-bundle",
-            "version": "1.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Spomky-Labs/pwa-bundle.git",
-                "reference": "3530dc2c02544e7f7518d4dfab28b1615630ae27"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Spomky-Labs/pwa-bundle/zipball/3530dc2c02544e7f7518d4dfab28b1615630ae27",
-                "reference": "3530dc2c02544e7f7518d4dfab28b1615630ae27",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "phpdocumentor/reflection-docblock": "^5.3",
-                "psr/log": "^1.1|^2.0|^3.0",
-                "symfony/asset": "^6.4|^7.0",
-                "symfony/asset-mapper": "^6.4|^7.0",
-                "symfony/config": "^6.4|^7.0",
-                "symfony/dependency-injection": "^6.4|^7.0",
-                "symfony/deprecation-contracts": "^3.5",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/property-access": "^6.4|^7.0",
-                "symfony/property-info": "^6.4|^7.0",
-                "symfony/routing": "^6.4|^7.0",
-                "symfony/serializer": "^6.4|^7.0",
-                "symfony/service-contracts": "^3.0",
-                "twig/twig": "^3.8"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-config-test": "^5.1|^6.0",
-                "nelmio/security-bundle": "^3.0",
-                "symfony/console": "^7.2",
-                "symfony/filesystem": "^7.1",
-                "symfony/framework-bundle": "^6.4|^7.0",
-                "symfony/mime": "^6.4|^7.0",
-                "symfony/monolog-bundle": "^3.10",
-                "symfony/translation": "^7.0",
-                "symfony/ux-icons": "^2.29",
-                "symfony/yaml": "^6.4|^7.0"
-            },
-            "suggest": {
-                "ext-gd": "Required to generate icons (or Imagick).",
-                "ext-imagick": "Required to generate icons (or GD).",
-                "symfony/filesystem": "For generating and manipulating icons or screenshots",
-                "symfony/mime": "For generating and manipulating icons or screenshots",
-                "symfony/ux-icons": "For using SVG icons (e.g. for shortcuts)"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "thanks": {
-                    "url": "https://github.com/spomky-labs/pwa-bundle",
-                    "name": "spomky-labs/pwa-bundle"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SpomkyLabs\\PwaBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Florent Morselli",
-                    "homepage": "https://github.com/Spomky"
-                },
-                {
-                    "name": "All contributors",
-                    "homepage": "https://github.com/spomky-labs/pwa-bundle/contributors"
-                }
-            ],
-            "description": "Progressive Web App Manifest Generator Bundle for Symfony.",
-            "homepage": "https://github.com/spomky-labs",
-            "keywords": [
-                "bundle",
-                "pwa",
-                "symfony",
-                "symfony-ux"
-            ],
-            "support": {
-                "issues": "https://github.com/Spomky-Labs/pwa-bundle/issues",
-                "source": "https://github.com/Spomky-Labs/pwa-bundle/tree/1.3.5"
-            },
-            "funding": [
-                {
-                    "url": "https://www.buymeacoffee.com/FlorentMorselli",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/Spomky",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/FlorentMorselli",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2025-10-26T00:12:45+00:00"
-        },
-        {
             "name": "sunaoka/ndjson",
             "version": "1.1.6",
             "source": {
@@ -8916,16 +8812,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v2.9.0",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "94b37978c9982dc41c5b6a4147892d2d3d1b9ce6"
+                "reference": "9cd384775973eabbf6e8b05784dda279fc67c28d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/94b37978c9982dc41c5b6a4147892d2d3d1b9ce6",
-                "reference": "94b37978c9982dc41c5b6a4147892d2d3d1b9ce6",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/9cd384775973eabbf6e8b05784dda279fc67c28d",
+                "reference": "9cd384775973eabbf6e8b05784dda279fc67c28d",
                 "shasum": ""
             },
             "require": {
@@ -8933,7 +8829,8 @@
                 "php": ">=8.1"
             },
             "conflict": {
-                "composer/semver": "<1.7.2"
+                "composer/semver": "<1.7.2",
+                "symfony/dotenv": "<5.4"
             },
             "require-dev": {
                 "composer/composer": "^2.1",
@@ -8964,7 +8861,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v2.9.0"
+                "source": "https://github.com/symfony/flex/tree/v2.10.0"
             },
             "funding": [
                 {
@@ -8984,7 +8881,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-31T15:22:50+00:00"
+            "time": "2025-11-16T09:38:19+00:00"
         },
         {
             "name": "symfony/form",

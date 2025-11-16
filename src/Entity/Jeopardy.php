@@ -55,6 +55,12 @@ class Jeopardy implements \Stringable
             set => self::cleanup($value);
         },
 
+        #[ORM\Column(length: 255)]
+        public /* private(set) */ string $category {
+            set => self::cleanupCategory($value);
+        },
+
+
         #[ORM\Column(type: Types::DATE_MUTABLE)]
         #[Map(source: 'air_date')] // , transform: [\DateTimeImmutable::class, 'createFromFormat'])]
         // this _might_ be better outside the constructor
@@ -66,21 +72,16 @@ class Jeopardy implements \Stringable
 
         #[ORM\Column(length: 255)]
         #[ApiProperty(extraProperties: ['list' => true])]
-        public ?string    $answer = null {
+        public ?string $answer = null {
             set {
 //                if (strlen($value) >= 244) { dd($value); }
                 $this->answer = mb_substr($value, 0, 255);
             }
         },
 
-        #[ORM\Column(length: 255)]
-        public /* private(set) */ string $category {
-            set => self::cleanupCategory($value);
-        },
-
         #[ORM\Column(type: Types::INTEGER, nullable: true)]
         #[Map(source: 'clue_value')]
-        public /* private(set) */ int|string|null $value {
+        public /* private(set) */ int|string|null $value = null {
             set => $value ? (int)str_replace('$', '', $value): 0;
         },
 

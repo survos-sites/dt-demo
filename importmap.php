@@ -426,9 +426,6 @@ return [
     'idb-keyval' => [
         'version' => '6.2.2',
     ],
-    '@spomky-labs/pwa/helpers' => [
-        'path' => './vendor/spomky-labs/pwa-bundle/assets/src/helpers.js',
-    ],
     'debug' => [
         'version' => '4.4.3',
     ],
