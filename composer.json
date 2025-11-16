@@ -139,6 +139,14 @@
         "symfony": {
             "allow-contrib": "true",
             "require": "^7.4"
+        },
+        "paas": {
+            "php-config": [
+                "memory_limit=1024M",
+                "max_execution_time=60",
+                "post_max_size=128M",
+                "upload_max_filesize=128M"
+            ]
         }
     },
     "require-dev": {
