@@ -2,3 +2,17 @@ survos_meili:
     host: '%env(default::MEILI_SERVER)%'
     apiKey: '%env(default::MEILI_API_KEY)%'
     searchKey: '%env(default::MEILI_SEARCH_KEY)%'
+    embedders:
+#        small_product: # for testing, as cheap as possible
+#            source: 'openAi'
+#            model: 'text-embedding-3-small' # 2 cents/million tokens
+#            apiKey: '%env(OPENAI_API_KEY)%'
+#            template: 'templates/liquid/product.liquid'
+        product:
+            source: 'openAi'
+            model: 'text-embedding-3-large' # 13 cents/million tokens
+            apiKey: '%env(OPENAI_API_KEY)%'
+            template: 'templates/liquid/product.liquid'
+            examples:
+                - cool gifts for a tech executive
+                - things to decorate an apartment

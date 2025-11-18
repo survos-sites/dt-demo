@@ -37,6 +37,7 @@
         "sentry/sentry-symfony": "^4.12|^5.0",
         "sunaoka/ndjson": "^1.1",
         "survos/auth-bundle": "^2.0",
+        "survos/babel-bundle": "^2.0",
         "survos/bootstrap-bundle": "^2.0",
         "survos/command-bundle": "^2.0",
         "survos/core-bundle": "^2.0",

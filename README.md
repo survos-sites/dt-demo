@@ -1,4 +1,4 @@
-## Complete datatables-demo project, Symfony 7.0
+## Various Meilisearch datasets
 
 ### Requirements
 
@@ -6,6 +6,7 @@
 * composer
 * MeiliSearch
 * Symfony CLI
+* Castor 
 
 With docker, installing meilisearch is easy.  
 
@@ -16,12 +17,15 @@ sudo docker run --rm --name meili -d -p 7700:7700 -v $(pwd)/../meili_data:/meili
 ## Install the application
 
 ```bash
-git clone git@github.com:survos-sites/dt-demo && cd dt-demo
+git clone git@github.com:survos-sites/meili && cd meili
 composer install
 symfony check:req
+
+
 # if using sqlite
 bin/console d:sch:update --force --complete
 bin/console cache:pool:clear cache.app
+
 bin/console init:congress --limit 50 
 # not needed!  meili automatically updated, but need to consume the meili queue
 bin/console meili:index Official

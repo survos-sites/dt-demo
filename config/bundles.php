@@ -46,4 +46,5 @@ return [
     Jwage\PhpAmqpLibMessengerBundle\PhpAmqpLibMessengerBundle::class => ['all' => true],
     Survos\EzBundle\SurvosEzBundle::class => ['all' => true],
     Survos\JsonlBundle\SurvosJsonlBundle::class => ['all' => true],
+    Survos\BabelBundle\SurvosBabelBundle::class => ['all' => true],
 ];

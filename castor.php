@@ -5,6 +5,7 @@ use Castor\Attribute\AsTask;
 use function Castor\{io,run,capture,import};
 
 import('src/Command/AppLoadDataCommand.php');
+import('src/Command/LoadDummyCommand.php');
 import('src/Command/JeopardyCommand.php');
 try {
     import('.castor/vendor/tacman/castor-tools/castor.php');

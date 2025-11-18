@@ -1911,6 +1911,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  * @psalm-type SurvosEzConfig = array{
  *     enabled?: bool, // Default: true
  * }
+ * @psalm-type SurvosBabelConfig = array<mixed>
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1948,6 +1949,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     survos_state?: SurvosStateConfig,
  *     zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     survos_ez?: SurvosEzConfig,
+ *     survos_babel?: SurvosBabelConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -1991,6 +1993,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_babel?: SurvosBabelConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2030,6 +2033,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_babel?: SurvosBabelConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2072,6 +2076,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_babel?: SurvosBabelConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,
