@@ -299,6 +299,9 @@
     "survos/inspection-bundle": {
         "version": "1.5.93"
     },
+    "survos/jsonl-bundle": {
+        "version": "2.0.55"
+    },
     "survos/meili-bundle": {
         "version": "2.0",
         "recipe": {

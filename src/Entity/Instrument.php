@@ -35,69 +35,73 @@ use function Symfony\Component\String\u;
 #[Groups(['instrument.read'])]
 #[MeiliIndex(
     persisted: new Fields(
-        groups: ['instrument.read','marking.read'],
+        groups: ['instrument.read', 'marking.read'],
     ),
-    filterable: ['type', 'genres','countries']
+    filterable: ['type', 'genres', 'countries']
 )]
 class Instrument
 {
+
+    #[ORM\Column(type: Types::TEXT)]
+    public /* private(set) */
+    string $name {
+        set => $this->cleanup($value);
+    }
+
+    #[ORM\Column(type: Types::TEXT)]
+    private(set) ?string $description {
+        set => strip_tags($value);
+    }
+
+    #[ORM\Column(length: 255, nullable: true)]
+    public /* private(set) */
+    ?string $type;
+
+    #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
+    public array $tags;
+
+    #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
+    public array $genres
+        {
+            set => self::cleanupGenres($value);
+//            get => self::cleanupGenres($value);
+        }
+
+//        #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
+    public private(set) ?array $relations
+        {
+            set => self::addRelations($value);
+//            get => self::cleanupGenres($value);
+        }
+
     #[Map(if: false)]
     #[Facet(format: 'flag', showMoreThreshold: 9)]
     #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
-    public array $countries=[]; // really country codes
+    public array $countries = []; // really country codes
+
     public function __construct(
         #[ORM\Id]
         #[ORM\Column]
         private(set) ?string $id, // probably uuid
-
-        #[ORM\Column(type: Types::TEXT)]
-        #[Map(transform: [self::class, 'cleanup'])]
-        public /* private(set) */string $name  {
-            set => self::cleanup($value);
-        },
-
-        #[ORM\Column(type: Types::TEXT)]
-        private(set) ?string $description {
-            set => strip_tags($value);
-        },
-
-        #[ORM\Column(length: 255, nullable: true)]
-        public /* private(set) */ ?string $type,
-
-        #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
-
-        public private(set) array $tags,
-
-        #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
-        public private(set) array $genres
-        {
-            set => self::cleanupGenres($value);
-//            get => self::cleanupGenres($value);
-        },
-
-//        #[ORM\Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
-        public private(set) ?array $relations
-            {
-                set => self::addRelations($value);
-//            get => self::cleanupGenres($value);
-            }
-
     )
     {
 
     }
 
-    public string $snippet { get => mb_substr($this->description, 0, 60); }
-
-    private function addRelations(array $relations): array {
-    {
-        foreach ($relations as $relation) {
-            if ($relation->area??null) {
-                $this->countries = array_merge($this->countries, $relation->area->{'iso-3166-1-codes'}??[]);
-            }
-        }
-        return $relations;
+    public string $snippet {
+        get => mb_substr($this->description, 0, 60);
     }
+
+    private function addRelations(array $relations): array
+    {
+        {
+            foreach ($relations as $relation) {
+                if ($relation->area ?? null) {
+                    $this->countries = array_merge($this->countries, $relation->area->{'iso-3166-1-codes'} ?? []);
+                }
+            }
+            return $relations;
+        }
 
     }
 
@@ -115,6 +119,7 @@ class Instrument
         $s = u($s)->lower()->title($s)->wordwrap(32)->split("\n")[0]->toString();
         return $s;
     }
+
     private function cleanup(string $s): string
     {
         // or markdown?

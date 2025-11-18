@@ -2,9 +2,11 @@
 
 namespace App\Command;
 
+use App\Entity\Instrument;
 use App\Service\NdJsonService;
 use Doctrine\ORM\EntityManagerInterface;
-use Sunaoka\Ndjson\NDJSON;
+use Survos\CoreBundle\Service\LooseObjectMapper;
+use Survos\JsonlBundle\IO\JsonlReader;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
@@ -23,6 +25,7 @@ class MusicCommand
     public function __construct(
         private readonly HttpClientInterface $downloadClient,
         private readonly EntityManagerInterface $entityManager,
+        private readonly LooseObjectMapper  $looseObjectMapper,
     )
     {
     }
@@ -88,8 +91,25 @@ class MusicCommand
             $io->warning("$class data purged.");
         }
 
+        foreach (new JsonlReader($ndJsonFilename) as $line => $row) {
+            $rows[$line] = $row;
+            $pkField = 'id'; // for now
+            $pkValue = $row[$pkField];
+            /** @var Instrument $entity  */
+            if (!$entity = $this->entityManager->getRepository($class)->find($pkValue)) {
+                $entity = new $class($pkValue);
+//                $entity->$pkField = $pkValue;
+                $this->entityManager->persist($entity);
+            }
 
+            $this->looseObjectMapper->mapInto($row, $entity, [$pkField]);
+            $entity->tags = array_map(fn(array $tag) => $tag['name'], $row['tags']);
+            dd($row, $entity);
+            dd($row, $class);
+        }
         $ndjson = new NdJsonService($ndJsonFilename);
+
+
         $objectMapper = new ObjectMapper();
         $count = 0;
         while ($data = $ndjson->readline()) {

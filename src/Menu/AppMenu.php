@@ -37,7 +37,7 @@ final class AppMenu implements KnpMenuHelperInterface
     public function midNavbarMenu(KnpMenuEvent $event): void
     {
         $menu = $event->getMenu();
-        foreach (['app_homepage', 'admin'] as $route)
+        foreach (['app_homepage', 'meili_admin'] as $route)
         {
             $this->add($menu, $route); // label: u($route)->after('app_')
         }
