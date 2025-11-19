@@ -22,6 +22,7 @@
         "doctrine/orm": "^3.4.2",
         "easycorp/easyadmin-bundle": "^4.24",
         "friendsofsymfony/jsrouting-bundle": "dev-master",
+        "halaxa/json-machine": "^1.2",
         "inspector-apm/inspector-symfony": "^1.8",
         "jolicode/castor": "^1.0",
         "jwage/phpamqplib-messenger": "^0.9.0",
