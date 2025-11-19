@@ -29,7 +29,7 @@ final class Marvel
 	#[Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
 	public ?array $authors = null;
 
-	#[Column(length: 255, nullable: true)]
+	#[Column(type: Types::TEXT, nullable: true)]
 	public ?string $description = null;
 
 	#[Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]

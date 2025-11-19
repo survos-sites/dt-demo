@@ -36,10 +36,9 @@ function load_database(
         http_download('https://github.com/algolia/marvel-search/archive/refs/heads/master.zip', $relativeFilename);
         io()->writeln(realpath($relativeFilename));
     }
-    if (!file_exists('data/marvel.json')) {
-        // in
-        // fetch the zip tarbal and read it, saving the files to .jsonl?
-        // same as some github museums, e.g. https://github.com/cooperhewitt/collection/blob/master/objects/102/141/219/102141219.json
+    if (!file_exists('data/marvel.jsonl')) {
+        // c json:convert:dir zip/marvel.zip data/marvel.jsonl --force -vv --path=marvel-search-master/records/
+        run('bin/console json:convert:dir zip/marvel.zip data/marvel.jsonl --slugify=name --pk=code --path=marvel-search-master/records/');
         // https://github.com/algolia/marvel-search/tree/master/records
     }
     // https://community.algolia.com/marvel-search/
@@ -76,6 +75,7 @@ function load_database(
         'Movie' => 'data/movies.csv',
         'Car' => 'data/cars.csv --auto',
         'Book' => 'data/goodreads-books.csv',
+        'Marvel' => 'data/marvel.jsonl',
     ];
     if (!array_key_exists($code, $map)) {
         io()->error("The code '{$code}' does not exist: " . implode('|', array_keys($map)));
