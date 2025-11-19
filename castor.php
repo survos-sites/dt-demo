@@ -2,7 +2,7 @@
 
 use Castor\Attribute\AsTask;
 
-use function Castor\{io,run,capture,import};
+use function Castor\{io,run,capture,import,http_download};
 
 import('src/Command/AppLoadDataCommand.php');
 import('src/Command/LoadDummyCommand.php');
@@ -29,6 +29,9 @@ function load_database(
     #[Opt()] ?int $limit=null,
 ): void
 {
+    if (!file_exists('data/wine.json')) {
+        http_download('https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json', 'data/wine.json');
+    }
     if (!file_exists('data/wam.csv')) {
         $zip = new ZipArchive();
         /* The original wam had errors.  This was applied before being zipped.

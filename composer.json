@@ -93,7 +93,8 @@
         "twig/intl-extra": "^3.8",
         "twig/markdown-extra": "^3.8",
         "twig/twig": "^3.13",
-        "zenstruck/messenger-monitor-bundle": "^0.5.4"
+        "zenstruck/messenger-monitor-bundle": "^0.5.4",
+        "ext-zip": "*"
     },
     "config": {
         "allow-plugins": {
