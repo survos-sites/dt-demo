@@ -34,7 +34,7 @@ class LoadDummyCommand
 
 	public function __invoke(
 		SymfonyStyle $io,
-        #[Argument('url')] ?string $url = 'https://dummyjson.com/products?limit=200',
+        #[Argument('the url to dummyJson')] ?string $url = 'https://dummyjson.com/products?limit=200',
 
 		#[Option('max number of records to import')] ?int $limit = null,
 		#[Option('purge Products')] ?bool $purge = null,
