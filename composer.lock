@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00099138ef0167560f26661d1cdffee2",
+    "content-hash": "190e40eba5a7bb29066ec616b5b5ee3a",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -3372,22 +3372,22 @@
         },
         {
             "name": "jolicode/castor",
-            "version": "v1.0.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/castor.git",
-                "reference": "6e3120c89b7b518b61f48e83c8762ed97616cdc6"
+                "reference": "9a9021d955994fc5ca498bde1bb9c3d2d29965bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/castor/zipball/6e3120c89b7b518b61f48e83c8762ed97616cdc6",
-                "reference": "6e3120c89b7b518b61f48e83c8762ed97616cdc6",
+                "url": "https://api.github.com/repos/jolicode/castor/zipball/9a9021d955994fc5ca498bde1bb9c3d2d29965bd",
+                "reference": "9a9021d955994fc5ca498bde1bb9c3d2d29965bd",
                 "shasum": ""
             },
             "require": {
                 "composer/composer": "^2.8.12",
-                "jolicode/jolinotif": "^3.1.1",
-                "jolicode/php-os-helper": "^0.2",
+                "jolicode/jolinotif": "^3.2",
+                "jolicode/php-os-helper": "^0.3.0",
                 "monolog/monolog": "^3.9.0",
                 "nikic/php-parser": "^5.6.1",
                 "php": ">=8.2",
@@ -3415,6 +3415,7 @@
                 "phpunit/php-code-coverage": "^9.2.32",
                 "symfony/phpunit-bridge": "^7.3.4"
             },
+            "default-branch": true,
             "bin": [
                 "bin/castor"
             ],
@@ -3457,34 +3458,35 @@
             ],
             "support": {
                 "issues": "https://github.com/jolicode/castor/issues",
-                "source": "https://github.com/jolicode/castor/tree/v1.0.0"
+                "source": "https://github.com/jolicode/castor/tree/main"
             },
-            "time": "2025-10-10T11:29:22+00:00"
+            "time": "2025-11-14T15:37:25+00:00"
         },
         {
             "name": "jolicode/jolinotif",
-            "version": "v3.1.1",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/JoliNotif.git",
-                "reference": "c3a886452b491924aae1ef5f7ad83d927040a9d1"
+                "reference": "6f6490f8fd062deda601a8bfc03ea03305253d29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/JoliNotif/zipball/c3a886452b491924aae1ef5f7ad83d927040a9d1",
-                "reference": "c3a886452b491924aae1ef5f7ad83d927040a9d1",
+                "url": "https://api.github.com/repos/jolicode/JoliNotif/zipball/6f6490f8fd062deda601a8bfc03ea03305253d29",
+                "reference": "6f6490f8fd062deda601a8bfc03ea03305253d29",
                 "shasum": ""
             },
             "require": {
-                "jolicode/php-os-helper": "^0.1 || ^0.2",
+                "jolicode/php-os-helper": "^0.3",
                 "php": ">=8.2",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
                 "symfony/deprecation-contracts": "^3",
-                "symfony/process": "^5.4 || ^6.4 || ^7.1"
+                "symfony/process": "^6.4 || ^7.3 || ^8.0"
             },
             "require-dev": {
-                "symfony/finder": "^5.4 || ^6.4 || ^7.1",
-                "symfony/phpunit-bridge": "^5.4 || ^6.4 || ^7.1"
+                "monolog/monolog": "^3.9",
+                "symfony/finder": "^6.4 || ^7.3 || ^8.0",
+                "symfony/phpunit-bridge": "^7.3 || ^8.0"
             },
             "suggest": {
                 "ext-ffi": "Needed to send notifications via libnotify on Linux"
@@ -3493,6 +3495,11 @@
                 "jolinotif"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Joli\\JoliNotif\\": "src/"
@@ -3518,7 +3525,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jolicode/JoliNotif/issues",
-                "source": "https://github.com/jolicode/JoliNotif/tree/v3.1.1"
+                "source": "https://github.com/jolicode/JoliNotif/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -3526,27 +3533,27 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-22T13:19:03+00:00"
+            "time": "2025-10-16T21:31:31+00:00"
         },
         {
             "name": "jolicode/php-os-helper",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jolicode/php-os-helper.git",
-                "reference": "43d77908330943cf5b32c80bf51d07db04c7106f"
+                "reference": "e71596ae67d477fe214a5908f5522b9e4d19fd37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jolicode/php-os-helper/zipball/43d77908330943cf5b32c80bf51d07db04c7106f",
-                "reference": "43d77908330943cf5b32c80bf51d07db04c7106f",
+                "url": "https://api.github.com/repos/jolicode/php-os-helper/zipball/e71596ae67d477fe214a5908f5522b9e4d19fd37",
+                "reference": "e71596ae67d477fe214a5908f5522b9e4d19fd37",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+                "php": ">=8.2"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^6.3.1"
+                "symfony/phpunit-bridge": "^6.4"
             },
             "type": "library",
             "autoload": {
@@ -3574,9 +3581,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jolicode/php-os-helper/issues",
-                "source": "https://github.com/jolicode/php-os-helper/tree/v0.2.0"
+                "source": "https://github.com/jolicode/php-os-helper/tree/v0.3.0"
             },
-            "time": "2024-10-02T19:51:05+00:00"
+            "time": "2025-10-11T13:02:06+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -21119,6 +21126,7 @@
     "minimum-stability": "RC",
     "stability-flags": {
         "friendsofsymfony/jsrouting-bundle": 20,
+        "jolicode/castor": 20,
         "meilisearch/meilisearch-php": 20,
         "survos/code-bundle": 20,
         "symfony/monolog-bundle": 20,

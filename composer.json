@@ -24,7 +24,7 @@
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "halaxa/json-machine": "^1.2",
         "inspector-apm/inspector-symfony": "^1.8",
-        "jolicode/castor": "^1.0",
+        "jolicode/castor": "dev-main",
         "jwage/phpamqplib-messenger": "^0.9.0",
         "league/csv": "^9.24",
         "league/flysystem-aws-s3-v3": "^3.22",
