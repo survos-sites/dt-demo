@@ -32,6 +32,17 @@ function load_database(
     if (!file_exists('data/wine.json')) {
         http_download('https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json', 'data/wine.json');
     }
+    if (!file_exists($relativeFilename = 'zip/marvel.zip')) {
+        http_download('https://github.com/algolia/marvel-search/archive/refs/heads/master.zip', $relativeFilename);
+        io()->writeln(realpath($relativeFilename));
+    }
+    if (!file_exists('data/marvel.json')) {
+        // in
+        // fetch the zip tarbal and read it, saving the files to .jsonl?
+        // same as some github museums, e.g. https://github.com/cooperhewitt/collection/blob/master/objects/102/141/219/102141219.json
+        // https://github.com/algolia/marvel-search/tree/master/records
+    }
+    // https://community.algolia.com/marvel-search/
     if (!file_exists('data/wam.csv')) {
         $zip = new ZipArchive();
         /* The original wam had errors.  This was applied before being zipped.

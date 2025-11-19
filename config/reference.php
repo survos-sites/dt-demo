@@ -1911,6 +1911,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  * @psalm-type SurvosEzConfig = array{
  *     enabled?: bool, // Default: true
  * }
+ * @psalm-type SurvosStepConfig = array<mixed>
  * @psalm-type SurvosBabelConfig = array<mixed>
  * @psalm-type SurvosDeploymentConfig = array{
  *     enabled?: bool, // Default: true
@@ -1955,6 +1956,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     survos_state?: SurvosStateConfig,
  *     zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *     survos_ez?: SurvosEzConfig,
+ *     survos_step?: SurvosStepConfig,
  *     survos_babel?: SurvosBabelConfig,
  *     survos_import?: SurvosImportConfig,
  *     "when@dev"?: array{
@@ -2000,6 +2002,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_step?: SurvosStepConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_deployment?: SurvosDeploymentConfig,
  *         survos_import?: SurvosImportConfig,
@@ -2042,6 +2045,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_step?: SurvosStepConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_import?: SurvosImportConfig,
  *     },
@@ -2086,6 +2090,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_state?: SurvosStateConfig,
  *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
  *         survos_ez?: SurvosEzConfig,
+ *         survos_step?: SurvosStepConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_deployment?: SurvosDeploymentConfig,
  *         survos_import?: SurvosImportConfig,
