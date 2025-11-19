@@ -290,6 +290,9 @@
             "config/routes/survos_crawler.yaml"
         ]
     },
+    "survos/deployment-bundle": {
+        "version": "2.0.57"
+    },
     "survos/ez-bundle": {
         "version": "2.0.19"
     },
@@ -298,6 +301,9 @@
     },
     "survos/image-client-bundle": {
         "version": "1.0"
+    },
+    "survos/import-bundle": {
+        "version": "2.0.58"
     },
     "survos/inspection-bundle": {
         "version": "1.5.93"
