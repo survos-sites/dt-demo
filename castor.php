@@ -85,6 +85,6 @@ function load_database(
         $code, $map[$code]);
     io()->writeln($command);
     run($command);
-    run('symfony open:local --path=/meiliAdmin/meiliAdmin/instant-search/index/meili_' . strtolower($code));
+//    run('symfony open:local --path=/meiliAdmin/meiliAdmin/instant-search/index/meili_' . strtolower($code));
 
 }
