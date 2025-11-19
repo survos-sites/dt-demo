@@ -68,7 +68,7 @@
         "symfony/intl": "^7.0",
         "symfony/mailer": "^7.0",
         "symfony/mime": "^7.0",
-        "symfony/monolog-bundle": "^4.x-dev",
+        "symfony/monolog-bundle": "^3.10",
         "symfony/notifier": "^7.0",
         "symfony/object-mapper": "^7.3",
         "symfony/process": "^7.0",
@@ -78,7 +78,7 @@
         "symfony/runtime": "^7.0",
         "symfony/security-bundle": "^7.0",
         "symfony/serializer": "^7.0",
-        "symfony/stimulus-bundle": "^2.x-dev",
+        "symfony/stimulus-bundle": "^2.30",
         "symfony/string": "^7.0",
         "symfony/translation": "^7.0",
         "symfony/twig-bundle": "^7.0",
@@ -155,6 +155,7 @@
         }
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "dbrekelmans/bdi": "^1.4",
         "doctrine/doctrine-fixtures-bundle": "^3.4.4||^4.0",
         "friendsofphp/php-cs-fixer": "^3.70",

@@ -4,6 +4,17 @@ use Castor\Attribute\AsTask;
 
 use function Castor\{io,run,capture,import,http_download};
 
+$autoloadCandidates = [
+    __DIR__ . '/vendor/autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../vendor/autoload.php',
+];
+foreach ($autoloadCandidates as $autoload) {
+    if (is_file($autoload)) { require_once $autoload; break; }
+}
+
+use Survos\MeiliBundle\Model\Dataset;
+
 import('src/Command/AppLoadDataCommand.php');
 import('src/Command/LoadDummyCommand.php');
 import('src/Command/JeopardyCommand.php');
@@ -29,8 +40,18 @@ function load_database(
     #[Opt()] ?int $limit=null,
 ): void
 {
-    if (!file_exists('data/wine.json')) {
-        http_download('https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json', 'data/wine.json');
+    $map = [
+        'wcma' => new Dataset(name: 'wcma',
+            url: 'https://github.com/wcmaart/collection/raw/refs/heads/master/wcma-collection.csv',
+            target: 'data/wcma.csv'
+        ),
+        'wine' => new Dataset('wine', 'https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json', 'data/wine.json')
+    ];
+    foreach ($map as $dataset) {
+        if (!file_exists($dataset->target)) {
+            http_download($dataset->url, $dataset->target);
+            io()->writeln(realpath($dataset->target) . ' written');
+        }
     }
     if (!file_exists($relativeFilename = 'zip/marvel.zip')) {
         http_download('https://github.com/algolia/marvel-search/archive/refs/heads/master.zip', $relativeFilename);
@@ -69,6 +90,7 @@ function load_database(
             throw new Exception('Failed to open ZIP file');
         }
     }
+    // https://github.com/algolia/datasets
     $map = [
         'Wam' => 'data/wam-dywer.csv',
         'Wine' => 'data/wine.json --auto',
