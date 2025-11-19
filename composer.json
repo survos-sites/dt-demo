@@ -32,6 +32,7 @@
         "liip/imagine-bundle": "^2.12",
         "meilisearch/meilisearch-php": "dev-main",
         "nelmio/cors-bundle": "^2.3.1",
+        "openai-php/client": "^0.18.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpmetrics/phpmetrics": "^3.0",
         "presta/sitemap-bundle": "^4.0",

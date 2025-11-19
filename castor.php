@@ -58,7 +58,7 @@ function load_database(
     }
     $map = [
         'Wam' => 'data/wam-dywer.csv',
-        'Wine' => 'data/wine.json',
+        'Wine' => 'data/wine.json --auto',
         'Movie' => 'data/movies.csv',
         'Car' => 'data/cars.csv --auto',
         'Book' => 'data/goodreads-books.csv',
