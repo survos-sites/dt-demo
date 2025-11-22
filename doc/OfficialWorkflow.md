@@ -68,7 +68,7 @@ public function onFetchWiki(TransitionEvent $event): void
             // we could do this in an async message, too.
             if ($url = $item['id']) {
                 $official->setOriginalImageUrl($url);
-                $response = $this->saisClientService->dispatchProcess(new ProcessPayload(AppLoadDataCommand::SAIS_CLIENT, [
+                $response = $this->saisClientService->dispatchProcess(new ProcessPayload(LoadCongressCommand::SAIS_CLIENT, [
                     $url
                 ],
                 thumbCallbackUrl: $x=$this->urlGenerator->generate('app_webhook', ['id' => $official->getId()], $this->urlGenerator::ABS_URL)

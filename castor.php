@@ -15,7 +15,7 @@ foreach ($autoloadCandidates as $autoload) {
 
 use Survos\MeiliBundle\Model\Dataset;
 
-import('src/Command/AppLoadDataCommand.php');
+import('src/Command/LoadCongressCommand.php');
 import('src/Command/LoadDummyCommand.php');
 import('src/Command/JeopardyCommand.php');
 try {
@@ -40,32 +40,50 @@ function load_database(
     #[Opt()] ?int $limit=null,
 ): void
 {
-    $map = [
-        'wcma' => new Dataset(name: 'wcma',
+    /** @var <string,Dataset> $map */
+    $map = [];
+    // https://github.com/Ambrosiani/museums-on-github
+    // https://github.com/algolia/datasets?tab=readme-ov-file
+    // https://community.algolia.com/
+    // https://medium.com/@canning.erin/museum-collections-as-data-comparing-collection-stats-across-four-datasets-in-four-days-32b98aa2b9c0
+
+//    citation: https://egallery.williams.edu/objects/14202
+    // iifi: sprintf('https://egallery.williams.edu/apis/iiif/presentation/v2/1-objects-%d/manifest', $obj->id);
+    // parse this file and extra the images
+
+    //         run('
+    //bin/console json:convert:dir data/wcma.csv  data/wcma-with-images.jsonl --dispatch --slugify=name --pk=code ');
+    $dataSets  = [
+        new Dataset(name: 'wcma',
             url: 'https://github.com/wcmaart/collection/raw/refs/heads/master/wcma-collection.csv',
-            target: 'data/wcma.csv'
+            target: 'data/wcma.csv',
         ),
-        'wine' => new Dataset('wine', 'https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json', 'data/wine.json')
+        new Dataset('car',
+        'https://corgis-edu.github.io/corgis/datasets/csv/cars/cars.csv',
+        'data/cars.csv'
+        ),
+        new Dataset('wine',
+            'https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json',
+            'data/wine.json'),
+        new Dataset('marvel',
+            'https://github.com/algolia/marvel-search/archive/refs/heads/master.zip', 'zip/marvel.zip'
+        ),
+        new Dataset('wam', null, "data/wam-dywer.csv"),
     ];
-    foreach ($map as $dataset) {
+    foreach ($dataSets as $dataset) {
+        $map[$dataset->name] = $dataset;
         if (!file_exists($dataset->target)) {
             http_download($dataset->url, $dataset->target);
             io()->writeln(realpath($dataset->target) . ' written');
         }
     }
-    if (!file_exists($relativeFilename = 'zip/marvel.zip')) {
-        http_download('https://github.com/algolia/marvel-search/archive/refs/heads/master.zip', $relativeFilename);
-        io()->writeln(realpath($relativeFilename));
-    }
-    if (!file_exists('data/marvel.jsonl')) {
-        // c json:convert:dir zip/marvel.zip data/marvel.jsonl --force -vv --path=marvel-search-master/records/
-        run('bin/console json:convert:dir zip/marvel.zip data/marvel.jsonl --slugify=name --pk=code --path=marvel-search-master/records/');
-        // https://github.com/algolia/marvel-search/tree/master/records
-    }
     // https://community.algolia.com/marvel-search/
+    // actually, we can now read from a ZIP file!  But it's looking for zipped json objects, might need to tweak
     if (!file_exists('data/wam.csv')) {
         $zip = new ZipArchive();
         /* The original wam had errors.  This was applied before being zipped.
+
+          we need a home for these! museado/datasets?
 
           mkdir data/wam/raw -p
           wget "https://data.museum.wa.gov.au/sites/default/files/Dywer-and-Mackay/index.csv" -O data/wam/raw/wam-dywer.csv
@@ -91,22 +109,39 @@ function load_database(
         }
     }
     // https://github.com/algolia/datasets
-    $map = [
-        'Wam' => 'data/wam-dywer.csv',
-        'Wine' => 'data/wine.json --auto',
-        'Movie' => 'data/movies.csv',
-        'Car' => 'data/cars.csv --auto',
-        'Book' => 'data/goodreads-books.csv',
-        'Marvel' => 'data/marvel.jsonl',
-    ];
+//    $map = [
+//        'wam' => 'data/wam-dywer.csv',
+//        'wine' => 'data/wine.json',
+//        'movie' => 'data/movies.csv',
+//        // https://corgis-edu.github.io/corgis/csv/cars/
+//        'car' => 'data/cars.csv',
+//        'book' => 'data/goodreads-books.csv',
+//        'marvel' => 'data/marvel.jsonl',
+//    ];
     if (!array_key_exists($code, $map)) {
         io()->error("The code '{$code}' does not exist: " . implode('|', array_keys($map)));
         return;
     }
-    $command = sprintf('bin/console import:entities App\\\\Entity\\\\%s --file %s ' . ($limit ? ' --limit=' . $limit : ''),
-        $code, $map[$code]);
+    /** @var DataSet $dataset */
+    $dataset = $map[$code];
+    $command = sprintf('bin/console json:convert %s %s --dispatch', $dataset->target, $dataset->jsonl);
+    run($command);
+
+    $command = sprintf('bin/console import:entities App\\\\Entity\\\\%s %s ' . ($limit ? ' --limit=' . $limit : ''),
+        ucfirst($code), $dataset->jsonl);
     io()->writeln($command);
     run($command);
 //    run('symfony open:local --path=/meiliAdmin/meiliAdmin/instant-search/index/meili_' . strtolower($code));
 
+}
+
+class X {
+    public function __construct(
+        public string $code,
+        public ?string $input=null,
+        public ?string $output=null,
+    )
+    {
+
+    }
 }

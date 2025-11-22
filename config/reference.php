@@ -1022,6 +1022,29 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         chain?: array{
  *             providers?: list<scalar|null>,
  *         },
+ *         entity?: array{
+ *             class: scalar|null, // The full entity class name of your user class.
+ *             property?: scalar|null, // Default: null
+ *             manager_name?: scalar|null, // Default: null
+ *         },
+ *         memory?: array{
+ *             users?: array<string, array{ // Default: []
+ *                 password?: scalar|null, // Default: null
+ *                 roles?: list<scalar|null>,
+ *             }>,
+ *         },
+ *         ldap?: array{
+ *             service: scalar|null,
+ *             base_dn: scalar|null,
+ *             search_dn?: scalar|null, // Default: null
+ *             search_password?: scalar|null, // Default: null
+ *             extra_fields?: list<scalar|null>,
+ *             default_roles?: list<scalar|null>,
+ *             role_fetcher?: scalar|null, // Default: null
+ *             uid_key?: scalar|null, // Default: "sAMAccountName"
+ *             filter?: scalar|null, // Default: "({uid_key}={user_identifier})"
+ *             password_attribute?: scalar|null, // Default: null
+ *         },
  *     }>,
  *     firewalls: array<string, array{ // Default: []
  *         pattern?: scalar|null,
@@ -1061,6 +1084,208 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *             target_route?: scalar|null, // Default: null
  *         },
  *         required_badges?: list<scalar|null>,
+ *         custom_authenticators?: list<scalar|null>,
+ *         login_throttling?: array{
+ *             limiter?: scalar|null, // A service id implementing "Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface".
+ *             max_attempts?: int, // Default: 5
+ *             interval?: scalar|null, // Default: "1 minute"
+ *             lock_factory?: scalar|null, // The service ID of the lock factory used by the login rate limiter (or null to disable locking). // Default: null
+ *             cache_pool?: string, // The cache pool to use for storing the limiter state // Default: "cache.rate_limiter"
+ *             storage_service?: string, // The service ID of a custom storage implementation, this precedes any configured "cache_pool" // Default: null
+ *         },
+ *         x509?: array{
+ *             provider?: scalar|null,
+ *             user?: scalar|null, // Default: "SSL_CLIENT_S_DN_Email"
+ *             credentials?: scalar|null, // Default: "SSL_CLIENT_S_DN"
+ *             user_identifier?: scalar|null, // Default: "emailAddress"
+ *         },
+ *         remote_user?: array{
+ *             provider?: scalar|null,
+ *             user?: scalar|null, // Default: "REMOTE_USER"
+ *         },
+ *         login_link?: array{
+ *             check_route: scalar|null, // Route that will validate the login link - e.g. "app_login_link_verify".
+ *             check_post_only?: scalar|null, // If true, only HTTP POST requests to "check_route" will be handled by the authenticator. // Default: false
+ *             signature_properties: list<scalar|null>,
+ *             lifetime?: int, // The lifetime of the login link in seconds. // Default: 600
+ *             max_uses?: int, // Max number of times a login link can be used - null means unlimited within lifetime. // Default: null
+ *             used_link_cache?: scalar|null, // Cache service id used to expired links of max_uses is set.
+ *             success_handler?: scalar|null, // A service id that implements Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface.
+ *             failure_handler?: scalar|null, // A service id that implements Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface.
+ *             provider?: scalar|null, // The user provider to load users from.
+ *             secret?: scalar|null, // Default: "%kernel.secret%"
+ *             always_use_default_target_path?: bool, // Default: false
+ *             default_target_path?: scalar|null, // Default: "/"
+ *             login_path?: scalar|null, // Default: "/login"
+ *             target_path_parameter?: scalar|null, // Default: "_target_path"
+ *             use_referer?: bool, // Default: false
+ *             failure_path?: scalar|null, // Default: null
+ *             failure_forward?: bool, // Default: false
+ *             failure_path_parameter?: scalar|null, // Default: "_failure_path"
+ *         },
+ *         form_login?: array{
+ *             provider?: scalar|null,
+ *             remember_me?: bool, // Default: true
+ *             success_handler?: scalar|null,
+ *             failure_handler?: scalar|null,
+ *             check_path?: scalar|null, // Default: "/login_check"
+ *             use_forward?: bool, // Default: false
+ *             login_path?: scalar|null, // Default: "/login"
+ *             username_parameter?: scalar|null, // Default: "_username"
+ *             password_parameter?: scalar|null, // Default: "_password"
+ *             csrf_parameter?: scalar|null, // Default: "_csrf_token"
+ *             csrf_token_id?: scalar|null, // Default: "authenticate"
+ *             enable_csrf?: bool, // Default: false
+ *             post_only?: bool, // Default: true
+ *             form_only?: bool, // Default: false
+ *             always_use_default_target_path?: bool, // Default: false
+ *             default_target_path?: scalar|null, // Default: "/"
+ *             target_path_parameter?: scalar|null, // Default: "_target_path"
+ *             use_referer?: bool, // Default: false
+ *             failure_path?: scalar|null, // Default: null
+ *             failure_forward?: bool, // Default: false
+ *             failure_path_parameter?: scalar|null, // Default: "_failure_path"
+ *         },
+ *         form_login_ldap?: array{
+ *             provider?: scalar|null,
+ *             remember_me?: bool, // Default: true
+ *             success_handler?: scalar|null,
+ *             failure_handler?: scalar|null,
+ *             check_path?: scalar|null, // Default: "/login_check"
+ *             use_forward?: bool, // Default: false
+ *             login_path?: scalar|null, // Default: "/login"
+ *             username_parameter?: scalar|null, // Default: "_username"
+ *             password_parameter?: scalar|null, // Default: "_password"
+ *             csrf_parameter?: scalar|null, // Default: "_csrf_token"
+ *             csrf_token_id?: scalar|null, // Default: "authenticate"
+ *             enable_csrf?: bool, // Default: false
+ *             post_only?: bool, // Default: true
+ *             form_only?: bool, // Default: false
+ *             always_use_default_target_path?: bool, // Default: false
+ *             default_target_path?: scalar|null, // Default: "/"
+ *             target_path_parameter?: scalar|null, // Default: "_target_path"
+ *             use_referer?: bool, // Default: false
+ *             failure_path?: scalar|null, // Default: null
+ *             failure_forward?: bool, // Default: false
+ *             failure_path_parameter?: scalar|null, // Default: "_failure_path"
+ *             service?: scalar|null, // Default: "ldap"
+ *             dn_string?: scalar|null, // Default: "{user_identifier}"
+ *             query_string?: scalar|null,
+ *             search_dn?: scalar|null, // Default: ""
+ *             search_password?: scalar|null, // Default: ""
+ *         },
+ *         json_login?: array{
+ *             provider?: scalar|null,
+ *             remember_me?: bool, // Default: true
+ *             success_handler?: scalar|null,
+ *             failure_handler?: scalar|null,
+ *             check_path?: scalar|null, // Default: "/login_check"
+ *             use_forward?: bool, // Default: false
+ *             login_path?: scalar|null, // Default: "/login"
+ *             username_path?: scalar|null, // Default: "username"
+ *             password_path?: scalar|null, // Default: "password"
+ *         },
+ *         json_login_ldap?: array{
+ *             provider?: scalar|null,
+ *             remember_me?: bool, // Default: true
+ *             success_handler?: scalar|null,
+ *             failure_handler?: scalar|null,
+ *             check_path?: scalar|null, // Default: "/login_check"
+ *             use_forward?: bool, // Default: false
+ *             login_path?: scalar|null, // Default: "/login"
+ *             username_path?: scalar|null, // Default: "username"
+ *             password_path?: scalar|null, // Default: "password"
+ *             service?: scalar|null, // Default: "ldap"
+ *             dn_string?: scalar|null, // Default: "{user_identifier}"
+ *             query_string?: scalar|null,
+ *             search_dn?: scalar|null, // Default: ""
+ *             search_password?: scalar|null, // Default: ""
+ *         },
+ *         access_token?: array{
+ *             provider?: scalar|null,
+ *             remember_me?: bool, // Default: true
+ *             success_handler?: scalar|null,
+ *             failure_handler?: scalar|null,
+ *             realm?: scalar|null, // Default: null
+ *             token_extractors?: list<scalar|null>,
+ *             token_handler: string|array{
+ *                 id?: scalar|null,
+ *                 oidc_user_info?: string|array{
+ *                     base_uri: scalar|null, // Base URI of the userinfo endpoint on the OIDC server, or the OIDC server URI to use the discovery (require "discovery" to be configured).
+ *                     discovery?: array{ // Enable the OIDC discovery.
+ *                         cache?: array{
+ *                             id: scalar|null, // Cache service id to use to cache the OIDC discovery configuration.
+ *                         },
+ *                     },
+ *                     claim?: scalar|null, // Claim which contains the user identifier (e.g. sub, email, etc.). // Default: "sub"
+ *                     client?: scalar|null, // HttpClient service id to use to call the OIDC server.
+ *                 },
+ *                 oidc?: array{
+ *                     discovery?: array{ // Enable the OIDC discovery.
+ *                         base_uri: list<scalar|null>,
+ *                         cache?: array{
+ *                             id: scalar|null, // Cache service id to use to cache the OIDC discovery configuration.
+ *                         },
+ *                     },
+ *                     claim?: scalar|null, // Claim which contains the user identifier (e.g.: sub, email..). // Default: "sub"
+ *                     audience: scalar|null, // Audience set in the token, for validation purpose.
+ *                     issuers: list<scalar|null>,
+ *                     algorithm?: array<mixed>,
+ *                     algorithms: list<scalar|null>,
+ *                     key?: scalar|null, // Deprecated: The "key" option is deprecated and will be removed in 8.0. Use the "keyset" option instead. // JSON-encoded JWK used to sign the token (must contain a "kty" key).
+ *                     keyset?: scalar|null, // JSON-encoded JWKSet used to sign the token (must contain a list of valid public keys).
+ *                     encryption?: bool|array{
+ *                         enabled?: bool, // Default: false
+ *                         enforce?: bool, // When enabled, the token shall be encrypted. // Default: false
+ *                         algorithms: list<scalar|null>,
+ *                         keyset: scalar|null, // JSON-encoded JWKSet used to decrypt the token (must contain a list of valid private keys).
+ *                     },
+ *                 },
+ *                 cas?: array{
+ *                     validation_url: scalar|null, // CAS server validation URL
+ *                     prefix?: scalar|null, // CAS prefix // Default: "cas"
+ *                     http_client?: scalar|null, // HTTP Client service // Default: null
+ *                 },
+ *                 oauth2?: scalar|null,
+ *             },
+ *         },
+ *         http_basic?: array{
+ *             provider?: scalar|null,
+ *             realm?: scalar|null, // Default: "Secured Area"
+ *         },
+ *         http_basic_ldap?: array{
+ *             provider?: scalar|null,
+ *             realm?: scalar|null, // Default: "Secured Area"
+ *             service?: scalar|null, // Default: "ldap"
+ *             dn_string?: scalar|null, // Default: "{user_identifier}"
+ *             query_string?: scalar|null,
+ *             search_dn?: scalar|null, // Default: ""
+ *             search_password?: scalar|null, // Default: ""
+ *         },
+ *         remember_me?: array{
+ *             secret?: scalar|null, // Default: "%kernel.secret%"
+ *             service?: scalar|null,
+ *             user_providers?: list<scalar|null>,
+ *             catch_exceptions?: bool, // Default: true
+ *             signature_properties?: list<scalar|null>,
+ *             token_provider?: string|array{
+ *                 service?: scalar|null, // The service ID of a custom remember-me token provider.
+ *                 doctrine?: bool|array{
+ *                     enabled?: bool, // Default: false
+ *                     connection?: scalar|null, // Default: null
+ *                 },
+ *             },
+ *             token_verifier?: scalar|null, // The service ID of a custom rememberme token verifier.
+ *             name?: scalar|null, // Default: "REMEMBERME"
+ *             lifetime?: int, // Default: 31536000
+ *             path?: scalar|null, // Default: "/"
+ *             domain?: scalar|null, // Default: null
+ *             secure?: true|false|"auto", // Default: null
+ *             httponly?: bool, // Default: true
+ *             samesite?: null|"lax"|"strict"|"none", // Default: "lax"
+ *             always_remember_me?: bool, // Default: false
+ *             remember_me_parameter?: scalar|null, // Default: "_remember_me"
+ *         },
  *     }>,
  *     access_control?: list<array{ // Default: []
  *         request_matcher?: scalar|null, // Default: null
@@ -1083,12 +1308,11 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     handlers?: array<string, array{ // Default: []
  *         type: scalar|null,
  *         id?: scalar|null,
- *         enabled?: bool, // Default: true
  *         priority?: scalar|null, // Default: 0
  *         level?: scalar|null, // Default: "DEBUG"
  *         bubble?: bool, // Default: true
- *         interactive_only?: bool, // Default: false
  *         app_name?: scalar|null, // Default: null
+ *         fill_extra_context?: bool, // Default: false
  *         include_stacktraces?: bool, // Default: false
  *         process_psr_3_messages?: array{
  *             enabled?: bool|null, // Default: null
@@ -1108,6 +1332,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         activation_strategy?: scalar|null, // Default: null
  *         stop_buffering?: bool, // Default: true
  *         passthru_level?: scalar|null, // Default: null
+ *         excluded_404s?: list<scalar|null>,
  *         excluded_http_codes?: list<array{ // Default: []
  *             code?: scalar|null,
  *             urls?: list<scalar|null>,
@@ -1121,6 +1346,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         url?: scalar|null,
  *         exchange?: scalar|null,
  *         exchange_name?: scalar|null, // Default: "log"
+ *         room?: scalar|null,
+ *         message_format?: scalar|null, // Default: "text"
+ *         api_version?: scalar|null, // Default: null
  *         channel?: scalar|null, // Default: null
  *         bot_name?: scalar|null, // Default: "Monolog"
  *         use_attachment?: scalar|null, // Default: true
@@ -1128,7 +1356,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         include_extra?: scalar|null, // Default: false
  *         icon_emoji?: scalar|null, // Default: null
  *         webhook_url?: scalar|null,
- *         exclude_fields?: list<scalar|null>,
+ *         team?: scalar|null,
+ *         notify?: scalar|null, // Default: false
+ *         nickname?: scalar|null, // Default: "Monolog"
  *         token?: scalar|null,
  *         region?: scalar|null,
  *         source?: scalar|null,
@@ -1146,15 +1376,21 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         store?: scalar|null, // Default: null
  *         connection_timeout?: scalar|null,
  *         persistent?: bool,
+ *         dsn?: scalar|null,
+ *         hub_id?: scalar|null, // Default: null
+ *         client_id?: scalar|null, // Default: null
+ *         auto_log_stacks?: scalar|null, // Default: false
+ *         release?: scalar|null, // Default: null
+ *         environment?: scalar|null, // Default: null
  *         message_type?: scalar|null, // Default: 0
  *         parse_mode?: scalar|null, // Default: null
  *         disable_webpage_preview?: bool|null, // Default: null
  *         disable_notification?: bool|null, // Default: null
  *         split_long_messages?: bool, // Default: false
  *         delay_between_messages?: bool, // Default: false
- *         topic?: int, // Default: null
  *         factor?: int, // Default: 1
  *         tags?: list<scalar|null>,
+ *         console_formater_options?: mixed, // Deprecated: "monolog.handlers..console_formater_options.console_formater_options" is deprecated, use "monolog.handlers..console_formater_options.console_formatter_options" instead.
  *         console_formatter_options?: mixed, // Default: []
  *         formatter?: scalar|null,
  *         nested?: bool, // Default: false
@@ -1163,19 +1399,18 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *             hostname?: scalar|null,
  *             port?: scalar|null, // Default: 12201
  *             chunk_size?: scalar|null, // Default: 1420
- *             encoder?: "json"|"compressed_json",
  *         },
- *         mongodb?: string|array{
- *             id?: scalar|null, // ID of a MongoDB\Client service
- *             uri?: scalar|null,
- *             username?: scalar|null,
- *             password?: scalar|null,
+ *         mongo?: string|array{
+ *             id?: scalar|null,
+ *             host?: scalar|null,
+ *             port?: scalar|null, // Default: 27017
+ *             user?: scalar|null,
+ *             pass?: scalar|null,
  *             database?: scalar|null, // Default: "monolog"
  *             collection?: scalar|null, // Default: "logs"
  *         },
  *         elasticsearch?: string|array{
  *             id?: scalar|null,
- *             hosts?: list<scalar|null>,
  *             host?: scalar|null,
  *             port?: scalar|null, // Default: 9200
  *             transport?: scalar|null, // Default: "Http"
@@ -1207,6 +1442,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *             id: scalar|null,
  *             method?: scalar|null, // Default: null
  *         },
+ *         lazy?: bool, // Default: true
  *         verbosity_levels?: array{
  *             VERBOSITY_QUIET?: scalar|null, // Default: "ERROR"
  *             VERBOSITY_NORMAL?: scalar|null, // Default: "WARNING"
@@ -1591,83 +1827,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     searchable?: bool, // Default: true
  *     fixed_height?: scalar|null, // Default: true
  * }
- * @psalm-type SentryConfig = array{
- *     dsn?: scalar|null, // If this value is not provided, the SDK will try to read it from the SENTRY_DSN environment variable. If that variable also does not exist, the SDK will not send any events.
- *     register_error_listener?: bool, // Default: true
- *     register_error_handler?: bool, // Default: true
- *     logger?: scalar|null, // The service ID of the PSR-3 logger used to log messages coming from the SDK client. Be aware that setting the same logger of the application may create a circular loop when an event fails to be sent. // Default: null
- *     options?: array{
- *         integrations?: mixed, // Default: []
- *         default_integrations?: bool,
- *         prefixes?: list<scalar|null>,
- *         sample_rate?: float, // The sampling factor to apply to events. A value of 0 will deny sending any event, and a value of 1 will send all events.
- *         enable_tracing?: bool,
- *         traces_sample_rate?: float, // The sampling factor to apply to transactions. A value of 0 will deny sending any transaction, and a value of 1 will send all transactions.
- *         traces_sampler?: scalar|null,
- *         profiles_sample_rate?: float, // The sampling factor to apply to profiles. A value of 0 will deny sending any profiles, and a value of 1 will send all profiles. Profiles are sampled in relation to traces_sample_rate
- *         enable_logs?: bool,
- *         attach_stacktrace?: bool,
- *         attach_metric_code_locations?: bool,
- *         context_lines?: int,
- *         environment?: scalar|null, // Default: "%kernel.environment%"
- *         logger?: scalar|null,
- *         spotlight?: bool,
- *         spotlight_url?: scalar|null,
- *         release?: scalar|null, // Default: "%env(default::SENTRY_RELEASE)%"
- *         server_name?: scalar|null,
- *         ignore_exceptions?: list<scalar|null>,
- *         ignore_transactions?: list<scalar|null>,
- *         before_send?: scalar|null,
- *         before_send_transaction?: scalar|null,
- *         before_send_check_in?: scalar|null,
- *         before_send_metrics?: scalar|null,
- *         before_send_log?: scalar|null,
- *         trace_propagation_targets?: mixed,
- *         tags?: array<string, scalar|null>,
- *         error_types?: scalar|null,
- *         max_breadcrumbs?: int,
- *         before_breadcrumb?: mixed,
- *         in_app_exclude?: list<scalar|null>,
- *         in_app_include?: list<scalar|null>,
- *         send_default_pii?: bool,
- *         max_value_length?: int,
- *         transport?: scalar|null,
- *         http_client?: scalar|null,
- *         http_proxy?: scalar|null,
- *         http_proxy_authentication?: scalar|null,
- *         http_connect_timeout?: float, // The maximum number of seconds to wait while trying to connect to a server. It works only when using the default transport.
- *         http_timeout?: float, // The maximum execution time for the request+response as a whole. It works only when using the default transport.
- *         http_ssl_verify_peer?: bool,
- *         http_compression?: bool,
- *         capture_silenced_errors?: bool,
- *         max_request_body_size?: "none"|"small"|"medium"|"always",
- *         class_serializers?: array<string, scalar|null>,
- *     },
- *     messenger?: bool|array{
- *         enabled?: bool, // Default: true
- *         capture_soft_fails?: bool, // Default: true
- *         isolate_breadcrumbs_by_message?: bool, // Default: false
- *     },
- *     tracing?: bool|array{
- *         enabled?: bool, // Default: true
- *         dbal?: bool|array{
- *             enabled?: bool, // Default: true
- *             connections?: list<scalar|null>,
- *         },
- *         twig?: bool|array{
- *             enabled?: bool, // Default: true
- *         },
- *         cache?: bool|array{
- *             enabled?: bool, // Default: true
- *         },
- *         http_client?: bool|array{
- *             enabled?: bool, // Default: true
- *         },
- *         console?: array{
- *             excluded_commands?: list<scalar|null>,
- *         },
- *     },
- * }
  * @psalm-type FosJsRoutingConfig = array{
  *     serializer?: scalar|null,
  *     routes_to_expose?: list<scalar|null>,
@@ -1727,8 +1886,50 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  * }
  * @psalm-type LiipImagineConfig = array{
  *     resolvers?: array<string, array{ // Default: []
+ *         web_path?: array{
+ *             web_root?: scalar|null, // Default: "%kernel.project_dir%/public"
+ *             cache_prefix?: scalar|null, // Default: "media/cache"
+ *         },
+ *         aws_s3?: array{
+ *             bucket: scalar|null,
+ *             cache?: scalar|null, // Default: false
+ *             use_psr_cache?: bool, // Default: false
+ *             acl?: scalar|null, // Default: "public-read"
+ *             cache_prefix?: scalar|null, // Default: ""
+ *             client_id?: scalar|null, // Default: null
+ *             client_config: list<mixed>,
+ *             get_options?: array<string, scalar|null>,
+ *             put_options?: array<string, scalar|null>,
+ *             proxies?: array<string, scalar|null>,
+ *         },
+ *         flysystem?: array{
+ *             filesystem_service: scalar|null,
+ *             cache_prefix?: scalar|null, // Default: ""
+ *             root_url: scalar|null,
+ *             visibility?: "public"|"private"|"noPredefinedVisibility", // Default: "public"
+ *         },
  *     }>,
  *     loaders?: array<string, array{ // Default: []
+ *         stream?: array{
+ *             wrapper: scalar|null,
+ *             context?: scalar|null, // Default: null
+ *         },
+ *         filesystem?: array{
+ *             locator?: "filesystem"|"filesystem_insecure", // Using the "filesystem_insecure" locator is not recommended due to a less secure resolver mechanism, but is provided for those using heavily symlinked projects. // Default: "filesystem"
+ *             data_root?: list<scalar|null>,
+ *             allow_unresolvable_data_roots?: bool, // Default: false
+ *             bundle_resources?: array{
+ *                 enabled?: bool, // Default: false
+ *                 access_control_type?: "blacklist"|"whitelist", // Sets the access control method applied to bundle names in "access_control_list" into a blacklist or whitelist. // Default: "blacklist"
+ *                 access_control_list?: list<scalar|null>,
+ *             },
+ *         },
+ *         flysystem?: array{
+ *             filesystem_service: scalar|null,
+ *         },
+ *         chain?: array{
+ *             loaders: list<scalar|null>,
+ *         },
  *     }>,
  *     driver?: scalar|null, // Default: "gd"
  *     cache?: scalar|null, // Default: "default"
@@ -1919,6 +2120,83 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  * @psalm-type SurvosImportConfig = array{
  *     dir?: scalar|null, // The default directory for data files // Default: "data"
  * }
+ * @psalm-type SentryConfig = array{
+ *     dsn?: scalar|null, // If this value is not provided, the SDK will try to read it from the SENTRY_DSN environment variable. If that variable also does not exist, the SDK will not send any events.
+ *     register_error_listener?: bool, // Default: true
+ *     register_error_handler?: bool, // Default: true
+ *     logger?: scalar|null, // The service ID of the PSR-3 logger used to log messages coming from the SDK client. Be aware that setting the same logger of the application may create a circular loop when an event fails to be sent. // Default: null
+ *     options?: array{
+ *         integrations?: mixed, // Default: []
+ *         default_integrations?: bool,
+ *         prefixes?: list<scalar|null>,
+ *         sample_rate?: float, // The sampling factor to apply to events. A value of 0 will deny sending any event, and a value of 1 will send all events.
+ *         enable_tracing?: bool,
+ *         traces_sample_rate?: float, // The sampling factor to apply to transactions. A value of 0 will deny sending any transaction, and a value of 1 will send all transactions.
+ *         traces_sampler?: scalar|null,
+ *         profiles_sample_rate?: float, // The sampling factor to apply to profiles. A value of 0 will deny sending any profiles, and a value of 1 will send all profiles. Profiles are sampled in relation to traces_sample_rate
+ *         enable_logs?: bool,
+ *         attach_stacktrace?: bool,
+ *         attach_metric_code_locations?: bool,
+ *         context_lines?: int,
+ *         environment?: scalar|null, // Default: "%kernel.environment%"
+ *         logger?: scalar|null,
+ *         spotlight?: bool,
+ *         spotlight_url?: scalar|null,
+ *         release?: scalar|null, // Default: "%env(default::SENTRY_RELEASE)%"
+ *         server_name?: scalar|null,
+ *         ignore_exceptions?: list<scalar|null>,
+ *         ignore_transactions?: list<scalar|null>,
+ *         before_send?: scalar|null,
+ *         before_send_transaction?: scalar|null,
+ *         before_send_check_in?: scalar|null,
+ *         before_send_metrics?: scalar|null,
+ *         before_send_log?: scalar|null,
+ *         trace_propagation_targets?: mixed,
+ *         tags?: array<string, scalar|null>,
+ *         error_types?: scalar|null,
+ *         max_breadcrumbs?: int,
+ *         before_breadcrumb?: mixed,
+ *         in_app_exclude?: list<scalar|null>,
+ *         in_app_include?: list<scalar|null>,
+ *         send_default_pii?: bool,
+ *         max_value_length?: int,
+ *         transport?: scalar|null,
+ *         http_client?: scalar|null,
+ *         http_proxy?: scalar|null,
+ *         http_proxy_authentication?: scalar|null,
+ *         http_connect_timeout?: float, // The maximum number of seconds to wait while trying to connect to a server. It works only when using the default transport.
+ *         http_timeout?: float, // The maximum execution time for the request+response as a whole. It works only when using the default transport.
+ *         http_ssl_verify_peer?: bool,
+ *         http_compression?: bool,
+ *         capture_silenced_errors?: bool,
+ *         max_request_body_size?: "none"|"small"|"medium"|"always",
+ *         class_serializers?: array<string, scalar|null>,
+ *     },
+ *     messenger?: bool|array{
+ *         enabled?: bool, // Default: true
+ *         capture_soft_fails?: bool, // Default: true
+ *         isolate_breadcrumbs_by_message?: bool, // Default: false
+ *     },
+ *     tracing?: bool|array{
+ *         enabled?: bool, // Default: true
+ *         dbal?: bool|array{
+ *             enabled?: bool, // Default: true
+ *             connections?: list<scalar|null>,
+ *         },
+ *         twig?: bool|array{
+ *             enabled?: bool, // Default: true
+ *         },
+ *         cache?: bool|array{
+ *             enabled?: bool, // Default: true
+ *         },
+ *         http_client?: bool|array{
+ *             enabled?: bool, // Default: true
+ *         },
+ *         console?: array{
+ *             excluded_commands?: list<scalar|null>,
+ *         },
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2103,7 +2381,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     }>
  * }
  */
-final class App extends AppReference
+final class App
 {
     /**
      * @param ConfigType $config
@@ -2112,7 +2390,7 @@ final class App extends AppReference
      */
     public static function config(array $config): array
     {
-        return parent::config($config);
+        return AppReference::config($config);
     }
 }
 
@@ -2180,7 +2458,7 @@ namespace Symfony\Component\Routing\Loader\Configurator;
  *     ...<string, RouteConfig|ImportConfig|AliasConfig>
  * }
  */
-final class Routes extends RoutesReference
+final class Routes
 {
     /**
      * @param RoutesConfig $config
@@ -2189,6 +2467,6 @@ final class Routes extends RoutesReference
      */
     public static function config(array $config): array
     {
-        return parent::config($config);
+        return $config;
     }
 }

@@ -54,10 +54,9 @@
             <span class="ms-1">Details {{ pkVal }}</span>
         </button>
 
-        {% if hit.url ?? false %}
-            <a href="{{ hit.url }}" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline-secondary">
-                🔗 Open
+        {% set url = 'https://egallery.williams.edu/objects/' ~ hit.id %}
+            <a href="{{ url }}" target="_blank" rel="noreferrer" class="btn btn-sm btn-outline-secondary">
+                🔗 {{ url }}
             </a>
-        {% endif %}
     </div>
 </div>
