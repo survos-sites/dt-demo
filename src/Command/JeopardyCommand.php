@@ -16,7 +16,7 @@ use Symfony\Component\ObjectMapper\ObjectMapper;
 use Castor\Attribute\AsSymfonyTask;
 
 #[AsCommand('app:jeopardy', 'Import 200k jeopardy questions')]
-#[AsSymfonyTask('jeopardy')]
+#[AsSymfonyTask('load:jeopardy')]
 class JeopardyCommand
 {
     public function __construct(

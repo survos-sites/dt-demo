@@ -10,4 +10,5 @@ class WineCrudController extends BaseCrudController
     {
         return \App\Entity\Wine::class;
     }
+
 }

@@ -2,7 +2,7 @@
 
 namespace App\MessageHandler;
 
-use App\Command\AppLoadDataCommand;
+use App\Command\LoadCongressCommand;
 use App\Entity\Official;
 use App\Message\FetchWikidataMessage;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,7 +60,7 @@ final class FetchWikidataMessageHandler
                 // trigger the download.  we could batch this, too.
                 $response = $this->imageClientService->dispatchProcess(
                     new ProcessPayload(
-                        AppLoadDataCommand::SAIS_CLIENT,
+                        LoadCongressCommand::SAIS_CLIENT,
                         [$url],
                         ['small','medium','large'],
 //                        mediaCallbackUrl: $this->urlGenerator->generate('app_webhook', [

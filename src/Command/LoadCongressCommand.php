@@ -23,8 +23,8 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Castor\Attribute\AsSymfonyTask;
 
 #[AsCommand('init:congress', 'Load the congressional data')]
-#[AsSymfonyTask('congress')]
-final class AppLoadDataCommand
+#[AsSymfonyTask('load:congress')]
+final class LoadCongressCommand
 {
     public const SAIS_CLIENT='dtDemo_Officials';
 
