@@ -63,7 +63,7 @@ function demo_datasets(): array
         'car' => new Dataset(
             name: 'car',
             url: 'https://corgis-edu.github.io/corgis/datasets/csv/cars/cars.csv',
-            target: 'data/cars.csv',
+            target: 'data/car.csv',
         ),
         'wine' => new Dataset(
             name: 'wine',
@@ -74,7 +74,7 @@ function demo_datasets(): array
             name: 'marvel',
             url: 'https://github.com/algolia/marvel-search/archive/refs/heads/master.zip',
             target: 'zip/marvel.zip',
-            jsonl: 'data/marvel.jsonl', // output of convert/import target
+            jsonl: '', // hack! null, // 'data/marvel.jsonl', // output of convert/import target
         ),
         // WAM (Dywer & Mackay) – CSV prepared elsewhere, see comments below.
         'wam' => new Dataset(
@@ -169,6 +169,10 @@ function load_database(
     // This will:
     //   - write JSONL to $dataset->jsonl (or derived from target)
     //   - write profile JSON alongside it
+    if (!$dataset->jsonl) {
+        io()->warning("stopped, no jsonl, maybe run another command?");
+        return;
+    }
     $convertCmd = sprintf(
         'bin/console import:convert %s --output=%s --tags=%s',
         $dataset->target,
@@ -184,7 +188,7 @@ function load_database(
     // and that you've already generated the entity via code:entity.
     $limitArg = $limit ? sprintf(' --limit=%d', $limit) : '';
     $importCmd = sprintf(
-        'bin/console import:entities App\\\\Entity\\\\%s %s%s',
+        'bin/console import:entities %s %s%s',
         ucfirst($code),
         $dataset->jsonl,
         $limitArg
