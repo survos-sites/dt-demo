@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use function Symfony\Component\String\u;
-
+use Survos\ImportBundle\Event\ImportConvertRowEvent;
 class EnhanceRecordService
 {
 
@@ -23,14 +23,15 @@ class EnhanceRecordService
     {
 
     }
-    #[AsEventListener(event: JsonlRecordEvent::class)]
-    final public function tweakRecord(JsonlRecordEvent $event): void
+    #[AsEventListener(event: ImportConvertRowEvent::class)]
+    final public function tweakRecord(ImportConvertRowEvent $event): void
     {
-        $record = $event->record;
+        $record = $event->row;
         $record = SurvosUtils::removeNullsAndEmptyArrays($record);
 
-        foreach ($event->tags as $tag) {
-            switch ($tag) {
+//        foreach ($event->tags as $tag)
+        {
+            switch ($event->dataset) {
                 case 'wcma':
                     $manifest = sprintf('https://egallery.williams.edu/apis/iiif/presentation/v2/1-objects-%d/manifest', $record['id']);
                     $record['manifest'] = $manifest;
@@ -38,7 +39,7 @@ class EnhanceRecordService
                 case 'wine':
                     $code = $this->asciiSlugger->slug(join('-', [$record['name'], $record['year'], $record['domain']]))->toString() . "-" . $event->index;
                     if (in_array($code, $this->seen)) {
-                        $event->record = null;
+                        $event->row = null;
                         dump($code . ' already seen', $event);
                         return;
                     }
@@ -54,7 +55,15 @@ class EnhanceRecordService
                     $code = $this->asciiSlugger->slug($record['name'])->toString();
                     $record['code'] = $code;
                     if (in_array($code, $this->seen)) {
-                        $event->record = null;
+                        $record = null;
+                        dump($code . ' already seen');
+                    }
+                    $this->seen[] = $code;
+                    break;
+                case 'wam':
+                    $code = $record['registrationNumber'];
+                    if (in_array($code, $this->seen)) {
+                        $record = null;
                         dump($code . ' already seen');
                     }
                     $this->seen[] = $code;
@@ -70,7 +79,7 @@ class EnhanceRecordService
 
         }
 
-        $event->record = $record;
+        $event->row = $record;
     }
 
     // More complete example with validation

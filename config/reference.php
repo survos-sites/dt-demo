@@ -2086,8 +2086,32 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         apiKey?: scalar|null, // Default: null
  *         for?: scalar|null, // Default: null
  *         template?: scalar|null, // Default: null
+ *         documentTemplateMaxBytes?: int, // Default: 4096
+ *         maxTokensPerDoc?: int, // Optional hint for expected max tokens per doc for cost estimation / guard rails. // Default: null
  *         examples?: list<scalar|null>,
  *     }>,
+ *     pricing?: array{
+ *         embedders?: array<string, scalar|null>,
+ *     },
+ *     meili_settings?: array{
+ *         typoTolerance?: array{
+ *             enabled?: bool, // Default: true
+ *             oneTypo?: int, // Default: 5
+ *             twoTypos?: int, // Default: 9
+ *             disableOnWords?: list<scalar|null>,
+ *             disableOnAttributes?: list<scalar|null>,
+ *             disableOnNumbers?: bool, // Default: false
+ *         },
+ *         faceting?: array{
+ *             maxValuesPerFacet?: int, // Default: 1000
+ *             sortFacetValuesBy?: array<string, scalar|null>,
+ *         },
+ *         pagination?: array{
+ *             maxTotalHits?: int, // Default: 1000
+ *         },
+ *         facetSearch?: bool, // Default: true
+ *         prefixSearch?: scalar|null, // Default: "indexingTime"
+ *     },
  *     entity_dirs?: list<scalar|null>,
  * }
  * @psalm-type SurvosStateConfig = array{

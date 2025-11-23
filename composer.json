@@ -30,7 +30,7 @@
         "league/flysystem-aws-s3-v3": "^3.22",
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.12",
-        "meilisearch/meilisearch-php": "dev-main",
+        "meilisearch/meilisearch-php": "^v2.0.0-beta.1||dev-main",
         "nelmio/cors-bundle": "^2.3.1",
         "openai-php/client": "^0.18.0",
         "phpdocumentor/reflection-docblock": "^5.3",
