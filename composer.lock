@@ -4638,16 +4638,16 @@
         },
         {
             "name": "meilisearch/meilisearch-php",
-            "version": "v2.0.0-beta.1",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/meilisearch/meilisearch-php.git",
-                "reference": "f82d8e8807853e62f81a3689c6a333a9031da30b"
+                "reference": "658fadeff80e9d3fcb48a56092ca89ba605fe560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/f82d8e8807853e62f81a3689c6a333a9031da30b",
-                "reference": "f82d8e8807853e62f81a3689c6a333a9031da30b",
+                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/658fadeff80e9d3fcb48a56092ca89ba605fe560",
+                "reference": "658fadeff80e9d3fcb48a56092ca89ba605fe560",
                 "shasum": ""
             },
             "require": {
@@ -4665,20 +4665,20 @@
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^10.5",
-                "symfony/http-client": "^5.4|^6.0|^7.0"
+                "symfony/http-client": "^5.4|^6.0|^7.0|^8.0"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "Use Guzzle ^7 as HTTP client",
                 "http-interop/http-factory-guzzle": "Factory for guzzlehttp/guzzle",
                 "symfony/http-client": "Use Symfony Http client"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
                     "src/functions.php"
                 ],
                 "psr-4": {
-                    "MeiliSearch\\": "src/",
                     "Meilisearch\\": "src/"
                 }
             },
@@ -4715,9 +4715,9 @@
             ],
             "support": {
                 "issues": "https://github.com/meilisearch/meilisearch-php/issues",
-                "source": "https://github.com/meilisearch/meilisearch-php/tree/v2.0.0-beta.1"
+                "source": "https://github.com/meilisearch/meilisearch-php/tree/main"
             },
-            "time": "2025-11-18T10:46:05+00:00"
+            "time": "2025-11-25T10:13:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8093,23 +8093,23 @@
         },
         {
             "name": "survos/meili-bundle",
-            "version": "2.0.71",
+            "version": "2.0.73",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/meili-bundle.git",
-                "reference": "b4dff7fc7a03196e2f799add35ca060d5b56b236"
+                "reference": "5299b21d3b3228695ef23a8879e8fe16a1d40ad1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/b4dff7fc7a03196e2f799add35ca060d5b56b236",
-                "reference": "b4dff7fc7a03196e2f799add35ca060d5b56b236",
+                "url": "https://api.github.com/repos/survos/meili-bundle/zipball/5299b21d3b3228695ef23a8879e8fe16a1d40ad1",
+                "reference": "5299b21d3b3228695ef23a8879e8fe16a1d40ad1",
                 "shasum": ""
             },
             "require": {
                 "adbario/php-dot-notation": "^3.3",
                 "cebe/php-openapi": "^1.8",
                 "ext-pdo": "*",
-                "meilisearch/meilisearch-php": "*",
+                "meilisearch/meilisearch-php": "dev-main",
                 "nyholm/psr7": "^1.8",
                 "php": "^8.4",
                 "survos/core-bundle": "^2.0",
@@ -8164,7 +8164,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/meili-bundle/issues",
-                "source": "https://github.com/survos/meili-bundle/tree/2.0.71"
+                "source": "https://github.com/survos/meili-bundle/tree/2.0.73"
             },
             "funding": [
                 {
@@ -8172,7 +8172,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-23T12:43:32+00:00"
+            "time": "2025-11-25T21:53:19+00:00"
         },
         {
             "name": "survos/sais-bundle",
