@@ -28,13 +28,23 @@ class EnhanceRecordService
     {
         $record = $event->row;
         $record = SurvosUtils::removeNullsAndEmptyArrays($record);
-
 //        foreach ($event->tags as $tag)
         {
             switch ($event->dataset) {
                 case 'wcma':
-                    $manifest = sprintf('https://egallery.williams.edu/apis/iiif/presentation/v2/1-objects-%d/manifest', $record['id']);
-                    $record['manifest'] = $manifest;
+                    $id = $record['id'];
+                    if (in_array($id, $this->seen)) {
+                        $record = null;
+                        dump($id . ' already seen');
+                    } else {
+                        $record['citation_url'] =
+                            sprintf('https://egallery.williams.edu/objects/%d', (int) $id);
+                        $this->seen[] = $id;
+                        $id = (int)$record['id'];
+                        $record['id'] = $id; // make int
+                        $manifest = sprintf('https://egallery.williams.edu/apis/iiif/presentation/v2/1-objects-%d/manifest', $record['id']);
+                        $record['manifest'] = $manifest;
+                    }
                     break;
                 case 'wine':
                     $code = $this->asciiSlugger->slug(join('-', [$record['name'], $record['year'], $record['domain']]))->toString() . "-" . $event->index;
@@ -60,6 +70,9 @@ class EnhanceRecordService
                     }
                     $this->seen[] = $code;
                     break;
+                case 'car':
+                    $record['id'] = $event->index+1;
+                    break;
                 case 'wam':
                     $code = $record['registrationNumber'];
                     if (in_array($code, $this->seen)) {
@@ -67,13 +80,6 @@ class EnhanceRecordService
                         dump($code . ' already seen');
                     }
                     $this->seen[] = $code;
-                    break;
-                case 'wcma':
-
-                    $id = (int)$record['id'];
-                    $record['citation_url'] =
-                        sprintf('https://egallery.williams.edu/objects/%d', (int) $id);
-                    $record['id'] = $id; // make int
                     break;
             }
 

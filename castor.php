@@ -208,6 +208,10 @@ function load_database(
     // This will:
     //   - write JSONL to $dataset->jsonl (or derived from target)
     //   - write profile JSON alongside it
+    if (!$dataset->jsonl) {
+        io()->warning("stopped, no jsonl, maybe run another command?");
+        return;
+    }
     $convertCmd = sprintf(
         'bin/console import:convert %s --output=%s --tags=%s',
         $dataset->target,
@@ -223,7 +227,7 @@ function load_database(
     // and that you've already generated the entity via code:entity.
     $limitArg = $limit ? sprintf(' --limit=%d', $limit) : '';
     $importCmd = sprintf(
-        'bin/console import:entities App\\\\Entity\\\\%s %s%s',
+        'bin/console import:entities %s %s%s',
         ucfirst($code),
         $dataset->jsonl,
         $limitArg
