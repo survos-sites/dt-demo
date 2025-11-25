@@ -33,12 +33,12 @@ use function Symfony\Component\String\u;
 //#[ApiFilter(FacetsFieldSearchFilter::class, properties: ['type', 'genres','countries'])]
 // since no relations, this gets ALL the properties
 #[Groups(['instrument.read'])]
-#[MeiliIndex(
-    persisted: new Fields(
-        groups: ['instrument.read', 'marking.read'],
-    ),
-    filterable: ['type', 'genres', 'countries']
-)]
+//#[MeiliIndex(
+//    persisted: new Fields(
+//        groups: ['instrument.read', 'marking.read'],
+//    ),
+//    filterable: ['type', 'genres', 'countries']
+//)]
 class Instrument
 {
 
