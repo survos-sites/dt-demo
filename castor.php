@@ -54,35 +54,74 @@ function marvel(): void
  */
 function demo_datasets(): array
 {
-    return [
-        'wcma' => new Dataset(
-            name: 'wcma',
-            url: 'https://github.com/wcmaart/collection/raw/refs/heads/master/wcma-collection.csv',
-            target: 'data/wcma.csv',
-        ),
-        'car' => new Dataset(
-            name: 'car',
-            url: 'https://corgis-edu.github.io/corgis/datasets/csv/cars/cars.csv',
-            target: 'data/cars.csv',
-        ),
-        'wine' => new Dataset(
-            name: 'wine',
-            url: 'https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json',
-            target: 'data/wine.json',
-        ),
-        'marvel' => new Dataset(
-            name: 'marvel',
-            url: 'https://github.com/algolia/marvel-search/archive/refs/heads/master.zip',
-            target: 'zip/marvel.zip',
-            jsonl: 'data/marvel.jsonl', // output of convert/import target
-        ),
-        // WAM (Dywer & Mackay) – CSV prepared elsewhere, see comments below.
-        'wam' => new Dataset(
-            name: 'wam',
-            url: null, // downloaded / prepared manually or via separate script
-            target: 'data/wam-dywer.csv',
-        ),
-    ];
+        $datasets = [
+            new Dataset(
+                name: 'wcma',
+                url: 'https://github.com/wcmaart/collection/raw/refs/heads/master/wcma-collection.csv',
+                target: 'data/wcma.csv',
+            ),
+            new Dataset(
+                name: 'car',
+                url: 'https://corgis-edu.github.io/corgis/datasets/csv/cars/cars.csv',
+                target: 'data/cars.csv',
+            ),
+            new Dataset(
+                name: 'wine',
+                url: 'https://github.com/algolia/datasets/raw/refs/heads/master/wine/bordeaux.json',
+                target: 'data/wine.json',
+            ),
+            new Dataset(
+                name: 'movie',
+                url: 'https://github.com/metarank/msrd/raw/master/dataset/movies.csv.gz',
+                target: 'data/movie.json',
+                afterDownload: 'gunzip data/movies.csv.gz -k
+'
+            ),
+            new Dataset(
+                name: 'marvel',
+                url: 'https://github.com/algolia/marvel-search/archive/refs/heads/master.zip',
+                target: 'zip/marvel.zip',
+                jsonl: 'data/marvel.jsonl', // output of convert/import target
+            ),
+            new Dataset(
+                name: 'wam',
+                url: null, // downloaded / prepared manually or via separate script
+                target: 'data/wam'
+            )
+        ];
+    foreach ($datasets as $name => $dataset) {
+        $map[$name] = $dataset;
+    }
+    return $map;
+}
+
+
+#[AsTask('download')]
+function download(?string $code=null): void
+{
+    $map = demo_datasets();
+    if ($code && !array_key_exists($code, $map)) {
+        io()->error("The code '{$code}' does not exist: " . implode('|', array_keys($map)));
+        return;
+    }
+    $datasets = $code ? [$map[$code]] : array_values($map);
+    foreach ($datasets as $dataset) {
+        // use fs()?
+        if ($dataset->url) {
+            if (!file_exists($dataset->target)) {
+                $dir = \dirname($dataset->target);
+                if ($dir !== '' && !\is_dir($dir)) {
+                    \mkdir($dir, 0777, true);
+                }
+
+                io()->writeln(sprintf('Downloading %s → %s', $dataset->url, $dataset->target));
+                http_download($dataset->url, $dataset->target);
+                io()->writeln(realpath($dataset->target) . ' written');
+            } else {
+                io()->writeln(sprintf('Target %s already exists, skipping download.', $dataset->target));
+            }
+        }
+    }
 }
 
 /**
