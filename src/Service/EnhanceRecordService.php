@@ -57,8 +57,8 @@ class EnhanceRecordService
 
                     $record['code'] = $code;
 
-                    $this->saveBase64Image($record['image'], "public/wine/$code.jpg");
-                    $record['image'] = "/wine/$code.jpg"; // url
+                    $this->saveBase64Image($record['image'], "public/images/uploads/$code.jpg");
+                    $record['image'] = "/images/uploads/$code.jpg"; // url
 
                     break;
                 case 'marvel':

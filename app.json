@@ -1,6 +1,6 @@
 {
-    "name": "dt-demo",
-    "description": "Datatables demo with congressional data.  Also a playground for and other Survos bundles",
+    "name": "meili",
+    "description": "meili demos",
     "keywords": [
         "php",
         "symfony"
@@ -12,6 +12,16 @@
             "postdeploy": "bin/console about"
         }
     },
+    "cron": [
+        {
+            "command": "bin/console mess:consume official.fetch.wiki  --time-limit 290",
+            "schedule": "*/5 * * * *"
+        },
+        {
+            "command": "bin/console mess:consume meili  --time-limit 115",
+            "schedule": "*/2 * * * *"
+        }
+    ],
     "env": {
         "SECRET_TOKEN": {
             "description": "A secret key for verifying the integrity of signed cookies.",

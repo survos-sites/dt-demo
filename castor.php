@@ -36,7 +36,7 @@ function congress_details(): void
     io()->writeln('make sure the message consumer is running');
 }
 
-#[AsTask('marvel', description: 'Fetch details from wikipedia')]
+#[AsTask('load:marvel', description: 'Fetch details from wikipedia')]
 function marvel(): void
 {
     run(sprintf('bin/console import:convert %s --output=%s --zip-path=marvel-search-master/records', 'zip/marvel.zip', 'data/marvel.jsonl'));

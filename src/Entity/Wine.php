@@ -141,7 +141,7 @@ final class Wine
 	 * Top/First value: "/wine/Chateau-Cote-Montpezat-Castillon-Cuvee-Compostelle-2010-Saint-Emilion-0.jpg"
 	 * Distinct counting capped in profile.
 	 */
-	#[Column(length: 83, nullable: true)]
+	#[Column(length: 254, nullable: true)]
 	#[ApiProperty(
 		description: 'Field "image": types=[string], distinct=501 (capped), range=33–83 chars',
 		example: '"/wine/Chateau-Cote-Montpezat-Castillon-Cuvee-Compostelle-2010-Saint-Emilion-0.jpg"',
