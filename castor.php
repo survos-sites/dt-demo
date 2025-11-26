@@ -64,6 +64,7 @@ function demo_datasets(): array
                 name: 'car',
                 url: 'https://corgis-edu.github.io/corgis/datasets/csv/cars/cars.csv',
                 target: 'data/cars.csv',
+                jsonl: 'data/car.jsonl',
             ),
             new Dataset(
                 name: 'wine',
@@ -73,9 +74,9 @@ function demo_datasets(): array
             new Dataset(
                 name: 'movie',
                 url: 'https://github.com/metarank/msrd/raw/master/dataset/movies.csv.gz',
-                target: 'data/movie.json',
-                afterDownload: 'gunzip data/movies.csv.gz -k
-'
+                target: 'data/movies.csv.gz',
+                jsonl: 'data/movie.jsonl',
+                afterDownload: 'gunzip data/movies.csv.gz -k'
             ),
             new Dataset(
                 name: 'marvel',
@@ -86,19 +87,44 @@ function demo_datasets(): array
             new Dataset(
                 name: 'wam',
                 url: null, // downloaded / prepared manually or via separate script
-                target: 'data/wam'
+                target: 'data/wam-dywer.csv',
+                jsonl: 'data/wam.jsonl'
             )
         ];
-    foreach ($datasets as $name => $dataset) {
-        $map[$name] = $dataset;
+    foreach ($datasets as $dataset) {
+        $map[$dataset->name] = $dataset;
     }
     return $map;
 }
 
+function wam(Dataset $dataset)
+{
+    $zipPath = 'zip/wam.zip';
+    if (!file_exists($zipPath)) {
+        throw new \RuntimeException(sprintf('WAM zip not found at %s', $zipPath));
+    }
+
+    $zip = new ZipArchive();
+    if ($zip->open($zipPath) === true) {
+        io()->writeln('Unzipping wam.zip');
+        $destDir = __DIR__ . '/data/';
+        if (!\is_dir($destDir)) {
+            \mkdir($destDir, 0777, true);
+        }
+        $zip->extractTo($destDir, 'wam-dywer.csv');
+        $zip->close();
+        io()->writeln('WAM CSV was extracted to ' . realpath($dataset->target));
+    } else {
+        throw new \RuntimeException('Failed to open WAM ZIP file at ' . $zipPath);
+    }
+
+}
 
 #[AsTask('download')]
 function download(?string $code=null): void
 {
+
+
     $map = demo_datasets();
     if ($code && !array_key_exists($code, $map)) {
         io()->error("The code '{$code}' does not exist: " . implode('|', array_keys($map)));
@@ -106,6 +132,10 @@ function download(?string $code=null): void
     }
     $datasets = $code ? [$map[$code]] : array_values($map);
     foreach ($datasets as $dataset) {
+        if ($dataset->name === 'wam') {
+            wam($dataset);
+            continue;
+        }
         // use fs()?
         if ($dataset->url) {
             if (!file_exists($dataset->target)) {
@@ -117,6 +147,11 @@ function download(?string $code=null): void
                 io()->writeln(sprintf('Downloading %s → %s', $dataset->url, $dataset->target));
                 http_download($dataset->url, $dataset->target);
                 io()->writeln(realpath($dataset->target) . ' written');
+                if ($dataset->afterDownload) {
+                    io()->warning($dataset->afterDownload);
+                    run($dataset->afterDownload);
+                }
+
             } else {
                 io()->writeln(sprintf('Target %s already exists, skipping download.', $dataset->target));
             }
@@ -213,9 +248,8 @@ function load_database(
         return;
     }
     $convertCmd = sprintf(
-        'bin/console import:convert %s --output=%s --tags=%s',
+        'bin/console import:convert %s --dataset=%s',
         $dataset->target,
-        $dataset->jsonl,
         $dataset->name
     );
     io()->writeln($convertCmd);
@@ -234,7 +268,7 @@ function load_database(
     );
     io()->writeln($importCmd);
     run($importCmd);
-
+dd();
     // In the new world, code generation (code:entity) and templates are explicit steps.
     // This Castor task focuses on:
     //   download → convert/profile → import.
