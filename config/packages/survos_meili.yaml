@@ -16,3 +16,17 @@ survos_meili:
             examples:
                 - cool gifts for a tech executive
                 - things to decorate an apartment
+        wam:
+            source: 'openAi'
+            model: 'text-embedding-3-large' # 13 cents/million tokens
+            apiKey: '%env(OPENAI_API_KEY)%'
+            template: 'templates/liquid/wam.liquid'
+            examples:
+                - animals
+        marvel:
+            source: 'openAi'
+            model: 'text-embedding-3-large' # 13 cents/million tokens
+            apiKey: '%env(OPENAI_API_KEY)%'
+            template: 'templates/liquid/marvel.liquid'
+            examples:
+                - animals

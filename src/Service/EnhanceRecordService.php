@@ -46,7 +46,26 @@ class EnhanceRecordService
                         $record['manifest'] = $manifest;
                     }
                     break;
-                case 'wine':
+                case 'amst':
+                    $code = $record['vondstnummer'];
+                    $record['image'] = sprintf('https://statics.belowthesurface.amsterdam/vondst/600/%s(01).png',
+                        $code);
+                    $record['citation_url'] = sprintf('https://belowthesurface.amsterdam/%s', $code);
+//                    dd($record['citation_url']);
+                    $code = str_replace('.', '-', $code);
+                    if (in_array($code, $this->seen)) {
+                        $event->row = null;
+                        dump($code . ' already seen', $event);
+                        return;
+                    }
+                    $this->seen[] = $code;
+                    $record['vondstnummer'] = $code;
+//                    dump($record);
+//                    dump('https://statics.belowthesurface.amsterdam/vondst/600/NZD1.00048FAU017-02(01).png');
+//                    dd($record['image'], $record['citation_url']);
+                    break;
+
+                    case 'wine':
                     $code = $this->asciiSlugger->slug(join('-', [$record['name'], $record['year'], $record['domain']]))->toString() . "-" . $event->index;
                     if (in_array($code, $this->seen)) {
                         $event->row = null;

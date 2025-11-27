@@ -54,11 +54,17 @@ function marvel(): void
  */
 function demo_datasets(): array
 {
+
         $datasets = [
             new Dataset(
                 name: 'wcma',
                 url: 'https://github.com/wcmaart/collection/raw/refs/heads/master/wcma-collection.csv',
                 target: 'data/wcma.csv',
+            ),
+            new Dataset(
+                name: 'amst',
+                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_NL.csv',
+                target: 'data/amst.csv',
             ),
             new Dataset(
                 name: 'car',

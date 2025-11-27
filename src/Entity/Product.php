@@ -50,15 +50,6 @@ use Survos\BabelBundle\Attribute\Translatable;
 )]
 
 #[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
-
-// @todo: sort/search on translatable properties
-//    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
-//#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
-
-#[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['category', 'tags', 'rating', 'stock', 'price'],
-    arguments: [ "searchParameterName" => "facet_filter"]
-)]
 #[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
 #[MeiliIndex(
     // serialization groups for the JSON sent to the index
@@ -67,7 +58,6 @@ use Survos\BabelBundle\Attribute\Translatable;
         fields: ['sku', 'stock', 'price', 'title','brand'],
         groups: ['product.read', 'product.details', 'product.searchable']
     ),
-//    groups: ['product.read', 'product.details'],
     displayed: ['*'],
     filterable: new Fields(
         fields: ['category','tags','rating','price','brand'],
@@ -81,16 +71,6 @@ use Survos\BabelBundle\Attribute\Translatable;
     embedders: ['product']
 )]
 
-/*
-*   #[MeiliIndex(
- *       name: 'product',
- *       display:   new FieldSet(['*']),
- *       filterable:['columns'=>['category','tags','rating','stock','price'], 'groups'=>['product.read','product.details']],
- *       sortable:  ['title','price'],
- *       searchable:['title','description'],
- *   )]
- *
- */
 class Product implements RouteParametersInterface
 {
     use BabelHooksTrait;
