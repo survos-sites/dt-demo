@@ -63,7 +63,8 @@ function demo_datasets(): array
             ),
             new Dataset(
                 name: 'amst',
-                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_NL.csv',
+                    url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_EN.csv',
+//                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_NL.csv',
                 target: 'data/amst.csv',
             ),
             new Dataset(
@@ -179,6 +180,7 @@ function load_database(
     string $code = '',
     #[Opt(description: 'Limit number of entities to import')]
     ?int $limit = null,
+    #[\Castor\Attribute\AsOption(description: "reset the database")] bool $reset = false
 ): void {
     /** @var array<string, Dataset> $map */
     $map = demo_datasets();
@@ -253,8 +255,9 @@ function load_database(
         io()->warning("stopped, no jsonl, maybe run another command?");
         return;
     }
+    $cmd = 'bin/console import:convert %s --dataset=%s';
     $convertCmd = sprintf(
-        'bin/console import:convert %s --dataset=%s',
+        $cmd,
         $dataset->target,
         $dataset->name
     );
@@ -266,8 +269,15 @@ function load_database(
     // Note: This assumes your entity class is App\Entity\<Code>, e.g. App\Entity\Car
     // and that you've already generated the entity via code:entity.
     $limitArg = $limit ? sprintf(' --limit=%d', $limit) : '';
+    $cmd = 'bin/console import:entities %s %s%s';
+    if ($limit) {
+        $cmd .= ' --limit ' . $limit;
+    }
+    if ($reset) {
+        $cmd .= ' --reset';
+    }
     $importCmd = sprintf(
-        'bin/console import:entities %s %s%s',
+        $cmd,
         ucfirst($code),
         $dataset->jsonl,
         $limitArg

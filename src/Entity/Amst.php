@@ -18,14 +18,16 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
  */
 #[Entity(repositoryClass: AmstRepository::class)]
 #[MeiliIndex(
-	primaryKey: 'vondstnummer',
+	primaryKey: 'code',
 	filterable: self::FILTERABLE_FIELDS,
 	sortable: self::SORTABLE_FIELDS,
 	searchable: self::SEARCHABLE_FIELDS,
+    embedders: ['amst_en_large']
 )]
 final class Amst
 {
 	public const FILTERABLE_FIELDS = [
+		'imageCount',
 		'projectCode',
 		'categorie',
 		'fragmenten',
@@ -145,8 +147,14 @@ final class Amst
 	 * @length 15–19 chars
 	 */
 	#[Column(length: 19, nullable: false)]
-	#[Id]
 	public ?string $vondstnummer = null;
+
+    #[Column(length: 19, nullable: false)]
+    #[Id]
+    public ?string $code = null;
+
+
+    public int $imageCount { get => $this->image ? 1 : 0; }
 
 	/**
 	 * Profile field "projectCode"

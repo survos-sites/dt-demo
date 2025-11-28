@@ -2,20 +2,22 @@
 
 namespace App\Service;
 
+use Sentry\HttpClient\HttpClient;
 use Survos\CoreBundle\Service\SurvosUtils;
 use Survos\JsonlBundle\Event\JsonlConvertStartedEvent;
 use Survos\JsonlBundle\Event\JsonlRecordEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use function Symfony\Component\String\u;
 use Survos\ImportBundle\Event\ImportConvertRowEvent;
 class EnhanceRecordService
 {
-
     private $seen = [];
     public function __construct(
         private SluggerInterface $asciiSlugger,
+        private HttpClientInterface $httpClient,
     ) { }
 
     #[AsEventListener(event: JsonlConvertStartedEvent::class)]
@@ -47,10 +49,24 @@ class EnhanceRecordService
                     }
                     break;
                 case 'amst':
-                    $code = $record['vondstnummer'];
-                    $record['image'] = sprintf('https://statics.belowthesurface.amsterdam/vondst/600/%s(01).png',
-                        $code);
-                    $record['citation_url'] = sprintf('https://belowthesurface.amsterdam/%s', $code);
+                    // bad: https://statics.belowthesurface.amsterdam/vondst/600/NZC1.00001MTL001(01).png
+                    // YES: https://statics.belowthesurface.amsterdam/vondst/600/NZD1.00048FAU017-02(01).png
+//                    https://statics.belowthesurface.amsterdam/vondst/600/NZC1.00001MTL001(01).png
+//                    https://statics.belowthesurface.amsterdam/vondst/600/NZD1.00048FAU017-02(01).png
+                    $code = $record['vondstnummer']; // with the .
+                    if ($record['website']) {
+                        $image = $record['image'] = sprintf('https://statics.belowthesurface.amsterdam/vondst/600/%s(01).png',
+                            $code);
+//                        $response = $this->httpClient->request('GET', $image);
+//                        if ($response->getStatusCode() <> 200) {
+//                            dd($response, $image);
+//                        } else {
+//                            dump($image);
+//                        }
+//                        dd($response->getStatusCode());
+//                        dd(array_keys($record));
+                    }
+                    $record['citation_url'] = sprintf('https://belowthesurface.amsterdam/nl/vondst/%s', $code);
 //                    dd($record['citation_url']);
                     $code = str_replace('.', '-', $code);
                     if (in_array($code, $this->seen)) {
@@ -59,7 +75,8 @@ class EnhanceRecordService
                         return;
                     }
                     $this->seen[] = $code;
-                    $record['vondstnummer'] = $code;
+                    $record['code'] = $code;
+//                    $record['vondstnummer'] = $code;
 //                    dump($record);
 //                    dump('https://statics.belowthesurface.amsterdam/vondst/600/NZD1.00048FAU017-02(01).png');
 //                    dd($record['image'], $record['citation_url']);

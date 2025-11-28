@@ -1308,9 +1308,11 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     handlers?: array<string, array{ // Default: []
  *         type: scalar|null,
  *         id?: scalar|null,
+ *         enabled?: bool, // Default: true
  *         priority?: scalar|null, // Default: 0
  *         level?: scalar|null, // Default: "DEBUG"
  *         bubble?: bool, // Default: true
+ *         interactive_only?: bool, // Default: false
  *         app_name?: scalar|null, // Default: null
  *         fill_extra_context?: bool, // Default: false
  *         include_stacktraces?: bool, // Default: false
@@ -1356,6 +1358,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         include_extra?: scalar|null, // Default: false
  *         icon_emoji?: scalar|null, // Default: null
  *         webhook_url?: scalar|null,
+ *         exclude_fields?: list<scalar|null>,
  *         team?: scalar|null,
  *         notify?: scalar|null, // Default: false
  *         nickname?: scalar|null, // Default: "Monolog"
@@ -1388,6 +1391,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         disable_notification?: bool|null, // Default: null
  *         split_long_messages?: bool, // Default: false
  *         delay_between_messages?: bool, // Default: false
+ *         topic?: int, // Default: null
  *         factor?: int, // Default: 1
  *         tags?: list<scalar|null>,
  *         console_formater_options?: mixed, // Deprecated: "monolog.handlers..console_formater_options.console_formater_options" is deprecated, use "monolog.handlers..console_formater_options.console_formatter_options" instead.
@@ -1399,6 +1403,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *             hostname?: scalar|null,
  *             port?: scalar|null, // Default: 12201
  *             chunk_size?: scalar|null, // Default: 1420
+ *             encoder?: "json"|"compressed_json",
  *         },
  *         mongo?: string|array{
  *             id?: scalar|null,
@@ -1409,8 +1414,17 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *             database?: scalar|null, // Default: "monolog"
  *             collection?: scalar|null, // Default: "logs"
  *         },
+ *         mongodb?: string|array{
+ *             id?: scalar|null, // ID of a MongoDB\Client service
+ *             uri?: scalar|null,
+ *             username?: scalar|null,
+ *             password?: scalar|null,
+ *             database?: scalar|null, // Default: "monolog"
+ *             collection?: scalar|null, // Default: "logs"
+ *         },
  *         elasticsearch?: string|array{
  *             id?: scalar|null,
+ *             hosts?: list<scalar|null>,
  *             host?: scalar|null,
  *             port?: scalar|null, // Default: 9200
  *             transport?: scalar|null, // Default: "Http"
@@ -2309,6 +2323,47 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_deployment?: SurvosDeploymentConfig,
  *         survos_import?: SurvosImportConfig,
  *     },
+ *     "when@never"?: array{
+ *         imports?: ImportsConfig,
+ *         parameters?: ParametersConfig,
+ *         services?: ServicesConfig,
+ *         framework?: FrameworkConfig,
+ *         doctrine?: DoctrineConfig,
+ *         doctrine_migrations?: DoctrineMigrationsConfig,
+ *         twig?: TwigConfig,
+ *         twig_extra?: TwigExtraConfig,
+ *         security?: SecurityConfig,
+ *         monolog?: MonologConfig,
+ *         stimulus?: StimulusConfig,
+ *         twig_component?: TwigComponentConfig,
+ *         survos_core?: SurvosCoreConfig,
+ *         knp_menu?: KnpMenuConfig,
+ *         survos_bootstrap?: SurvosBootstrapConfig,
+ *         survos_html_prettify?: SurvosHtmlPrettifyConfig,
+ *         nelmio_cors?: NelmioCorsConfig,
+ *         api_platform?: ApiPlatformConfig,
+ *         knpu_oauth2_client?: KnpuOauth2ClientConfig,
+ *         survos_auth?: SurvosAuthConfig,
+ *         survos_scraper?: SurvosScraperConfig,
+ *         survos_simple_datatables?: SurvosSimpleDatatablesConfig,
+ *         fos_js_routing?: FosJsRoutingConfig,
+ *         survos_inspection?: SurvosInspectionConfig,
+ *         survos_crawler?: SurvosCrawlerConfig,
+ *         survos_wiki?: SurvosWikiConfig,
+ *         flysystem?: FlysystemConfig,
+ *         liip_imagine?: LiipImagineConfig,
+ *         presta_sitemap?: PrestaSitemapConfig,
+ *         ux_icons?: UxIconsConfig,
+ *         survos_sais?: SurvosSaisConfig,
+ *         inspector?: InspectorConfig,
+ *         survos_meili?: SurvosMeiliConfig,
+ *         survos_state?: SurvosStateConfig,
+ *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
+ *         survos_ez?: SurvosEzConfig,
+ *         survos_jsonl?: SurvosJsonlConfig,
+ *         survos_babel?: SurvosBabelConfig,
+ *         survos_import?: SurvosImportConfig,
+ *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2477,6 +2532,7 @@ namespace Symfony\Component\Routing\Loader\Configurator;
  * }
  * @psalm-type RoutesConfig = array{
  *     "when@dev"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
+ *     "when@never"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     "when@prod"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     "when@test"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     ...<string, RouteConfig|ImportConfig|AliasConfig>
