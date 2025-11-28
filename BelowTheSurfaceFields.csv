@@ -1,0 +1,164 @@
+veldnaam,datatype,omschrijving
+vondstnummer,Text,Vondstnummer
+project_code,Text,Project code (Locatie)
+categorie,Text,Materiaal categorie
+subcategorie,Text,Materiaal
+gewicht,Double,Gewicht in gram
+object,Text,Objectnaam
+objectdeel,Text,Objectdeel
+fragmenten,Long,Aantal fragmenten
+past_aan_hoort_bij,Memo,Past aan of hoort bij vonstnummer(s)
+begin_dat,Long,Begin datering
+eind_dat,Long,Eind datering
+put,Text,Putnummer
+vlak,Text,Vlaknummer
+spoor,Text,Spoornummer
+vak,Text,Vaknummer
+vlak_min,Double,Minimum hoogte vlak (NAP)
+vlak_max,Double,Maximum hoogte vlak (NAP)
+trefwoorden,Memo,Trefwoorden (alleen bij gefotografeerde vondsten)
+niveau1,Memo,Niveau 1 van de functionele classificatie
+niveau2,Memo,Niveau 2 van de functionele classificatie
+niveau3,Memo,Niveau 3 van de functionele classificatie
+niveau4,Memo,Niveau 4 van de functionele classificatie
+website,Boolean,"Aanwezig op de website (1=Ja, 0=Nee)"
+aardewerk_ds_type,Text,Aardewerk: Deventer systeem code
+aardewerk_eve_rand,Double,Aardewerk: rand-EVE (Estimated vessel equivalent)
+aardewerk_eve_bodem,Double,Aardewerk: bodem-EVE (Estimated vessel equivalent)
+aardewerk_herkomst,Text,Aardewerk: Herkomst
+aardewerk_object_diameter_mm,Double,Aardewerk: (gereconstrueerde) object diameter in mm
+aardewerk_object_hoogte_mm,Double,Aardewerk: (gereconstrueerde) object hoogte in mm
+aardewerk_fragm_lengte_mm,Double,Aardewerk: Fragment lengte in mm
+aardewerk_fragm_breedte_mm,Double,Aardewerk: Fragment breedte in mm
+aardewerk_fragm_hoogte_mm,Double,Aardewerk: Fragment hoogte in mm
+aardewerk_opp_behandeling,Text,Aardewerk: Oppervlakte behandeling
+aardewerk_decoratietechniek,Text,Aardewerk: Decoratietechniek
+aardewerk_decorgroepen,Text,Aardewerk: Decorgroepen
+aardewerk_merk,Text,Aardewerk: Merk
+blankewapens_totale_lengte_mm,Long,Blanke wapens: Totale lengte in mm
+blankewapens_type_lemmet,Text,Blanke wapens: Type lemmet
+blankewapens_type_klingvanger,Text,Blanke wapens: Type klingvanger
+blankewapens_type_heft,Text,Blanke wapens: Type heft
+blankewapens_materiaal_heft,Text,Blanke wapens: Materiaal van het heft
+blankewapens_type_heftbekroning,Text,Blanke wapens: Type heftbekroning
+blankewapens_productiemerk,Text,Blanke wapens: Productiemerk
+bouwmaterialen_kleur,Text,Bouwmaterialen: Kleur
+bouwmaterialen_grootstelengte_mm,Double,Bouwmaterialen: Grootste lengte in mm
+bouwmaterialen_grootstebreedte_mm,Double,Bouwmaterialen: Grootste breedte in mm
+bouwmaterialen_grootstedikte_mm,Double,Bouwmaterialen: Grootste dikte in mm
+bouwmaterialen_productiecentrum,Text,Bouwmaterialen: Productiecentrum
+bouwmaterialen_afbeelding,Text,Bouwmaterialen: Type afbeelding
+bouwmaterialen_oppervlakte,Text,Bouwmaterialen: Oppervlaktebehandeling
+fauna_soort,Text,Fauna: Diersoort
+fauna_element,Text,Fauna: Element
+fauna_lengte_mm,Double,Fauna: Lengte in mm
+fauna_breedte_mm,Double,Fauna: Breedte in mm
+fauna_hoogte_mm,Double,Fauna: Hoogte in mm
+glas_ds_type,Text,Glas: Deventer systeem code
+glas_kleur,Text,Glas: Kleur
+glas_herkomst,Text,Glas: Herkomst
+glas_eve_rand,Double,Glas: rand-EVE (Estimated vessel equivalent)
+glas_eve_bodem,Long,Glas: bodem-EVE (Estimated vessel equivalent)
+glas_object_diameter_mm,Double,Glas: (gereconstrueerde) object diameter in mm
+glas_object_hoogte_mm,Double,Glas: (gereconstrueerde) object hoogte in mm
+glas_fragm_lengte_mm,Double,Glas: Fragment lengte in mm
+glas_fragm_breedte_mm,Double,Glas: Fragment breedte in mm
+glas_fragm_hoogte_mm,Double,Glas: Fragment hoogte in mm
+glas_fragm_dikte_mm,Double,Glas: Fragment dikte in mm
+glas_decoratie,Text,Glas: Decoratie
+glas_merk,Text,Glas: Merk
+hout_deelmaterialen,Text,Hout: Deelmaterialen
+hout_grootstelengte_mm,Double,Hout: Grootste lengte in mm
+hout_grootstebreedte_mm,Double,Hout: Grootste breedte in mm
+hout_grootstehoogte_mm,Double,Hout: Grootste hoogte in mm
+hout_grootstedikte_mm,Double,Hout: Grootste dikte in mm
+hout_diameter_mm,Double,Hout: Diameter in mm
+hout_productiewijze,Text,Hout: Productiewijze
+kunststof_deelmaterialen,Text,Kunststof: Deelmaterialen
+kunststof_grootstelengte_mm,Double,Kunststof: Grootste lengte in mm
+kunststof_grootstebreedte_mm,Double,Kunststof: Grootste breedte in mm
+kunststof_grootstehoogte_mm,Double,Kunststof: Grootste hoogte in mm
+kunststof_diameter_mm,Double,Kunststof: Diameter in mm
+kunststof_productiecentrum,Text,Kunststof: Productiecentrum
+kunststof_eigenaar,Text,Kunststof: Eigenaar
+kunststof_merk,Text,Kunststof: Merk
+kunststof_type,Text,Kunststof: Type
+kunststof_eenheid_waarde,Text,Kunststof: Eenheid/waarde
+leer_archeologischobjecttype,Text,Leer: Type
+leer_deelmaterialen,Text,Leer: Deelmaterialen
+leer_versiering,Text,Leer: Versieringstechniek
+leer_leersoort,Text,Leer: Leersoort
+leer_grootste_lengte_mm,Double,Leer: Grootste lengte in mm
+leer_grootste_breedte_mm,Double,Leer: Grootste breedte in mm
+leer_grootste_hoogte_mm,Double,Leer: Grootste hoogte in mm
+messen_angel_of_plaatangel,Text,Messen: Angel of plaatangel
+messen_heft_mat_1,Text,Messen: Heft materiaal
+messen_lemmet_lengte,Double,Messen: Lemmet lengte in mm
+messen_heft_lengte,Double,Messen: Heft lengte in mm
+messen_minimale_totale_lengte,Double,Messen: Grootste lengte
+messen_minimale_totale_breedte,Double,Messen: Grootste breedte
+metaal_deelmaterialen,Text,Metaal: Deelmaterialen
+metaal_grootstelengte_mm,Double,Metaal: Grootste lengte in mm
+metaal_grootstebreedte_mm,Double,Metaal: Grootste breedte in mm
+metaal_grootstehoogte_mm,Double,Metaal: Grootste hoogte in mm
+metaal_grootstedikte_mm,Double,Metaal: Grootste dikte in mm
+metaal_diameter_mm,Double,Metaal: Diameter in mm
+metaal_productiecentrum,Text,Metaal: Productiecentrum
+mix_grootstelengte_mm,Double,Mix: Grootste lengte in mm
+mix_grootstebreedte_mm,Double,Mix: Grootste breedte in mm
+mix_grootstehoogte_mm,Double,Mix: Grootste hoogte in mm
+mix_grootstedikte_mm,Double,Mix: Grootste dikte in mm
+mix_diameter_mm,Double,Mix: Diameter in mm
+munt_land_geografisch,Text,Munt: Land (geografisch)
+munt_staat_politieke_eenheid,Text,Munt: Politieke eenheid
+munt_autoriteit_politiek,Text,Munt: Autoriteit
+munt_muntsoort,Text,Munt: Muntsoort
+munt_eenheid_waarde,Text,Munt: Eenheid/waarde
+munt_ontwerper,Text,Munt: Ontwerper
+munt_onderwerp_gelegenheid,Text,Munt: Onderwerp of gelegenheid
+munt_muntplaats_productieplaats,Text,Munt: Muntplaats of productieplaats
+munt_lengte_diameter_in_mm,Double,Munt: Diameter in mm
+munt_breedte_in_mm,Double,Munt: Breedte in mm
+natuursteen_subsoort,Text,Natuursteen: Subsoort
+natuursteen_grootstelengte_mm,Double,Natuursteen: Grootste lengte in mm
+natuursteen_grootstebreedte_mm,Double,Natuursteen: Grootste breedte in mm
+natuursteen_grootstehoogte_mm,Double,Natuursteen: Grootste hoogte in mm
+natuursteen_grootstedikte_mm,Double,Natuursteen: Grootste dikte in mm
+natuursteen_diameter_mm,Double,Natuursteen: Diameter in mm
+natuursteen_productiesporen,Text,Natuursteen: Productiesporen
+plant_soort,Text,Plant: Soort
+plant_grootstelengte_mm,Double,Plant: Grootste lengte in mm
+plant_grootstebreedte_mm,Double,Plant: Grootste breedte in mm
+plant_grootstehoogte_mm,Double,Plant: Grootste hoogte in mm
+plant_grootstedikte_mm,Double,Plant: Grootste dikte in mm
+plant_diameter_mm,Double,Plant: Diameter in mm
+rookpijpen_model,Text,Rookpijpen: Model
+rookpijpen_zijmerk_links,Text,Rookpijpen: Zijmerk links
+rookpijpen_zijmerk_rechts,Text,Rookpijpen: Zijmerk rechts
+rookpijpen_bijmerk_links,Text,Rookpijpen: Bijmerk links
+rookpijpen_bijmerk_rechts,Text,Rookpijpen: Bijmerk rechts
+rookpijpen_merk_of_hielmerk,Text,Rookpijpen: Merk of hielmerk
+rookpijpen_oppervlaktebehandeling_kop,Text,Rookpijpen: Oppervlaktebehandeling kop
+rookpijpen_kopopening,Text,Rookpijpen: Kopopening
+rookpijpen_radering,Text,Rookpijpen: Radering
+rookpijpen_steelbehandeling,Text,Rookpijpen: Steelbehandeling
+rookpijpen_kwaliteit,Text,Rookpijpen: Kwaliteit
+rookpijpen_productiecentrum,Text,Rookpijpen: Productiecentrum
+rookpijpen_pijpenmaker,Text,Rookpijpen: Pijpenmaker
+sculpturen_baksel,Text,Sculpturen: Baksel
+sculpturen_hoogte_mm,Long,Sculpturen: Hoogte in mm
+sculpturen_breedte_mm,Long,Sculpturen: Breedte in mm
+sculpturen_diepte_mm,Long,Sculpturen: Diepte in mm
+sculpturen_hol_of_massief,Text,Sculpturen: Hol of massief
+sculpturen_voorstelling,Text,Sculpturen: Voorstelling
+textiel_deelmaterialen,Text,Textiel: Deelmaterialen
+textiel_grootstelengte_mm,Double,Textiel: Grootste lengte in mm
+textiel_grootstebreedte_mm,Double,Textiel: Grootste breedte in mm
+textiel_productiewijze,Text,Textiel: Productiewijze
+textiel_binding,Text,Textiel: Binding
+textiel_bewerking,Text,Textiel: Bewerking
+touw_grootstelengte_mm,Double,Touw: Grootste lengte in mm
+touw_grootstebreedte_mm,Double,Touw: Grootste breedte in mm
+touw_diameter_mm,Double,Touw: Diameter in mm
+touw_strengen,Long,Touw: Aantal strengen
+touw_productiewijze,Text,Touw: Productiewijze
