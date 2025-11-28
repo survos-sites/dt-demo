@@ -51,5 +51,6 @@ congress.db
 ###< vincentlanglet/twig-cs-fixer ###
 
 /data
+/zip
 
 .castor.stub.php
