@@ -121,9 +121,6 @@
             "config/packages/doctrine_diagram.yaml"
         ]
     },
-    "jwage/phpamqplib-messenger": {
-        "version": "0.8.5"
-    },
     "knplabs/knp-menu-bundle": {
         "version": "v3.2.0"
     },

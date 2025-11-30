@@ -1,5 +1,5 @@
 api_platform:
-    title: Congress API
+    title:  Meili Demos API
     version: 1.0.0
     defaults:
         stateless: true
