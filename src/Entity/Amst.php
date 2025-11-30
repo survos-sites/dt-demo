@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\AmstRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Survos\EzBundle\Attribute\EzField;
 use Survos\MeiliBundle\Metadata\MeiliIndex;
 
 /**
@@ -18,1226 +20,1431 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
  */
 #[Entity(repositoryClass: AmstRepository::class)]
 #[MeiliIndex(
-	primaryKey: 'code',
-	filterable: self::FILTERABLE_FIELDS,
-	sortable: self::SORTABLE_FIELDS,
-	searchable: self::SEARCHABLE_FIELDS,
+    primaryKey: 'code',
+    filterable: self::FILTERABLE_FIELDS,
+    sortable: self::SORTABLE_FIELDS,
+    searchable: self::SEARCHABLE_FIELDS,
     embedders: ['amst_en_large']
 )]
 final class Amst
 {
-	public const FILTERABLE_FIELDS = [
-		'imageCount',
-		'projectCode',
-		'categorie',
-		'fragmenten',
-		'beginDat',
-		'eindDat',
-		'put',
-		'vlak',
-		'spoor',
-		'niveau1',
-		'niveau2',
-		'niveau4',
-		'website',
-		'muntLandGeografisch',
-		'muntAutoriteitPolitiek',
-		'muntMuntsoort',
-		'muntEenheidWaarde',
-		'muntMuntplaatsProductieplaats',
-		'muntLengteDiameterInMm',
-		'trefwoorden',
-		'metaalGrootstehoogteMm',
-		'vlakMin',
-		'vlakMax',
-		'vak',
-		'bouwmaterialenGrootstedikteMm',
-		'bouwmaterialenOppervlakte',
-		'aardewerkEveRand',
-		'aardewerkHerkomst',
-		'aardewerkOppBehandeling',
-		'aardewerkDecoratietechniek',
-		'aardewerkDecorgroepen',
-		'aardewerkEveBodem',
-		'glasDsType',
-		'glasKleur',
-		'glasHerkomst',
-		'objectdeel',
-		'metaalGrootstelengteMm',
-		'metaalGrootstebreedteMm',
-		'metaalGrootstedikteMm',
-		'rookpijpenModel',
-		'rookpijpenKwaliteit',
-		'aardewerkMerk',
-		'aardewerkObjectDiameterMm',
-		'aardewerkObjectHoogteMm',
-		'bouwmaterialenKleur',
-		'bouwmaterialenAfbeelding',
-		'aardewerkFragmHoogteMm',
-		'rookpijpenSteelbehandeling',
-		'rookpijpenProductiecentrum',
-		'rookpijpenZijmerkLinks',
-		'rookpijpenOppervlaktebehandelingKop',
-		'rookpijpenKopopening',
-		'rookpijpenRadering',
-		'rookpijpenZijmerkRechts',
-		'rookpijpenBijmerkRechts',
-		'rookpijpenMerkOfHielmerk',
-		'rookpijpenPijpenmaker',
-		'rookpijpenBijmerkLinks',
-		'faunaSoort',
-		'faunaLengteMm',
-		'faunaBreedteMm',
-		'glasEveRand',
-		'glasEveBodem',
-		'glasObjectDiameterMm',
-		'glasObjectHoogteMm',
-		'kunststofGrootstelengteMm',
-		'kunststofGrootstebreedteMm',
-		'kunststofEigenaar',
-		'kunststofEenheidWaarde',
-		'metaalProductiecentrum',
-		'metaalDeelmaterialen',
-		'faunaElement',
-		'kunststofDiameterMm',
-		'plantSoort',
-		'houtGrootstelengteMm',
-		'houtGrootstebreedteMm',
-		'houtGrootstedikteMm',
-		'bouwmaterialenGrootstelengteMm',
-		'bouwmaterialenGrootstebreedteMm',
-		'houtDiameterMm',
-		'plantGrootstelengteMm',
-		'plantGrootstebreedteMm',
-		'plantGrootstedikteMm',
-		'metaalDiameterMm',
-		'glasFragmHoogteMm',
-		'natuursteenSubsoort',
-		'natuursteenGrootstelengteMm',
-		'natuursteenGrootstebreedteMm',
-		'natuursteenGrootstedikteMm',
-		'natuursteenProductiesporen',
-		'leerDeelmaterialen',
-		'leerLeersoort',
-		'natuursteenDiameterMm',
-		'houtGrootstehoogteMm',
-	];
+    public const FILTERABLE_FIELDS = [
+        'imageCount',
+        'projectCode',
+        'categorie',
+        'fragmenten',
+        'beginDat',
+        'eindDat',
+        'put',
+        'vlak',
+        'spoor',
+        'niveau1',
+        'niveau2',
+        'niveau4',
+        'website',
+        'muntLandGeografisch',
+        'muntAutoriteitPolitiek',
+        'muntMuntsoort',
+        'muntEenheidWaarde',
+        'muntMuntplaatsProductieplaats',
+        'muntLengteDiameterInMm',
+        'trefwoorden',
+        'metaalGrootstehoogteMm',
+        'vlakMin',
+        'vlakMax',
+        'vak',
+        'bouwmaterialenGrootstedikteMm',
+        'bouwmaterialenOppervlakte',
+        'aardewerkEveRand',
+        'aardewerkHerkomst',
+        'aardewerkOppBehandeling',
+        'aardewerkDecoratietechniek',
+        'aardewerkDecorgroepen',
+        'aardewerkEveBodem',
+        'glasDsType',
+        'glasKleur',
+        'glasHerkomst',
+        'objectdeel',
+        'metaalGrootstelengteMm',
+        'metaalGrootstebreedteMm',
+        'metaalGrootstedikteMm',
+        'rookpijpenModel',
+        'rookpijpenKwaliteit',
+        'aardewerkMerk',
+        'aardewerkObjectDiameterMm',
+        'aardewerkObjectHoogteMm',
+        'bouwmaterialenKleur',
+        'bouwmaterialenAfbeelding',
+        'aardewerkFragmHoogteMm',
+        'rookpijpenSteelbehandeling',
+        'rookpijpenProductiecentrum',
+        'rookpijpenZijmerkLinks',
+        'rookpijpenOppervlaktebehandelingKop',
+        'rookpijpenKopopening',
+        'rookpijpenRadering',
+        'rookpijpenZijmerkRechts',
+        'rookpijpenBijmerkRechts',
+        'rookpijpenMerkOfHielmerk',
+        'rookpijpenPijpenmaker',
+        'rookpijpenBijmerkLinks',
+        'faunaSoort',
+        'faunaLengteMm',
+        'faunaBreedteMm',
+        'glasEveRand',
+        'glasEveBodem',
+        'glasObjectDiameterMm',
+        'glasObjectHoogteMm',
+        'kunststofGrootstelengteMm',
+        'kunststofGrootstebreedteMm',
+        'kunststofEigenaar',
+        'kunststofEenheidWaarde',
+        'metaalProductiecentrum',
+        'metaalDeelmaterialen',
+        'faunaElement',
+        'kunststofDiameterMm',
+        'plantSoort',
+        'houtGrootstelengteMm',
+        'houtGrootstebreedteMm',
+        'houtGrootstedikteMm',
+        'bouwmaterialenGrootstelengteMm',
+        'bouwmaterialenGrootstebreedteMm',
+        'houtDiameterMm',
+        'plantGrootstelengteMm',
+        'plantGrootstebreedteMm',
+        'plantGrootstedikteMm',
+        'metaalDiameterMm',
+        'glasFragmHoogteMm',
+        'natuursteenSubsoort',
+        'natuursteenGrootstelengteMm',
+        'natuursteenGrootstebreedteMm',
+        'natuursteenGrootstedikteMm',
+        'natuursteenProductiesporen',
+        'leerDeelmaterialen',
+        'leerLeersoort',
+        'natuursteenDiameterMm',
+        'houtGrootstehoogteMm',
+    ];
 
-	public const SORTABLE_FIELDS = [
-		'fragmenten',
-		'beginDat',
-		'eindDat',
-		'spoor',
-		'muntEenheidWaarde',
-		'metaalGrootstehoogteMm',
-		'aardewerkEveRand',
-		'aardewerkEveBodem',
-		'metaalGrootstelengteMm',
-		'metaalGrootstebreedteMm',
-		'aardewerkObjectDiameterMm',
-		'aardewerkObjectHoogteMm',
-	];
+    public const SORTABLE_FIELDS = [
+        'fragmenten',
+        'beginDat',
+        'eindDat',
+        'spoor',
+        'muntEenheidWaarde',
+        'metaalGrootstehoogteMm',
+        'aardewerkEveRand',
+        'aardewerkEveBodem',
+        'metaalGrootstelengteMm',
+        'metaalGrootstebreedteMm',
+        'aardewerkObjectDiameterMm',
+        'aardewerkObjectHoogteMm',
+    ];
 
-	public const SEARCHABLE_FIELDS = [];
+    public const SEARCHABLE_FIELDS = [];
 
-	/**
-	 * Profile field "vondstnummer"
-	 * @types string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=499
-	 * @length 15–19 chars
-	 */
-	#[Column(length: 19, nullable: false)]
-	public ?string $vondstnummer = null;
+    /**
+     * Find number (Vondstnummer)
+     * Profile field "vondstnummer"
+     * @types string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=499
+     * @length 15–19 chars
+     */
+    #[ApiProperty(description: 'Find number')]
+    #[Column(length: 19, nullable: false)]
+    public ?string $vondstnummer = null;
 
+    #[ApiProperty(description: 'Unique code identifier')]
     #[Column(length: 19, nullable: false)]
     #[Id]
     public ?string $code = null;
 
-
+    #[ApiProperty(description: 'Number of images')]
     public int $imageCount { get => $this->image ? 1 : 0; }
 
-	/**
-	 * Profile field "projectCode"
-	 * @original project_code
-	 * @types string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=2
-	 * @length 4 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 4, nullable: true)]
-	public ?string $projectCode = null;
-
-	/**
-	 * Profile field "categorie"
-	 * @types string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=15
-	 * @length 2–3 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 3, nullable: true)]
-	public ?string $categorie = null;
-
-	/**
-	 * Profile field "subcategorie"
-	 * @types string (storageHint=string)
-	 * @stats total=472, nulls=0, distinct=80
-	 * @length 4–33 chars
-	 */
-	#[Column(length: 33, nullable: true)]
-	public ?string $subcategorie = null;
-
-	/**
-	 * Profile field "object"
-	 * @types string (storageHint=string)
-	 * @stats total=391, nulls=0, distinct=66
-	 * @length 3–17 chars
-	 */
-	#[Column(length: 17, nullable: true)]
-	public ?string $object = null;
-
-	/**
-	 * Profile field "fragmenten"
-	 * @types int (storageHint=int)
-	 * @stats total=498, nulls=0, distinct=24
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $fragmenten = null;
-
-	/**
-	 * Profile field "beginDat"
-	 * @original begin_dat
-	 * @types int (storageHint=int)
-	 * @stats total=385, nulls=0, distinct=68
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $beginDat = null;
-
-	/**
-	 * Profile field "eindDat"
-	 * @original eind_dat
-	 * @types int (storageHint=int)
-	 * @stats total=385, nulls=0, distinct=58
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $eindDat = null;
-
-	/**
-	 * Profile field "put"
-	 * @types int (storageHint=int)
-	 * @stats total=499, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $put = null;
-
-	/**
-	 * Profile field "vlak"
-	 * @types int, string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=9
-	 * @length 2–5 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 5, nullable: true)]
-	public ?string $vlak = null;
-
-	/**
-	 * Profile field "spoor"
-	 * @types int (storageHint=int)
-	 * @stats total=499, nulls=0, distinct=6
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $spoor = null;
-
-	/**
-	 * Profile field "niveau1"
-	 * @types string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=10
-	 * @length 16–36 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 36, nullable: true)]
-	public ?string $niveau1 = null;
-
-	/**
-	 * Profile field "niveau2"
-	 * @types string (storageHint=string)
-	 * @stats total=417, nulls=0, distinct=46
-	 * @length 3–87 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 87, nullable: true)]
-	public ?string $niveau2 = null;
-
-	/**
-	 * Profile field "niveau3"
-	 * @types string (storageHint=string)
-	 * @stats total=363, nulls=0, distinct=97
-	 * @length 3–81 chars
-	 */
-	#[Column(length: 81, nullable: true)]
-	public ?string $niveau3 = null;
-
-	/**
-	 * Profile field "niveau4"
-	 * @types string (storageHint=string)
-	 * @stats total=51, nulls=0, distinct=21
-	 * @length 6–58 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 58, nullable: true)]
-	public ?string $niveau4 = null;
-
-	/**
-	 * Profile field "website"
-	 * @types int (storageHint=int)
-	 * @stats total=499, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $website = null;
-
-	/**
-	 * Profile field "muntLandGeografisch"
-	 * @original munt_land_geografisch
-	 * @types string (storageHint=string)
-	 * @stats total=11, nulls=0, distinct=4
-	 * @length 7–9 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 9, nullable: true)]
-	public ?string $muntLandGeografisch = null;
-
-	/**
-	 * Profile field "muntAutoriteitPolitiek"
-	 * @original munt_autoriteit_politiek
-	 * @types string (storageHint=string)
-	 * @stats total=6, nulls=0, distinct=3
-	 * @length 7–8 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 8, nullable: true)]
-	public ?string $muntAutoriteitPolitiek = null;
-
-	/**
-	 * Profile field "muntMuntsoort"
-	 * @original munt_muntsoort
-	 * @types string (storageHint=string)
-	 * @stats total=11, nulls=0, distinct=6
-	 * @length 4–7 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 7, nullable: true)]
-	public ?string $muntMuntsoort = null;
-
-	/**
-	 * Profile field "muntEenheidWaarde"
-	 * @original munt_eenheid_waarde
-	 * @types int (storageHint=int)
-	 * @stats total=11, nulls=0, distinct=5
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $muntEenheidWaarde = null;
-
-	/**
-	 * Profile field "muntMuntplaatsProductieplaats"
-	 * @original munt_muntplaats_productieplaats
-	 * @types string (storageHint=string)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @length 8 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 8, nullable: true)]
-	public ?string $muntMuntplaatsProductieplaats = null;
-
-	/**
-	 * Profile field "muntLengteDiameterInMm"
-	 * @original munt_lengte_diameter_in_mm
-	 * @types int, float (storageHint=string)
-	 * @stats total=11, nulls=0, distinct=9
-	 * @facetCandidate true
-	 */
-	#[Column(length: 255, nullable: true)]
-	public ?string $muntLengteDiameterInMm = null;
-
-	/**
-	 * Profile field "image"
-	 * @types string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=499
-	 * @length 76–80 chars
-	 */
-	#[Column(length: 80, nullable: true)]
-	public ?string $image = null;
-
-	/**
-	 * Profile field "citation_url"
-	 * @types string (storageHint=string)
-	 * @stats total=499, nulls=0, distinct=499
-	 * @length 49–53 chars
-	 */
-	#[Column(length: 53, nullable: true)]
-	public ?string $citationUrl = null;
-
-	/**
-	 * Profile field "trefwoorden"
-	 * @types string (storageHint=string)
-	 * @stats total=19, nulls=0, distinct=17
-	 * @length 4–62 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 62, nullable: true)]
-	public ?string $trefwoorden = null;
-
-	/**
-	 * Profile field "metaalGrootstehoogteMm"
-	 * @original metaal_grootstehoogte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=9, nulls=0, distinct=9
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $metaalGrootstehoogteMm = null;
-
-	/**
-	 * Profile field "vlakMin"
-	 * @original vlak_min
-	 * @types int, float (storageHint=string)
-	 * @stats total=374, nulls=0, distinct=8
-	 * @facetCandidate true
-	 */
-	#[Column(length: 255, nullable: true)]
-	public ?string $vlakMin = null;
-
-	/**
-	 * Profile field "vlakMax"
-	 * @original vlak_max
-	 * @types int, float (storageHint=string)
-	 * @stats total=374, nulls=0, distinct=7
-	 * @facetCandidate true
-	 */
-	#[Column(length: 255, nullable: true)]
-	public ?string $vlakMax = null;
-
-	/**
-	 * Profile field "gewicht"
-	 * @types int, float (storageHint=string)
-	 * @stats total=328, nulls=0, distinct=136
-	 */
-	#[Column(length: 255, nullable: true)]
-	public ?string $gewicht = null;
-
-	/**
-	 * Profile field "vak"
-	 * @types int, string (storageHint=string)
-	 * @stats total=491, nulls=0, distinct=3
-	 * @length 3–5 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 5, nullable: true)]
-	public ?string $vak = null;
-
-	/**
-	 * Profile field "bouwmaterialenGrootstedikteMm"
-	 * @original bouwmaterialen_grootstedikte_mm
-	 * @types int, float (storageHint=string)
-	 * @stats total=19, nulls=0, distinct=9
-	 * @facetCandidate true
-	 */
-	#[Column(length: 255, nullable: true)]
-	public ?string $bouwmaterialenGrootstedikteMm = null;
-
-	/**
-	 * Profile field "bouwmaterialenOppervlakte"
-	 * @original bouwmaterialen_oppervlakte
-	 * @types string (storageHint=string)
-	 * @stats total=22, nulls=0, distinct=2
-	 * @length 10–12 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 12, nullable: true)]
-	public ?string $bouwmaterialenOppervlakte = null;
-
-	/**
-	 * Profile field "aardewerkDsType"
-	 * @original aardewerk_ds_type
-	 * @types string (storageHint=string)
-	 * @stats total=204, nulls=0, distinct=78
-	 * @length 1–9 chars
-	 */
-	#[Column(length: 9, nullable: true)]
-	public ?string $aardewerkDsType = null;
-
-	/**
-	 * Profile field "aardewerkEveRand"
-	 * @original aardewerk_eve_rand
-	 * @types int (storageHint=int)
-	 * @stats total=65, nulls=0, distinct=11
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $aardewerkEveRand = null;
-
-	/**
-	 * Profile field "aardewerkHerkomst"
-	 * @original aardewerk_herkomst
-	 * @types string (storageHint=string)
-	 * @stats total=193, nulls=0, distinct=27
-	 * @length 5–30 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 30, nullable: true)]
-	public ?string $aardewerkHerkomst = null;
-
-	/**
-	 * Profile field "aardewerkOppBehandeling"
-	 * @original aardewerk_opp_behandeling
-	 * @types string (storageHint=string)
-	 * @stats total=197, nulls=0, distinct=19
-	 * @length 10–49 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 49, nullable: true)]
-	public ?string $aardewerkOppBehandeling = null;
-
-	/**
-	 * Profile field "aardewerkDecoratietechniek"
-	 * @original aardewerk_decoratietechniek
-	 * @types string (storageHint=string)
-	 * @stats total=89, nulls=0, distinct=19
-	 * @length 5–43 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 43, nullable: true)]
-	public ?string $aardewerkDecoratietechniek = null;
-
-	/**
-	 * Profile field "aardewerkDecorgroepen"
-	 * @original aardewerk_decorgroepen
-	 * @types string (storageHint=string)
-	 * @stats total=18, nulls=0, distinct=6
-	 * @length 11–19 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 19, nullable: true)]
-	public ?string $aardewerkDecorgroepen = null;
-
-	/**
-	 * Profile field "aardewerkEveBodem"
-	 * @original aardewerk_eve_bodem
-	 * @types int (storageHint=int)
-	 * @stats total=43, nulls=0, distinct=12
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $aardewerkEveBodem = null;
-
-	/**
-	 * Profile field "glasDsType"
-	 * @original glas_ds_type
-	 * @types string (storageHint=string)
-	 * @stats total=40, nulls=0, distinct=8
-	 * @length 2–10 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 10, nullable: true)]
-	public ?string $glasDsType = null;
-
-	/**
-	 * Profile field "glasKleur"
-	 * @original glas_kleur
-	 * @types string (storageHint=string)
-	 * @stats total=39, nulls=0, distinct=9
-	 * @length 3–27 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 27, nullable: true)]
-	public ?string $glasKleur = null;
-
-	/**
-	 * Profile field "glasHerkomst"
-	 * @original glas_herkomst
-	 * @types string (storageHint=string)
-	 * @stats total=39, nulls=0, distinct=6
-	 * @length 6–21 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 21, nullable: true)]
-	public ?string $glasHerkomst = null;
-
-	/**
-	 * Profile field "objectdeel"
-	 * @types string (storageHint=string)
-	 * @stats total=141, nulls=0, distinct=14
-	 * @length 3–15 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 15, nullable: true)]
-	public ?string $objectdeel = null;
-
-	/**
-	 * Profile field "metaalGrootstelengteMm"
-	 * @original metaal_grootstelengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=14, nulls=0, distinct=14
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $metaalGrootstelengteMm = null;
-
-	/**
-	 * Profile field "metaalGrootstebreedteMm"
-	 * @original metaal_grootstebreedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=13, nulls=0, distinct=11
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $metaalGrootstebreedteMm = null;
-
-	/**
-	 * Profile field "metaalGrootstedikteMm"
-	 * @original metaal_grootstedikte_mm
-	 * @types int, float (storageHint=string)
-	 * @stats total=11, nulls=0, distinct=11
-	 * @facetCandidate true
-	 */
-	#[Column(length: 255, nullable: true)]
-	public ?string $metaalGrootstedikteMm = null;
-
-	/**
-	 * Profile field "rookpijpenModel"
-	 * @original rookpijpen_model
-	 * @types string (storageHint=string)
-	 * @stats total=48, nulls=0, distinct=7
-	 * @length 5–13 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 13, nullable: true)]
-	public ?string $rookpijpenModel = null;
-
-	/**
-	 * Profile field "rookpijpenKwaliteit"
-	 * @original rookpijpen_kwaliteit
-	 * @types string (storageHint=string)
-	 * @stats total=56, nulls=0, distinct=5
-	 * @length 4–14 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 14, nullable: true)]
-	public ?string $rookpijpenKwaliteit = null;
-
-	/**
-	 * Profile field "aardewerkMerk"
-	 * @original aardewerk_merk
-	 * @types string (storageHint=string)
-	 * @stats total=8, nulls=0, distinct=7
-	 * @length 7–21 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 21, nullable: true)]
-	public ?string $aardewerkMerk = null;
-
-	/**
-	 * Profile field "aardewerkObjectDiameterMm"
-	 * @original aardewerk_object_diameter_mm
-	 * @types int (storageHint=int)
-	 * @stats total=39, nulls=0, distinct=28
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $aardewerkObjectDiameterMm = null;
-
-	/**
-	 * Profile field "aardewerkObjectHoogteMm"
-	 * @original aardewerk_object_hoogte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=10, nulls=0, distinct=10
-	 * @facetCandidate true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $aardewerkObjectHoogteMm = null;
-
-	/**
-	 * Profile field "bouwmaterialenKleur"
-	 * @original bouwmaterialen_kleur
-	 * @types string (storageHint=string)
-	 * @stats total=21, nulls=0, distinct=9
-	 * @length 3–24 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 24, nullable: true)]
-	public ?string $bouwmaterialenKleur = null;
-
-	/**
-	 * Profile field "bouwmaterialenAfbeelding"
-	 * @original bouwmaterialen_afbeelding
-	 * @types string (storageHint=string)
-	 * @stats total=3, nulls=0, distinct=2
-	 * @length 5–12 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 12, nullable: true)]
-	public ?string $bouwmaterialenAfbeelding = null;
-
-	/**
-	 * Profile field "aardewerkFragmHoogteMm"
-	 * @original aardewerk_fragm_hoogte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $aardewerkFragmHoogteMm = null;
-
-	/**
-	 * Profile field "rookpijpenSteelbehandeling"
-	 * @original rookpijpen_steelbehandeling
-	 * @types string (storageHint=string)
-	 * @stats total=18, nulls=0, distinct=2
-	 * @length 8–10 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 10, nullable: true)]
-	public ?string $rookpijpenSteelbehandeling = null;
-
-	/**
-	 * Profile field "rookpijpenProductiecentrum"
-	 * @original rookpijpen_productiecentrum
-	 * @types string (storageHint=string)
-	 * @stats total=32, nulls=0, distinct=2
-	 * @length 5–10 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 10, nullable: true)]
-	public ?string $rookpijpenProductiecentrum = null;
-
-	/**
-	 * Profile field "rookpijpenZijmerkLinks"
-	 * @original rookpijpen_zijmerk_links
-	 * @types string, array (storageHint=json)
-	 * @stats total=9, nulls=0, distinct=6
-	 * @length 3–79 chars
-	 */
-	#[Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
-	public ?array $rookpijpenZijmerkLinks = null;
-
-	/**
-	 * Profile field "rookpijpenOppervlaktebehandelingKop"
-	 * @original rookpijpen_oppervlaktebehandeling_kop
-	 * @types string (storageHint=string)
-	 * @stats total=48, nulls=0, distinct=2
-	 * @length 8–10 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 10, nullable: true)]
-	public ?string $rookpijpenOppervlaktebehandelingKop = null;
-
-	/**
-	 * Profile field "rookpijpenKopopening"
-	 * @original rookpijpen_kopopening
-	 * @types string (storageHint=string)
-	 * @stats total=36, nulls=0, distinct=1
-	 * @length 9 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 9, nullable: true)]
-	public ?string $rookpijpenKopopening = null;
-
-	/**
-	 * Profile field "rookpijpenRadering"
-	 * @original rookpijpen_radering
-	 * @types string (storageHint=string)
-	 * @stats total=34, nulls=0, distinct=3
-	 * @length 31–35 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 35, nullable: true)]
-	public ?string $rookpijpenRadering = null;
-
-	/**
-	 * Profile field "rookpijpenZijmerkRechts"
-	 * @original rookpijpen_zijmerk_rechts
-	 * @types array (storageHint=json)
-	 * @stats total=4, nulls=0, distinct=1
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
-	public ?array $rookpijpenZijmerkRechts = null;
-
-	/**
-	 * Profile field "rookpijpenBijmerkRechts"
-	 * @original rookpijpen_bijmerk_rechts
-	 * @types string (storageHint=string)
-	 * @stats total=10, nulls=0, distinct=3
-	 * @length 4–21 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 21, nullable: true)]
-	public ?string $rookpijpenBijmerkRechts = null;
-
-	/**
-	 * Profile field "rookpijpenMerkOfHielmerk"
-	 * @original rookpijpen_merk_of_hielmerk
-	 * @types string (storageHint=string)
-	 * @stats total=23, nulls=0, distinct=23
-	 * @length 2–18 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 18, nullable: true)]
-	public ?string $rookpijpenMerkOfHielmerk = null;
-
-	/**
-	 * Profile field "rookpijpenPijpenmaker"
-	 * @original rookpijpen_pijpenmaker
-	 * @types string (storageHint=string)
-	 * @stats total=16, nulls=0, distinct=16
-	 * @length 8–26 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 26, nullable: true)]
-	public ?string $rookpijpenPijpenmaker = null;
-
-	/**
-	 * Profile field "rookpijpenBijmerkLinks"
-	 * @original rookpijpen_bijmerk_links
-	 * @types string (storageHint=string)
-	 * @stats total=15, nulls=0, distinct=7
-	 * @length 4–26 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 26, nullable: true)]
-	public ?string $rookpijpenBijmerkLinks = null;
-
-	/**
-	 * Profile field "faunaSoort"
-	 * @original fauna_soort
-	 * @types string (storageHint=string)
-	 * @stats total=23, nulls=0, distinct=9
-	 * @length 3–18 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 18, nullable: true)]
-	public ?string $faunaSoort = null;
-
-	/**
-	 * Profile field "faunaLengteMm"
-	 * @original fauna_lengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $faunaLengteMm = null;
-
-	/**
-	 * Profile field "faunaBreedteMm"
-	 * @original fauna_breedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $faunaBreedteMm = null;
-
-	/**
-	 * Profile field "glasEveRand"
-	 * @original glas_eve_rand
-	 * @types int (storageHint=int)
-	 * @stats total=5, nulls=0, distinct=4
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $glasEveRand = null;
-
-	/**
-	 * Profile field "glasEveBodem"
-	 * @original glas_eve_bodem
-	 * @types int (storageHint=int)
-	 * @stats total=6, nulls=0, distinct=3
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $glasEveBodem = null;
-
-	/**
-	 * Profile field "glasObjectDiameterMm"
-	 * @original glas_object_diameter_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $glasObjectDiameterMm = null;
-
-	/**
-	 * Profile field "glasObjectHoogteMm"
-	 * @original glas_object_hoogte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $glasObjectHoogteMm = null;
-
-	/**
-	 * Profile field "kunststofGrootstelengteMm"
-	 * @original kunststof_grootstelengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=7, nulls=0, distinct=3
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $kunststofGrootstelengteMm = null;
-
-	/**
-	 * Profile field "kunststofGrootstebreedteMm"
-	 * @original kunststof_grootstebreedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=6, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $kunststofGrootstebreedteMm = null;
-
-	/**
-	 * Profile field "kunststofEigenaar"
-	 * @original kunststof_eigenaar
-	 * @types string (storageHint=string)
-	 * @stats total=5, nulls=0, distinct=5
-	 * @length 7–28 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 28, nullable: true)]
-	public ?string $kunststofEigenaar = null;
-
-	/**
-	 * Profile field "kunststofEenheidWaarde"
-	 * @original kunststof_eenheid_waarde
-	 * @types string (storageHint=string)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @length 7 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 7, nullable: true)]
-	public ?string $kunststofEenheidWaarde = null;
-
-	/**
-	 * Profile field "metaalProductiecentrum"
-	 * @original metaal_productiecentrum
-	 * @types string (storageHint=string)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @length 6 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 6, nullable: true)]
-	public ?string $metaalProductiecentrum = null;
-
-	/**
-	 * Profile field "metaalDeelmaterialen"
-	 * @original metaal_deelmaterialen
-	 * @types string (storageHint=string)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @length 7–9 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 9, nullable: true)]
-	public ?string $metaalDeelmaterialen = null;
-
-	/**
-	 * Profile field "faunaElement"
-	 * @original fauna_element
-	 * @types string (storageHint=string)
-	 * @stats total=10, nulls=0, distinct=6
-	 * @length 6–17 chars
-	 * @facetCandidate true
-	 */
-	#[Column(length: 17, nullable: true)]
-	public ?string $faunaElement = null;
-
-	/**
-	 * Profile field "pastAanHoortBij"
-	 * @original past_aan_hoort_bij
-	 * @types string (storageHint=string)
-	 * @stats total=9, nulls=0, distinct=9
-	 * @length 26–190 chars
-	 */
-	#[Column(length: 190, nullable: true)]
-	public ?string $pastAanHoortBij = null;
-
-	/**
-	 * Profile field "kunststofDiameterMm"
-	 * @original kunststof_diameter_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $kunststofDiameterMm = null;
-
-	/**
-	 * Profile field "plantSoort"
-	 * @original plant_soort
-	 * @types string (storageHint=string)
-	 * @stats total=3, nulls=0, distinct=2
-	 * @length 6–9 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 9, nullable: true)]
-	public ?string $plantSoort = null;
-
-	/**
-	 * Profile field "houtGrootstelengteMm"
-	 * @original hout_grootstelengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=3, nulls=0, distinct=3
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $houtGrootstelengteMm = null;
-
-	/**
-	 * Profile field "houtGrootstebreedteMm"
-	 * @original hout_grootstebreedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $houtGrootstebreedteMm = null;
-
-	/**
-	 * Profile field "houtGrootstedikteMm"
-	 * @original hout_grootstedikte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $houtGrootstedikteMm = null;
-
-	/**
-	 * Profile field "bouwmaterialenGrootstelengteMm"
-	 * @original bouwmaterialen_grootstelengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $bouwmaterialenGrootstelengteMm = null;
-
-	/**
-	 * Profile field "bouwmaterialenGrootstebreedteMm"
-	 * @original bouwmaterialen_grootstebreedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $bouwmaterialenGrootstebreedteMm = null;
-
-	/**
-	 * Profile field "houtDiameterMm"
-	 * @original hout_diameter_mm
-	 * @types int (storageHint=int)
-	 * @stats total=3, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $houtDiameterMm = null;
-
-	/**
-	 * Profile field "plantGrootstelengteMm"
-	 * @original plant_grootstelengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $plantGrootstelengteMm = null;
-
-	/**
-	 * Profile field "plantGrootstebreedteMm"
-	 * @original plant_grootstebreedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $plantGrootstebreedteMm = null;
-
-	/**
-	 * Profile field "plantGrootstedikteMm"
-	 * @original plant_grootstedikte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $plantGrootstedikteMm = null;
-
-	/**
-	 * Profile field "metaalDiameterMm"
-	 * @original metaal_diameter_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $metaalDiameterMm = null;
-
-	/**
-	 * Profile field "glasFragmHoogteMm"
-	 * @original glas_fragm_hoogte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $glasFragmHoogteMm = null;
-
-	/**
-	 * Profile field "natuursteenSubsoort"
-	 * @original natuursteen_subsoort
-	 * @types string (storageHint=string)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @length 12–14 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 14, nullable: true)]
-	public ?string $natuursteenSubsoort = null;
-
-	/**
-	 * Profile field "natuursteenGrootstelengteMm"
-	 * @original natuursteen_grootstelengte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $natuursteenGrootstelengteMm = null;
-
-	/**
-	 * Profile field "natuursteenGrootstebreedteMm"
-	 * @original natuursteen_grootstebreedte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $natuursteenGrootstebreedteMm = null;
-
-	/**
-	 * Profile field "natuursteenGrootstedikteMm"
-	 * @original natuursteen_grootstedikte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=2, nulls=0, distinct=2
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $natuursteenGrootstedikteMm = null;
-
-	/**
-	 * Profile field "natuursteenProductiesporen"
-	 * @original natuursteen_productiesporen
-	 * @types string (storageHint=string)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @length 8 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 8, nullable: true)]
-	public ?string $natuursteenProductiesporen = null;
-
-	/**
-	 * Profile field "leerDeelmaterialen"
-	 * @original leer_deelmaterialen
-	 * @types string (storageHint=string)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @length 5 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 5, nullable: true)]
-	public ?string $leerDeelmaterialen = null;
-
-	/**
-	 * Profile field "leerLeersoort"
-	 * @original leer_leersoort
-	 * @types string (storageHint=string)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @length 4 chars
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(length: 4, nullable: true)]
-	public ?string $leerLeersoort = null;
-
-	/**
-	 * Profile field "natuursteenDiameterMm"
-	 * @original natuursteen_diameter_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $natuursteenDiameterMm = null;
-
-	/**
-	 * Profile field "houtGrootstehoogteMm"
-	 * @original hout_grootstehoogte_mm
-	 * @types int (storageHint=int)
-	 * @stats total=1, nulls=0, distinct=1
-	 * @facetCandidate true
-	 * @booleanLike true
-	 */
-	#[Column(type: Types::INTEGER, nullable: true)]
-	public ?int $houtGrootstehoogteMm = null;
+    /**
+     * Project code (Location)
+     * Profile field "projectCode"
+     * @original project_code
+     * @types string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=2
+     * @length 4 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Project code (Location)')]
+    #[Column(length: 4, nullable: true)]
+    public ?string $projectCode = null;
+
+    /**
+     * Material category
+     * Profile field "categorie"
+     * @types string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=15
+     * @length 2–3 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Material category')]
+    #[Column(length: 3, nullable: true)]
+    public ?string $categorie = null;
+
+    /**
+     * Material (subcategory)
+     * Profile field "subcategorie"
+     * @types string (storageHint=string)
+     * @stats total=472, nulls=0, distinct=80
+     * @length 4–33 chars
+     */
+    #[ApiProperty(description: 'Material')]
+    #[Column(length: 33, nullable: true)]
+    public ?string $subcategorie = null;
+
+    /**
+     * Object name
+     * Profile field "object"
+     * @types string (storageHint=string)
+     * @stats total=391, nulls=0, distinct=66
+     * @length 3–17 chars
+     */
+    #[ApiProperty(description: 'Object name')]
+    #[Column(length: 17, nullable: true)]
+    public ?string $object = null;
+
+    /**
+     * Number of fragments
+     * Profile field "fragmenten"
+     * @types int (storageHint=int)
+     * @stats total=498, nulls=0, distinct=24
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Number of fragments')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $fragmenten = null;
+
+    /**
+     * Start dating
+     * Profile field "beginDat"
+     * @original begin_dat
+     * @types int (storageHint=int)
+     * @stats total=385, nulls=0, distinct=68
+     */
+    #[ApiProperty(description: 'Start dating')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $beginDat = null;
+
+    /**
+     * End dating
+     * Profile field "eindDat"
+     * @original eind_dat
+     * @types int (storageHint=int)
+     * @stats total=385, nulls=0, distinct=58
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'End dating')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $eindDat = null;
+
+    /**
+     * Pit number
+     * Profile field "put"
+     * @types int (storageHint=int)
+     * @stats total=499, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Pit number')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $put = null;
+
+    /**
+     * Level number
+     * Profile field "vlak"
+     * @types int, string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=9
+     * @length 2–5 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Level number')]
+    #[Column(length: 5, nullable: true)]
+    public ?string $vlak = null;
+
+    /**
+     * Feature number
+     * Profile field "spoor"
+     * @types int (storageHint=int)
+     * @stats total=499, nulls=0, distinct=6
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Feature number')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $spoor = null;
+
+    /**
+     * Level 1 of the functional classification
+     * Profile field "niveau1"
+     * @types string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=10
+     * @length 16–36 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Level 1 of the functional classification')]
+    #[Column(length: 36, nullable: true)]
+    public ?string $niveau1 = null;
+
+    /**
+     * Level 2 of the functional classification
+     * Profile field "niveau2"
+     * @types string (storageHint=string)
+     * @stats total=417, nulls=0, distinct=46
+     * @length 3–87 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Level 2 of the functional classification')]
+    #[Column(length: 87, nullable: true)]
+    public ?string $niveau2 = null;
+
+    /**
+     * Level 3 of the functional classification
+     * Profile field "niveau3"
+     * @types string (storageHint=string)
+     * @stats total=363, nulls=0, distinct=97
+     * @length 3–81 chars
+     */
+    #[ApiProperty(description: 'Level 3 of the functional classification')]
+    #[Column(length: 81, nullable: true)]
+    public ?string $niveau3 = null;
+
+    /**
+     * Level 4 of the functional classification
+     * Profile field "niveau4"
+     * @types string (storageHint=string)
+     * @stats total=51, nulls=0, distinct=21
+     * @length 6–58 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Level 4 of the functional classification')]
+    #[Column(length: 58, nullable: true)]
+    public ?string $niveau4 = null;
+
+    /**
+     * Present on the website (1=Yes, 0=No)
+     * Profile field "website"
+     * @types int (storageHint=int)
+     * @stats total=499, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Present on the website (1=Yes, 0=No)')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $website = null;
+
+    /**
+     * Coin: Country (geographical)
+     * Profile field "muntLandGeografisch"
+     * @original munt_land_geografisch
+     * @types string (storageHint=string)
+     * @stats total=11, nulls=0, distinct=4
+     * @length 7–9 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Coin: Country (geographical)')]
+    #[Column(length: 9, nullable: true)]
+    public ?string $muntLandGeografisch = null;
+
+    /**
+     * Coin: Authority
+     * Profile field "muntAutoriteitPolitiek"
+     * @original munt_autoriteit_politiek
+     * @types string (storageHint=string)
+     * @stats total=6, nulls=0, distinct=3
+     * @length 7–8 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Coin: Authority')]
+    #[Column(length: 8, nullable: true)]
+    public ?string $muntAutoriteitPolitiek = null;
+
+    /**
+     * Coin: Coin type
+     * Profile field "muntMuntsoort"
+     * @original munt_muntsoort
+     * @types string (storageHint=string)
+     * @stats total=11, nulls=0, distinct=6
+     * @length 4–7 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Coin: Coin type')]
+    #[Column(length: 7, nullable: true)]
+    public ?string $muntMuntsoort = null;
+
+    /**
+     * Coin: Unit/value
+     * Profile field "muntEenheidWaarde"
+     * @original munt_eenheid_waarde
+     * @types int (storageHint=int)
+     * @stats total=11, nulls=0, distinct=5
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Coin: Unit/value')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $muntEenheidWaarde = null;
+
+    /**
+     * Coin: Mint or production place
+     * Profile field "muntMuntplaatsProductieplaats"
+     * @original munt_muntplaats_productieplaats
+     * @types string (storageHint=string)
+     * @stats total=1, nulls=0, distinct=1
+     * @length 8 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Coin: Mint or production place')]
+    #[Column(length: 8, nullable: true)]
+    public ?string $muntMuntplaatsProductieplaats = null;
+
+    /**
+     * Coin: Diameter in mm
+     * Profile field "muntLengteDiameterInMm"
+     * @original munt_lengte_diameter_in_mm
+     * @types int, float (storageHint=string)
+     * @stats total=11, nulls=0, distinct=9
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Coin: Diameter in mm')]
+    #[Column(length: 255, nullable: true)]
+    public ?string $muntLengteDiameterInMm = null;
+
+    /**
+     * Image URL
+     * Profile field "image"
+     * @types string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=499
+     * @length 76–80 chars
+     */
+    #[ApiProperty(description: 'Image URL')]
+    #[Column(length: 80, nullable: true)]
+    public ?string $image = null;
+
+    /**
+     * Citation URL
+     * Profile field "citation_url"
+     * @types string (storageHint=string)
+     * @stats total=499, nulls=0, distinct=499
+     * @length 49–53 chars
+     */
+    #[ApiProperty(description: 'Citation URL')]
+    #[Column(length: 53, nullable: true)]
+    public ?string $citationUrl = null;
+
+    /**
+     * Keywords (only for photographed finds)
+     * Profile field "trefwoorden"
+     * @types string (storageHint=string)
+     * @stats total=19, nulls=0, distinct=17
+     * @length 4–62 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Keywords (only for photographed finds)')]
+    #[Column(length: 62, nullable: true)]
+    public ?string $trefwoorden = null;
+
+    /**
+     * Metal: Greatest height in mm
+     * Profile field "metaalGrootstehoogteMm"
+     * @original metaal_grootstehoogte_mm
+     * @types int (storageHint=int)
+     * @stats total=9, nulls=0, distinct=9
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Metal: Greatest height in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $metaalGrootstehoogteMm = null;
+
+    /**
+     * Minimum height level (NAP)
+     * Profile field "vlakMin"
+     * @original vlak_min
+     * @types int, float (storageHint=string)
+     * @stats total=374, nulls=0, distinct=8
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Minimum height level (NAP)')]
+    #[Column(length: 255, nullable: true)]
+    public ?string $vlakMin = null;
+
+    /**
+     * Maximum height level (NAP)
+     * Profile field "vlakMax"
+     * @original vlak_max
+     * @types int, float (storageHint=string)
+     * @stats total=374, nulls=0, distinct=7
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Maximum height level (NAP)')]
+    #[Column(length: 255, nullable: true)]
+    public ?string $vlakMax = null;
+
+    /**
+     * Weight in grams
+     * Profile field "gewicht"
+     * @types int, float (storageHint=string)
+     * @stats total=328, nulls=0, distinct=136
+     */
+    #[ApiProperty(description: 'Weight in grams')]
+    #[Column(length: 255, nullable: true)]
+    public ?string $gewicht = null;
+
+    /**
+     * Section number
+     * Profile field "vak"
+     * @types int, string (storageHint=string)
+     * @stats total=491, nulls=0, distinct=3
+     * @length 3–5 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Section number')]
+    #[Column(length: 5, nullable: true)]
+    public ?string $vak = null;
+
+    /**
+     * Building materials: Greatest thickness in mm
+     * Profile field "bouwmaterialenGrootstedikteMm"
+     * @original bouwmaterialen_grootstedikte_mm
+     * @types int, float (storageHint=string)
+     * @stats total=19, nulls=0, distinct=9
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Building materials: Greatest thickness in mm')]
+    #[Column(length: 255, nullable: true)]
+    public ?string $bouwmaterialenGrootstedikteMm = null;
+
+    /**
+     * Building materials: Surface treatment
+     * Profile field "bouwmaterialenOppervlakte"
+     * @original bouwmaterialen_oppervlakte
+     * @types string (storageHint=string)
+     * @stats total=22, nulls=0, distinct=2
+     * @length 10–12 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Building materials: Surface treatment')]
+    #[Column(length: 12, nullable: true)]
+    public ?string $bouwmaterialenOppervlakte = null;
+
+    /**
+     * Ceramics: Deventer system code
+     * Profile field "aardewerkDsType"
+     * @original aardewerk_ds_type
+     * @types string (storageHint=string)
+     * @stats total=204, nulls=0, distinct=78
+     * @length 1–9 chars
+     */
+    #[ApiProperty(description: 'Ceramics: Deventer system code')]
+    #[Column(length: 9, nullable: true)]
+    public ?string $aardewerkDsType = null;
+
+    /**
+     * Ceramics: rim-EVE (Estimated vessel equivalent)
+     * Profile field "aardewerkEveRand"
+     * @original aardewerk_eve_rand
+     * @types int (storageHint=int)
+     * @stats total=65, nulls=0, distinct=11
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: rim-EVE (Estimated vessel equivalent)')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $aardewerkEveRand = null;
+
+    /**
+     * Ceramics: Origin
+     * Profile field "aardewerkHerkomst"
+     * @original aardewerk_herkomst
+     * @types string (storageHint=string)
+     * @stats total=193, nulls=0, distinct=27
+     * @length 5–30 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: Origin')]
+    #[Column(length: 30, nullable: true)]
+    public ?string $aardewerkHerkomst = null;
+
+    /**
+     * Ceramics: Surface treatment
+     * Profile field "aardewerkOppBehandeling"
+     * @original aardewerk_opp_behandeling
+     * @types string (storageHint=string)
+     * @stats total=197, nulls=0, distinct=19
+     * @length 10–49 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: Surface treatment')]
+    #[Column(length: 49, nullable: true)]
+    public ?string $aardewerkOppBehandeling = null;
+
+    /**
+     * Ceramics: Decoration technique
+     * Profile field "aardewerkDecoratietechniek"
+     * @original aardewerk_decoratietechniek
+     * @types string (storageHint=string)
+     * @stats total=89, nulls=0, distinct=19
+     * @length 5–43 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: Decoration technique')]
+    #[Column(length: 43, nullable: true)]
+    public ?string $aardewerkDecoratietechniek = null;
+
+    /**
+     * Ceramics: Decoration groups
+     * Profile field "aardewerkDecorgroepen"
+     * @original aardewerk_decorgroepen
+     * @types string (storageHint=string)
+     * @stats total=18, nulls=0, distinct=6
+     * @length 11–19 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: Decoration groups')]
+    #[Column(length: 19, nullable: true)]
+    public ?string $aardewerkDecorgroepen = null;
+
+    /**
+     * Ceramics: base-EVE (Estimated vessel equivalent)
+     * Profile field "aardewerkEveBodem"
+     * @original aardewerk_eve_bodem
+     * @types int (storageHint=int)
+     * @stats total=43, nulls=0, distinct=12
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: base-EVE (Estimated vessel equivalent)')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $aardewerkEveBodem = null;
+
+    /**
+     * Glass: Deventer system code
+     * Profile field "glasDsType"
+     * @original glas_ds_type
+     * @types string (storageHint=string)
+     * @stats total=40, nulls=0, distinct=8
+     * @length 2–10 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Glass: Deventer system code')]
+    #[Column(length: 10, nullable: true)]
+    public ?string $glasDsType = null;
+
+    /**
+     * Glass: Color
+     * Profile field "glasKleur"
+     * @original glas_kleur
+     * @types string (storageHint=string)
+     * @stats total=39, nulls=0, distinct=9
+     * @length 3–27 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Glass: Color')]
+    #[Column(length: 27, nullable: true)]
+    public ?string $glasKleur = null;
+
+    /**
+     * Glass: Origin
+     * Profile field "glasHerkomst"
+     * @original glas_herkomst
+     * @types string (storageHint=string)
+     * @stats total=39, nulls=0, distinct=6
+     * @length 6–21 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Glass: Origin')]
+    #[Column(length: 21, nullable: true)]
+    public ?string $glasHerkomst = null;
+
+    /**
+     * Object part
+     * Profile field "objectdeel"
+     * @types string (storageHint=string)
+     * @stats total=141, nulls=0, distinct=14
+     * @length 3–15 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Object part')]
+    #[Column(length: 15, nullable: true)]
+    public ?string $objectdeel = null;
+
+    /**
+     * Metal: Greatest length in mm
+     * Profile field "metaalGrootstelengteMm"
+     * @original metaal_grootstelengte_mm
+     * @types int (storageHint=int)
+     * @stats total=14, nulls=0, distinct=14
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Metal: Greatest length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $metaalGrootstelengteMm = null;
+
+    /**
+     * Metal: Greatest width in mm
+     * Profile field "metaalGrootstebreedteMm"
+     * @original metaal_grootstebreedte_mm
+     * @types int (storageHint=int)
+     * @stats total=13, nulls=0, distinct=11
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Metal: Greatest width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $metaalGrootstebreedteMm = null;
+
+    /**
+     * Metal: Greatest thickness in mm
+     * Profile field "metaalGrootstedikteMm"
+     * @original metaal_grootstedikte_mm
+     * @types int, float (storageHint=string)
+     * @stats total=11, nulls=0, distinct=11
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Metal: Greatest thickness in mm')]
+    #[Column(length: 255, nullable: true)]
+    public ?string $metaalGrootstedikteMm = null;
+
+    /**
+     * Clay pipes: Model
+     * Profile field "rookpijpenModel"
+     * @original rookpijpen_model
+     * @types string (storageHint=string)
+     * @stats total=48, nulls=0, distinct=7
+     * @length 5–13 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Clay pipes: Model')]
+    #[Column(length: 13, nullable: true)]
+    public ?string $rookpijpenModel = null;
+
+    /**
+     * Clay pipes: Quality
+     * Profile field "rookpijpenKwaliteit"
+     * @original rookpijpen_kwaliteit
+     * @types string (storageHint=string)
+     * @stats total=56, nulls=0, distinct=5
+     * @length 4–14 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Clay pipes: Quality')]
+    #[Column(length: 14, nullable: true)]
+    public ?string $rookpijpenKwaliteit = null;
+
+    /**
+     * Ceramics: Mark
+     * Profile field "aardewerkMerk"
+     * @original aardewerk_merk
+     * @types string (storageHint=string)
+     * @stats total=8, nulls=0, distinct=7
+     * @length 7–21 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: Mark')]
+    #[Column(length: 21, nullable: true)]
+    public ?string $aardewerkMerk = null;
+
+    /**
+     * Ceramics: (reconstructed) object diameter in mm
+     * Profile field "aardewerkObjectDiameterMm"
+     * @original aardewerk_object_diameter_mm
+     * @types int (storageHint=int)
+     * @stats total=39, nulls=0, distinct=28
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: (reconstructed) object diameter in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $aardewerkObjectDiameterMm = null;
+
+    /**
+     * Ceramics: (reconstructed) object height in mm
+     * Profile field "aardewerkObjectHoogteMm"
+     * @original aardewerk_object_hoogte_mm
+     * @types int (storageHint=int)
+     * @stats total=10, nulls=0, distinct=10
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Ceramics: (reconstructed) object height in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $aardewerkObjectHoogteMm = null;
+
+    /**
+     * Building materials: Color
+     * Profile field "bouwmaterialenKleur"
+     * @original bouwmaterialen_kleur
+     * @types string (storageHint=string)
+     * @stats total=21, nulls=0, distinct=9
+     * @length 3–24 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Building materials: Color')]
+    #[Column(length: 24, nullable: true)]
+    public ?string $bouwmaterialenKleur = null;
+
+    /**
+     * Building materials: Type of image
+     * Profile field "bouwmaterialenAfbeelding"
+     * @original bouwmaterialen_afbeelding
+     * @types string (storageHint=string)
+     * @stats total=3, nulls=0, distinct=2
+     * @length 5–12 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Building materials: Type of image')]
+    #[Column(length: 12, nullable: true)]
+    public ?string $bouwmaterialenAfbeelding = null;
+
+    /**
+     * Ceramics: Fragment height in mm
+     * Profile field "aardewerkFragmHoogteMm"
+     * @original aardewerk_fragm_hoogte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Ceramics: Fragment height in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $aardewerkFragmHoogteMm = null;
+
+    /**
+     * Clay pipes: Stem treatment
+     * Profile field "rookpijpenSteelbehandeling"
+     * @original rookpijpen_steelbehandeling
+     * @types string (storageHint=string)
+     * @stats total=18, nulls=0, distinct=2
+     * @length 8–10 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Stem treatment')]
+    #[Column(length: 10, nullable: true)]
+    public ?string $rookpijpenSteelbehandeling = null;
+
+    /**
+     * Clay pipes: Production center
+     * Profile field "rookpijpenProductiecentrum"
+     * @original rookpijpen_productiecentrum
+     * @types string (storageHint=string)
+     * @stats total=32, nulls=0, distinct=2
+     * @length 5–10 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Production center')]
+    #[Column(length: 10, nullable: true)]
+    public ?string $rookpijpenProductiecentrum = null;
+
+    /**
+     * Clay pipes: Side mark left
+     * Profile field "rookpijpenZijmerkLinks"
+     * @original rookpijpen_zijmerk_links
+     * @types string, array (storageHint=json)
+     * @stats total=9, nulls=0, distinct=6
+     * @length 3–79 chars
+     */
+    #[ApiProperty(description: 'Clay pipes: Side mark left')]
+    #[Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
+    public ?array $rookpijpenZijmerkLinks = null;
+
+    /**
+     * Clay pipes: Surface treatment bowl
+     * Profile field "rookpijpenOppervlaktebehandelingKop"
+     * @original rookpijpen_oppervlaktebehandeling_kop
+     * @types string (storageHint=string)
+     * @stats total=48, nulls=0, distinct=2
+     * @length 8–10 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Surface treatment bowl')]
+    #[Column(length: 10, nullable: true)]
+    public ?string $rookpijpenOppervlaktebehandelingKop = null;
+
+    /**
+     * Clay pipes: Bowl opening
+     * Profile field "rookpijpenKopopening"
+     * @original rookpijpen_kopopening
+     * @types string (storageHint=string)
+     * @stats total=36, nulls=0, distinct=1
+     * @length 9 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Bowl opening')]
+    #[Column(length: 9, nullable: true)]
+    public ?string $rookpijpenKopopening = null;
+
+    /**
+     * Clay pipes: Rouletting
+     * Profile field "rookpijpenRadering"
+     * @original rookpijpen_radering
+     * @types string (storageHint=string)
+     * @stats total=34, nulls=0, distinct=3
+     * @length 31–35 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Rouletting')]
+    #[Column(length: 35, nullable: true)]
+    public ?string $rookpijpenRadering = null;
+
+    /**
+     * Clay pipes: Side mark right
+     * Profile field "rookpijpenZijmerkRechts"
+     * @original rookpijpen_zijmerk_rechts
+     * @types array (storageHint=json)
+     * @stats total=4, nulls=0, distinct=1
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Side mark right')]
+    #[Column(type: Types::JSON, options: ['jsonb' => true], nullable: true)]
+    public ?array $rookpijpenZijmerkRechts = null;
+
+    /**
+     * Clay pipes: Secondary mark right
+     * Profile field "rookpijpenBijmerkRechts"
+     * @original rookpijpen_bijmerk_rechts
+     * @types string (storageHint=string)
+     * @stats total=10, nulls=0, distinct=3
+     * @length 4–21 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Clay pipes: Secondary mark right')]
+    #[Column(length: 21, nullable: true)]
+    public ?string $rookpijpenBijmerkRechts = null;
+
+    /**
+     * Clay pipes: Mark or heel mark
+     * Profile field "rookpijpenMerkOfHielmerk"
+     * @original rookpijpen_merk_of_hielmerk
+     * @types string (storageHint=string)
+     * @stats total=23, nulls=0, distinct=23
+     * @length 2–18 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Clay pipes: Mark or heel mark')]
+    #[Column(length: 18, nullable: true)]
+    public ?string $rookpijpenMerkOfHielmerk = null;
+
+    /**
+     * Clay pipes: Pipe maker
+     * Profile field "rookpijpenPijpenmaker"
+     * @original rookpijpen_pijpenmaker
+     * @types string (storageHint=string)
+     * @stats total=16, nulls=0, distinct=16
+     * @length 8–26 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Clay pipes: Pipe maker')]
+    #[Column(length: 26, nullable: true)]
+    public ?string $rookpijpenPijpenmaker = null;
+
+    /**
+     * Clay pipes: Secondary mark left
+     * Profile field "rookpijpenBijmerkLinks"
+     * @original rookpijpen_bijmerk_links
+     * @types string (storageHint=string)
+     * @stats total=15, nulls=0, distinct=7
+     * @length 4–26 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Clay pipes: Secondary mark left')]
+    #[Column(length: 26, nullable: true)]
+    public ?string $rookpijpenBijmerkLinks = null;
+
+    /**
+     * Fauna: Animal species
+     * Profile field "faunaSoort"
+     * @original fauna_soort
+     * @types string (storageHint=string)
+     * @stats total=23, nulls=0, distinct=9
+     * @length 3–18 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Fauna: Animal species')]
+    #[Column(length: 18, nullable: true)]
+    public ?string $faunaSoort = null;
+
+    /**
+     * Fauna: Length in mm
+     * Profile field "faunaLengteMm"
+     * @original fauna_lengte_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Fauna: Length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $faunaLengteMm = null;
+
+    /**
+     * Fauna: Width in mm
+     * Profile field "faunaBreedteMm"
+     * @original fauna_breedte_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Fauna: Width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $faunaBreedteMm = null;
+
+    /**
+     * Glass: rim-EVE (Estimated vessel equivalent)
+     * Profile field "glasEveRand"
+     * @original glas_eve_rand
+     * @types int (storageHint=int)
+     * @stats total=5, nulls=0, distinct=4
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Glass: rim-EVE (Estimated vessel equivalent)')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $glasEveRand = null;
+
+    /**
+     * Glass: base-EVE (Estimated vessel equivalent)
+     * Profile field "glasEveBodem"
+     * @original glas_eve_bodem
+     * @types int (storageHint=int)
+     * @stats total=6, nulls=0, distinct=3
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Glass: base-EVE (Estimated vessel equivalent)')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $glasEveBodem = null;
+
+    /**
+     * Glass: (reconstructed) object diameter in mm
+     * Profile field "glasObjectDiameterMm"
+     * @original glas_object_diameter_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Glass: (reconstructed) object diameter in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $glasObjectDiameterMm = null;
+
+    /**
+     * Glass: (reconstructed) object height in mm
+     * Profile field "glasObjectHoogteMm"
+     * @original glas_object_hoogte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Glass: (reconstructed) object height in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $glasObjectHoogteMm = null;
+
+    /**
+     * Plastic: Greatest length in mm
+     * Profile field "kunststofGrootstelengteMm"
+     * @original kunststof_grootstelengte_mm
+     * @types int (storageHint=int)
+     * @stats total=7, nulls=0, distinct=3
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plastic: Greatest length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $kunststofGrootstelengteMm = null;
+
+    /**
+     * Plastic: Greatest width in mm
+     * Profile field "kunststofGrootstebreedteMm"
+     * @original kunststof_grootstebreedte_mm
+     * @types int (storageHint=int)
+     * @stats total=6, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plastic: Greatest width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $kunststofGrootstebreedteMm = null;
+
+    /**
+     * Plastic: Owner
+     * Profile field "kunststofEigenaar"
+     * @original kunststof_eigenaar
+     * @types string (storageHint=string)
+     * @stats total=5, nulls=0, distinct=5
+     * @length 7–28 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Plastic: Owner')]
+    #[Column(length: 28, nullable: true)]
+    public ?string $kunststofEigenaar = null;
+
+    /**
+     * Plastic: Unit/value
+     * Profile field "kunststofEenheidWaarde"
+     * @original kunststof_eenheid_waarde
+     * @types string (storageHint=string)
+     * @stats total=1, nulls=0, distinct=1
+     * @length 7 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plastic: Unit/value')]
+    #[Column(length: 7, nullable: true)]
+    public ?string $kunststofEenheidWaarde = null;
+
+    /**
+     * Metal: Production center
+     * Profile field "metaalProductiecentrum"
+     * @original metaal_productiecentrum
+     * @types string (storageHint=string)
+     * @stats total=1, nulls=0, distinct=1
+     * @length 6 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Metal: Production center')]
+    #[Column(length: 6, nullable: true)]
+    public ?string $metaalProductiecentrum = null;
+
+    /**
+     * Metal: Sub-materials
+     * Profile field "metaalDeelmaterialen"
+     * @original metaal_deelmaterialen
+     * @types string (storageHint=string)
+     * @stats total=2, nulls=0, distinct=2
+     * @length 7–9 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Metal: Sub-materials')]
+    #[Column(length: 9, nullable: true)]
+    public ?string $metaalDeelmaterialen = null;
+
+    /**
+     * Fauna: Element
+     * Profile field "faunaElement"
+     * @original fauna_element
+     * @types string (storageHint=string)
+     * @stats total=10, nulls=0, distinct=6
+     * @length 6–17 chars
+     * @facetCandidate true
+     */
+    #[ApiProperty(description: 'Fauna: Element')]
+    #[Column(length: 17, nullable: true)]
+    public ?string $faunaElement = null;
+
+    /**
+     * Fits with or belongs to find number(s)
+     * Profile field "pastAanHoortBij"
+     * @original past_aan_hoort_bij
+     * @types string (storageHint=string)
+     * @stats total=9, nulls=0, distinct=9
+     * @length 26–190 chars
+     */
+    #[ApiProperty(description: 'Fits with or belongs to find number(s)')]
+    #[Column(length: 190, nullable: true)]
+    public ?string $pastAanHoortBij = null;
+
+    /**
+     * Plastic: Diameter in mm
+     * Profile field "kunststofDiameterMm"
+     * @original kunststof_diameter_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plastic: Diameter in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $kunststofDiameterMm = null;
+
+    /**
+     * Plant: Species
+     * Profile field "plantSoort"
+     * @original plant_soort
+     * @types string (storageHint=string)
+     * @stats total=3, nulls=0, distinct=2
+     * @length 6–9 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plant: Species')]
+    #[Column(length: 9, nullable: true)]
+    public ?string $plantSoort = null;
+
+    /**
+     * Wood: Greatest length in mm
+     * Profile field "houtGrootstelengteMm"
+     * @original hout_grootstelengte_mm
+     * @types int (storageHint=int)
+     * @stats total=3, nulls=0, distinct=3
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Wood: Greatest length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $houtGrootstelengteMm = null;
+
+    /**
+     * Wood: Greatest width in mm
+     * Profile field "houtGrootstebreedteMm"
+     * @original hout_grootstebreedte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Wood: Greatest width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $houtGrootstebreedteMm = null;
+
+    /**
+     * Wood: Greatest thickness in mm
+     * Profile field "houtGrootstedikteMm"
+     * @original hout_grootstedikte_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Wood: Greatest thickness in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $houtGrootstedikteMm = null;
+
+    /**
+     * Building materials: Greatest length in mm
+     * Profile field "bouwmaterialenGrootstelengteMm"
+     * @original bouwmaterialen_grootstelengte_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Building materials: Greatest length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $bouwmaterialenGrootstelengteMm = null;
+
+    /**
+     * Building materials: Greatest width in mm
+     * Profile field "bouwmaterialenGrootstebreedteMm"
+     * @original bouwmaterialen_grootstebreedte_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Building materials: Greatest width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $bouwmaterialenGrootstebreedteMm = null;
+
+    /**
+     * Wood: Diameter in mm
+     * Profile field "houtDiameterMm"
+     * @original hout_diameter_mm
+     * @types int (storageHint=int)
+     * @stats total=3, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Wood: Diameter in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $houtDiameterMm = null;
+
+    /**
+     * Plant: Greatest length in mm
+     * Profile field "plantGrootstelengteMm"
+     * @original plant_grootstelengte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plant: Greatest length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $plantGrootstelengteMm = null;
+
+    /**
+     * Plant: Greatest width in mm
+     * Profile field "plantGrootstebreedteMm"
+     * @original plant_grootstebreedte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plant: Greatest width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $plantGrootstebreedteMm = null;
+
+    /**
+     * Plant: Greatest thickness in mm
+     * Profile field "plantGrootstedikteMm"
+     * @original plant_grootstedikte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Plant: Greatest thickness in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $plantGrootstedikteMm = null;
+
+    /**
+     * Metal: Diameter in mm
+     * Profile field "metaalDiameterMm"
+     * @original metaal_diameter_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Metal: Diameter in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $metaalDiameterMm = null;
+
+    /**
+     * Glass: Fragment height in mm
+     * Profile field "glasFragmHoogteMm"
+     * @original glas_fragm_hoogte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Glass: Fragment height in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $glasFragmHoogteMm = null;
+
+    /**
+     * Natural stone: Subtype
+     * Profile field "natuursteenSubsoort"
+     * @original natuursteen_subsoort
+     * @types string (storageHint=string)
+     * @stats total=2, nulls=0, distinct=2
+     * @length 12–14 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Natural stone: Subtype')]
+    #[Column(length: 14, nullable: true)]
+    public ?string $natuursteenSubsoort = null;
+
+    /**
+     * Natural stone: Greatest length in mm
+     * Profile field "natuursteenGrootstelengteMm"
+     * @original natuursteen_grootstelengte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Natural stone: Greatest length in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $natuursteenGrootstelengteMm = null;
+
+    /**
+     * Natural stone: Greatest width in mm
+     * Profile field "natuursteenGrootstebreedteMm"
+     * @original natuursteen_grootstebreedte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Natural stone: Greatest width in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $natuursteenGrootstebreedteMm = null;
+
+    /**
+     * Natural stone: Greatest thickness in mm
+     * Profile field "natuursteenGrootstedikteMm"
+     * @original natuursteen_grootstedikte_mm
+     * @types int (storageHint=int)
+     * @stats total=2, nulls=0, distinct=2
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Natural stone: Greatest thickness in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $natuursteenGrootstedikteMm = null;
+
+    /**
+     * Natural stone: Production traces
+     * Profile field "natuursteenProductiesporen"
+     * @original natuursteen_productiesporen
+     * @types string (storageHint=string)
+     * @stats total=1, nulls=0, distinct=1
+     * @length 8 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Natural stone: Production traces')]
+    #[Column(length: 8, nullable: true)]
+    public ?string $natuursteenProductiesporen = null;
+
+    /**
+     * Leather: Sub-materials
+     * Profile field "leerDeelmaterialen"
+     * @original leer_deelmaterialen
+     * @types string (storageHint=string)
+     * @stats total=1, nulls=0, distinct=1
+     * @length 5 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Leather: Sub-materials')]
+    #[Column(length: 5, nullable: true)]
+    public ?string $leerDeelmaterialen = null;
+
+    /**
+     * Leather: Leather type
+     * Profile field "leerLeersoort"
+     * @original leer_leersoort
+     * @types string (storageHint=string)
+     * @stats total=1, nulls=0, distinct=1
+     * @length 4 chars
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Leather: Leather type')]
+    #[Column(length: 4, nullable: true)]
+    public ?string $leerLeersoort = null;
+
+    /**
+     * Natural stone: Diameter in mm
+     * Profile field "natuursteenDiameterMm"
+     * @original natuursteen_diameter_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Natural stone: Diameter in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $natuursteenDiameterMm = null;
+
+    /**
+     * Wood: Greatest height in mm
+     * Profile field "houtGrootstehoogteMm"
+     * @original hout_grootstehoogte_mm
+     * @types int (storageHint=int)
+     * @stats total=1, nulls=0, distinct=1
+     * @facetCandidate true
+     * @booleanLike true
+     */
+    #[ApiProperty(description: 'Wood: Greatest height in mm')]
+    #[Column(type: Types::INTEGER, nullable: true)]
+    public ?int $houtGrootstehoogteMm = null;
 }

@@ -62,10 +62,14 @@ function demo_datasets(): array
                 target: 'data/wcma.csv',
             ),
             new Dataset(
-                name: 'amst',
-                    url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_EN.csv',
-//                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_NL.csv',
-                target: 'data/amst.csv',
+                name: 'amst_en',
+                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_EN.csv',
+                target: 'data/amst_en.csv',
+            ),
+            new Dataset(
+                name: 'amst_nl',
+                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_NL.csv',
+                target: 'data/amst_nl.csv',
             ),
             new Dataset(
                 name: 'car',

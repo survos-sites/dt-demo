@@ -48,7 +48,8 @@ class EnhanceRecordService
                         $record['manifest'] = $manifest;
                     }
                     break;
-                case 'amst':
+                case 'amst_en':
+                case 'amst_nl':
                     // bad: https://statics.belowthesurface.amsterdam/vondst/600/NZC1.00001MTL001(01).png
                     // YES: https://statics.belowthesurface.amsterdam/vondst/600/NZD1.00048FAU017-02(01).png
 //                    https://statics.belowthesurface.amsterdam/vondst/600/NZC1.00001MTL001(01).png
