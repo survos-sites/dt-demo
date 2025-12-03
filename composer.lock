@@ -15426,16 +15426,16 @@
         },
         {
             "name": "jawira/doctrine-diagram-bundle",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jawira/doctrine-diagram-bundle.git",
-                "reference": "5827f20977bc474c712edcb19c06852c582e1484"
+                "reference": "46840aef3bf860ad48bab4047aec5418e5f7129b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jawira/doctrine-diagram-bundle/zipball/5827f20977bc474c712edcb19c06852c582e1484",
-                "reference": "5827f20977bc474c712edcb19c06852c582e1484",
+                "url": "https://api.github.com/repos/jawira/doctrine-diagram-bundle/zipball/46840aef3bf860ad48bab4047aec5418e5f7129b",
+                "reference": "46840aef3bf860ad48bab4047aec5418e5f7129b",
                 "shasum": ""
             },
             "require": {
@@ -15447,11 +15447,11 @@
                 "jawira/plantuml-client": "^1.0",
                 "jawira/plantuml-to-image": "^1.1",
                 "php": "^8.1",
-                "symfony/config": "^6.0 || ^7.0",
-                "symfony/console": "^6.0 || ^7.0",
-                "symfony/dependency-injection": "^6.0 || ^7.0",
-                "symfony/filesystem": "^6.0 || ^7.0",
-                "symfony/http-kernel": "^6.0 || ^7.0"
+                "symfony/config": "^6.0 || ^7.0 || ^8.0",
+                "symfony/console": "^6.0 || ^7.0 || ^8.0",
+                "symfony/dependency-injection": "^6.0 || ^7.0 || ^8.0",
+                "symfony/filesystem": "^6.0 || ^7.0 || ^8.0",
+                "symfony/http-kernel": "^6.0 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.42",
@@ -15494,9 +15494,9 @@
             "support": {
                 "docs": "https://jawira.github.io/doctrine-diagram-bundle",
                 "issues": "https://github.com/jawira/doctrine-diagram-bundle/issues",
-                "source": "https://github.com/jawira/doctrine-diagram-bundle/tree/v1.1.0"
+                "source": "https://github.com/jawira/doctrine-diagram-bundle/tree/v1.2.0"
             },
-            "time": "2025-10-13T17:45:02+00:00"
+            "time": "2025-11-30T21:12:29+00:00"
         },
         {
             "name": "jawira/doctrine-diagram-contracts",
