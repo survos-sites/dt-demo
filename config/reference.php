@@ -775,10 +775,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     },
  *     orm?: array{
  *         default_entity_manager?: scalar|null,
- *         enable_native_lazy_objects?: bool, // no-op, will be deprecated and removed in the future // Default: true
+ *         enable_native_lazy_objects?: bool, // Deprecated: The "enable_native_lazy_objects" option is deprecated and will be removed in DoctrineBundle 4.0, as native lazy objects are now always enabled. // Default: true
  *         controller_resolver?: bool|array{
  *             enabled?: bool, // Default: true
- *             auto_mapping?: bool, // Set to true to enable using route placeholders as lookup criteria when the primary key doesn't match the argument name // Default: false
+ *             auto_mapping?: bool, // Deprecated: The "auto_mapping" option is deprecated and will be removed in DoctrineBundle 4.0, as it only accepts `false` since 3.0. // Set to true to enable using route placeholders as lookup criteria when the primary key doesn't match the argument name // Default: false
  *             evict_cache?: bool, // Set to true to fetch the entity from the database instead of using the cache, if any // Default: false
  *         },
  *         entity_managers?: array<string, array{ // Default: []
@@ -2089,6 +2089,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     searchKey?: scalar|null, // Default: "%env(default::MEILI_SEARCH_KEY)%"
  *     meiliPrefix?: scalar|null, // Default: "%env(default::MEILI_PREFIX)%"
  *     passLocale?: bool, // Default: false
+ *     multiLingual?: bool, // turn on multi-lingual indexing // Default: false
  *     maxValuesPerFacet?: int, // Default: 1000
  *     tools?: list<array{ // Default: []
  *         label: scalar|null,
@@ -2173,6 +2174,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         traces_sampler?: scalar|null,
  *         profiles_sample_rate?: float, // The sampling factor to apply to profiles. A value of 0 will deny sending any profiles, and a value of 1 will send all profiles. Profiles are sampled in relation to traces_sample_rate
  *         enable_logs?: bool,
+ *         enable_metrics?: bool, // Default: true
  *         attach_stacktrace?: bool,
  *         attach_metric_code_locations?: bool,
  *         context_lines?: int,
@@ -2189,6 +2191,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         before_send_check_in?: scalar|null,
  *         before_send_metrics?: scalar|null,
  *         before_send_log?: scalar|null,
+ *         before_send_metric?: scalar|null,
  *         trace_propagation_targets?: mixed,
  *         tags?: array<string, scalar|null>,
  *         error_types?: scalar|null,
@@ -2207,7 +2210,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         http_ssl_verify_peer?: bool,
  *         http_compression?: bool,
  *         capture_silenced_errors?: bool,
- *         max_request_body_size?: "none"|"small"|"medium"|"always",
+ *         max_request_body_size?: "none"|"never"|"small"|"medium"|"always",
  *         class_serializers?: array<string, scalar|null>,
  *     },
  *     messenger?: bool|array{
