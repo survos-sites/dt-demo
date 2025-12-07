@@ -109,7 +109,7 @@ class Official implements RouteParametersInterface, MarkingInterface
     private ?\DateTimeImmutable $birthday = null;
 
     #[ORM\Column(length: 1, nullable: true)]
-    #[Assert\Choice(self::GENDERS)]
+    #[Assert\Choice(choices: self::GENDERS)]
     private ?string $gender = null;
 
     #[ORM\OneToMany(targetEntity: Term::class, mappedBy: 'official', cascade: ['remove', 'persist'], orphanRemoval: true)]
@@ -117,7 +117,7 @@ class Official implements RouteParametersInterface, MarkingInterface
 
     #[ORM\Column(length: 12, nullable: true)]
     #[Assert\Length(min: 0, max: 12)]
-    #[Assert\Choice(['Democrat', 'Republican','Independent'])]
+    #[Assert\Choice(choices: ['Democrat', 'Republican','Independent'])]
     private ?string $currentParty = null;
 
     #[ORM\Column(length: 255)]

@@ -288,8 +288,4 @@ function load_database(
     );
     io()->writeln($importCmd);
     run($importCmd);
-dd();
-    // In the new world, code generation (code:entity) and templates are explicit steps.
-    // This Castor task focuses on:
-    //   download → convert/profile → import.
 }

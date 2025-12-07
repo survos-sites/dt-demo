@@ -1,6 +1,10 @@
 # config/packages/ux_icons.yaml
 #when@dev:
 ux_icons:
+  aliases:
+    Wine: lucide:wine
+    Marvel: openmoji:superhero
+    Car: mdi:car
   default_icon_attributes:
     width: 30px
       # Default:
@@ -47,7 +51,7 @@ ux_icons:
 
     # Ignore error when an icon is not found.
     # Set to 'true' to fail silently.
-  ignore_not_found:     true
+  ignore_not_found:     false
 
 #when@prod:
 #    ux_icons:

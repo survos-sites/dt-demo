@@ -33,6 +33,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ApiFilter(filterClass: SearchFilter::class, properties: self::SEARCHABLE_FIELDS)]
 #[ApiFilter(filterClass: OrderFilter::class, properties: self::SORTABLE_FIELDS)]
 #[MeiliIndex(
+    ui: ['icon' => 'Wine'],
 	primaryKey: 'code',
 	filterable: self::FILTERABLE_FIELDS,
 	sortable: self::SORTABLE_FIELDS,

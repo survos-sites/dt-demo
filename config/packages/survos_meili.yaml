@@ -14,6 +14,8 @@ survos_meili:
     host: '%env(default::MEILI_SERVER)%'
     apiKey: '%env(default::MEILI_API_KEY)%'
     searchKey: '%env(default::MEILI_SEARCH_KEY)%'
+    multiLingual: false
+    translationStyle: off # off, simple/key, compound (label/info)?  per-index? do we need a translation domain?
     embedders:
         product:
             <<: *openai_large
