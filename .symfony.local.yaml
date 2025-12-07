@@ -3,9 +3,12 @@ workers:
   # built-in command that builds and watches front-end assets
 
 #   built-in command that starts messenger consumer
-  messenger_consume_async:
-       cmd: ['symfony', 'console', 'messenger:consume', 'meili', 'official.fetch.wiki']
+  messenger_consume_meili:
+       cmd: ['symfony', 'console', 'messenger:consume', 'meili']
        watch: ['config', 'src', 'templates', 'vendor']
+#  messenger_consume_congress:
+#      cmd: ['symfony', 'console', 'messenger:consume', 'meili']
+#      watch: ['config', 'src', 'templates', 'vendor']
 
 #  messenger_consume_async: ~
 

@@ -7,12 +7,12 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\PartialSearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\QueryParameter;
+use ApiPlatform\Tests\Fixtures\TestBundle\Entity\Field;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -49,35 +49,36 @@ use Survos\BabelBundle\Attribute\Translatable;
                 'groups' => ['product.read'],
             ],
             parameters: [
-                ':property' => new QueryParameter(
-                    filter: ExactFilter::class,
-                    properties: ['category', 'tags']
+                // ?category=foo
+                'brand' => new QueryParameter(
+                    filter: ExactFilter::class, // or: new ExactFilter()
                 ),
-                'range[:property]' => new QueryParameter(
-                    filter: RangeFilter::class,
-                    properties: self::RANGE_PROPS
-                ),
-                'search[:property]' => new QueryParameter(
-                    filter: PartialSearchFilter::class,
-                    properties: self::SEARCH_PROPS
-                ),
-
-            ]
+            ],
+//            parameters: [
+//                ':property' => new QueryParameter(
+//                    filter: ExactFilter::class,
+//                    properties: ['category', 'tags', 'brand']
+//                ),
+//                'range[:property]' => new QueryParameter(
+//                    filter: RangeFilter::class,
+//                    properties: self::RANGE_PROPS
+//                ),
+//                'search[:property]' => new QueryParameter(
+//                    filter: PartialSearchFilter::class,
+//                    properties: self::SEARCH_PROPS
+//                ),
+//                'filter[:property]' => new QueryParameter(
+//                    filter: ExactFilter::class,
+//                    properties: self::FILTER_PROPS
+//                ),
+//                'order[:property]' => new QueryParameter(
+//                    filter: OrderFilter::class,
+//                    properties: self::SORT_PROPS + ['exactPrice']
+//                ),
+//            ]
         )],
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
-
-//#[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
-
-// @todo: sort/search on translatable properties
-//    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
-//#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
-
-//#[ApiFilter(FacetsFieldSearchFilter::class,
-//    properties: ['category', 'tags', 'rating', 'stock', 'price'],
-//    arguments: [ "searchParameterName" => "facet_filter"]
-//)]
-//#[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
 
 #[MeiliIndex(
     // serialization groups for the JSON sent to the index
@@ -86,38 +87,27 @@ use Survos\BabelBundle\Attribute\Translatable;
         fields: ['sku', 'stock', 'price', 'title','brand'],
         groups: ['product.read', 'product.details', 'product.searchable']
     ),
-//    groups: ['product.read', 'product.details'],
     displayed: ['*'],
     filterable: new Fields(
-        fields: ['category','tags','rating','price','brand'],
+        fields: self::FILTER_PROPS + self::RANGE_PROPS,
 //        groups: ['product.read','product.details']
     ),
-    sortable: ['price', 'rating'],
-    searchable: new Fields(
-//        fields: ['title', 'description'],
-        groups: ['product.searchable']
+    sortable: new Fields(
+        fields: self::SORT_PROPS + ['price'],
     ),
     embedders: ['product']
 )]
 
-/*
-*   #[MeiliIndex(
- *       name: 'product',
- *       display:   new FieldSet(['*']),
- *       filterable:['columns'=>['category','tags','rating','stock','price'], 'groups'=>['product.read','product.details']],
- *       sortable:  ['title','price'],
- *       searchable:['title','description'],
- *   )]
- *
- */
 class Product implements RouteParametersInterface
 {
     use BabelHooksTrait;
 
     use RouteParametersTrait;
 
-    private const RANGE_PROPS = ['rating', 'stock', 'price'];
-    private const SEARCH_PROPS = ['name', 'description'];
+    private const RANGE_PROPS = ['rating', 'stock'];
+    private const FILTER_PROPS = ['category','tags','brand']; // meili will also add RANGE_PROPS
+    private const SEARCH_PROPS = ['titleBacking', 'descriptionBacking'];
+    private const SORT_PROPS = ['rating']; // price for meili, , 'exactPrice' for doctrine
 
 
     public const UNIQUE_PARAMETERS = ['productId'=>'sku'];
@@ -168,10 +158,14 @@ class Product implements RouteParametersInterface
 
 
     #[Groups(['product.read'])]
-    #[ApiProperty("virtual price")]
+    #[ApiProperty("virtual price, int for meili slider")]
     public ?int $price {
         get => round($this->data['price']??0);
     }
+
+    #[ORM\Column(type: Types::SMALLFLOAT, nullable: true)]
+    #[ApiProperty("exact price, float, for doctrine filters")]
+    public ?float $exactPrice;
 
     #[Groups(['product.read'])]
     #[ApiProperty("rounded rating, for range slider")]

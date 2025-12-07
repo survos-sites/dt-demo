@@ -216,9 +216,6 @@
     "pierstoval/smoke-testing": {
         "version": "v1.0.0"
     },
-    "presta/sitemap-bundle": {
-        "version": "v4.0.0"
-    },
     "sentry/sentry-symfony": {
         "version": "5.2",
         "recipe": {

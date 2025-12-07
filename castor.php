@@ -54,11 +54,22 @@ function marvel(): void
  */
 function demo_datasets(): array
 {
+
         $datasets = [
             new Dataset(
                 name: 'wcma',
                 url: 'https://github.com/wcmaart/collection/raw/refs/heads/master/wcma-collection.csv',
                 target: 'data/wcma.csv',
+            ),
+            new Dataset(
+                name: 'amst_en',
+                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_EN.csv',
+                target: 'data/amst_en.csv',
+            ),
+            new Dataset(
+                name: 'amst_nl',
+                url: 'https://statics.belowthesurface.amsterdam/downloadbare-datasets/Downloadtabel_NL.csv',
+                target: 'data/amst_nl.csv',
             ),
             new Dataset(
                 name: 'car',
@@ -173,6 +184,7 @@ function load_database(
     string $code = '',
     #[Opt(description: 'Limit number of entities to import')]
     ?int $limit = null,
+    #[\Castor\Attribute\AsOption(description: "reset the database")] bool $reset = false
 ): void {
     /** @var array<string, Dataset> $map */
     $map = demo_datasets();
@@ -247,8 +259,9 @@ function load_database(
         io()->warning("stopped, no jsonl, maybe run another command?");
         return;
     }
+    $cmd = 'bin/console import:convert %s --dataset=%s';
     $convertCmd = sprintf(
-        'bin/console import:convert %s --dataset=%s',
+        $cmd,
         $dataset->target,
         $dataset->name
     );
@@ -260,16 +273,19 @@ function load_database(
     // Note: This assumes your entity class is App\Entity\<Code>, e.g. App\Entity\Car
     // and that you've already generated the entity via code:entity.
     $limitArg = $limit ? sprintf(' --limit=%d', $limit) : '';
+    $cmd = 'bin/console import:entities %s %s%s';
+    if ($limit) {
+        $cmd .= ' --limit ' . $limit;
+    }
+    if ($reset) {
+        $cmd .= ' --reset';
+    }
     $importCmd = sprintf(
-        'bin/console import:entities %s %s%s',
+        $cmd,
         ucfirst($code),
         $dataset->jsonl,
         $limitArg
     );
     io()->writeln($importCmd);
     run($importCmd);
-dd();
-    // In the new world, code generation (code:entity) and templates are explicit steps.
-    // This Castor task focuses on:
-    //   download → convert/profile → import.
 }

@@ -27,7 +27,7 @@ final class Movie
 {
 	public const FILTERABLE_FIELDS = ['tags', 'genres', 'actors', 'characters', 'year', 'votes', 'budget'];
 	public const SORTABLE_FIELDS = ['id', 'year', 'votes', 'budget'];
-	public const SEARCHABLE_FIELDS = [];
+	public const SEARCHABLE_FIELDS = ['title','overview'];
 
 	/**
 	 * Profile field "id"

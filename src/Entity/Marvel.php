@@ -18,6 +18,7 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
  */
 #[Entity(repositoryClass: MarvelRepository::class)]
 #[MeiliIndex(
+    ui: ['icon' => 'Marvel'],
 	primaryKey: 'code',
 	filterable: self::FILTERABLE_FIELDS,
 	sortable: self::SORTABLE_FIELDS,

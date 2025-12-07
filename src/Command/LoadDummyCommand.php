@@ -67,6 +67,7 @@ class LoadDummyCommand
             $product->description = $data->description;
             $product->brand = $data->brand??null;
             $product->tags = $data->tags??null;
+            $product->exactPrice = $data->price??null;
             $product->rating = round($data->rating);
             $product->category = $data->category;
 

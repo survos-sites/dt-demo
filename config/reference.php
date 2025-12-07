@@ -1659,6 +1659,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     elasticsearch?: bool|array{
  *         enabled?: bool, // Default: false
  *         hosts?: list<scalar|null>,
+ *         ssl_ca_bundle?: scalar|null, // Path to the SSL CA bundle file for Elasticsearch SSL verification. // Default: null
+ *         ssl_verification?: bool, // Enable or disable SSL verification for Elasticsearch connections. // Default: true
  *     },
  *     openapi?: array{
  *         contact?: array{
@@ -1683,6 +1685,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     },
  *     maker?: bool|array{
  *         enabled?: bool, // Default: true
+ *         namespace_prefix?: scalar|null, // Add a prefix to all maker generated classes. e.g set it to "Api" to set the maker namespace to "App\Api\" (if the maker.root_namespace config is App). e.g. App\Api\State\MyStateProcessor // Default: ""
  *     },
  *     exception_to_status?: array<string, int>,
  *     formats?: array<string, array{ // Default: {"jsonld":{"mime_types":["application/ld+json"]}}
@@ -1969,27 +1972,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         post_processors?: array<string, array<string, mixed>>,
  *     },
  * }
- * @psalm-type PrestaSitemapConfig = array{
- *     generator?: scalar|null, // Default: "presta_sitemap.generator_default"
- *     dumper?: scalar|null, // Default: "presta_sitemap.dumper_default"
- *     timetolive?: int, // Default: 3600
- *     sitemap_file_prefix?: scalar|null, // Sets sitemap filename prefix defaults to "sitemap" -> sitemap.xml (for index); sitemap.<section>.xml(.gz) (for sitemaps) // Default: "sitemap"
- *     items_by_set?: int, // The maximum number of items allowed in single sitemap. // Default: 50000
- *     route_annotation_listener?: scalar|null, // Default: true
- *     dump_directory?: scalar|null, // The directory to which the sitemap will be dumped. It can be either absolute, or relative (to the place where the command will be triggered). Default to Symfony's public dir. // Default: "%kernel.project_dir%/public"
- *     defaults?: array{
- *         priority?: scalar|null, // Default: 0.5
- *         changefreq?: scalar|null, // Default: "daily"
- *         lastmod?: scalar|null, // Default: "now"
- *     },
- *     default_section?: scalar|null, // The default section in which static routes are registered. // Default: "default"
- *     alternate?: bool|array{ // Automatically generate alternate (hreflang) urls with static routes. Requires route_annotation_listener config to be enabled.
- *         enabled?: bool, // Default: false
- *         default_locale?: scalar|null, // The default locale of your routes. // Default: "en"
- *         locales?: list<scalar|null>,
- *         i18n?: "symfony"|"jms", // Strategy used to create your i18n routes. // Default: "symfony"
- *     },
- * }
  * @psalm-type UxIconsConfig = array{
  *     icon_dir?: scalar|null, // The local directory where icons are stored. // Default: "%kernel.project_dir%/assets/icons"
  *     default_icon_attributes?: mixed, // Default attributes to add to all icons. // Default: {"fill":"currentColor"}
@@ -2059,7 +2041,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     transport?: scalar|null, // Default: "%env(default::MEILI_TRANSPORT)%"
  *     searchKey?: scalar|null, // Default: "%env(default::MEILI_SEARCH_KEY)%"
  *     meiliPrefix?: scalar|null, // Default: "%env(default::MEILI_PREFIX)%"
+ *     translationStyle?: scalar|null, // Default: "simple"
  *     passLocale?: bool, // Default: false
+ *     multiLingual?: bool, // turn on multi-lingual indexing // Default: false
  *     maxValuesPerFacet?: int, // Default: 1000
  *     tools?: list<array{ // Default: []
  *         label: scalar|null,
@@ -2144,6 +2128,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         traces_sampler?: scalar|null,
  *         profiles_sample_rate?: float, // The sampling factor to apply to profiles. A value of 0 will deny sending any profiles, and a value of 1 will send all profiles. Profiles are sampled in relation to traces_sample_rate
  *         enable_logs?: bool,
+ *         enable_metrics?: bool, // Default: true
  *         attach_stacktrace?: bool,
  *         attach_metric_code_locations?: bool,
  *         context_lines?: int,
@@ -2160,6 +2145,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         before_send_check_in?: scalar|null,
  *         before_send_metrics?: scalar|null,
  *         before_send_log?: scalar|null,
+ *         before_send_metric?: scalar|null,
  *         trace_propagation_targets?: mixed,
  *         tags?: array<string, scalar|null>,
  *         error_types?: scalar|null,
@@ -2178,7 +2164,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         http_ssl_verify_peer?: bool,
  *         http_compression?: bool,
  *         capture_silenced_errors?: bool,
- *         max_request_body_size?: "none"|"small"|"medium"|"always",
+ *         max_request_body_size?: "none"|"never"|"small"|"medium"|"always",
  *         class_serializers?: array<string, scalar|null>,
  *     },
  *     messenger?: bool|array{
@@ -2235,7 +2221,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     survos_wiki?: SurvosWikiConfig,
  *     flysystem?: FlysystemConfig,
  *     liip_imagine?: LiipImagineConfig,
- *     presta_sitemap?: PrestaSitemapConfig,
  *     ux_icons?: UxIconsConfig,
  *     survos_sais?: SurvosSaisConfig,
  *     inspector?: InspectorConfig,
@@ -2279,7 +2264,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_wiki?: SurvosWikiConfig,
  *         flysystem?: FlysystemConfig,
  *         liip_imagine?: LiipImagineConfig,
- *         presta_sitemap?: PrestaSitemapConfig,
  *         ux_icons?: UxIconsConfig,
  *         survos_sais?: SurvosSaisConfig,
  *         doctrine_diagram?: DoctrineDiagramConfig,
@@ -2292,6 +2276,46 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_jsonl?: SurvosJsonlConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_deployment?: SurvosDeploymentConfig,
+ *         survos_import?: SurvosImportConfig,
+ *     },
+ *     "when@never"?: array{
+ *         imports?: ImportsConfig,
+ *         parameters?: ParametersConfig,
+ *         services?: ServicesConfig,
+ *         framework?: FrameworkConfig,
+ *         doctrine?: DoctrineConfig,
+ *         doctrine_migrations?: DoctrineMigrationsConfig,
+ *         twig?: TwigConfig,
+ *         twig_extra?: TwigExtraConfig,
+ *         security?: SecurityConfig,
+ *         monolog?: MonologConfig,
+ *         stimulus?: StimulusConfig,
+ *         twig_component?: TwigComponentConfig,
+ *         survos_core?: SurvosCoreConfig,
+ *         knp_menu?: KnpMenuConfig,
+ *         survos_bootstrap?: SurvosBootstrapConfig,
+ *         survos_html_prettify?: SurvosHtmlPrettifyConfig,
+ *         nelmio_cors?: NelmioCorsConfig,
+ *         api_platform?: ApiPlatformConfig,
+ *         knpu_oauth2_client?: KnpuOauth2ClientConfig,
+ *         survos_auth?: SurvosAuthConfig,
+ *         survos_scraper?: SurvosScraperConfig,
+ *         survos_simple_datatables?: SurvosSimpleDatatablesConfig,
+ *         fos_js_routing?: FosJsRoutingConfig,
+ *         survos_inspection?: SurvosInspectionConfig,
+ *         survos_crawler?: SurvosCrawlerConfig,
+ *         survos_wiki?: SurvosWikiConfig,
+ *         flysystem?: FlysystemConfig,
+ *         liip_imagine?: LiipImagineConfig,
+ *         ux_icons?: UxIconsConfig,
+ *         survos_sais?: SurvosSaisConfig,
+ *         inspector?: InspectorConfig,
+ *         survos_meili?: SurvosMeiliConfig,
+ *         survos_state?: SurvosStateConfig,
+ *         zenstruck_messenger_monitor?: ZenstruckMessengerMonitorConfig,
+ *         survos_ez?: SurvosEzConfig,
+ *         survos_jsonl?: SurvosJsonlConfig,
+ *         survos_babel?: SurvosBabelConfig,
  *         survos_import?: SurvosImportConfig,
  *     },
  *     "when@prod"?: array{
@@ -2324,7 +2348,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_wiki?: SurvosWikiConfig,
  *         flysystem?: FlysystemConfig,
  *         liip_imagine?: LiipImagineConfig,
- *         presta_sitemap?: PrestaSitemapConfig,
  *         ux_icons?: UxIconsConfig,
  *         survos_sais?: SurvosSaisConfig,
  *         inspector?: InspectorConfig,
@@ -2367,7 +2390,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_wiki?: SurvosWikiConfig,
  *         flysystem?: FlysystemConfig,
  *         liip_imagine?: LiipImagineConfig,
- *         presta_sitemap?: PrestaSitemapConfig,
  *         ux_icons?: UxIconsConfig,
  *         survos_sais?: SurvosSaisConfig,
  *         doctrine_diagram?: DoctrineDiagramConfig,
@@ -2462,6 +2484,7 @@ namespace Symfony\Component\Routing\Loader\Configurator;
  * }
  * @psalm-type RoutesConfig = array{
  *     "when@dev"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
+ *     "when@never"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     "when@prod"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     "when@test"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     ...<string, RouteConfig|ImportConfig|AliasConfig>

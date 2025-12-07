@@ -32,7 +32,6 @@ return [
     Survos\WikiBundle\SurvosWikiBundle::class => ['all' => true],
     League\FlysystemBundle\FlysystemBundle::class => ['all' => true],
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
-    Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
     Pierstoval\SmokeTesting\SmokeTestingBundle::class => ['dev' => true, 'test' => true],
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Survos\SaisBundle\SurvosSaisBundle::class => ['all' => true],

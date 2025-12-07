@@ -29,12 +29,12 @@
         "league/flysystem-aws-s3-v3": "^3.22",
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.12",
+        "liquid/liquid": "^1.4",
         "meilisearch/meilisearch-php": "dev-main",
         "nelmio/cors-bundle": "^2.3.1",
         "openai-php/client": "^0.18.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpmetrics/phpmetrics": "^3.0",
-        "presta/sitemap-bundle": "^4.0",
         "sentry/sentry-symfony": "^4.12|^5.0",
         "sunaoka/ndjson": "^1.1",
         "survos/auth-bundle": "^2.0",
@@ -152,7 +152,6 @@
         }
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "dbrekelmans/bdi": "^1.4",
         "doctrine/doctrine-fixtures-bundle": "^3.4.4||^4.0",
         "friendsofphp/php-cs-fixer": "^3.70",
@@ -163,6 +162,7 @@
         "phpunit/phpunit": "^12.1",
         "pierstoval/smoke-testing": "^1.0",
         "rector/rector": "^2.0",
+        "roave/security-advisories": "dev-latest",
         "spaze/phpstan-disallowed-calls": "^4.0",
         "survos/code-bundle": "dev-main",
         "survos/deployment-bundle": "^2.0",
@@ -176,6 +176,7 @@
         "symfony/web-profiler-bundle": "^7.4||^8.0",
         "symplify/easy-coding-standard": "^13.0",
         "vincentlanglet/twig-cs-fixer": "^3.0",
+        "yethee/tiktoken": "^1.0",
         "zenstruck/browser": "^1.8"
     },
     "repositories": {

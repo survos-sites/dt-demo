@@ -18,6 +18,7 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
  */
 #[Entity(repositoryClass: CarRepository::class)]
 #[MeiliIndex(
+    ui: ['icon' => 'Car'],
 	primaryKey: 'id',
 	filterable: self::FILTERABLE_FIELDS,
 	sortable: self::SORTABLE_FIELDS,

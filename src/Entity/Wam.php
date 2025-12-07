@@ -22,6 +22,7 @@ use Survos\MeiliBundle\Metadata\MeiliIndex;
 	filterable: self::FILTERABLE_FIELDS,
 	sortable: self::SORTABLE_FIELDS,
 	searchable: self::SEARCHABLE_FIELDS,
+    embedders: ['wam']
 )]
 final class Wam
 {

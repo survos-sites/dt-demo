@@ -1,18 +1,41 @@
+when@never:
+    _anchors:
+        openai_base: &openai_base
+            source: 'openAi'
+            apiKey: '%env(OPENAI_API_KEY)%'
+        openai_large: &openai_large
+            <<: *openai_base
+            model: 'text-embedding-3-large'
+        openai_small: &openai_small
+            <<: *openai_base
+            model: 'text-embedding-3-small'
+
 survos_meili:
     host: '%env(default::MEILI_SERVER)%'
     apiKey: '%env(default::MEILI_API_KEY)%'
     searchKey: '%env(default::MEILI_SEARCH_KEY)%'
+    multiLingual: false
+    translationStyle: off # off, simple/key, compound (label/info)?  per-index? do we need a translation domain?
     embedders:
-#        small_product: # for testing, as cheap as possible
-#            source: 'openAi'
-#            model: 'text-embedding-3-small' # 2 cents/million tokens
-#            apiKey: '%env(OPENAI_API_KEY)%'
-#            template: 'templates/liquid/product.liquid'
         product:
-            source: 'openAi'
-            model: 'text-embedding-3-large' # 13 cents/million tokens
-            apiKey: '%env(OPENAI_API_KEY)%'
+            <<: *openai_large
             template: 'templates/liquid/product.liquid'
             examples:
                 - cool gifts for a tech executive
                 - things to decorate an apartment
+        wam:
+            <<: *openai_large
+            template: 'templates/liquid/wam.liquid'
+            examples:
+                - animals
+        marvel:
+            <<: *openai_large
+            template: 'templates/liquid/marvel.liquid'
+            examples:
+                - animals
+        amst_en_large:
+            <<: *openai_large
+            template: 'templates/liquid/amst.liquid'
+        amst_en_small:
+            <<: *openai_small
+            template: 'templates/liquid/amst.liquid'
