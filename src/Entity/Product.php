@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\ExactFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\PartialSearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
@@ -10,6 +12,7 @@ use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\QueryParameter;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,22 +47,38 @@ use Survos\BabelBundle\Attribute\Translatable;
         new GetCollection(
             normalizationContext: [
                 'groups' => ['product.read'],
+            ],
+            parameters: [
+                ':property' => new QueryParameter(
+                    filter: ExactFilter::class,
+                    properties: ['category', 'tags']
+                ),
+                'range[:property]' => new QueryParameter(
+                    filter: RangeFilter::class,
+                    properties: self::RANGE_PROPS
+                ),
+                'search[:property]' => new QueryParameter(
+                    filter: PartialSearchFilter::class,
+                    properties: self::SEARCH_PROPS
+                ),
+
             ]
         )],
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
 
-#[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
+//#[ApiFilter(OrderFilter::class, properties: ['price','stock','rating'])]
 
 // @todo: sort/search on translatable properties
 //    #[ApiFilter(SearchFilter::class, properties: ['title'=>'partial'])]
 //#[ApiFilter(MultiFieldSearchFilter::class, properties: ['title', 'description'])]
 
-#[ApiFilter(FacetsFieldSearchFilter::class,
-    properties: ['category', 'tags', 'rating', 'stock', 'price'],
-    arguments: [ "searchParameterName" => "facet_filter"]
-)]
-#[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
+//#[ApiFilter(FacetsFieldSearchFilter::class,
+//    properties: ['category', 'tags', 'rating', 'stock', 'price'],
+//    arguments: [ "searchParameterName" => "facet_filter"]
+//)]
+//#[ApiFilter(RangeFilter::class, properties: ['rating','stock', 'price'])]
+
 #[MeiliIndex(
     // serialization groups for the JSON sent to the index
     primaryKey: 'sku',
@@ -96,6 +115,11 @@ class Product implements RouteParametersInterface
     use BabelHooksTrait;
 
     use RouteParametersTrait;
+
+    private const RANGE_PROPS = ['rating', 'stock', 'price'];
+    private const SEARCH_PROPS = ['name', 'description'];
+
+
     public const UNIQUE_PARAMETERS = ['productId'=>'sku'];
     public function __construct(
         #[ORM\Column(type: 'string', length: 255)]
