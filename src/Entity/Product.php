@@ -18,6 +18,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Survos\BabelBundle\Attribute\BabelLocale;
+use Survos\BabelBundle\Attribute\BabelStorage;
+use Survos\BabelBundle\Attribute\StorageMode;
 use Survos\CoreBundle\Entity\RouteParametersInterface;
 use Survos\CoreBundle\Entity\RouteParametersTrait;
 use Survos\MeiliBundle\Api\Filter\FacetsFieldSearchFilter;
@@ -36,6 +39,7 @@ use Survos\BabelBundle\Entity\Traits\BabelHooksTrait;
 use Doctrine\ORM\Mapping\Column;
 
 use Survos\BabelBundle\Attribute\Translatable;
+
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
     operations: [
@@ -48,64 +52,69 @@ use Survos\BabelBundle\Attribute\Translatable;
             normalizationContext: [
                 'groups' => ['product.read'],
             ],
-            parameters: [
-                // ?category=foo
-                'brand' => new QueryParameter(
-                    filter: ExactFilter::class, // or: new ExactFilter()
-                ),
-            ],
 //            parameters: [
-//                ':property' => new QueryParameter(
-//                    filter: ExactFilter::class,
-//                    properties: ['category', 'tags', 'brand']
+//                // ?category=foo
+//                'brand' => new QueryParameter(
+//                    filter: new ExactFilter() // instance, ignored if not registered
+//                ),
+//            ],
+            parameters: [
+                // it appears that this won't work without a custom filter
+                // create a "tag" entity and then filter on it
+                // https://chatgpt.com/share/69357edd-e82c-8010-b119-aa3723ba84da
+//                'tags' => new QueryParameter(
+//                    filter: new ExactFilter(),
+//                    property: 'tags',
 //                ),
 //                'range[:property]' => new QueryParameter(
-//                    filter: RangeFilter::class,
+//                    filter: new RangeFilter(),
 //                    properties: self::RANGE_PROPS
 //                ),
-//                'search[:property]' => new QueryParameter(
-//                    filter: PartialSearchFilter::class,
-//                    properties: self::SEARCH_PROPS
-//                ),
-//                'filter[:property]' => new QueryParameter(
-//                    filter: ExactFilter::class,
-//                    properties: self::FILTER_PROPS
-//                ),
-//                'order[:property]' => new QueryParameter(
-//                    filter: OrderFilter::class,
-//                    properties: self::SORT_PROPS + ['exactPrice']
-//                ),
-//            ]
+                'search[:property]' => new QueryParameter(
+                    filter: new PartialSearchFilter(),
+                    properties: self::SEARCH_PROPS
+                ),
+                'filter[:property]' => new QueryParameter(
+                    filter: new ExactFilter(),
+                    properties: ['category','brand'], // self::FILTER_PROPS
+                ),
+                'order[:property]' => new QueryParameter(
+                    filter: new OrderFilter(),
+                    properties: self::SORT_PROPS + ['exactPrice']
+                ),
+            ]
         )],
     normalizationContext: ['groups' => ['product.read', 'product.details','rp']],
 )]
 
-#[MeiliIndex(
-    // serialization groups for the JSON sent to the index
-    primaryKey: 'sku',
-    persisted: new Fields(
-        fields: ['sku', 'stock', 'price', 'title','brand'],
-        groups: ['product.read', 'product.details', 'product.searchable']
-    ),
-    displayed: ['*'],
-    filterable: new Fields(
-        fields: self::FILTER_PROPS + self::RANGE_PROPS,
-//        groups: ['product.read','product.details']
-    ),
-    sortable: new Fields(
-        fields: self::SORT_PROPS + ['price'],
-    ),
-    embedders: ['product']
-)]
-
+//#[MeiliIndex(
+//    // serialization groups for the JSON sent to the index
+//    primaryKey: 'sku',
+//    persisted: new Fields(
+//        fields: ['sku', 'stock', 'price', 'title','brand'],
+//        groups: ['product.read', 'product.details', 'product.searchable']
+//    ),
+//    displayed: ['*'],
+//    filterable: new Fields(
+//        fields: self::FILTER_PROPS + self::RANGE_PROPS,
+////        groups: ['product.read','product.details']
+//    ),
+//    sortable: new Fields(
+//        fields: self::SORT_PROPS + ['price'],
+//    ),
+//    embedders: ['product']
+//)]
+#[BabelStorage(StorageMode::Property)]
+#[BabelLocale(targetLocales: ['es','fr'])]
 class Product implements RouteParametersInterface
 {
     use BabelHooksTrait;
 
     use RouteParametersTrait;
 
-    private const RANGE_PROPS = ['rating', 'stock'];
-    private const FILTER_PROPS = ['category','tags','brand']; // meili will also add RANGE_PROPS
+    private const RANGE_PROPS = ['rating', 'stock']; // // meili will also add RANGE_PROPS as filterable
+    private const FILTER_PROPS = ['category','brand']; // single values only without custom filter
+    private const FILTER_ARRAY_PROPS = ['tags']; // meili can handle these
     private const SEARCH_PROPS = ['titleBacking', 'descriptionBacking'];
     private const SORT_PROPS = ['rating']; // price for meili, , 'exactPrice' for doctrine
 

@@ -2113,6 +2113,11 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  * @psalm-type SurvosImportConfig = array{
  *     dir?: scalar|null, // The default directory for data files // Default: "data"
  * }
+ * @psalm-type SurvosLinguaConfig = array{
+ *     server?: scalar|null, // Default: "%env(default::LINGUA_BASE_URI)%"
+ *     api_key?: scalar|null, // Default: "%env(default::LINGUA_API_KEY)%"
+ *     timeout?: int, // Default: 10
+ * }
  * @psalm-type SentryConfig = array{
  *     dsn?: scalar|null, // If this value is not provided, the SDK will try to read it from the SENTRY_DSN environment variable. If that variable also does not exist, the SDK will not send any events.
  *     register_error_listener?: bool, // Default: true
@@ -2231,6 +2236,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     survos_jsonl?: SurvosJsonlConfig,
  *     survos_babel?: SurvosBabelConfig,
  *     survos_import?: SurvosImportConfig,
+ *     survos_lingua?: SurvosLinguaConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2277,6 +2283,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_babel?: SurvosBabelConfig,
  *         survos_deployment?: SurvosDeploymentConfig,
  *         survos_import?: SurvosImportConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     "when@never"?: array{
  *         imports?: ImportsConfig,
@@ -2317,6 +2324,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_jsonl?: SurvosJsonlConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_import?: SurvosImportConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -2358,6 +2366,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_jsonl?: SurvosJsonlConfig,
  *         survos_babel?: SurvosBabelConfig,
  *         survos_import?: SurvosImportConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2403,6 +2412,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         survos_babel?: SurvosBabelConfig,
  *         survos_deployment?: SurvosDeploymentConfig,
  *         survos_import?: SurvosImportConfig,
+ *         survos_lingua?: SurvosLinguaConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

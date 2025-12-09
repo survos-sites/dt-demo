@@ -305,6 +305,9 @@
     "survos/jsonl-bundle": {
         "version": "2.0.55"
     },
+    "survos/lingua-bundle": {
+        "version": "2.0.81"
+    },
     "survos/meili-bundle": {
         "version": "2.0",
         "recipe": {

@@ -48,6 +48,7 @@
         "survos/import-bundle": "^2.0",
         "survos/inspection-bundle": "^2.0",
         "survos/jsonl-bundle": "^2.0",
+        "survos/lingua-bundle": "^2.0",
         "survos/meili-bundle": "^2.0",
         "survos/sais-bundle": "^2.0",
         "survos/scraper-bundle": "^2.0",

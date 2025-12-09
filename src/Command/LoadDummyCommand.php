@@ -48,7 +48,7 @@ class LoadDummyCommand
             //$io show "Purging Products";
             $io->writeln("Purging Images and Products");
             foreach ([Image::class, Product::class] as $className) {
-                $count = $this->entityManager->getRepository(Image::class)->createQueryBuilder('qb')->delete()->getQuery()->execute();
+                $count = $this->entityManager->getRepository($className)->createQueryBuilder('qb')->delete()->getQuery()->execute();
                 $io->writeln("Purging $count $className");
             }
 //            $this->entityManager->getRepository(Product::class)->createQueryBuilder('qb')->delete()->getQuery()->execute();

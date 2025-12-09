@@ -8,8 +8,3 @@ api_platform:
         extra_properties:
             standard_put: true
             rfc_7807_compliant_errors: true
-        # These don't really work :-(
-        item_operations:
-            get: ~
-        collection_operations:
-            get: ~

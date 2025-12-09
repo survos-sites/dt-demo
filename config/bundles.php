@@ -47,4 +47,5 @@ return [
     Survos\BabelBundle\SurvosBabelBundle::class => ['all' => true],
     Survos\DeploymentBundle\SurvosDeploymentBundle::class => ['dev' => true, 'test' => true],
     Survos\ImportBundle\SurvosImportBundle::class => ['all' => true],
+    Survos\LinguaBundle\SurvosLinguaBundle::class => ['all' => true],
 ];

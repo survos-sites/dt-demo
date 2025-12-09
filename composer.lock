@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5fadeea2221ebe12b2a88453c087862",
+    "content-hash": "11462d6455a56d9eedb8b5eac2c3848c",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -6442,6 +6442,67 @@
             "support": {
                 "issues": "https://github.com/survos/jsonl-bundle/issues",
                 "source": "https://github.com/survos/jsonl-bundle/tree/2.0.81"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-11-30T13:21:58+00:00"
+        },
+        {
+            "name": "survos/lingua-bundle",
+            "version": "2.0.81",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/lingua-bundle.git",
+                "reference": "62b8a1f1fcb7a94a0af7b2ca28487155b5d8818a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/lingua-bundle/zipball/62b8a1f1fcb7a94a0af7b2ca28487155b5d8818a",
+                "reference": "62b8a1f1fcb7a94a0af7b2ca28487155b5d8818a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4",
+                "symfony/config": "^7.4||^8.0",
+                "symfony/console": "^7.4||^8.0",
+                "symfony/dependency-injection": "^7.4||^8.0",
+                "symfony/framework-bundle": "^7.4||^8.0",
+                "symfony/http-client": "^7.4||^8.0",
+                "symfony/http-kernel": "^7.4||^8.0",
+                "symfony/routing": "^7.4||^8.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^7.4||^8.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Survos\\LinguaBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tac Tacelosky",
+                    "email": "tacman@gmail.com"
+                }
+            ],
+            "description": "interact with Survos Lingua Server (aka translation server).  Does not translate directly",
+            "keywords": [
+                "survos",
+                "symfony",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/survos/lingua-bundle/issues",
+                "source": "https://github.com/survos/lingua-bundle/tree/2.0.81"
             },
             "funding": [
                 {
