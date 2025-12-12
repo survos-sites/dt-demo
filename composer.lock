@@ -6328,16 +6328,16 @@
         },
         {
             "name": "survos/installer",
-            "version": "2.1.6",
+            "version": "2.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/installer.git",
-                "reference": "0173ce0444057d6becf8f64b35556c4a69efc09f"
+                "reference": "22921903ef6ba41e749da1dad23ef8d1e564550c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/installer/zipball/0173ce0444057d6becf8f64b35556c4a69efc09f",
-                "reference": "0173ce0444057d6becf8f64b35556c4a69efc09f",
+                "url": "https://api.github.com/repos/survos/installer/zipball/22921903ef6ba41e749da1dad23ef8d1e564550c",
+                "reference": "22921903ef6ba41e749da1dad23ef8d1e564550c",
                 "shasum": ""
             },
             "require": {
@@ -6380,7 +6380,7 @@
             ],
             "description": "Composer plugin for installing configuration files and updating .env and .gitignore, based on survos/installer",
             "support": {
-                "source": "https://github.com/survos/installer/tree/2.1.6"
+                "source": "https://github.com/survos/installer/tree/2.1.7"
             },
             "funding": [
                 {
@@ -6388,7 +6388,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-09T10:45:57+00:00"
+            "time": "2025-12-09T15:18:29+00:00"
         },
         {
             "name": "survos/jsonl-bundle",
@@ -20616,5 +20616,5 @@
         "ext-zip": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

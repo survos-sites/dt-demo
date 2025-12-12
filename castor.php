@@ -24,7 +24,6 @@ import('src/Command/JeopardyCommand.php');
 try {
     import('.castor/vendor/tacman/castor-tools/castor.php');
 } catch (Throwable $e) {
-    io()->error('castor composer install');
     io()->error($e->getMessage());
 }
 
